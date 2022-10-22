@@ -7,6 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK", "src\Atomy.SDK.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Tests", "test\Atomy.SDK.Tests.csproj", "{C7CEC53F-F7CF-4965-98F9-FD4C43A08009}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{BE2439E8-F7E5-4B02-92DD-9F3626B133EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.Database.Data", "database\Atomy.Database.Data\Atomy.Database.Data.csproj", "{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "migrations", "migrations", "{933AE6ED-43B5-46C6-A7FB-AE5F02490A06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.Database.Migrations.PostgreSql", "database\migrations\Atomy.Database.Migrations.PostgreSql\Atomy.Database.Migrations.PostgreSql.csproj", "{AC7B2A76-DCC6-4790-9BE8-564E8D860399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.Database.Migrations.SqlLite", "database\migrations\Atomy.Database.Migrations.SqlLite\Atomy.Database.Migrations.SqlLite.csproj", "{E16E436D-EF76-4DFC-9717-9405768CC37A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +34,23 @@ Global
 		{C7CEC53F-F7CF-4965-98F9-FD4C43A08009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7CEC53F-F7CF-4965-98F9-FD4C43A08009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7CEC53F-F7CF-4965-98F9-FD4C43A08009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC7B2A76-DCC6-4790-9BE8-564E8D860399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC7B2A76-DCC6-4790-9BE8-564E8D860399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC7B2A76-DCC6-4790-9BE8-564E8D860399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC7B2A76-DCC6-4790-9BE8-564E8D860399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16E436D-EF76-4DFC-9717-9405768CC37A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16E436D-EF76-4DFC-9717-9405768CC37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16E436D-EF76-4DFC-9717-9405768CC37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16E436D-EF76-4DFC-9717-9405768CC37A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0ADD954-1C82-4FAB-A00F-53ECF99281C0} = {BE2439E8-F7E5-4B02-92DD-9F3626B133EC}
+		{933AE6ED-43B5-46C6-A7FB-AE5F02490A06} = {BE2439E8-F7E5-4B02-92DD-9F3626B133EC}
+		{AC7B2A76-DCC6-4790-9BE8-564E8D860399} = {933AE6ED-43B5-46C6-A7FB-AE5F02490A06}
+		{E16E436D-EF76-4DFC-9717-9405768CC37A} = {933AE6ED-43B5-46C6-A7FB-AE5F02490A06}
 	EndGlobalSection
 EndGlobal
