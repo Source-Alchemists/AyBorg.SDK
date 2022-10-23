@@ -3,7 +3,7 @@ using Atomy.SDK.ImageProcessing.Shapes;
 
 namespace Atomy.SDK.Ports;
 
-internal static class PortConverter
+public static class PortConverter
 {
     /// <summary>
     /// Determines whether the source port value is convertible to the target port value.
