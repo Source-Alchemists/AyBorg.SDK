@@ -13,7 +13,7 @@ namespace Atomy.SDK.Authorization
         public JwtProviderService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Jwt:SecretKey"));
+            _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Atomy:Jwt:SecretKey"));
         }
 
         public string GenerateToken(string userName, IEnumerable<string> roles)
