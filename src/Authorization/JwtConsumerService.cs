@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Atomy.SDK.Authorization;
 
-public class JwtConsumerService
+public class JwtConsumerService : IJwtConsumerService
 {
     private readonly ILogger<JwtConsumerService> _logger;
     private readonly IConfiguration _configuration;
@@ -16,7 +16,7 @@ public class JwtConsumerService
     {
         _logger = logger;
         _configuration = configuration;
-        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Jwt:SecretKey"));
+        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Atomy:Jwt:SecretKey"));
     }
 
     public JwtSecurityToken ValidateToken(string token)
