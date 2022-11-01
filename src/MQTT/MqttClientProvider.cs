@@ -129,10 +129,10 @@ public class MqttClientProvider : IMqttClientProvider
                 await PublishAsync($"{topic}/value", stringPort.Value, options).ConfigureAwait(false);
                 break;
             case NumericPort numericPort:
-                await PublishAsync($"{topic}/value", numericPort.Value.ToString(CultureInfo.InstalledUICulture), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}/value", numericPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
                 break;
             case BooleanPort booleanPort:
-                await PublishAsync($"{topic}/value", booleanPort.Value.ToString(CultureInfo.InstalledUICulture), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}/value", booleanPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
                 break;
             case EnumPort enumPort:
                 await PublishAsync($"{topic}/value", enumPort.Value.ToString(), options).ConfigureAwait(false);
