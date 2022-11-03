@@ -1,4 +1,6 @@
-﻿namespace Atomy.SDK.DTOs;
+﻿using Atomy.SDK.Common;
+
+namespace Atomy.SDK.Data.DTOs;
 
 public record StepDto
 {

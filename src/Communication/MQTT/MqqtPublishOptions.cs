@@ -1,7 +1,7 @@
 using Atomy.SDK.ImageProcessing.Encoding;
 using MQTTnet.Protocol;
 
-namespace Atomy.SDK.MQTT;
+namespace Atomy.SDK.Communication.MQTT;
 
 public record MqttPublishOptions
 {

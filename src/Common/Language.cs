@@ -1,4 +1,4 @@
-﻿namespace Atomy.SDK;
+﻿namespace Atomy.SDK.Common;
 
 public enum Language
 {

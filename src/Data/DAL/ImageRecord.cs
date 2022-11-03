@@ -1,6 +1,6 @@
 using Atomy.SDK.ImageProcessing;
 
-namespace Atomy.SDK.DAL;
+namespace Atomy.SDK.Data.DAL;
 
 public record ImageRecord
 {

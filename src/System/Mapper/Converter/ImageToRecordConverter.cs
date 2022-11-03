@@ -1,10 +1,11 @@
-using Atomy.SDK.DAL;
+using Sys = System;
+using Atomy.SDK.Data.DAL;
 using Atomy.SDK.ImageProcessing;
 using Atomy.SDK.ImageProcessing.Buffers;
 using Atomy.SDK.ImageProcessing.Pixels;
 using AutoMapper;
 
-namespace Atomy.SDK.Mapper.Converter;
+namespace Atomy.SDK.System.Mapper.Converter;
 
 internal class ImageToRecordConverter : IValueConverter<Image, string>
 {
@@ -29,6 +30,6 @@ internal class ImageToRecordConverter : IValueConverter<Image, string>
             Value = string.Empty // No need to save images to the database as port.
         };
         
-        return System.Text.Json.JsonSerializer.Serialize(record);
+        return Sys.Text.Json.JsonSerializer.Serialize(record);
     }
 }

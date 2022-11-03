@@ -1,6 +1,6 @@
 using Atomy.SDK.ImageProcessing.Buffers;
 using Atomy.SDK.ImageProcessing.Mirroring.Operations;
-using Atomy.SDK.Operations;
+using Atomy.SDK.ImageProcessing.Operations;
 
 namespace Atomy.SDK.ImageProcessing.Mirroring;
 

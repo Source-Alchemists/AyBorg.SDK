@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Atomy.SDK;
+namespace Atomy.SDK.Common;
 
 public class Environment : IEnvironment
 {

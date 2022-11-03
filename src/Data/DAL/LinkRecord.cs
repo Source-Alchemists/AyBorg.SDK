@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Atomy.SDK.DAL;
+namespace Atomy.SDK.Data.DAL;
 
 public record LinkRecord {
     

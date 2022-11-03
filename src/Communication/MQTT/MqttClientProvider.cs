@@ -8,13 +8,13 @@ using Microsoft.IO;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
-using Atomy.SDK.DTOs;
+using Atomy.SDK.Data.DTOs;
 using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.Mapper;
-using Atomy.SDK.Ports;
+using Atomy.SDK.System.Mapper;
+using Atomy.SDK.Common.Ports;
 using MQTTnet.Server;
 
-namespace Atomy.SDK.MQTT;
+namespace Atomy.SDK.Communication.MQTT;
 
 public class MqttClientProvider : IMqttClientProvider
 {

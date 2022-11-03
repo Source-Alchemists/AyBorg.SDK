@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Runtime;
+namespace Atomy.SDK.System.Runtime;
 
 public enum EngineState 
 {

@@ -1,4 +1,4 @@
-using Atomy.SDK.Operations;
+using Atomy.SDK.ImageProcessing.Operations;
 
 namespace Atomy.SDK.ImageProcessing.Binarizing.Operations;
 

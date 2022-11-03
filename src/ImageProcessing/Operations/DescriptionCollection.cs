@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 
-namespace Atomy.SDK.Operations;
+namespace Atomy.SDK.ImageProcessing.Operations;
 
 internal class DescriptionCollection : IEnumerable<OperationDescription>
 {

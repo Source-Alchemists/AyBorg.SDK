@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Atomy.SDK.Operations;
+namespace Atomy.SDK.ImageProcessing.Operations;
 
 public abstract class Operation
 {

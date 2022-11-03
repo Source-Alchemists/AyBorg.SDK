@@ -22,7 +22,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Registry
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Atomy.SDK.DAL.ServiceEntryRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.ServiceEntryRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

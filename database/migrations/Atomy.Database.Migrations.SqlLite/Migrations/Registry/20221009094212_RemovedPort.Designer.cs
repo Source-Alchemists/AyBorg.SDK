@@ -19,7 +19,7 @@ namespace Atomy.Database.Migrations.SqlLite.Migrations.Registry
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
 
-            modelBuilder.Entity("Atomy.SDK.DAL.ServiceEntryRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.ServiceEntryRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

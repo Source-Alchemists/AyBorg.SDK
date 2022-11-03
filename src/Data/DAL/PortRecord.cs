@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Atomy.SDK.Ports;
+using Atomy.SDK.Common.Ports;
 
-namespace Atomy.SDK.DAL;
+namespace Atomy.SDK.Data.DAL;
 
 public record PortRecord
 {

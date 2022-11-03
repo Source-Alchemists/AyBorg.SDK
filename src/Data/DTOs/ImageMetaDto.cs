@@ -1,7 +1,7 @@
 using Atomy.SDK.ImageProcessing;
 using Atomy.SDK.ImageProcessing.Encoding;
 
-namespace Atomy.SDK.DTOs;
+namespace Atomy.SDK.Data.DTOs;
 
 public record ImageMetaDto
 {

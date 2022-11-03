@@ -1,6 +1,7 @@
-﻿using Atomy.SDK.Ports;
+﻿using Atomy.SDK.Common;
+using Atomy.SDK.Common.Ports;
 
-namespace Atomy.SDK;
+namespace Atomy.SDK.Projects;
 
 public class Project
 {

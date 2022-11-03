@@ -24,7 +24,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Atomy.SDK.DAL.LinkRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.LinkRecord", b =>
                 {
                     b.Property<Guid>("DbId")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.ToTable("AtomyLinks");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.PortRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.PortRecord", b =>
                 {
                     b.Property<Guid>("DbId")
                         .ValueGeneratedOnAdd()
@@ -82,7 +82,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.ToTable("AtomyPorts");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.ProjectMetaRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.ProjectMetaRecord", b =>
                 {
                     b.Property<Guid>("DbId")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.ToTable("AtomyProjectMetas");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.ProjectRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.ProjectRecord", b =>
                 {
                     b.Property<Guid>("DbId")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.ToTable("AtomyProjects");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.StepRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.StepRecord", b =>
                 {
                     b.Property<Guid>("DbId")
                         .ValueGeneratedOnAdd()
@@ -188,9 +188,9 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.ToTable("PluginMetaInfo");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.LinkRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.LinkRecord", b =>
                 {
-                    b.HasOne("Atomy.SDK.DAL.ProjectRecord", "ProjectRecord")
+                    b.HasOne("Atomy.SDK.Data.DAL.ProjectRecord", "ProjectRecord")
                         .WithMany("Links")
                         .HasForeignKey("ProjectRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -199,9 +199,9 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.Navigation("ProjectRecord");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.PortRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.PortRecord", b =>
                 {
-                    b.HasOne("Atomy.SDK.DAL.StepRecord", "StepRecord")
+                    b.HasOne("Atomy.SDK.Data.DAL.StepRecord", "StepRecord")
                         .WithMany("Ports")
                         .HasForeignKey("StepRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -210,16 +210,16 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.Navigation("StepRecord");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.ProjectMetaRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.ProjectMetaRecord", b =>
                 {
-                    b.HasOne("Atomy.SDK.DAL.ProjectRecord", null)
+                    b.HasOne("Atomy.SDK.Data.DAL.ProjectRecord", null)
                         .WithOne("Meta")
-                        .HasForeignKey("Atomy.SDK.DAL.ProjectMetaRecord", "ProjectRecordId")
+                        .HasForeignKey("Atomy.SDK.Data.DAL.ProjectMetaRecord", "ProjectRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.StepRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.StepRecord", b =>
                 {
                     b.HasOne("Atomy.SDK.PluginMetaInfo", "MetaInfo")
                         .WithMany()
@@ -227,7 +227,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Atomy.SDK.DAL.ProjectRecord", "ProjectRecord")
+                    b.HasOne("Atomy.SDK.Data.DAL.ProjectRecord", "ProjectRecord")
                         .WithMany("Steps")
                         .HasForeignKey("ProjectRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -238,7 +238,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.Navigation("ProjectRecord");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.ProjectRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.ProjectRecord", b =>
                 {
                     b.Navigation("Links");
 
@@ -248,7 +248,7 @@ namespace Atomy.Database.Migrations.PostgreSql.Migrations.Project
                     b.Navigation("Steps");
                 });
 
-            modelBuilder.Entity("Atomy.SDK.DAL.StepRecord", b =>
+            modelBuilder.Entity("Atomy.SDK.Data.DAL.StepRecord", b =>
                 {
                     b.Navigation("Ports");
                 });

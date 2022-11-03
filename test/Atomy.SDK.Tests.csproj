@@ -23,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Atomy.SDK.csproj" />
+    <ProjectReference Include="..\src\ImageProcessing\Atomy.SDK.ImageProcessing.csproj" />
+    <ProjectReference Include="..\src\System\Atomy.SDK.System.csproj" />
+    <ProjectReference Include="..\src\Common\Atomy.SDK.Common.csproj" />
+    <ProjectReference Include="..\src\Projects\Atomy.SDK.Projects.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,12 @@
+using Sys = System;
 using Microsoft.IO;
 using Microsoft.Toolkit.HighPerformance;
 using AutoMapper;
-using Atomy.SDK.DTOs;
+using Atomy.SDK.Data.DTOs;
 using Atomy.SDK.ImageProcessing;
 using Atomy.SDK.ImageProcessing.Encoding;
 
-namespace Atomy.SDK.Mapper.Converter;
+namespace Atomy.SDK.System.Mapper.Converter;
 
 internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
 {
@@ -38,7 +39,7 @@ internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
         var buffer = rmStream.GetBuffer();
         var dto = new ImageDto
         {
-            Base64 = System.Convert.ToBase64String(buffer, 0, (int)stream.Length),
+            Base64 = Sys.Convert.ToBase64String(buffer, 0, (int)stream.Length),
             Meta = new ImageMetaDto
             {
                 Width = sourceMember.Width,

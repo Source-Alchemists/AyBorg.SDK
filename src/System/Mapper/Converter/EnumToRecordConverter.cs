@@ -1,7 +1,8 @@
+using Sys = System;
 using AutoMapper;
-using Atomy.SDK.DAL;
+using Atomy.SDK.Data.DAL;
 
-namespace Atomy.SDK.Mapper.Converter;
+namespace Atomy.SDK.System.Mapper.Converter;
 
 internal class EnumToRecordConverter : IValueConverter<Enum, string>
 {
@@ -14,6 +15,6 @@ internal class EnumToRecordConverter : IValueConverter<Enum, string>
             Names = names
         };
 
-        return System.Text.Json.JsonSerializer.Serialize(record);
+        return Sys.Text.Json.JsonSerializer.Serialize(record);
     }
 }

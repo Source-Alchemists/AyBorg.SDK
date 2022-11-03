@@ -1,4 +1,4 @@
-namespace Atomy.SDK.DTOs;
+namespace Atomy.SDK.Data.DTOs;
 
 public record ImageDto
 {

@@ -1,4 +1,4 @@
-namespace Atomy.SDK;
+namespace Atomy.SDK.Projects;
 
 public enum ProjectState
 {

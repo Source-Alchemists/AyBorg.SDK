@@ -1,6 +1,6 @@
 using Atomy.SDK.ImageProcessing.Buffers;
 using Atomy.SDK.ImageProcessing.Decoding.Operations;
-using Atomy.SDK.Operations;
+using Atomy.SDK.ImageProcessing.Operations;
 
 namespace Atomy.SDK.ImageProcessing.Decoding;
 

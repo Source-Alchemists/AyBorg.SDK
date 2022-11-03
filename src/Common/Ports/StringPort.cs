@@ -1,4 +1,4 @@
-﻿namespace Atomy.SDK.Ports;
+﻿namespace Atomy.SDK.Common.Ports;
 
 public class StringPort : ValuePortGeneric<StringPort, string>
 {

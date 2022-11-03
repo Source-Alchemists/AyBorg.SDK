@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Atomy.SDK.ImageProcessing.Shapes;
 
-namespace Atomy.SDK.Ports;
+namespace Atomy.SDK.Common.Ports;
 
 public static class PortConverter
 {

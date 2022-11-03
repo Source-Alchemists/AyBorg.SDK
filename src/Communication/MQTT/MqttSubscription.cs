@@ -1,6 +1,6 @@
 using MQTTnet;
 
-namespace Atomy.SDK.MQTT;
+namespace Atomy.SDK.Communication.MQTT;
 
 public class MqttSubscription
 {

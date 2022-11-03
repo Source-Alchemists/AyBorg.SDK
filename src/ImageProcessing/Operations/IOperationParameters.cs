@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Operations;
+namespace Atomy.SDK.ImageProcessing.Operations;
 
 public interface IOperationParameters
 {

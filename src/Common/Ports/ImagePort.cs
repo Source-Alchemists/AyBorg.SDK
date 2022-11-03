@@ -1,6 +1,6 @@
 using Atomy.SDK.ImageProcessing;
 
-namespace Atomy.SDK.Ports;
+namespace Atomy.SDK.Common.Ports;
 
 public class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
 {

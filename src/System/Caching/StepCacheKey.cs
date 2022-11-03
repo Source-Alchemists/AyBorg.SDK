@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Caching;
+namespace Atomy.SDK.System.Caching;
 
 public record StepCacheKey
 {

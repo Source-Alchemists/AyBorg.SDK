@@ -1,8 +1,9 @@
-using Atomy.SDK.DAL;
+using Sys = System;
+using Atomy.SDK.Data.DAL;
 using Atomy.SDK.ImageProcessing.Shapes;
 using AutoMapper;
 
-namespace Atomy.SDK.Mapper.Converter;
+namespace Atomy.SDK.System.Mapper.Converter;
 
 internal class RectangleToRecordConverter : IValueConverter<Rectangle, string>
 {
@@ -15,6 +16,6 @@ internal class RectangleToRecordConverter : IValueConverter<Rectangle, string>
             Width = sourceMember.Width,
             Height = sourceMember.Height
         };
-        return System.Text.Json.JsonSerializer.Serialize(record);
+        return Sys.Text.Json.JsonSerializer.Serialize(record);
     }
 }

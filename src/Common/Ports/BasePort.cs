@@ -1,4 +1,4 @@
-﻿namespace Atomy.SDK.Ports;
+﻿namespace Atomy.SDK.Common.Ports;
 
 public abstract class BasePort<TPort> : IPort where TPort : class, IPort
 {

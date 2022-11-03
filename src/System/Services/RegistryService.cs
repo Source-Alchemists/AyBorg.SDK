@@ -1,12 +1,13 @@
+using Sys = System;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using Atomy.SDK.DTOs;
+using Atomy.SDK.Data.DTOs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Atomy.SDK.Services;
+namespace Atomy.SDK.System.Services;
 
 public class RegistryService : BackgroundService
 {
@@ -79,7 +80,7 @@ public class RegistryService : BackgroundService
         try
         {
             var deleteResult = await _httpClient.DeleteAsync($"/Services?id={_serviceId}", cancellationToken);
-            if (deleteResult.StatusCode != System.Net.HttpStatusCode.OK && deleteResult.StatusCode != System.Net.HttpStatusCode.NoContent)
+            if (deleteResult.StatusCode != Sys.Net.HttpStatusCode.OK && deleteResult.StatusCode != Sys.Net.HttpStatusCode.NoContent)
             {
                 _logger.LogWarning($"Failed to unregister service with id {_serviceId} [Code: {deleteResult.StatusCode}]!");
             }
@@ -105,7 +106,7 @@ public class RegistryService : BackgroundService
                     if (IsConnected)
                     {
                         var putResult = await _httpClient.PutAsync("/Services", _serviceInfoContent, stoppingToken);
-                        if (putResult.StatusCode != System.Net.HttpStatusCode.OK)
+                        if (putResult.StatusCode != Sys.Net.HttpStatusCode.OK)
                         {
                             _logger.LogWarning($"Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!");
                             IsConnected = false;
@@ -134,7 +135,7 @@ public class RegistryService : BackgroundService
     {
         var postResult = await _httpClient.PostAsync("/Services", _serviceInfoContent, cancellationToken);
 
-        if (postResult.StatusCode != System.Net.HttpStatusCode.OK)
+        if (postResult.StatusCode != Sys.Net.HttpStatusCode.OK)
         {
             _logger.LogWarning($"Could not register {_serviceEntry.Name} [Code: {postResult.StatusCode}]!");
         }

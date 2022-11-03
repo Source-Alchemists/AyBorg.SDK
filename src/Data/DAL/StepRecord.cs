@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Atomy.SDK.Common;
 
-namespace Atomy.SDK.DAL;
+namespace Atomy.SDK.Data.DAL;
 
 public record StepRecord
 {

@@ -1,6 +1,6 @@
-﻿using Atomy.SDK.Ports;
+﻿using Atomy.SDK.Common.Ports;
 
-namespace Atomy.SDK;
+namespace Atomy.SDK.Common;
 
 public interface IStepProxy : IDisposable
 {

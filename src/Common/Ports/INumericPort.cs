@@ -1,4 +1,4 @@
-﻿namespace Atomy.SDK.Ports;
+﻿namespace Atomy.SDK.Common.Ports;
 
 public interface INumericPort<TValue> : IPortGeneric<TValue>
 {

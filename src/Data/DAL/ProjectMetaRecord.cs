@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Atomy.SDK.Projects;
 
-namespace Atomy.SDK.DAL;
+namespace Atomy.SDK.Data.DAL;
 
 public record ProjectMetaRecord
 {

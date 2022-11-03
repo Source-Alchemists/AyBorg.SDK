@@ -1,5 +1,5 @@
 using Atomy.SDK.ImageProcessing.Encoding.Operations;
-using Atomy.SDK.Operations;
+using Atomy.SDK.ImageProcessing.Operations;
 
 namespace Atomy.SDK.ImageProcessing.Encoding;
 

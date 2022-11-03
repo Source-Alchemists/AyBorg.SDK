@@ -1,8 +1,9 @@
-using Atomy.SDK.DAL;
-using Atomy.SDK.DTOs;
+using Atomy.SDK.Data.DAL;
+using Atomy.SDK.Data.DTOs;
 using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.Mapper;
-using Atomy.SDK.Ports;
+using Atomy.SDK.System.Mapper;
+using Atomy.SDK.Common;
+using Atomy.SDK.Common.Ports;
 using Moq;
 
 namespace Atomy.SDK.Tests.Mapper;
