@@ -65,7 +65,7 @@ public class RegistryService : BackgroundService
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex.Message);
+            _logger.LogWarning("Failed to start", ex);
         }
 
         await base.StartAsync(cancellationToken);
@@ -82,14 +82,14 @@ public class RegistryService : BackgroundService
             var deleteResult = await _httpClient.DeleteAsync($"/Services?id={_serviceId}", cancellationToken);
             if (deleteResult.StatusCode != Sys.Net.HttpStatusCode.OK && deleteResult.StatusCode != Sys.Net.HttpStatusCode.NoContent)
             {
-                _logger.LogWarning($"Failed to unregister service with id {_serviceId} [Code: {deleteResult.StatusCode}]!");
+                _logger.LogWarning("Failed to unregister service with id {_serviceId} [Code: {deleteResult.StatusCode}]!", _serviceId, deleteResult.StatusCode);
             }
 
             IsConnected = false;
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex.Message);
+            _logger.LogWarning("Failed to start", ex);
         }
 
         await base.StopAsync(cancellationToken);
@@ -108,7 +108,7 @@ public class RegistryService : BackgroundService
                         var putResult = await _httpClient.PutAsync("/Services", _serviceInfoContent, stoppingToken);
                         if (putResult.StatusCode != Sys.Net.HttpStatusCode.OK)
                         {
-                            _logger.LogWarning($"Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!");
+                            _logger.LogWarning("Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!", _serviceId, putResult.StatusCode);
                             IsConnected = false;
 
                             // Try to register again. Because it is not costing much, we will try it infinite times.
@@ -122,7 +122,7 @@ public class RegistryService : BackgroundService
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex.Message);
+                    _logger.LogWarning("Failed to execute", ex);
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(30));
@@ -137,14 +137,14 @@ public class RegistryService : BackgroundService
 
         if (postResult.StatusCode != Sys.Net.HttpStatusCode.OK)
         {
-            _logger.LogWarning($"Could not register {_serviceEntry.Name} [Code: {postResult.StatusCode}]!");
+            _logger.LogWarning("Could not register {_serviceEntry.Name} [Code: {postResult.StatusCode}]!", _serviceEntry.Name, postResult.StatusCode);
         }
         else
         {
-            using var stream = postResult.Content.ReadAsStream();
+            using var stream = postResult.Content.ReadAsStream(cancellationToken);
             var streamReader = new StreamReader(stream, Encoding.UTF8);
             var providedId = streamReader.ReadToEnd().Trim(new char[] { '\\', '"' });
-            _logger.LogInformation($"Registry successful with ID: {providedId}.");
+            _logger.LogInformation("Registry successful with ID: {providedId}.", providedId);
             _serviceId = Guid.Parse(providedId);
             IsConnected = true;
         }
