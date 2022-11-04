@@ -2,7 +2,7 @@ using Atomy.SDK.Common;
 using Atomy.SDK.Data.DAL;
 using Atomy.SDK.Projects;
 
-namespace Atomy.SDK.System.Mapper;
+namespace Atomy.SDK.Data.Mapper;
 
 public interface IRuntimeToStorageMapper
 {

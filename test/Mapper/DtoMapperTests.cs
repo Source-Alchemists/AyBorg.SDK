@@ -1,7 +1,7 @@
 using Atomy.SDK.Data.DAL;
 using Atomy.SDK.Data.DTOs;
 using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.System.Mapper;
+using Atomy.SDK.Data.Mapper;
 using Atomy.SDK.Common;
 using Atomy.SDK.Common.Ports;
 using Moq;

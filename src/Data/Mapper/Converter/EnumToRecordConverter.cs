@@ -2,7 +2,7 @@ using Sys = System;
 using AutoMapper;
 using Atomy.SDK.Data.DAL;
 
-namespace Atomy.SDK.System.Mapper.Converter;
+namespace Atomy.SDK.Data.Mapper.Converter;
 
 internal class EnumToRecordConverter : IValueConverter<Enum, string>
 {

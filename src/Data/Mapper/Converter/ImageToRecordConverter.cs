@@ -5,7 +5,7 @@ using Atomy.SDK.ImageProcessing.Buffers;
 using Atomy.SDK.ImageProcessing.Pixels;
 using AutoMapper;
 
-namespace Atomy.SDK.System.Mapper.Converter;
+namespace Atomy.SDK.Data.Mapper.Converter;
 
 internal class ImageToRecordConverter : IValueConverter<Image, string>
 {

@@ -3,7 +3,7 @@ using Atomy.SDK.Data.DAL;
 using Atomy.SDK.ImageProcessing.Shapes;
 using AutoMapper;
 
-namespace Atomy.SDK.System.Mapper.Converter;
+namespace Atomy.SDK.Data.Mapper.Converter;
 
 internal class RectangleToRecordConverter : IValueConverter<Rectangle, string>
 {

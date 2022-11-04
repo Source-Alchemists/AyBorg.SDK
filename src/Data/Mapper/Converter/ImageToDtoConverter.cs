@@ -6,7 +6,7 @@ using Atomy.SDK.Data.DTOs;
 using Atomy.SDK.ImageProcessing;
 using Atomy.SDK.ImageProcessing.Encoding;
 
-namespace Atomy.SDK.System.Mapper.Converter;
+namespace Atomy.SDK.Data.Mapper.Converter;
 
 internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
 {

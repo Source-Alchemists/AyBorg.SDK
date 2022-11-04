@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Atomy.SDK.Common.csproj" />
-    <ProjectReference Include="..\..\System\Atomy.SDK.System.csproj" />
+    <ProjectReference Include="..\..\Data\Mapper\Atomy.SDK.Data.Mapper.csproj" />
   </ItemGroup>
 
 </Project>

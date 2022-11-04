@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Atomy.SDK.Data.DAL;
 using Atomy.SDK.Data.DTOs;
-using Atomy.SDK.System.Mapper.Converter;
+using Atomy.SDK.Data.Mapper.Converter;
 using Atomy.SDK.Common.Ports;
 using Atomy.SDK.Common;
 
-namespace Atomy.SDK.System.Mapper;
+namespace Atomy.SDK.Data.Mapper;
 
 public class DtoMapper : IDtoMapper
 {
