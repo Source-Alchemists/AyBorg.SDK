@@ -1,6 +1,6 @@
 namespace Atomy.SDK.Common.Ports;
 
-public record PortLink : BaseLink<IPort>
+public sealed record PortLink : BaseLink<IPort>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PortLink"/> class.

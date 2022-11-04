@@ -8,7 +8,7 @@ namespace Atomy.SDK.ImageProcessing;
 public partial record Image : IImage
 {
     private readonly IPixelBuffer _rootPixelBuffer;
-    private readonly ConcurrentDictionary<Type, IPixelBuffer> _convertedPixelBuffers = new ConcurrentDictionary<Type, IPixelBuffer>();
+    private readonly ConcurrentDictionary<Type, IPixelBuffer> _convertedPixelBuffers = new();
     private bool _isDisposed = false;
 
     /// <summary>
@@ -28,15 +28,11 @@ public partial record Image : IImage
 
     public bool IsColor {
         get {
-            switch(PixelFormat)
+            return PixelFormat switch
             {
-                case PixelFormat.Mono:
-                case PixelFormat.Mono8:
-                case PixelFormat.Mono16:
-                    return false;
-                default:
-                    return true;
-            }
+                PixelFormat.Mono or PixelFormat.Mono8 or PixelFormat.Mono16 => false,
+                _ => true,
+            };
         }
     }
 

@@ -3,7 +3,7 @@ using Atomy.SDK.ImageProcessing.Encoding;
 
 namespace Atomy.SDK.Data.DTOs;
 
-public record ImageMetaDto
+public sealed record ImageMetaDto
 {
     public int Width { get; set; }
     public int Height { get; set; }

@@ -3,7 +3,7 @@ using Atomy.SDK.Projects;
 
 namespace Atomy.SDK.Data.DTOs;
 
-public record ProjectMetaDto
+public sealed record ProjectMetaDto
 {
 
     /// <summary>

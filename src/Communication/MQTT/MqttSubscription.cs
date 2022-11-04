@@ -2,7 +2,7 @@ using MQTTnet;
 
 namespace Atomy.SDK.Communication.MQTT;
 
-public class MqttSubscription
+public sealed record MqttSubscription
 {
     /// <summary>
     /// Callback to be called when a message is received.

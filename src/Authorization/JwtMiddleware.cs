@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Atomy.SDK.Authorization;
 
-public class JwtMiddleware
+public sealed class JwtMiddleware
 {
     private readonly RequestDelegate _next;
 

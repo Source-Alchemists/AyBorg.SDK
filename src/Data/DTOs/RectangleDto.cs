@@ -1,6 +1,6 @@
 namespace Atomy.SDK.Data.DTOs;
 
-public record RectangleDto
+public sealed record RectangleDto
 {
     public int X { get; set; }
     public int Y { get; set; }

@@ -1,9 +1,8 @@
-﻿using Atomy.SDK.Common;
-using Atomy.SDK.Common.Ports;
+﻿using Atomy.SDK.Common.Ports;
 
 namespace Atomy.SDK.Data.DTOs;
 
-public record PortDto
+public sealed record PortDto
 {
     /// <summary>
     /// Gets or sets the identifier.

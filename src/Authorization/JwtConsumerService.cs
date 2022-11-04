@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Atomy.SDK.Authorization;
 
-public class JwtConsumerService : IJwtConsumerService
+public sealed class JwtConsumerService : IJwtConsumerService
 {
     private readonly ILogger<JwtConsumerService> _logger;
     private readonly IConfiguration _configuration;

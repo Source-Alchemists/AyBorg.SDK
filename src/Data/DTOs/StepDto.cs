@@ -2,7 +2,7 @@
 
 namespace Atomy.SDK.Data.DTOs;
 
-public record StepDto
+public sealed record StepDto
 {
     /// <summary>
     /// Gets or sets the default name.

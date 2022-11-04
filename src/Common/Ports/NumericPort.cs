@@ -1,6 +1,6 @@
 namespace Atomy.SDK.Common.Ports;
 
-public class NumericPort : ValuePortGeneric<NumericPort, double>
+public sealed class NumericPort : ValuePortGeneric<NumericPort, double>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="NumericPort"/> class.

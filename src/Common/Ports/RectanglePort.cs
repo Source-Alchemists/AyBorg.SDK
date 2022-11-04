@@ -2,7 +2,7 @@ using Atomy.SDK.ImageProcessing.Shapes;
 
 namespace Atomy.SDK.Common.Ports;
 
-public class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
+public sealed class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RectanglePort"/> class.

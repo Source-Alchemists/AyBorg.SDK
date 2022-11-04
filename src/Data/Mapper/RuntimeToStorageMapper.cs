@@ -8,7 +8,7 @@ using Atomy.SDK.Projects;
 
 namespace Atomy.SDK.Data.Mapper;
 
-public class RuntimeToStorageMapper : IRuntimeToStorageMapper
+public sealed class RuntimeToStorageMapper : IRuntimeToStorageMapper
 {
     private readonly AutoMapper.Mapper _mapper;
 

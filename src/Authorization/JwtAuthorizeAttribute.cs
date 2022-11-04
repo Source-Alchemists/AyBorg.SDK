@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Atomy.SDK.Authorization;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class JwtAuthorizeAttribute : Attribute, IAuthorizationFilter
+public sealed class JwtAuthorizeAttribute : Attribute, IAuthorizationFilter
 {
     public string[] Roles { get; set; } = null!;
 

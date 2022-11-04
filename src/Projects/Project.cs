@@ -3,7 +3,7 @@ using Atomy.SDK.Common.Ports;
 
 namespace Atomy.SDK.Projects;
 
-public class Project
+public sealed record Project
 {
     /// <summary>
     /// Gets or sets the meta informations.

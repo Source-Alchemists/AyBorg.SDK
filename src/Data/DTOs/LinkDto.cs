@@ -1,6 +1,6 @@
 namespace Atomy.SDK.Data.DTOs;
 
-public record LinkDto {
+public sealed record LinkDto {
 
     /// <summary>
     /// Gets the identifier.

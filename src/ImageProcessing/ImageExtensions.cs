@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Atomy.SDK.ImageProcessing.Binarizing;
 using Atomy.SDK.ImageProcessing.Buffers;
 using Atomy.SDK.ImageProcessing.Converting;

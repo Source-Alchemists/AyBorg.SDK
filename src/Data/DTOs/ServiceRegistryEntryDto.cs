@@ -5,7 +5,7 @@ namespace Atomy.SDK.Data.DTOs;
 /// <summary>
 /// Service registry entry.
 /// </summary>
-public record ServiceRegistryEntryDto
+public sealed record ServiceRegistryEntryDto
 {
     /// <summary>
     /// Gets or sets the identifier.

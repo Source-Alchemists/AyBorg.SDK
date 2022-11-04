@@ -1,6 +1,6 @@
 namespace Atomy.SDK.Projects;
 
-public record ProjectMeta {
+public sealed record ProjectMeta {
     /// <summary>
     /// Gets or sets the identifier.
     /// </summary>

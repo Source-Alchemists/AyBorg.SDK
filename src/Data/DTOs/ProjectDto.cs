@@ -1,6 +1,6 @@
 ﻿namespace Atomy.SDK.Data.DTOs;
 
-public record ProjectDto
+public sealed record ProjectDto
 {
     
     /// <summary>

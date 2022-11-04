@@ -51,38 +51,18 @@ public partial record Image
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Save(Image image, Stream stream, EncoderType encodeType, int quality = 80)
     {
-        IReadOnlyPixelBuffer pixelBuffer = null!;
-        switch (image.PixelFormat)
+        IReadOnlyPixelBuffer pixelBuffer = image.PixelFormat switch
         {
-            case PixelFormat.Mono8:
-                pixelBuffer = image.AsPacked<Mono8>();
-                break;
-            case PixelFormat.Mono16:
-                pixelBuffer = image.AsPacked<Mono8>();
-                break;
-            case PixelFormat.Rgb24Packed:
-                pixelBuffer = image.AsPacked<Rgb24>();
-                break;
-            case PixelFormat.Rgb48Packed:
-                pixelBuffer = image.AsPacked<Rgb48>();
-                break;
-            case PixelFormat.Rgb888Planar:
-                pixelBuffer = image.AsPacked<Rgb24>();
-                break;
-            case PixelFormat.Rgb161616Planar:
-                pixelBuffer = image.AsPacked<Rgb48>();
-                break;
-            case PixelFormat.Mono:
-                pixelBuffer = image.AsPacked<Mono8>();
-                break;
-            case PixelFormat.RgbPacked:
-                pixelBuffer = image.AsPacked<Rgb24>();
-                break;
-            default:
-                throw new NotSupportedException($"The pixel format {image.PixelFormat} is not supported.");
-
-        }
-
+            PixelFormat.Mono8 => image.AsPacked<Mono8>(),
+            PixelFormat.Mono16 => image.AsPacked<Mono8>(),
+            PixelFormat.Rgb24Packed => image.AsPacked<Rgb24>(),
+            PixelFormat.Rgb48Packed => image.AsPacked<Rgb48>(),
+            PixelFormat.Rgb888Planar => image.AsPacked<Rgb24>(),
+            PixelFormat.Rgb161616Planar => image.AsPacked<Rgb48>(),
+            PixelFormat.Mono => image.AsPacked<Mono8>(),
+            PixelFormat.RgbPacked => image.AsPacked<Rgb24>(),
+            _ => throw new NotSupportedException($"The pixel format {image.PixelFormat} is not supported."),
+        };
         _encoder.Execute(new Encoding.Operations.EncoderParameters
         {
             Input = pixelBuffer,

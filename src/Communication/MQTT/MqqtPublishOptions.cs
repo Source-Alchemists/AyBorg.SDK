@@ -3,7 +3,7 @@ using MQTTnet.Protocol;
 
 namespace Atomy.SDK.Communication.MQTT;
 
-public record MqttPublishOptions
+public sealed record MqttPublishOptions
 {
     public MqttQualityOfServiceLevel QualityOfServiceLevel { get; init; } = MqttQualityOfServiceLevel.AtLeastOnce;
     public bool Retain { get; init; } = false;

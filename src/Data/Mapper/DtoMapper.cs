@@ -7,7 +7,7 @@ using Atomy.SDK.Common;
 
 namespace Atomy.SDK.Data.Mapper;
 
-public class DtoMapper : IDtoMapper
+public sealed class DtoMapper : IDtoMapper
 {
     private readonly AutoMapper.Mapper _mapper;
 

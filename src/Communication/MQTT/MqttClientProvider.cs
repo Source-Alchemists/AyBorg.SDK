@@ -16,12 +16,11 @@ using MQTTnet.Server;
 
 namespace Atomy.SDK.Communication.MQTT;
 
-public class MqttClientProvider : IMqttClientProvider
+public sealed class MqttClientProvider : IMqttClientProvider
 {
-    private static readonly RecyclableMemoryStreamManager _memoryManager = new RecyclableMemoryStreamManager();
+    private static readonly RecyclableMemoryStreamManager _memoryManager = new();
     private readonly ILogger<MqttClientProvider> _logger;
     private readonly IConfiguration _configuration;
-    private readonly IDtoMapper _dtoMapper;
     private readonly string _serviceTypeName;
     private readonly string _serviceUniqueName;
     private readonly string _serviceVersion;
@@ -30,15 +29,14 @@ public class MqttClientProvider : IMqttClientProvider
     private readonly IManagedMqttClient _mqttClient;
     private bool _disposedValue;
     private Task? _statusTask;
-    private ConcurrentBag<MqttSubscription> _subscriptions = new ConcurrentBag<MqttSubscription>();
+    private ConcurrentBag<MqttSubscription> _subscriptions = new();
 
     public string ServiceUniqueName => _serviceUniqueName;
 
-    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IDtoMapper dtoMapper)
+    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration)
     {
         _logger = logger;
         _configuration = configuration;
-        _dtoMapper = dtoMapper;
         _serviceTypeName = _configuration.GetValue<string>("Atomy:Service:Type");
         _serviceUniqueName = _configuration.GetValue<string>("Atomy:Service:UniqueName");
         var assemblyName = Assembly.GetEntryAssembly()!.GetName();
@@ -235,7 +233,7 @@ public class MqttClientProvider : IMqttClientProvider
         GC.SuppressFinalize(this);
     }
 
-    protected virtual async void Dispose(bool disposing)
+    public async void Dispose(bool disposing)
     {
         if (!_disposedValue)
         {

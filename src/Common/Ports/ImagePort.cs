@@ -2,7 +2,7 @@ using Atomy.SDK.ImageProcessing;
 
 namespace Atomy.SDK.Common.Ports;
 
-public class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
+public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
 {
     private bool disposedValue;
 
@@ -29,7 +29,7 @@ public class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
     /// </summary>
     public override PortBrand Brand => PortBrand.Image;
 
-    protected virtual void Dispose(bool disposing)
+    public void Dispose(bool disposing)
     {
         if (!disposedValue)
         {
