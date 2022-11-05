@@ -23,7 +23,7 @@ public sealed class BinarizerOperation : Binarizer
         Parallel.For(0, sourceBuffer.Height, parameters.ParallelOptions, rowIndex =>
         {
             BinarizerImpl.BinarizeMono(sourceBuffer.GetRow(rowIndex), targetBuffer.GetRow(rowIndex),
-                                            sourceBuffer, rowIndex, parameters.Threshold, parameters.Mode);
+                                            sourceBuffer, parameters.Threshold, parameters.Mode);
         });
         return targetBuffer;
     }
@@ -35,7 +35,7 @@ public sealed class BinarizerOperation : Binarizer
         Parallel.For(0, sourceBuffer.Height, parameters.ParallelOptions, rowIndex =>
         {
             BinarizerImpl.BinarizeMono8(sourceBuffer.GetRow(rowIndex), targetBuffer.GetRow(rowIndex),
-                                            sourceBuffer, rowIndex, parameters.Threshold, parameters.Mode);
+                                            sourceBuffer, parameters.Threshold, parameters.Mode);
         });
         return targetBuffer;
     }
@@ -47,7 +47,7 @@ public sealed class BinarizerOperation : Binarizer
         Parallel.For(0, sourceBuffer.Height, parameters.ParallelOptions, rowIndex =>
         {
             BinarizerImpl.BinarizeMono16(sourceBuffer.GetRow(rowIndex), targetBuffer.GetRow(rowIndex),
-                                            sourceBuffer, rowIndex, parameters.Threshold, parameters.Mode);
+                                            sourceBuffer, parameters.Threshold, parameters.Mode);
         });
         return targetBuffer;
     }
@@ -59,7 +59,7 @@ public sealed class BinarizerOperation : Binarizer
         Parallel.For(0, sourceBuffer.Height, parameters.ParallelOptions, rowIndex =>
         {
             BinarizerImpl.BinarizeRgb(sourceBuffer.GetRow(rowIndex), targetBuffer.GetRow(rowIndex),
-                                            sourceBuffer, rowIndex, parameters.Threshold, parameters.Mode);
+                                            sourceBuffer, parameters.Threshold, parameters.Mode);
         });
         return targetBuffer;
     }
@@ -71,7 +71,7 @@ public sealed class BinarizerOperation : Binarizer
         Parallel.For(0, sourceBuffer.Height, parameters.ParallelOptions, rowIndex =>
         {
             BinarizerImpl.BinarizeRgb24(sourceBuffer.GetRow(rowIndex), targetBuffer.GetRow(rowIndex),
-                                            sourceBuffer, rowIndex, parameters.Threshold, parameters.Mode);
+                                            sourceBuffer, parameters.Threshold, parameters.Mode);
         });
         return targetBuffer;
     }
@@ -83,7 +83,7 @@ public sealed class BinarizerOperation : Binarizer
         Parallel.For(0, sourceBuffer.Height, parameters.ParallelOptions, rowIndex =>
         {
             BinarizerImpl.BinarizeRgb48(sourceBuffer.GetRow(rowIndex), targetBuffer.GetRow(rowIndex),
-                                            sourceBuffer, rowIndex, parameters.Threshold, parameters.Mode);
+                                            sourceBuffer, parameters.Threshold, parameters.Mode);
         });
         return targetBuffer;
     }

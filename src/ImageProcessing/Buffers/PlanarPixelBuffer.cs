@@ -2,7 +2,7 @@ using Atomy.SDK.ImageProcessing.Pixels;
 
 namespace Atomy.SDK.ImageProcessing.Buffers;
 
-public record PlanarPixelBuffer<TPixel> : PixelBuffer<TPixel>
+public sealed record PlanarPixelBuffer<TPixel> : PixelBuffer<TPixel>
     where TPixel : unmanaged, IPlanarPixel<TPixel>
 {
     /// <inheritdoc/>

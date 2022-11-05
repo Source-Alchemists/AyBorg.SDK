@@ -2,7 +2,7 @@ using Atomy.SDK.ImageProcessing.Pixels;
 
 namespace Atomy.SDK.ImageProcessing.Buffers;
 
-public record PackedPixelBuffer<TPixel> : PixelBuffer<TPixel>
+public sealed record PackedPixelBuffer<TPixel> : PixelBuffer<TPixel>
     where TPixel : unmanaged, IPackedPixel<TPixel>
 {
     /// <inheritdoc/>

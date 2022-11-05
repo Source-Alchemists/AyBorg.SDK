@@ -18,6 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Atomy.SDK.csproj" />
+    <ProjectReference Include="..\..\src\Data\DAL\Atomy.SDK.Data.DAL.csproj" />
   </ItemGroup>
 </Project>

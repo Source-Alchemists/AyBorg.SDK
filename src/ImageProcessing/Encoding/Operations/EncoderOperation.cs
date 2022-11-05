@@ -44,10 +44,8 @@ public class EncoderOperation : Encoder
     private static object EncodeMono8(EncoderParameters parameters)
     {
         var pixelBuffer = parameters.Input as ReadOnlyPackedPixelBuffer<Mono8>;
-        if (pixelBuffer == null)
-            throw new ArgumentNullException(nameof(parameters.Input));
 
-        using var image = pixelBuffer.ToImageSharp();
+        using var image = pixelBuffer!.ToImageSharp();
         var stream = parameters.Stream;
         Save(image, stream!, parameters.EncoderType, parameters.Quality);
         return null!;
@@ -56,10 +54,8 @@ public class EncoderOperation : Encoder
     private static object EncodeMono16(EncoderParameters parameters)
     {
         var pixelBuffer = parameters.Input as ReadOnlyPackedPixelBuffer<Mono16>;
-        if (pixelBuffer == null)
-            throw new ArgumentNullException(nameof(parameters.Input));
 
-        using var image = pixelBuffer.ToImageSharp();
+        using var image = pixelBuffer!.ToImageSharp();
         var stream = parameters.Stream;
         Save(image, stream!, parameters.EncoderType, parameters.Quality);
         return null!;
@@ -68,10 +64,8 @@ public class EncoderOperation : Encoder
     private static object EncodeRgb24(EncoderParameters parameters)
     {
         var pixelBuffer = parameters.Input as ReadOnlyPackedPixelBuffer<Rgb24>;
-        if (pixelBuffer == null)
-            throw new ArgumentNullException(nameof(parameters.Input));
 
-        using var image = pixelBuffer.ToImageSharp();
+        using var image = pixelBuffer!.ToImageSharp();
         var stream = parameters.Stream;
         Save(image, stream!, parameters.EncoderType, parameters.Quality);
         return null!;
@@ -80,10 +74,8 @@ public class EncoderOperation : Encoder
     private static object EncodeRgb48(EncoderParameters parameters)
     {
         var pixelBuffer = parameters.Input as ReadOnlyPackedPixelBuffer<Rgb48>;
-        if (pixelBuffer == null)
-            throw new ArgumentNullException(nameof(parameters.Input));
 
-        using var image = pixelBuffer.ToImageSharp();
+        using var image = pixelBuffer!.ToImageSharp();
         var stream = parameters.Stream;
         Save(image, stream!, parameters.EncoderType, parameters.Quality);
         return null!;

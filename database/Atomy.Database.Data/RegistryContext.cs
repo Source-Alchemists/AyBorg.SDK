@@ -1,4 +1,4 @@
-using Atomy.SDK.DAL;
+using Atomy.SDK.Data.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace Atomy.Database.Data;

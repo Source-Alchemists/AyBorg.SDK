@@ -1,9 +1,11 @@
-﻿using Atomy.SDK.DAL;
+﻿using Atomy.SDK.Data.DAL;
 using Atomy.SDK.ImageProcessing;
 using Atomy.SDK.ImageProcessing.Buffers;
 using Atomy.SDK.ImageProcessing.Pixels;
-using Atomy.SDK.Mapper;
-using Atomy.SDK.Ports;
+using Atomy.SDK.Data.Mapper;
+using Atomy.SDK.Common;
+using Atomy.SDK.Common.Ports;
+using Atomy.SDK.Projects;
 using AutoMapper;
 using Moq;
 using Newtonsoft.Json;
