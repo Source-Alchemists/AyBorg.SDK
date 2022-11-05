@@ -181,8 +181,8 @@ public sealed class MqttClientProvider : IMqttClientProvider
         if (image == null) return;
 
         const int maxSize = 250;
-        Image targetImage = null!;
         Image resizedImage = null!;
+        Image targetImage;
         if (image.Width <= maxSize && image.Height <= maxSize || options.Resize == false)
         {
             targetImage = image;

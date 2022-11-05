@@ -10,7 +10,7 @@ namespace Atomy.SDK.Data.Mapper.Converter;
 
 internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
 {
-    private static readonly RecyclableMemoryStreamManager _memoryManager = new RecyclableMemoryStreamManager();
+    private static readonly RecyclableMemoryStreamManager _memoryManager = new();
     public ImageDto Convert(Image sourceMember, ResolutionContext context)
     {
         const int maxSize = 250;
@@ -18,8 +18,9 @@ internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
         {
             return new ImageDto();
         }
-        Image targetImage = null!;
+
         Image resizedImage = null!;
+        Image targetImage;
         if (sourceMember.Width <= maxSize && sourceMember.Height <= maxSize)
         {
             targetImage = sourceMember;

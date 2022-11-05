@@ -16,11 +16,6 @@ internal class ImageToRecordConverter : IValueConverter<Image, string>
             return string.Empty;
         }
 
-        IReadOnlyPixelBuffer buffer;
-
-        if(sourceMember.IsColor) buffer = sourceMember.AsPacked<Rgb>();
-        else buffer = sourceMember.AsPacked<Mono>();
-
         var record = new ImageRecord
         {
             Width = sourceMember.Width,

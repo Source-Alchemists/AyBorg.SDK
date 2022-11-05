@@ -58,12 +58,7 @@ public abstract class BasePort<TPort> : IPort where TPort : class, IPort
     /// <exception cref="System.InvalidOperationException">Input ports can only be linked with output ports!</exception>
     public void Connect(PortLink link)
     {
-        if (link == null)
-        {
-            throw new ArgumentNullException(nameof(link));
-        }
-
-        _link = link;
+        _link = link ?? throw new ArgumentNullException(nameof(link));
     }
 
     /// <summary>

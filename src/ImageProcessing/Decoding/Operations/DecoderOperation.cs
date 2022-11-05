@@ -19,10 +19,8 @@ public class DecoderOperations : Decoder
     private static IPixelBuffer DecodeStream(DecoderParameters parameters)
     {
         var stream = parameters.Input;
-        if (stream == null)
-            throw new ArgumentNullException(nameof(parameters.Input));
 
-        long position = stream.Position;
+        long position = stream!.Position;
         var info = SixLabors.ImageSharp.Image.Identify(stream);
         if (info == null)
             throw new InvalidOperationException("Could not identify image.");

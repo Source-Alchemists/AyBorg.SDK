@@ -17,28 +17,21 @@ public static class PortConverter
         {
             return true;
         }
-        switch (sourcePort.Brand)
+        return sourcePort.Brand switch
         {
-            case PortBrand.String:
-                return targetPort.Brand == PortBrand.Numeric
-                        || targetPort.Brand == PortBrand.Boolean
-                        || targetPort.Brand == PortBrand.Rectangle
-                        || targetPort.Brand == PortBrand.Enum;
-            case PortBrand.Folder:
-                return targetPort.Brand == PortBrand.String;
-            case PortBrand.Numeric:
-                return targetPort.Brand == PortBrand.String
-                        || targetPort.Brand == PortBrand.Boolean
-                        || targetPort.Brand == PortBrand.Enum;
-            case PortBrand.Boolean:
-                return targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric;
-            case PortBrand.Rectangle:
-                return targetPort.Brand == PortBrand.String;
-            case PortBrand.Enum:
-                return targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric;
-            default:
-                return false;
-        }
+            PortBrand.String => targetPort.Brand == PortBrand.Numeric
+                                    || targetPort.Brand == PortBrand.Boolean
+                                    || targetPort.Brand == PortBrand.Rectangle
+                                    || targetPort.Brand == PortBrand.Enum,
+            PortBrand.Folder => targetPort.Brand == PortBrand.String,
+            PortBrand.Numeric => targetPort.Brand == PortBrand.String
+                                    || targetPort.Brand == PortBrand.Boolean
+                                    || targetPort.Brand == PortBrand.Enum,
+            PortBrand.Boolean => targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric,
+            PortBrand.Rectangle => targetPort.Brand == PortBrand.String,
+            PortBrand.Enum => targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric,
+            _ => false,
+        };
     }
 
     /// <summary>

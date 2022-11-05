@@ -80,10 +80,10 @@ public interface IStepProxy : IDisposable
     /// <summary>
     /// Executes the step.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
     /// <param name="iterationId">The iteration identifier.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
-    Task<bool> TryRunAsync(CancellationToken cancellationToken, Guid iterationId);
+    Task<bool> TryRunAsync(Guid iterationId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Initializes the step.

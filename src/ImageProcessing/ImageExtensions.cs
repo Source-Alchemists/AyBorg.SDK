@@ -140,25 +140,13 @@ public static class ImageExtensions
     /// <returns>The binary thresholded image.</returns>
     public static Image Binarize(this Image image, float threshold = 0.5f, BinaryThresholdMode mode = BinaryThresholdMode.Lumincance)
     {
-        IReadOnlyPixelBuffer sourceBuffer;
-
-        switch(image.PixelFormat)
+        IReadOnlyPixelBuffer sourceBuffer = image.PixelFormat switch
         {
-            case PixelFormat.RgbPlanar:
-                sourceBuffer = image.AsPacked<Rgb>();
-                break;
-            case PixelFormat.Rgb888Planar:
-                sourceBuffer = image.AsPacked<Rgb24>();
-                break;
-            case PixelFormat.Rgb161616Planar:
-                sourceBuffer = image.AsPacked<Rgb48>();
-                break;
-            default:
-                sourceBuffer = image.GetPixelBuffer();
-                break;
-
-        }
-
+            PixelFormat.RgbPlanar => image.AsPacked<Rgb>(),
+            PixelFormat.Rgb888Planar => image.AsPacked<Rgb24>(),
+            PixelFormat.Rgb161616Planar => image.AsPacked<Rgb48>(),
+            _ => image.GetPixelBuffer(),
+        };
         var binarizedBuffer = _binarizer.Execute(new Binarizing.Operations.BinarizerParameters
         {
             Input = sourceBuffer,
@@ -171,28 +159,18 @@ public static class ImageExtensions
 
     internal static IReadOnlyPixelBuffer GetPixelBuffer(this Image image)
     {
-        switch(image.PixelFormat)
+        return image.PixelFormat switch
         {
-            case PixelFormat.Mono:
-                return image.AsPacked<Mono>();
-            case PixelFormat.Mono8:
-                return image.AsPacked<Mono8>();
-            case PixelFormat.Mono16:
-                return image.AsPacked<Mono16>();
-            case PixelFormat.RgbPacked:
-                return image.AsPacked<Rgb>();
-            case PixelFormat.Rgb24Packed:
-                return image.AsPacked<Rgb24>();
-            case PixelFormat.Rgb48Packed:
-                return image.AsPacked<Rgb48>();
-            case PixelFormat.RgbPlanar:
-                return image.AsPlanar<RgbFFF>();
-            case PixelFormat.Rgb888Planar:
-                return image.AsPlanar<Rgb888>();
-            case PixelFormat.Rgb161616Planar:
-                return image.AsPlanar<Rgb161616>();
-            default:
-                throw new NotSupportedException($"The pixel format {image.PixelFormat} is not supported.");
-        }
+            PixelFormat.Mono => image.AsPacked<Mono>(),
+            PixelFormat.Mono8 => image.AsPacked<Mono8>(),
+            PixelFormat.Mono16 => image.AsPacked<Mono16>(),
+            PixelFormat.RgbPacked => image.AsPacked<Rgb>(),
+            PixelFormat.Rgb24Packed => image.AsPacked<Rgb24>(),
+            PixelFormat.Rgb48Packed => image.AsPacked<Rgb48>(),
+            PixelFormat.RgbPlanar => image.AsPlanar<RgbFFF>(),
+            PixelFormat.Rgb888Planar => image.AsPlanar<Rgb888>(),
+            PixelFormat.Rgb161616Planar => image.AsPlanar<Rgb161616>(),
+            _ => throw new NotSupportedException($"The pixel format {image.PixelFormat} is not supported."),
+        };
     }
 }

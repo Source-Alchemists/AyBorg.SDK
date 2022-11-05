@@ -70,8 +70,6 @@ public abstract class Operation<TDescription, TParameters, TResult> : Operation,
     where TParameters : class, IOperationParameters, new()
     where TResult : class
 {
-    private readonly TParameters _defaultParameters = new();
-
     public abstract TResult Execute(TParameters parameters);
 
     protected void AddOperation<TInput, TOutput>(Func<TParameters, TOutput> delegateFunc)
