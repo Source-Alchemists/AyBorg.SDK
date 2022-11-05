@@ -27,6 +27,7 @@
     <ProjectReference Include="..\src\System\Atomy.SDK.System.csproj" />
     <ProjectReference Include="..\src\Common\Atomy.SDK.Common.csproj" />
     <ProjectReference Include="..\src\Projects\Atomy.SDK.Projects.csproj" />
+    <ProjectReference Include="..\src\Data\Mapper\Atomy.SDK.Data.Mapper.csproj" />
   </ItemGroup>
 
   <ItemGroup>
