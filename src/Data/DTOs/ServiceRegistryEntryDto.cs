@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Atomy.SDK.Data.DTOs;
+namespace Autodroid.SDK.Data.DTOs;
 
 /// <summary>
 /// Service registry entry.

@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing.Cropping.Operations;
+namespace Autodroid.SDK.ImageProcessing.Cropping.Operations;
 
 public sealed class CropOperation : Crop
 {

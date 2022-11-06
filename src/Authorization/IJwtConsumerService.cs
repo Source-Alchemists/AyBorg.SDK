@@ -1,6 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Atomy.SDK.Authorization;
+namespace Autodroid.SDK.Authorization;
 
 public interface IJwtConsumerService
 {

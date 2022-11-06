@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Atomy.SDK.Data.DAL;
-using Atomy.SDK.Data.DTOs;
-using Atomy.SDK.Data.Mapper.Converter;
-using Atomy.SDK.Common.Ports;
-using Atomy.SDK.Common;
+using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.Data.DTOs;
+using Autodroid.SDK.Data.Mapper.Converter;
+using Autodroid.SDK.Common.Ports;
+using Autodroid.SDK.Common;
 
-namespace Atomy.SDK.Data.Mapper;
+namespace Autodroid.SDK.Data.Mapper;
 
 public sealed class DtoMapper : IDtoMapper
 {

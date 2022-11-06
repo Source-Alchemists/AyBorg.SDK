@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing;
 
-namespace Atomy.SDK.Data.DAL;
+namespace Autodroid.SDK.Data.DAL;
 
 public record ImageRecord
 {

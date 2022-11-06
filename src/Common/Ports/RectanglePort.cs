@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Shapes;
+using Autodroid.SDK.ImageProcessing.Shapes;
 
-namespace Atomy.SDK.Common.Ports;
+namespace Autodroid.SDK.Common.Ports;
 
 public sealed class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
 {

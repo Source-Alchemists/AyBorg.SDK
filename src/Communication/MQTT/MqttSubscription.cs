@@ -1,6 +1,6 @@
 using MQTTnet;
 
-namespace Atomy.SDK.Communication.MQTT;
+namespace Autodroid.SDK.Communication.MQTT;
 
 public sealed record MqttSubscription
 {

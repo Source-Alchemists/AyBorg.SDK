@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Atomy.SDK.Common;
+using Autodroid.SDK.Common;
 
-namespace Atomy.SDK.Data.DAL;
+namespace Autodroid.SDK.Data.DAL;
 
 public record StepRecord
 {

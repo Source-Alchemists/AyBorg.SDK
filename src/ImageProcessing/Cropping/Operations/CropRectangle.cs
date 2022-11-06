@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Shapes;
+using Autodroid.SDK.ImageProcessing.Shapes;
 
-namespace Atomy.SDK.ImageProcessing.Cropping.Operations;
+namespace Autodroid.SDK.ImageProcessing.Cropping.Operations;
 
 internal record struct CropRectangle
 {

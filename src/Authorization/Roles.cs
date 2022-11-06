@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Authorization;
+namespace Autodroid.SDK.Authorization;
 
 public static class Roles
 {

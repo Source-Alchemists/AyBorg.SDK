@@ -1,16 +1,16 @@
-﻿using Atomy.SDK.Data.DAL;
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Pixels;
-using Atomy.SDK.Data.Mapper;
-using Atomy.SDK.Common;
-using Atomy.SDK.Common.Ports;
-using Atomy.SDK.Projects;
+﻿using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.Data.Mapper;
+using Autodroid.SDK.Common;
+using Autodroid.SDK.Common.Ports;
+using Autodroid.SDK.Projects;
 using AutoMapper;
 using Moq;
 using Newtonsoft.Json;
 
-namespace Atomy.SDK.Tests.Mapper;
+namespace Autodroid.SDK.Tests.Mapper;
 
 public class RuntimeStorageMapperTests
 {

@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing.Resizing.Operations;
+namespace Autodroid.SDK.ImageProcessing.Resizing.Operations;
 
 public sealed class ResizeOperation : Resizer
 {

@@ -1,14 +1,14 @@
 using System.Runtime.CompilerServices;
-using Atomy.SDK.ImageProcessing.Binarizing;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Converting;
-using Atomy.SDK.ImageProcessing.Cropping;
-using Atomy.SDK.ImageProcessing.Mirroring;
-using Atomy.SDK.ImageProcessing.Pixels;
-using Atomy.SDK.ImageProcessing.Resizing;
-using Atomy.SDK.ImageProcessing.Shapes;
+using Autodroid.SDK.ImageProcessing.Binarizing;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Converting;
+using Autodroid.SDK.ImageProcessing.Cropping;
+using Autodroid.SDK.ImageProcessing.Mirroring;
+using Autodroid.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Resizing;
+using Autodroid.SDK.ImageProcessing.Shapes;
 
-namespace Atomy.SDK.ImageProcessing;
+namespace Autodroid.SDK.ImageProcessing;
 
 public static class ImageExtensions
 {

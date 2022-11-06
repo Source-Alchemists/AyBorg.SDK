@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Data.DAL
+namespace Autodroid.SDK.Data.DAL
 {
     public record EnumRecord
     {

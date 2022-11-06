@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Common.Ports;
+namespace Autodroid.SDK.Common.Ports;
 
 public sealed class BooleanPort : ValuePortGeneric<BooleanPort, bool>
 {

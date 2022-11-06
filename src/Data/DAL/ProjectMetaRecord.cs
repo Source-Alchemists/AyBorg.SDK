@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Atomy.SDK.Projects;
+using Autodroid.SDK.Projects;
 
-namespace Atomy.SDK.Data.DAL;
+namespace Autodroid.SDK.Data.DAL;
 
 public record ProjectMetaRecord
 {

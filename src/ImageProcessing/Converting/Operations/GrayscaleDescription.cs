@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Converting.Operations;
+namespace Autodroid.SDK.ImageProcessing.Converting.Operations;
 
 public record GrayscaleConverterDescription : OperationDescription
 {

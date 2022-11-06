@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing.Buffers;
+namespace Autodroid.SDK.ImageProcessing.Buffers;
 
 public static class PixelBufferMarshal
 {

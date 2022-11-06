@@ -1,4 +1,4 @@
-namespace Atomy.SDK.ImageProcessing.Shapes;
+namespace Autodroid.SDK.ImageProcessing.Shapes;
 
 public record struct Rectangle
 {

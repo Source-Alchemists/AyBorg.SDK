@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Encoding.Operations;
+namespace Autodroid.SDK.ImageProcessing.Encoding.Operations;
 
 public record EncoderDescription : OperationDescription
 {

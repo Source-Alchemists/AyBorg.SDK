@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Atomy.SDK.Projects;
+using Autodroid.SDK.Projects;
 
-namespace Atomy.SDK.Data.DTOs;
+namespace Autodroid.SDK.Data.DTOs;
 
 public sealed record ProjectMetaDto
 {

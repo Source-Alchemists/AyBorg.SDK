@@ -1,6 +1,6 @@
-using Atomy.SDK.Common.Ports;
+using Autodroid.SDK.Common.Ports;
 
-namespace Atomy.SDK.Common;
+namespace Autodroid.SDK.Common;
 
 public interface IStepBody 
 {

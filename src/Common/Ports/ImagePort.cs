@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing;
 
-namespace Atomy.SDK.Common.Ports;
+namespace Autodroid.SDK.Common.Ports;
 
 public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
 {

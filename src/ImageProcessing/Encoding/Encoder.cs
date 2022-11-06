@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing.Encoding.Operations;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Encoding.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Encoding;
+namespace Autodroid.SDK.ImageProcessing.Encoding;
 
 public class Encoder : Operation<EncoderDescription, EncoderParameters, object>
 {

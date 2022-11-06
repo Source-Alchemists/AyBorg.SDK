@@ -1,8 +1,8 @@
 using Sys = System;
 using AutoMapper;
-using Atomy.SDK.Data.DAL;
+using Autodroid.SDK.Data.DAL;
 
-namespace Atomy.SDK.Data.Mapper.Converter;
+namespace Autodroid.SDK.Data.Mapper.Converter;
 
 internal class EnumToRecordConverter : IValueConverter<Enum, string>
 {

@@ -1,8 +1,8 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Cropping.Operations;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Cropping.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Cropping;
+namespace Autodroid.SDK.ImageProcessing.Cropping;
 
 public class Crop : Operation<CropDescription, CropParameters, IPixelBuffer>
 {

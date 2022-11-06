@@ -1,10 +1,10 @@
 using System.Runtime.CompilerServices;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Decoding;
-using Atomy.SDK.ImageProcessing.Encoding;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Decoding;
+using Autodroid.SDK.ImageProcessing.Encoding;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing;
+namespace Autodroid.SDK.ImageProcessing;
 
 public partial record Image
 {

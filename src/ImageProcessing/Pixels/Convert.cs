@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Atomy.SDK.ImageProcessing.Pixels;
+namespace Autodroid.SDK.ImageProcessing.Pixels;
 
 internal static class Convert
 {

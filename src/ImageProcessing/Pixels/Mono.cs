@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Atomy.SDK.ImageProcessing.Pixels;
+namespace Autodroid.SDK.ImageProcessing.Pixels;
 
 public record struct Mono : IPackedPixel<Mono>
 {

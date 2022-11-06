@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Mirroring.Operations;
+namespace Autodroid.SDK.ImageProcessing.Mirroring.Operations;
 public record MirrorDescription : OperationDescription
 {
     public MirrorDescription() : base() { }

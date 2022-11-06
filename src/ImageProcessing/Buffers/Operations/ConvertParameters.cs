@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Buffers.Operations;
+namespace Autodroid.SDK.ImageProcessing.Buffers.Operations;
 
 public record ConvertParameters : IOperationParameters
 {

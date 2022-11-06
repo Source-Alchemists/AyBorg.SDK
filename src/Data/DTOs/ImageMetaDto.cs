@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.ImageProcessing.Encoding;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing.Encoding;
 
-namespace Atomy.SDK.Data.DTOs;
+namespace Autodroid.SDK.Data.DTOs;
 
 public sealed record ImageMetaDto
 {

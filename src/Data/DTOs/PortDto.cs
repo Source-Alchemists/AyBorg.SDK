@@ -1,6 +1,6 @@
-﻿using Atomy.SDK.Common.Ports;
+﻿using Autodroid.SDK.Common.Ports;
 
-namespace Atomy.SDK.Data.DTOs;
+namespace Autodroid.SDK.Data.DTOs;
 
 public sealed record PortDto
 {

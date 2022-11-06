@@ -1,9 +1,9 @@
 using Sys = System;
-using Atomy.SDK.Data.DAL;
-using Atomy.SDK.ImageProcessing.Shapes;
+using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.ImageProcessing.Shapes;
 using AutoMapper;
 
-namespace Atomy.SDK.Data.Mapper.Converter;
+namespace Autodroid.SDK.Data.Mapper.Converter;
 
 internal class RectangleToRecordConverter : IValueConverter<Rectangle, string>
 {

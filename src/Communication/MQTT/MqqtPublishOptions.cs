@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing.Encoding;
+using Autodroid.SDK.ImageProcessing.Encoding;
 using MQTTnet.Protocol;
 
-namespace Atomy.SDK.Communication.MQTT;
+namespace Autodroid.SDK.Communication.MQTT;
 
 public sealed record MqttPublishOptions
 {

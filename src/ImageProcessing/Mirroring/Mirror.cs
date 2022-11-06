@@ -1,8 +1,8 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Mirroring.Operations;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Mirroring.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Mirroring;
+namespace Autodroid.SDK.ImageProcessing.Mirroring;
 
 public class Mirror : Operation<MirrorDescription, MirrorParameters, IPixelBuffer>
 {

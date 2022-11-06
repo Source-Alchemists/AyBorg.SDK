@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Resizing.Operations;
+namespace Autodroid.SDK.ImageProcessing.Resizing.Operations;
 
 public record ResizerDescription : OperationDescription
 {

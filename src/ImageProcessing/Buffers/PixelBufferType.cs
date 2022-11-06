@@ -1,4 +1,4 @@
-namespace Atomy.SDK.ImageProcessing.Buffers;
+namespace Autodroid.SDK.ImageProcessing.Buffers;
 
 public enum PixelBufferType
 {

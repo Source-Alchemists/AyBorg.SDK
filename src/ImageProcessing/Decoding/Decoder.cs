@@ -1,8 +1,8 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Decoding.Operations;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Decoding.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Decoding;
+namespace Autodroid.SDK.ImageProcessing.Decoding;
 
 public class Decoder : Operation<DecoderDescription, DecoderParameters, IPixelBuffer>
 {

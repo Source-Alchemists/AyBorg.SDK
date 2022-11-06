@@ -2,7 +2,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Atomy.SDK.ImageProcessing.Pixels;
+namespace Autodroid.SDK.ImageProcessing.Pixels;
 
 public static class PixelExtensions
 {

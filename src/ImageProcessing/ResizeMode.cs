@@ -1,4 +1,4 @@
-namespace Atomy.SDK.ImageProcessing;
+namespace Autodroid.SDK.ImageProcessing;
 
 public enum ResizeMode
 {

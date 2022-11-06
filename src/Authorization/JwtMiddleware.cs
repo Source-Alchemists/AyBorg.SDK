@@ -2,7 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace Atomy.SDK.Authorization;
+namespace Autodroid.SDK.Authorization;
 
 public sealed class JwtMiddleware
 {
