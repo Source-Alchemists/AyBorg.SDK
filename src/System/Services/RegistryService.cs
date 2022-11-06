@@ -13,7 +13,7 @@ public class RegistryService : BackgroundService
 {
     private readonly ILogger<RegistryService> _logger;
     private readonly HttpClient _httpClient;
-    private readonly ServiceRegistryEntryDto _serviceEntry;
+    private readonly RegistryEntryDto _serviceEntry;
     private readonly StringContent _serviceInfoContent;
     private Guid _serviceId;
 
@@ -40,7 +40,7 @@ public class RegistryService : BackgroundService
             versionString = version.ToString();
         }
 
-        _serviceEntry = new ServiceRegistryEntryDto
+        _serviceEntry = new RegistryEntryDto
         {
             Name = configuration.GetValue<string>("Autodroid:Service:Name"),
             UniqueName = configuration.GetValue<string>("Autodroid:Service:UniqueName"),
@@ -50,7 +50,7 @@ public class RegistryService : BackgroundService
         };
 
         _serviceInfoContent = new StringContent(JsonSerializer.Serialize(_serviceEntry), Encoding.UTF8, "application/json");
-        _httpClient.BaseAddress = new Uri(configuration.GetValue<string>("Autodroid:ServiceRegistry:Url"));
+        _httpClient.BaseAddress = new Uri(configuration.GetValue<string>("Autodroid:Registry:Url"));
     }
 
     /// <summary>

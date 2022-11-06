@@ -5,7 +5,7 @@ namespace Autodroid.SDK.Data.DTOs;
 /// <summary>
 /// Service registry entry.
 /// </summary>
-public sealed record ServiceRegistryEntryDto
+public sealed record RegistryEntryDto
 {
     /// <summary>
     /// Gets or sets the identifier.
