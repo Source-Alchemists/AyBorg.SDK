@@ -1,9 +1,9 @@
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Encoding;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Encoding;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.Tests.ImageProcessing;
+namespace Autodroid.SDK.Tests.ImageProcessing;
 
 public class ImageTests
 {

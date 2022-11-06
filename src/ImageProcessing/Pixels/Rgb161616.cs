@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Atomy.SDK.ImageProcessing.Pixels;
+namespace Autodroid.SDK.ImageProcessing.Pixels;
 
 public record struct Rgb161616 : IPlanarPixel<Rgb161616>
 {

@@ -1,4 +1,4 @@
-﻿namespace Atomy.SDK.Common;
+﻿namespace Autodroid.SDK.Common;
 
 public record PluginMetaInfo
 {

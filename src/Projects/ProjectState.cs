@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Projects;
+namespace Autodroid.SDK.Projects;
 
 public enum ProjectState
 {

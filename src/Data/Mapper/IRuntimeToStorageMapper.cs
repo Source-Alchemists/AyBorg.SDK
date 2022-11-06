@@ -1,8 +1,8 @@
-using Atomy.SDK.Common;
-using Atomy.SDK.Data.DAL;
-using Atomy.SDK.Projects;
+using Autodroid.SDK.Common;
+using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.Projects;
 
-namespace Atomy.SDK.Data.Mapper;
+namespace Autodroid.SDK.Data.Mapper;
 
 public interface IRuntimeToStorageMapper
 {

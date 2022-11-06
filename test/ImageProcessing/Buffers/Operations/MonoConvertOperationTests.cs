@@ -1,8 +1,8 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Buffers.Operations;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Buffers.Operations;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.Tests.ImageProcessing.Buffers.Operations;
+namespace Autodroid.SDK.Tests.ImageProcessing.Buffers.Operations;
 
 public class MonoConvertOperationTests
 {

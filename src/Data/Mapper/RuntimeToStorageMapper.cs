@@ -1,12 +1,12 @@
 ﻿using System.Globalization;
 using AutoMapper;
-using Atomy.SDK.Data.DAL;
-using Atomy.SDK.Common.Ports;
-using Atomy.SDK.Data.Mapper.Converter;
-using Atomy.SDK.Common;
-using Atomy.SDK.Projects;
+using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.Common.Ports;
+using Autodroid.SDK.Data.Mapper.Converter;
+using Autodroid.SDK.Common;
+using Autodroid.SDK.Projects;
 
-namespace Atomy.SDK.Data.Mapper;
+namespace Autodroid.SDK.Data.Mapper;
 
 public sealed class RuntimeToStorageMapper : IRuntimeToStorageMapper
 {

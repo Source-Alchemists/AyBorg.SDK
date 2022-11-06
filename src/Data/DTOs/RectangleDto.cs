@@ -1,4 +1,4 @@
-namespace Atomy.SDK.Data.DTOs;
+namespace Autodroid.SDK.Data.DTOs;
 
 public sealed record RectangleDto
 {

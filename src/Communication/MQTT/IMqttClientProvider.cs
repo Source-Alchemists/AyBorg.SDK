@@ -1,6 +1,6 @@
-using Atomy.SDK.Common.Ports;
+using Autodroid.SDK.Common.Ports;
 
-namespace Atomy.SDK.Communication.MQTT;
+namespace Autodroid.SDK.Communication.MQTT;
 
 public interface IMqttClientProvider : IDisposable
 {

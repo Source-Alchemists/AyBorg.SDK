@@ -1,8 +1,8 @@
-using Atomy.SDK.ImageProcessing.Binarizing.Operations;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Binarizing.Operations;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Binarizing;
+namespace Autodroid.SDK.ImageProcessing.Binarizing;
 
 public class Binarizer : Operation<BinarizerDescription, BinarizerParameters, IPixelBuffer>
 {

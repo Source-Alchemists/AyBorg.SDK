@@ -1,12 +1,12 @@
-using Atomy.SDK.Data.DAL;
-using Atomy.SDK.Data.DTOs;
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.Data.Mapper;
-using Atomy.SDK.Common;
-using Atomy.SDK.Common.Ports;
+using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.Data.DTOs;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.Data.Mapper;
+using Autodroid.SDK.Common;
+using Autodroid.SDK.Common.Ports;
 using Moq;
 
-namespace Atomy.SDK.Tests.Mapper;
+namespace Autodroid.SDK.Tests.Mapper;
 
 #nullable disable
 

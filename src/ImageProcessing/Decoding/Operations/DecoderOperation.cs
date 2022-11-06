@@ -1,9 +1,9 @@
 using System.Runtime.InteropServices;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Pixels;
 using SixLabors.ImageSharp;
 
-namespace Atomy.SDK.ImageProcessing.Decoding.Operations;
+namespace Autodroid.SDK.ImageProcessing.Decoding.Operations;
 
 public class DecoderOperations : Decoder
 {

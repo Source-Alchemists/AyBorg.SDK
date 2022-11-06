@@ -3,39 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Tests", "test\Atomy.SDK.Tests.csproj", "{C7CEC53F-F7CF-4965-98F9-FD4C43A08009}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Tests", "test\Autodroid.SDK.Tests.csproj", "{C7CEC53F-F7CF-4965-98F9-FD4C43A08009}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{BE2439E8-F7E5-4B02-92DD-9F3626B133EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.Database.Data", "database\Atomy.Database.Data\Atomy.Database.Data.csproj", "{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.Database.Data", "database\Autodroid.Database.Data\Autodroid.Database.Data.csproj", "{D0ADD954-1C82-4FAB-A00F-53ECF99281C0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "migrations", "migrations", "{933AE6ED-43B5-46C6-A7FB-AE5F02490A06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.Database.Migrations.PostgreSql", "database\migrations\Atomy.Database.Migrations.PostgreSql\Atomy.Database.Migrations.PostgreSql.csproj", "{AC7B2A76-DCC6-4790-9BE8-564E8D860399}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.Database.Migrations.PostgreSql", "database\migrations\Autodroid.Database.Migrations.PostgreSql\Autodroid.Database.Migrations.PostgreSql.csproj", "{AC7B2A76-DCC6-4790-9BE8-564E8D860399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.Database.Migrations.SqlLite", "database\migrations\Atomy.Database.Migrations.SqlLite\Atomy.Database.Migrations.SqlLite.csproj", "{E16E436D-EF76-4DFC-9717-9405768CC37A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.Database.Migrations.SqlLite", "database\migrations\Autodroid.Database.Migrations.SqlLite\Autodroid.Database.Migrations.SqlLite.csproj", "{E16E436D-EF76-4DFC-9717-9405768CC37A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3072902B-3D55-4EEC-9A09-CBC77CE6930B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Authorization", "src\Authorization\Atomy.SDK.Authorization.csproj", "{C44D6A8A-5241-4A16-9273-78BFDAB30F7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Authorization", "src\Authorization\Autodroid.SDK.Authorization.csproj", "{C44D6A8A-5241-4A16-9273-78BFDAB30F7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Common", "src\Common\Atomy.SDK.Common.csproj", "{71C695DA-A290-43F1-AC59-86388048A651}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Common", "src\Common\Autodroid.SDK.Common.csproj", "{71C695DA-A290-43F1-AC59-86388048A651}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Communication", "Communication", "{8D001D47-DA75-4EA7-BDBA-BA65CCEF59BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Communication.MQTT", "src\Communication\MQTT\Atomy.SDK.Communication.MQTT.csproj", "{EE87E61A-F9AC-4DB5-B336-75167C58604C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Communication.MQTT", "src\Communication\MQTT\Autodroid.SDK.Communication.MQTT.csproj", "{EE87E61A-F9AC-4DB5-B336-75167C58604C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.ImageProcessing", "src\ImageProcessing\Atomy.SDK.ImageProcessing.csproj", "{13C591F0-E8E8-4552-B72F-7C2FA7056CA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.ImageProcessing", "src\ImageProcessing\Autodroid.SDK.ImageProcessing.csproj", "{13C591F0-E8E8-4552-B72F-7C2FA7056CA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Projects", "src\Projects\Atomy.SDK.Projects.csproj", "{C2AD7B10-5106-45F5-B4BB-F5B63722CDFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Projects", "src\Projects\Autodroid.SDK.Projects.csproj", "{C2AD7B10-5106-45F5-B4BB-F5B63722CDFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.System", "src\System\Atomy.SDK.System.csproj", "{FA389899-1B82-4451-9CAD-10683AD66270}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.System", "src\System\Autodroid.SDK.System.csproj", "{FA389899-1B82-4451-9CAD-10683AD66270}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DC74A650-99B5-4DD5-8CFF-8FA0FB581E14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Data.DAL", "src\Data\DAL\Atomy.SDK.Data.DAL.csproj", "{0A15E23E-F125-4181-9CEF-F1788623FE8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Data.DAL", "src\Data\DAL\Autodroid.SDK.Data.DAL.csproj", "{0A15E23E-F125-4181-9CEF-F1788623FE8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomy.SDK.Data.DTOs", "src\Data\DTOs\Atomy.SDK.Data.DTOs.csproj", "{D315B41D-9D88-4887-9A12-C6F408591F61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodroid.SDK.Data.DTOs", "src\Data\DTOs\Autodroid.SDK.Data.DTOs.csproj", "{D315B41D-9D88-4887-9A12-C6F408591F61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

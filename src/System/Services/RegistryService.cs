@@ -2,12 +2,12 @@ using Sys = System;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using Atomy.SDK.Data.DTOs;
+using Autodroid.SDK.Data.DTOs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Atomy.SDK.System.Services;
+namespace Autodroid.SDK.System.Services;
 
 public class RegistryService : BackgroundService
 {
@@ -42,15 +42,15 @@ public class RegistryService : BackgroundService
 
         _serviceEntry = new ServiceRegistryEntryDto
         {
-            Name = configuration.GetValue<string>("Atomy:Service:Name"),
-            UniqueName = configuration.GetValue<string>("Atomy:Service:UniqueName"),
-            Type = configuration.GetValue<string>("Atomy:Service:Type"),
-            Url = configuration.GetValue<string>("Atomy:Service:Url"),
+            Name = configuration.GetValue<string>("Autodroid:Service:Name"),
+            UniqueName = configuration.GetValue<string>("Autodroid:Service:UniqueName"),
+            Type = configuration.GetValue<string>("Autodroid:Service:Type"),
+            Url = configuration.GetValue<string>("Autodroid:Service:Url"),
             Version = versionString
         };
 
         _serviceInfoContent = new StringContent(JsonSerializer.Serialize(_serviceEntry), Encoding.UTF8, "application/json");
-        _httpClient.BaseAddress = new Uri(configuration.GetValue<string>("Atomy:ServiceRegistry:Url"));
+        _httpClient.BaseAddress = new Uri(configuration.GetValue<string>("Autodroid:ServiceRegistry:Url"));
     }
 
     /// <summary>

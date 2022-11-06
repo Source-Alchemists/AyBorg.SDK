@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Cropping.Operations;
+namespace Autodroid.SDK.ImageProcessing.Cropping.Operations;
 
 public record CropDescription : OperationDescription
 {

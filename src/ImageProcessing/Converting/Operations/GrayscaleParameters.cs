@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Converting.Operations;
+namespace Autodroid.SDK.ImageProcessing.Converting.Operations;
 
 public record GrayscaleConverterParameters : IOperationParameters
 {

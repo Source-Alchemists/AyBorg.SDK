@@ -1,6 +1,6 @@
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing.Buffers.Operations;
+namespace Autodroid.SDK.ImageProcessing.Buffers.Operations;
 
 public class RgbConvertOperation : PixelBufferConverter
 {

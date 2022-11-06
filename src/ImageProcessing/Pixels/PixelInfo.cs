@@ -1,4 +1,4 @@
-namespace Atomy.SDK.ImageProcessing.Pixels;
+namespace Autodroid.SDK.ImageProcessing.Pixels;
 
 public record PixelInfo
 {

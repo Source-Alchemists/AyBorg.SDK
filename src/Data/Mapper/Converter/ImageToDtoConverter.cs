@@ -2,11 +2,11 @@ using Sys = System;
 using Microsoft.IO;
 using Microsoft.Toolkit.HighPerformance;
 using AutoMapper;
-using Atomy.SDK.Data.DTOs;
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.ImageProcessing.Encoding;
+using Autodroid.SDK.Data.DTOs;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing.Encoding;
 
-namespace Atomy.SDK.Data.Mapper.Converter;
+namespace Autodroid.SDK.Data.Mapper.Converter;
 
 internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
 {

@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Atomy.SDK.ImageProcessing.Pixels;
+namespace Autodroid.SDK.ImageProcessing.Pixels;
 
 [StructLayout(LayoutKind.Explicit, Size = 6)]
 public record struct Rgb48 : IPackedPixel<Rgb48>

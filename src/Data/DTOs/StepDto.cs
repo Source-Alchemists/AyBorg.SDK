@@ -1,6 +1,6 @@
-﻿using Atomy.SDK.Common;
+﻿using Autodroid.SDK.Common;
 
-namespace Atomy.SDK.Data.DTOs;
+namespace Autodroid.SDK.Data.DTOs;
 
 public sealed record StepDto
 {

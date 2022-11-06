@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing;
+namespace Autodroid.SDK.ImageProcessing;
 
 internal static class ColorNumerics
 {

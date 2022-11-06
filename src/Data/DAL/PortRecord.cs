@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Atomy.SDK.Common.Ports;
+using Autodroid.SDK.Common.Ports;
 
-namespace Atomy.SDK.Data.DAL;
+namespace Autodroid.SDK.Data.DAL;
 
 public record PortRecord
 {

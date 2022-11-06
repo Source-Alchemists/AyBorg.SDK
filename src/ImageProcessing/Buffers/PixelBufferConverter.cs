@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing.Buffers.Operations;
-using Atomy.SDK.ImageProcessing.Operations;
+using Autodroid.SDK.ImageProcessing.Buffers.Operations;
+using Autodroid.SDK.ImageProcessing.Operations;
 
-namespace Atomy.SDK.ImageProcessing.Buffers;
+namespace Autodroid.SDK.ImageProcessing.Buffers;
 
 public class PixelBufferConverter : Operation<ConvertDescription, ConvertParameters, IPixelBuffer>
 {

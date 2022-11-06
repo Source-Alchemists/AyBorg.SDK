@@ -1,7 +1,7 @@
 using AutoMapper;
-using Atomy.SDK.Data.DTOs;
+using Autodroid.SDK.Data.DTOs;
 
-namespace Atomy.SDK.Data.Mapper.Converter;
+namespace Autodroid.SDK.Data.Mapper.Converter;
 
 internal class EnumToDtoConverter : IValueConverter<Enum, EnumDto>
 {

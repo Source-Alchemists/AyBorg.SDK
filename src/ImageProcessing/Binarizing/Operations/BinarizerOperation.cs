@@ -1,7 +1,7 @@
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Pixels;
 
-namespace Atomy.SDK.ImageProcessing.Binarizing.Operations;
+namespace Autodroid.SDK.ImageProcessing.Binarizing.Operations;
 
 public sealed class BinarizerOperation : Binarizer
 {

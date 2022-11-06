@@ -1,4 +1,4 @@
-﻿namespace Atomy.SDK.Common.Ports;
+﻿namespace Autodroid.SDK.Common.Ports;
 
 public class StringPort : ValuePortGeneric<StringPort, string>
 {

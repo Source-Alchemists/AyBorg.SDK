@@ -1,11 +1,11 @@
 using Sys = System;
-using Atomy.SDK.Data.DAL;
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.ImageProcessing.Buffers;
-using Atomy.SDK.ImageProcessing.Pixels;
+using Autodroid.SDK.Data.DAL;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.ImageProcessing.Buffers;
+using Autodroid.SDK.ImageProcessing.Pixels;
 using AutoMapper;
 
-namespace Atomy.SDK.Data.Mapper.Converter;
+namespace Autodroid.SDK.Data.Mapper.Converter;
 
 internal class ImageToRecordConverter : IValueConverter<Image, string>
 {

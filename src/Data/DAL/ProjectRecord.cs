@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Atomy.SDK.Data.DAL;
+namespace Autodroid.SDK.Data.DAL;
 
 public record ProjectRecord
 {

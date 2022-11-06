@@ -1,4 +1,4 @@
-namespace Atomy.SDK.ImageProcessing.Operations;
+namespace Autodroid.SDK.ImageProcessing.Operations;
 
 public interface IOperationParameters
 {

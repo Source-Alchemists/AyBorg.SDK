@@ -1,4 +1,4 @@
-namespace Atomy.SDK.ImageProcessing.Encoding;
+namespace Autodroid.SDK.ImageProcessing.Encoding;
 
 public enum EncoderType
 {

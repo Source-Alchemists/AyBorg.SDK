@@ -8,13 +8,13 @@ using Microsoft.IO;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
-using Atomy.SDK.Data.DTOs;
-using Atomy.SDK.ImageProcessing;
-using Atomy.SDK.Data.Mapper;
-using Atomy.SDK.Common.Ports;
+using Autodroid.SDK.Data.DTOs;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.Data.Mapper;
+using Autodroid.SDK.Common.Ports;
 using MQTTnet.Server;
 
-namespace Atomy.SDK.Communication.MQTT;
+namespace Autodroid.SDK.Communication.MQTT;
 
 public sealed class MqttClientProvider : IMqttClientProvider
 {
@@ -37,8 +37,8 @@ public sealed class MqttClientProvider : IMqttClientProvider
     {
         _logger = logger;
         _configuration = configuration;
-        _serviceTypeName = _configuration.GetValue<string>("Atomy:Service:Type");
-        _serviceUniqueName = _configuration.GetValue<string>("Atomy:Service:UniqueName");
+        _serviceTypeName = _configuration.GetValue<string>("Autodroid:Service:Type");
+        _serviceUniqueName = _configuration.GetValue<string>("Autodroid:Service:UniqueName");
         var assemblyName = Assembly.GetEntryAssembly()!.GetName();
         _serviceVersion = assemblyName!.Version!.ToString();
 
@@ -63,7 +63,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         {
             await Task.Delay(100);
         }
-        var baseTopic = $"atomy/sys/services/{_serviceUniqueName}";
+        var baseTopic = $"Autodroid/sys/services/{_serviceUniqueName}";
         var options = new MqttPublishOptions { Retain = true };
         await PublishAsync($"{baseTopic}/version", _serviceVersion, options);
         await PublishAsync($"{baseTopic}/type", _serviceTypeName, options);
