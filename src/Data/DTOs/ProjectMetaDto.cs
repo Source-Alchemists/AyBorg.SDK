@@ -19,6 +19,9 @@ public sealed record ProjectMetaDto
     [StringLength(100, MinimumLength = 3)]
     public string Name { get; set; } = string.Empty;
 
+    [Editable(true)]
+    public string VersionName { get; set; } = string.Empty;
+
     /// <summary>
     /// Gets or sets the created date.
     /// </summary>
