@@ -20,7 +20,12 @@ public sealed record ProjectMetaDto
     public string Name { get; set; } = string.Empty;
 
     [Editable(true)]
+    [StringLength(100, MinimumLength = 1)]
     public string VersionName { get; set; } = string.Empty;
+
+    [Editable(true)]
+    [StringLength(200)]
+    public string Comment { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the created date.
