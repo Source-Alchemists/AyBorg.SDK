@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 using MQTTnet;
 using MQTTnet.Client;
+using MQTTnet.Server;
 using MQTTnet.Extensions.ManagedClient;
 using Autodroid.SDK.Data.DTOs;
 using Autodroid.SDK.ImageProcessing;
 using Autodroid.SDK.Common.Ports;
-using MQTTnet.Server;
 using Autodroid.SDK.System.Configuration;
 
 namespace Autodroid.SDK.Communication.MQTT;
@@ -219,10 +219,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
         finally
         {
-            if (resizedImage != null)
-            {
-                resizedImage.Dispose();
-            }
+            resizedImage?.Dispose();
         }
     }
 

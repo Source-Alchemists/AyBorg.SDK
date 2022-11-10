@@ -23,10 +23,7 @@ public sealed class JwtMiddleware
         }
 
         var validatedToken = jwtConsumerService.ValidateToken(token);
-        if(validatedToken != null)
-        {
-            validatedToken.Claims.ToList().ForEach(claim => context.User.AddIdentity(new ClaimsIdentity(new[] { claim }, "jwt")));
-        }
+        validatedToken?.Claims.ToList().ForEach(claim => context.User.AddIdentity(new ClaimsIdentity(new[] { claim }, "jwt")));
         await _next(context);
     }
 }
