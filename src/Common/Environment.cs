@@ -6,7 +6,7 @@ public class Environment : IEnvironment
 {
     public Environment(IConfiguration configuration)
     {
-        StorageLocation = configuration.GetValue("Storage:Folder", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Autodroid", "Storage"));
+        StorageLocation = configuration.GetValue("Storage:Folder", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Autodroid", "Storage"))!;
     }
 
     /// <summary>

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Mapper\Autodroid.SDK.Data.Mapper.csproj" />
+    <ProjectReference Include="..\..\System\Autodroid.SDK.System.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,10 @@
 using Sys = System;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using Autodroid.SDK.Data.DTOs;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Autodroid.SDK.System.Configuration;
 
 namespace Autodroid.SDK.System.Services;
 
@@ -26,31 +25,23 @@ public class RegistryService : BackgroundService
     /// Initializes a new instance of <see cref="RegistryService"/>.
     /// </summary>
     /// <param name="logger">Logger.</param>
-    /// <param name="configuration">App configuration.</param>
+    /// <param name="serviceConfiguration">App configuration.</param>
     /// <param name="httpClient">Http client.</param>
-    public RegistryService(ILogger<RegistryService> logger, IConfiguration configuration, HttpClient httpClient)
+    public RegistryService(ILogger<RegistryService> logger, IServiceConfiguration serviceConfiguration, HttpClient httpClient)
     {
         _logger = logger;
         _httpClient = httpClient;
-        var assembly = Assembly.GetEntryAssembly();
-        var version = assembly?.GetName()?.Version;
-        var versionString = "unknown";
-        if (version != null)
-        {
-            versionString = version.ToString();
-        }
-
         _serviceEntry = new RegistryEntryDto
         {
-            Name = configuration.GetValue<string>("Autodroid:Service:Name"),
-            UniqueName = configuration.GetValue<string>("Autodroid:Service:UniqueName"),
-            Type = configuration.GetValue<string>("Autodroid:Service:Type"),
-            Url = configuration.GetValue<string>("Autodroid:Service:Url"),
-            Version = versionString
+            Name = serviceConfiguration.DisplayName,
+            UniqueName = serviceConfiguration.UniqueName,
+            Type = serviceConfiguration.TypeName,
+            Url = serviceConfiguration.Url,
+            Version = serviceConfiguration.Version
         };
 
         _serviceInfoContent = new StringContent(JsonSerializer.Serialize(_serviceEntry), Encoding.UTF8, "application/json");
-        _httpClient.BaseAddress = new Uri(configuration.GetValue<string>("Autodroid:Registry:Url"));
+        _httpClient.BaseAddress = new Uri(serviceConfiguration.RegistryUrl);
     }
 
     /// <summary>

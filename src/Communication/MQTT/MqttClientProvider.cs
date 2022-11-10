@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.Globalization;
-using System.Reflection;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -10,9 +9,9 @@ using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using Autodroid.SDK.Data.DTOs;
 using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.Data.Mapper;
 using Autodroid.SDK.Common.Ports;
 using MQTTnet.Server;
+using Autodroid.SDK.System.Configuration;
 
 namespace Autodroid.SDK.Communication.MQTT;
 
@@ -33,14 +32,14 @@ public sealed class MqttClientProvider : IMqttClientProvider
 
     public string ServiceUniqueName => _serviceUniqueName;
 
-    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration)
+    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IServiceConfiguration serviceConfiguration)
     {
         _logger = logger;
         _configuration = configuration;
-        _serviceTypeName = _configuration.GetValue<string>("Autodroid:Service:Type");
-        _serviceUniqueName = _configuration.GetValue<string>("Autodroid:Service:UniqueName");
-        var assemblyName = Assembly.GetEntryAssembly()!.GetName();
-        _serviceVersion = assemblyName!.Version!.ToString();
+
+        _serviceUniqueName = serviceConfiguration.UniqueName;
+        _serviceTypeName = serviceConfiguration.TypeName;
+        _serviceVersion = serviceConfiguration.Version;
 
         var factory = new MqttFactory();
         _mqttClientOptions = new MqttClientOptionsBuilder()
