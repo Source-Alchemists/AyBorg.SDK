@@ -1,17 +1,17 @@
 using System.Collections.Concurrent;
 using System.Globalization;
 using System.Text.Json;
+using Autodroid.SDK.Common.Ports;
+using Autodroid.SDK.Data.DTOs;
+using Autodroid.SDK.ImageProcessing;
+using Autodroid.SDK.System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 using MQTTnet;
 using MQTTnet.Client;
-using MQTTnet.Server;
 using MQTTnet.Extensions.ManagedClient;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.System.Configuration;
+using MQTTnet.Server;
 
 namespace Autodroid.SDK.Communication.MQTT;
 
@@ -50,7 +50,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         _managedMqttClientOptions = new ManagedMqttClientOptionsBuilder()
             .WithClientOptions(_mqttClientOptions)
             .Build();
-        
+
         _mqttClient = factory.CreateManagedMqttClient();
         _mqttClient.ApplicationMessageReceivedAsync += OnApplicationMessageReceivedAsync;
     }
@@ -58,7 +58,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
     public async ValueTask ConnectAsync()
     {
         await _mqttClient.StartAsync(_managedMqttClientOptions);
-        while(!_mqttClient.IsConnected)
+        while (!_mqttClient.IsConnected)
         {
             await Task.Delay(100);
         }

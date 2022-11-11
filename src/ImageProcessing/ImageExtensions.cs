@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Autodroid.SDK.ImageProcessing.Binarizing;
 using Autodroid.SDK.ImageProcessing.Buffers;
 using Autodroid.SDK.ImageProcessing.Converting;
@@ -28,11 +27,11 @@ public static class ImageExtensions
     /// <returns>The resized image.</returns>
     public static Image Resize(this Image image, int width, int height, ResizeMode resizeMode = ResizeMode.Bicubic)
     {
-        if(width < 1)
+        if (width < 1)
             throw new ArgumentOutOfRangeException(nameof(width), "Width must be greater than 0.");
-        if(height < 1)
+        if (height < 1)
             throw new ArgumentOutOfRangeException(nameof(height), "Height must be greater than 0.");
-            
+
         IReadOnlyPixelBuffer sourceBuffer = image.GetPixelBuffer();
         var resizedPixelBuffer = _resizer.Execute(new Resizing.Operations.ResizerParameters
         {
@@ -52,15 +51,15 @@ public static class ImageExtensions
     /// <returns>The grayscale image.</returns>
     public static Image ToGrayscale(this Image image)
     {
-        if(!image.IsColor)
+        if (!image.IsColor)
         {
             return new Image(image);
         }
 
         IReadOnlyPixelBuffer sourceBuffer = null!;
         Type targetType = null!;
-        switch(image.PixelFormat)
-        {   
+        switch (image.PixelFormat)
+        {
             case PixelFormat.RgbPacked:
                 sourceBuffer = image.AsPacked<Rgb>();
                 targetType = typeof(PackedPixelBuffer<Mono>);
@@ -153,7 +152,7 @@ public static class ImageExtensions
             Threshold = threshold,
             Mode = mode
         });
-        
+
         return new Image(binarizedBuffer);
     }
 

@@ -12,11 +12,11 @@ public sealed class JwtMiddleware
     {
         _next = next;
     }
-    
+
     public async Task InvokeAsync(HttpContext context, IJwtConsumerService jwtConsumerService)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-        if(string.IsNullOrEmpty(token))
+        if (string.IsNullOrEmpty(token))
         {
             await _next(context);
             return;
