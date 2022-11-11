@@ -6,15 +6,15 @@ public interface IMqttClientProvider : IDisposable
 {
     string ServiceUniqueName { get; }
 
-    Task ConnectAsync();
+    ValueTask ConnectAsync();
     
-    Task PublishAsync(string topic, string message, MqttPublishOptions options);
+    ValueTask PublishAsync(string topic, string message, MqttPublishOptions options);
     
-    Task PublishAsync(string topic, byte[] message, MqttPublishOptions options);
+    ValueTask PublishAsync(string topic, byte[] message, MqttPublishOptions options);
     
-    Task PublishAsync(string topic, IPort port, MqttPublishOptions options);
+    ValueTask PublishAsync(string topic, IPort port, MqttPublishOptions options);
 
-    Task<MqttSubscription> SubscribeAsync(string topic);
+    ValueTask<MqttSubscription> SubscribeAsync(string topic);
 
-    Task UnsubscribeAsync(MqttSubscription subscription);
+    ValueTask UnsubscribeAsync(MqttSubscription subscription);
 }

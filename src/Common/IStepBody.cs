@@ -19,5 +19,5 @@ public interface IStepBody
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
-    Task<bool> TryRunAsync(CancellationToken cancellationToken);
+    ValueTask<bool> TryRunAsync(CancellationToken cancellationToken);
 }

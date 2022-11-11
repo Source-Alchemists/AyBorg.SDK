@@ -55,7 +55,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         _mqttClient.ApplicationMessageReceivedAsync += OnApplicationMessageReceivedAsync;
     }
 
-    public async Task ConnectAsync()
+    public async ValueTask ConnectAsync()
     {
         await _mqttClient.StartAsync(_managedMqttClientOptions);
         while(!_mqttClient.IsConnected)
@@ -82,11 +82,11 @@ public sealed class MqttClientProvider : IMqttClientProvider
         });
     }
 
-    public Task PublishAsync(string topic, string message, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string topic, string message, MqttPublishOptions options)
     {
         try
         {
-            return _mqttClient.InternalClient.PublishAsync(new MqttApplicationMessageBuilder()
+            await _mqttClient.InternalClient.PublishAsync(new MqttApplicationMessageBuilder()
                 .WithTopic(topic)
                 .WithPayload(message)
                 .WithQualityOfServiceLevel(options.QualityOfServiceLevel)
@@ -96,11 +96,10 @@ public sealed class MqttClientProvider : IMqttClientProvider
         catch (OperationCanceledException ex)
         {
             _logger.LogTrace(ex, "PublishAsync cancelled");
-            return Task.CompletedTask;
         }
     }
 
-    public async Task PublishAsync(string topic, byte[] message, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string topic, byte[] message, MqttPublishOptions options)
     {
         try
         {
@@ -117,7 +116,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    public async Task PublishAsync(string baseTopic, IPort port, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string baseTopic, IPort port, MqttPublishOptions options)
     {
         var topic = baseTopic;
         switch (port)
@@ -146,7 +145,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    public async Task<MqttSubscription> SubscribeAsync(string topic)
+    public async ValueTask<MqttSubscription> SubscribeAsync(string topic)
     {
         if (!_mqttClient.IsConnected)
         {
@@ -159,7 +158,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         return subscription;
     }
 
-    public async Task UnsubscribeAsync(MqttSubscription subscription)
+    public async ValueTask UnsubscribeAsync(MqttSubscription subscription)
     {
         if (!_mqttClient.IsConnected)
         {
@@ -175,7 +174,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    private async Task SendImageAsync(string topic, Image image, MqttPublishOptions options)
+    private async ValueTask SendImageAsync(string topic, Image image, MqttPublishOptions options)
     {
         if (image == null) return;
 
@@ -254,7 +253,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         await Parallel.ForEachAsync(subscriptions, async (subscription, token) =>
         {
             subscription.MessageReceived?.Invoke(e.ApplicationMessage);
-            await Task.CompletedTask;
+            await ValueTask.CompletedTask;
         });
     }
 }

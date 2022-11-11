@@ -122,7 +122,7 @@ public class RegistryService : BackgroundService
         }, TaskCreationOptions.LongRunning);
     }
 
-    private async Task Register(CancellationToken cancellationToken)
+    private async ValueTask Register(CancellationToken cancellationToken)
     {
         var postResult = await _httpClient.PostAsync("/Services", _serviceInfoContent, cancellationToken);
 
