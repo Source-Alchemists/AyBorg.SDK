@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing.Shapes;
+namespace AyBorg.SDK.ImageProcessing.Shapes;
 
 public record struct Rectangle
 {

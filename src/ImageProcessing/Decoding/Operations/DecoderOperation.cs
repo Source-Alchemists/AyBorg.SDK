@@ -1,9 +1,9 @@
 using System.Runtime.InteropServices;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Pixels;
 using SixLabors.ImageSharp;
 
-namespace Autodroid.SDK.ImageProcessing.Decoding.Operations;
+namespace AyBorg.SDK.ImageProcessing.Decoding.Operations;
 
 public class DecoderOperations : Decoder
 {

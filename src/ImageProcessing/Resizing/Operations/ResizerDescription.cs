@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Resizing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Resizing.Operations;
 
 public record ResizerDescription : OperationDescription
 {

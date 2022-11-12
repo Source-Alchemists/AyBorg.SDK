@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing.Buffers.Operations;
+namespace AyBorg.SDK.ImageProcessing.Buffers.Operations;
 
 public class MonoConvertOperation : PixelBufferConverter
 {

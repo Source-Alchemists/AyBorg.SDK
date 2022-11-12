@@ -1,16 +1,16 @@
-﻿using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Pixels;
-using Autodroid.SDK.Data.Mapper;
-using Autodroid.SDK.Common;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.Projects;
+﻿using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.Data.Mapper;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Projects;
 using AutoMapper;
 using Moq;
 using Newtonsoft.Json;
 
-namespace Autodroid.SDK.Tests.Mapper;
+namespace AyBorg.SDK.Tests.Mapper;
 
 public class RuntimeStorageMapperTests
 {

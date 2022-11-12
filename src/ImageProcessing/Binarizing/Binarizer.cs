@@ -1,8 +1,8 @@
-using Autodroid.SDK.ImageProcessing.Binarizing.Operations;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Binarizing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Binarizing;
+namespace AyBorg.SDK.ImageProcessing.Binarizing;
 
 public class Binarizer : Operation<BinarizerDescription, BinarizerParameters, IPixelBuffer>
 {

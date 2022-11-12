@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Autodroid.SDK.System.Configuration;
+namespace AyBorg.SDK.System.Configuration;
 
 public record RegistryConfiguration : IRegistryConfiguration
 {
@@ -22,10 +22,10 @@ public record RegistryConfiguration : IRegistryConfiguration
     {
         _logger = logger;
         var assemblyName = Assembly.GetEntryAssembly()!.GetName();
-        var serviceUniqueName = configuration.GetValue<string>("Autodroid:Service:UniqueName");
+        var serviceUniqueName = configuration.GetValue<string>("AyBorg:Service:UniqueName");
         if (string.IsNullOrEmpty(serviceUniqueName))
         {
-            _logger.LogWarning("Service unique name is not set in configuration. Using default value. (Hint: Autodroid:Service:UniqueName)");
+            _logger.LogWarning("Service unique name is not set in configuration. Using default value. (Hint: AyBorg:Service:UniqueName)");
             UniqueName = assemblyName.Name!;
         }
         else
@@ -33,10 +33,10 @@ public record RegistryConfiguration : IRegistryConfiguration
             UniqueName = serviceUniqueName;
         }
 
-        var serviceTypeName = configuration.GetValue<string>("Autodroid:Service:Type");
+        var serviceTypeName = configuration.GetValue<string>("AyBorg:Service:Type");
         if (string.IsNullOrEmpty(serviceTypeName))
         {
-            _logger.LogWarning("Service type name is not set in configuration. Using default value. (Hint: Autodroid:Service:Type)");
+            _logger.LogWarning("Service type name is not set in configuration. Using default value. (Hint: AyBorg:Service:Type)");
             TypeName = assemblyName.Name!;
         }
         else
@@ -44,10 +44,10 @@ public record RegistryConfiguration : IRegistryConfiguration
             TypeName = serviceTypeName;
         }
 
-        var serviceDisplayName = configuration.GetValue<string>("Autodroid:Service:DisplayName");
+        var serviceDisplayName = configuration.GetValue<string>("AyBorg:Service:DisplayName");
         if (string.IsNullOrEmpty(serviceDisplayName))
         {
-            _logger.LogWarning("Service display name is not set in configuration. Using default value. (Hint: Autodroid:Service:DisplayName)");
+            _logger.LogWarning("Service display name is not set in configuration. Using default value. (Hint: AyBorg:Service:DisplayName)");
             DisplayName = assemblyName.Name!;
         }
         else
@@ -55,10 +55,10 @@ public record RegistryConfiguration : IRegistryConfiguration
             DisplayName = serviceDisplayName;
         }
 
-        var serviceUrl = configuration.GetValue<string>("Autodroid:Service:Url");
+        var serviceUrl = configuration.GetValue<string>("AyBorg:Service:Url");
         if (string.IsNullOrEmpty(serviceUrl))
         {
-            _logger.LogWarning("Service url is not set in configuration. Using default value. (Hint: Autodroid:Service:Url)");
+            _logger.LogWarning("Service url is not set in configuration. Using default value. (Hint: AyBorg:Service:Url)");
             Url = "https://localhost:5001";
         }
         else

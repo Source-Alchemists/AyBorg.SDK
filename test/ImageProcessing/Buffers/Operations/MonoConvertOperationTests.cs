@@ -1,8 +1,8 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Buffers.Operations;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Buffers.Operations;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.Tests.ImageProcessing.Buffers.Operations;
+namespace AyBorg.SDK.Tests.ImageProcessing.Buffers.Operations;
 
 public class MonoConvertOperationTests
 {

@@ -1,7 +1,7 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing;
+namespace AyBorg.SDK.ImageProcessing;
 
 public interface IImage : IDisposable
 {

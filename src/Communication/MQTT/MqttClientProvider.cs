@@ -1,10 +1,10 @@
 using System.Collections.Concurrent;
 using System.Globalization;
 using System.Text.Json;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.System.Configuration;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
@@ -13,7 +13,7 @@ using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using MQTTnet.Server;
 
-namespace Autodroid.SDK.Communication.MQTT;
+namespace AyBorg.SDK.Communication.MQTT;
 
 public sealed class MqttClientProvider : IMqttClientProvider
 {
@@ -62,7 +62,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         {
             await Task.Delay(100);
         }
-        var baseTopic = $"Autodroid/sys/services/{_serviceUniqueName}";
+        var baseTopic = $"AyBorg/sys/services/{_serviceUniqueName}";
         var options = new MqttPublishOptions { Retain = true };
         await PublishAsync($"{baseTopic}/version", _serviceVersion, options);
         await PublishAsync($"{baseTopic}/type", _serviceTypeName, options);

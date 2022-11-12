@@ -1,6 +1,6 @@
-﻿using Autodroid.SDK.Common;
+﻿using AyBorg.SDK.Common;
 
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 public sealed record StepDto
 {

@@ -1,7 +1,7 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Binarizing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Binarizing.Operations;
 
 public record BinarizerParameters : IOperationParameters
 {

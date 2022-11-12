@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing.Converting.Operations;
+namespace AyBorg.SDK.ImageProcessing.Converting.Operations;
 
 public class GrayscaleOperation : GrayscaleConverter
 {

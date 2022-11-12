@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Autodroid.SDK.ImageProcessing.Pixels;
+namespace AyBorg.SDK.ImageProcessing.Pixels;
 
 [StructLayout(LayoutKind.Explicit, Size = 6)]
 public record struct Rgb48 : IPackedPixel<Rgb48>

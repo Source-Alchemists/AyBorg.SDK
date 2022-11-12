@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Operations;
 
 public interface IOperation<out TDescription, in TParameters, out TResult>
     where TDescription : OperationDescription, new()

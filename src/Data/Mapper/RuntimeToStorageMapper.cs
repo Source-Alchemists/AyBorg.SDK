@@ -1,12 +1,12 @@
 ﻿using System.Globalization;
 using AutoMapper;
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.Data.Mapper.Converter;
-using Autodroid.SDK.Common;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Data.Mapper.Converter;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.Mapper;
+namespace AyBorg.SDK.Data.Mapper;
 
 public sealed class RuntimeToStorageMapper : IRuntimeToStorageMapper
 {

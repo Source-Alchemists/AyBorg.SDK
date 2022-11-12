@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 public sealed record ProjectMetaDto
 {

@@ -1,8 +1,8 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Mirroring.Operations;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Mirroring.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Mirroring;
+namespace AyBorg.SDK.ImageProcessing.Mirroring;
 
 public class Mirror : Operation<MirrorDescription, MirrorParameters, IPixelBuffer>
 {

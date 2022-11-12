@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.System.Configuration;
+namespace AyBorg.SDK.System.Configuration;
 
 public interface IRegistryConfiguration
 {

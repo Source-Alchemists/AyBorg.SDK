@@ -1,4 +1,4 @@
-﻿namespace Autodroid.SDK.Common;
+﻿namespace AyBorg.SDK.Common;
 
 public enum Language
 {

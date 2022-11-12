@@ -1,4 +1,4 @@
-﻿namespace Autodroid.SDK.Common.Ports;
+﻿namespace AyBorg.SDK.Common.Ports;
 
 public abstract class BasePort<TPort> : IPort where TPort : class, IPort
 {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Autodroid.SDK.Authorization;
+namespace AyBorg.SDK.Authorization;
 
 public sealed class JwtConsumerService : IJwtConsumerService
 {
@@ -16,7 +16,7 @@ public sealed class JwtConsumerService : IJwtConsumerService
     {
         _logger = logger;
         _configuration = configuration;
-        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Autodroid:Jwt:SecretKey"));
+        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
     }
 
     public JwtSecurityToken ValidateToken(string token)

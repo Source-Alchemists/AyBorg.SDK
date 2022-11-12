@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Converting.Operations;
+namespace AyBorg.SDK.ImageProcessing.Converting.Operations;
 
 public record GrayscaleConverterDescription : OperationDescription
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Common;
+using AyBorg.SDK.Common;
 
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record StepRecord
 {

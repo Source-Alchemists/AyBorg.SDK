@@ -1,6 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Autodroid.SDK.Authorization;
+namespace AyBorg.SDK.Authorization;
 
 public interface IJwtConsumerService
 {

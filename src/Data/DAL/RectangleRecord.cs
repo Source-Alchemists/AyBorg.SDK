@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record RectangleRecord
 {

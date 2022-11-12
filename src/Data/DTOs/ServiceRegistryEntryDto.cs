@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 /// <summary>
 /// Service registry entry.

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Autodroid.SDK.Authorization;
+namespace AyBorg.SDK.Authorization;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public sealed class JwtAuthorizeAttribute : Attribute, IAuthorizationFilter

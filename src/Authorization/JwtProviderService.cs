@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Autodroid.SDK.Authorization;
+namespace AyBorg.SDK.Authorization;
 public sealed class JwtProviderService : IJwtProviderService
 {
     private readonly IConfiguration _configuration;
@@ -12,7 +12,7 @@ public sealed class JwtProviderService : IJwtProviderService
     public JwtProviderService(IConfiguration configuration)
     {
         _configuration = configuration;
-        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Autodroid:Jwt:SecretKey"));
+        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
     }
 
     public string GenerateToken(string userName, IEnumerable<string> roles)

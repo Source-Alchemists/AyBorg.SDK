@@ -2,7 +2,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Autodroid.SDK.ImageProcessing.Pixels;
+namespace AyBorg.SDK.ImageProcessing.Pixels;
 
 public static class PixelExtensions
 {

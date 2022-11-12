@@ -1,12 +1,12 @@
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.Data.Mapper;
-using Autodroid.SDK.Common;
-using Autodroid.SDK.Common.Ports;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.Data.Mapper;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Ports;
 using Moq;
 
-namespace Autodroid.SDK.Tests.Mapper;
+namespace AyBorg.SDK.Tests.Mapper;
 
 #nullable disable
 

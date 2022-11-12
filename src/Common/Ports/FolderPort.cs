@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.Common.Ports;
+namespace AyBorg.SDK.Common.Ports;
 
 public sealed class FolderPort : StringPort
 {

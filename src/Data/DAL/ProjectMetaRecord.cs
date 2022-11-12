@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record ProjectMetaRecord
 {

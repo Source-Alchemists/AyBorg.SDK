@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Buffers.Operations;
+namespace AyBorg.SDK.ImageProcessing.Buffers.Operations;
 
 public record ConvertDescription : OperationDescription
 {

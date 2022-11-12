@@ -1,7 +1,7 @@
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.ImageProcessing.Encoding;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing.Encoding;
 
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 public sealed record ImageMetaDto
 {

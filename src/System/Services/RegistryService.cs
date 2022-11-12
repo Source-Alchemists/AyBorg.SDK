@@ -1,12 +1,12 @@
 using Sys = System;
 using System.Text;
 using System.Text.Json;
-using Autodroid.SDK.Data.DTOs;
+using AyBorg.SDK.Data.DTOs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Autodroid.SDK.System.Configuration;
+using AyBorg.SDK.System.Configuration;
 
-namespace Autodroid.SDK.System.Services;
+namespace AyBorg.SDK.System.Services;
 
 public class RegistryService : BackgroundService
 {

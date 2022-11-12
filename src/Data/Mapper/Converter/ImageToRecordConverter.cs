@@ -1,11 +1,11 @@
 using Sys = System;
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Pixels;
 using AutoMapper;
 
-namespace Autodroid.SDK.Data.Mapper.Converter;
+namespace AyBorg.SDK.Data.Mapper.Converter;
 
 internal class ImageToRecordConverter : IValueConverter<Image, string>
 {

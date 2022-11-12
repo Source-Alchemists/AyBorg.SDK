@@ -1,6 +1,6 @@
-﻿using Autodroid.SDK.Common.Ports;
+﻿using AyBorg.SDK.Common.Ports;
 
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 public sealed record PortDto
 {

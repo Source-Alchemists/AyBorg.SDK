@@ -1,7 +1,7 @@
-using Autodroid.SDK.ImageProcessing.Encoding.Operations;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Encoding.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Encoding;
+namespace AyBorg.SDK.ImageProcessing.Encoding;
 
 public class Encoder : Operation<EncoderDescription, EncoderParameters, object>
 {

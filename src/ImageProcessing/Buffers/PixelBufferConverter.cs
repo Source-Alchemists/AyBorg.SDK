@@ -1,7 +1,7 @@
-using Autodroid.SDK.ImageProcessing.Buffers.Operations;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Buffers;
+namespace AyBorg.SDK.ImageProcessing.Buffers;
 
 public class PixelBufferConverter : Operation<ConvertDescription, ConvertParameters, IPixelBuffer>
 {

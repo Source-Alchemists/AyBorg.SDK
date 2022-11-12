@@ -1,13 +1,13 @@
-using Autodroid.SDK.ImageProcessing.Binarizing;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Converting;
-using Autodroid.SDK.ImageProcessing.Cropping;
-using Autodroid.SDK.ImageProcessing.Mirroring;
-using Autodroid.SDK.ImageProcessing.Pixels;
-using Autodroid.SDK.ImageProcessing.Resizing;
-using Autodroid.SDK.ImageProcessing.Shapes;
+using AyBorg.SDK.ImageProcessing.Binarizing;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Converting;
+using AyBorg.SDK.ImageProcessing.Cropping;
+using AyBorg.SDK.ImageProcessing.Mirroring;
+using AyBorg.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Resizing;
+using AyBorg.SDK.ImageProcessing.Shapes;
 
-namespace Autodroid.SDK.ImageProcessing;
+namespace AyBorg.SDK.ImageProcessing;
 
 public static class ImageExtensions
 {

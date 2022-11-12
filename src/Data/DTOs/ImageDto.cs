@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 public sealed record ImageDto
 {

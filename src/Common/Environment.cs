@@ -1,12 +1,12 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Autodroid.SDK.Common;
+namespace AyBorg.SDK.Common;
 
 public class Environment : IEnvironment
 {
     public Environment(IConfiguration configuration)
     {
-        StorageLocation = configuration.GetValue("Storage:Folder", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Autodroid", "Storage"))!;
+        StorageLocation = configuration.GetValue("Storage:Folder", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "AyBorg", "Storage"))!;
     }
 
     /// <summary>
