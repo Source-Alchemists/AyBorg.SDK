@@ -15,7 +15,30 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+
+            modelBuilder.Entity("AyBorg.SDK.Common.PluginMetaInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AssemblyName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AssemblyVersion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TypeName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PluginMetaInfo");
+                });
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.LinkRecord", b =>
                 {
@@ -84,6 +107,9 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
@@ -103,6 +129,13 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("VersionIteration")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("VersionName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("DbId");
@@ -158,29 +191,6 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
                     b.ToTable("AyBorgSteps");
                 });
 
-            modelBuilder.Entity("AyBorg.SDK.PluginMetaInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AssemblyName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AssemblyVersion")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PluginMetaInfo");
-                });
-
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.LinkRecord", b =>
                 {
                     b.HasOne("AyBorg.SDK.Data.DAL.ProjectRecord", "ProjectRecord")
@@ -214,7 +224,7 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.StepRecord", b =>
                 {
-                    b.HasOne("AyBorg.SDK.PluginMetaInfo", "MetaInfo")
+                    b.HasOne("AyBorg.SDK.Common.PluginMetaInfo", "MetaInfo")
                         .WithMany()
                         .HasForeignKey("MetaInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
