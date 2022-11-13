@@ -24,7 +24,7 @@ public sealed class DtoMapper : IDtoMapper
         var config = new MapperConfiguration(config =>
         {
             // Records
-            config.CreateMap<ProjectMetaRecord, ProjectMetaDto>().ForMember(d => d.Id, opt => opt.MapFrom(s => s.DbId)).ReverseMap();
+            config.CreateMap<ProjectMetaRecord, ProjectMetaDto>().ReverseMap();
             config.CreateMap<ProjectRecord, ProjectDto>().ReverseMap();
             config.CreateMap<StepRecord, StepDto>();
             config.CreateMap<LinkRecord, LinkDto>();

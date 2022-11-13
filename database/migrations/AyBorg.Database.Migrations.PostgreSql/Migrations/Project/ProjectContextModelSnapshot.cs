@@ -22,29 +22,6 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("AyBorg.SDK.Common.PluginMetaInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AssemblyName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("AssemblyVersion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PluginMetaInfo");
-                });
-
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.LinkRecord", b =>
                 {
                     b.Property<Guid>("DbId")
@@ -68,6 +45,32 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
                     b.HasIndex("ProjectRecordId");
 
                     b.ToTable("AyBorgLinks");
+                });
+
+            modelBuilder.Entity("AyBorg.SDK.Data.DAL.PluginMetaInfoRecord", b =>
+                {
+                    b.Property<Guid>("DbId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AssemblyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("AssemblyVersion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TypeName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("DbId");
+
+                    b.ToTable("PluginMetaInfoRecord");
                 });
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.PortRecord", b =>
@@ -171,7 +174,7 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MetaInfoId")
+                    b.Property<Guid>("MetaInfoDbId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
@@ -189,7 +192,7 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
 
                     b.HasKey("DbId");
 
-                    b.HasIndex("MetaInfoId");
+                    b.HasIndex("MetaInfoDbId");
 
                     b.HasIndex("ProjectRecordId");
 
@@ -229,9 +232,9 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.StepRecord", b =>
                 {
-                    b.HasOne("AyBorg.SDK.Common.PluginMetaInfo", "MetaInfo")
+                    b.HasOne("AyBorg.SDK.Data.DAL.PluginMetaInfoRecord", "MetaInfo")
                         .WithMany()
-                        .HasForeignKey("MetaInfoId")
+                        .HasForeignKey("MetaInfoDbId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

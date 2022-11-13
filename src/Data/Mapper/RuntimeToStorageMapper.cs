@@ -19,6 +19,7 @@ public sealed class RuntimeToStorageMapper : IRuntimeToStorageMapper
     {
         var config = new MapperConfiguration(config => {
             config.CreateMap<ProjectMeta, ProjectMetaRecord>().ReverseMap();
+            config.CreateMap<PluginMetaInfo, PluginMetaInfoRecord>().ReverseMap();
             config.CreateMap<Project, ProjectRecord>();
             config.CreateMap<IStepProxy, StepRecord>();
             config.CreateMap<PortLink, LinkRecord>();
