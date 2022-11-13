@@ -7,9 +7,16 @@ public sealed record ProjectMetaDto
 {
 
     /// <summary>
-    /// Gets or sets the identifier.
+    /// Gets or sets the database identifier.
     /// </summary>
     [Key]
+    [Required]
+    public Guid DbId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the identifier.
+    /// </summary>
+    [Required]
     public Guid Id { get; set; }
 
     /// <summary>
