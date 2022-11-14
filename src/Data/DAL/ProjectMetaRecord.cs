@@ -58,6 +58,7 @@ public record ProjectMetaRecord
     /// <summary>
     // Gets or sets the version of this project.
     /// </summary>
+    [StringLength(100, MinimumLength = 1)]
     public string VersionName { get; set; } = string.Empty;
 
     /// <summary>
