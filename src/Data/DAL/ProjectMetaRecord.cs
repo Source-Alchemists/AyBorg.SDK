@@ -61,6 +61,13 @@ public record ProjectMetaRecord
     public string VersionName { get; set; } = string.Empty;
 
     /// <summary>
+    /// Gets or sets the comment.
+    /// </summary>
+    [Editable(true)]
+    [StringLength(200)]
+    public string Comment { get; set; } = string.Empty;
+
+    /// <summary>
     /// Gets or sets the internal version.
     /// </summary>
     public long VersionIteration { get; set; } = 0;

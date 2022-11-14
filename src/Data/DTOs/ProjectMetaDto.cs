@@ -26,10 +26,16 @@ public sealed record ProjectMetaDto
     [StringLength(100, MinimumLength = 3)]
     public string Name { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Gets or sets the version name.
+    /// </summary>
     [Editable(true)]
     [StringLength(100, MinimumLength = 1)]
     public string VersionName { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Gets or sets the comment.
+    /// </summary>
     [Editable(true)]
     [StringLength(200)]
     public string Comment { get; set; } = string.Empty;
