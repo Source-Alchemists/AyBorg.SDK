@@ -14,4 +14,6 @@ public record ProjectStateChangeDto
 
     [StringLength(200)]
     public string? Comment { get; set; }
+
+    public string? UserName { get; set; }
 }
