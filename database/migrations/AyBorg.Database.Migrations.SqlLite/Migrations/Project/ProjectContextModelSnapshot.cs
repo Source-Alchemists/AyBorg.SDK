@@ -107,6 +107,9 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ApprovedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -144,6 +147,7 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
 
                     b.Property<string>("VersionName")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("DbId");

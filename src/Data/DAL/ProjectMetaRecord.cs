@@ -78,4 +78,9 @@ public record ProjectMetaRecord
     /// </summary>
     /// <remarks>Used for navigation.</remarks>
     public Guid ProjectRecordId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the approvers.
+    /// </summary>
+    public string? ApprovedBy { get; set; }
 }

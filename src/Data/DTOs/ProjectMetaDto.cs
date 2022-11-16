@@ -59,4 +59,9 @@ public sealed record ProjectMetaDto
     /// Gets or sets the state.
     /// </summary>
     public ProjectState State { get; set; } = ProjectState.Draft;
+
+    /// <summary>
+    /// Gets or sets the approvers.
+    /// </summary>
+    public string? ApprovedBy { get; set; }
 }
