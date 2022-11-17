@@ -1,20 +1,19 @@
 using System.Collections.Concurrent;
 using System.Globalization;
-using System.Reflection;
 using System.Text.Json;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.Data.Mapper;
-using Autodroid.SDK.Common.Ports;
 using MQTTnet.Server;
 
-namespace Autodroid.SDK.Communication.MQTT;
+namespace AyBorg.SDK.Communication.MQTT;
 
 public sealed class MqttClientProvider : IMqttClientProvider
 {
@@ -33,14 +32,14 @@ public sealed class MqttClientProvider : IMqttClientProvider
 
     public string ServiceUniqueName => _serviceUniqueName;
 
-    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration)
+    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IServiceConfiguration serviceConfiguration)
     {
         _logger = logger;
         _configuration = configuration;
-        _serviceTypeName = _configuration.GetValue<string>("Autodroid:Service:Type");
-        _serviceUniqueName = _configuration.GetValue<string>("Autodroid:Service:UniqueName");
-        var assemblyName = Assembly.GetEntryAssembly()!.GetName();
-        _serviceVersion = assemblyName!.Version!.ToString();
+
+        _serviceUniqueName = serviceConfiguration.UniqueName;
+        _serviceTypeName = serviceConfiguration.TypeName;
+        _serviceVersion = serviceConfiguration.Version;
 
         var factory = new MqttFactory();
         _mqttClientOptions = new MqttClientOptionsBuilder()
@@ -51,19 +50,19 @@ public sealed class MqttClientProvider : IMqttClientProvider
         _managedMqttClientOptions = new ManagedMqttClientOptionsBuilder()
             .WithClientOptions(_mqttClientOptions)
             .Build();
-        
+
         _mqttClient = factory.CreateManagedMqttClient();
         _mqttClient.ApplicationMessageReceivedAsync += OnApplicationMessageReceivedAsync;
     }
 
-    public async Task ConnectAsync()
+    public async ValueTask ConnectAsync()
     {
         await _mqttClient.StartAsync(_managedMqttClientOptions);
-        while(!_mqttClient.IsConnected)
+        while (!_mqttClient.IsConnected)
         {
             await Task.Delay(100);
         }
-        var baseTopic = $"Autodroid/sys/services/{_serviceUniqueName}";
+        var baseTopic = $"AyBorg/sys/services/{_serviceUniqueName}";
         var options = new MqttPublishOptions { Retain = true };
         await PublishAsync($"{baseTopic}/version", _serviceVersion, options);
         await PublishAsync($"{baseTopic}/type", _serviceTypeName, options);
@@ -83,11 +82,11 @@ public sealed class MqttClientProvider : IMqttClientProvider
         });
     }
 
-    public Task PublishAsync(string topic, string message, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string topic, string message, MqttPublishOptions options)
     {
         try
         {
-            return _mqttClient.InternalClient.PublishAsync(new MqttApplicationMessageBuilder()
+            await _mqttClient.InternalClient.PublishAsync(new MqttApplicationMessageBuilder()
                 .WithTopic(topic)
                 .WithPayload(message)
                 .WithQualityOfServiceLevel(options.QualityOfServiceLevel)
@@ -97,11 +96,10 @@ public sealed class MqttClientProvider : IMqttClientProvider
         catch (OperationCanceledException ex)
         {
             _logger.LogTrace(ex, "PublishAsync cancelled");
-            return Task.CompletedTask;
         }
     }
 
-    public async Task PublishAsync(string topic, byte[] message, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string topic, byte[] message, MqttPublishOptions options)
     {
         try
         {
@@ -118,7 +116,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    public async Task PublishAsync(string baseTopic, IPort port, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string baseTopic, IPort port, MqttPublishOptions options)
     {
         var topic = baseTopic;
         switch (port)
@@ -147,7 +145,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    public async Task<MqttSubscription> SubscribeAsync(string topic)
+    public async ValueTask<MqttSubscription> SubscribeAsync(string topic)
     {
         if (!_mqttClient.IsConnected)
         {
@@ -160,7 +158,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         return subscription;
     }
 
-    public async Task UnsubscribeAsync(MqttSubscription subscription)
+    public async ValueTask UnsubscribeAsync(MqttSubscription subscription)
     {
         if (!_mqttClient.IsConnected)
         {
@@ -176,7 +174,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    private async Task SendImageAsync(string topic, Image image, MqttPublishOptions options)
+    private async ValueTask SendImageAsync(string topic, Image image, MqttPublishOptions options)
     {
         if (image == null) return;
 
@@ -220,10 +218,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
         finally
         {
-            if (resizedImage != null)
-            {
-                resizedImage.Dispose();
-            }
+            resizedImage?.Dispose();
         }
     }
 
@@ -258,7 +253,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         await Parallel.ForEachAsync(subscriptions, async (subscription, token) =>
         {
             subscription.MessageReceived?.Invoke(e.ApplicationMessage);
-            await Task.CompletedTask;
+            await ValueTask.CompletedTask;
         });
     }
 }

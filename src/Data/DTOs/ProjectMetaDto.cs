@@ -1,15 +1,22 @@
 using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.DTOs;
+namespace AyBorg.SDK.Data.DTOs;
 
 public sealed record ProjectMetaDto
 {
 
     /// <summary>
-    /// Gets or sets the identifier.
+    /// Gets or sets the database identifier.
     /// </summary>
     [Key]
+    [Required]
+    public Guid DbId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the identifier.
+    /// </summary>
+    [Required]
     public Guid Id { get; set; }
 
     /// <summary>
@@ -18,6 +25,20 @@ public sealed record ProjectMetaDto
     [Editable(true)]
     [StringLength(100, MinimumLength = 3)]
     public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the version name.
+    /// </summary>
+    [Editable(true)]
+    [StringLength(100, MinimumLength = 1)]
+    public string VersionName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the comment.
+    /// </summary>
+    [Editable(true)]
+    [StringLength(200)]
+    public string Comment { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the created date.
@@ -38,4 +59,9 @@ public sealed record ProjectMetaDto
     /// Gets or sets the state.
     /// </summary>
     public ProjectState State { get; set; } = ProjectState.Draft;
+
+    /// <summary>
+    /// Gets or sets the approvers.
+    /// </summary>
+    public string? ApprovedBy { get; set; }
 }

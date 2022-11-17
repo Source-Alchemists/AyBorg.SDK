@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing.Resizing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Resizing.Operations;
 
 internal static class ResizeImpl
 {

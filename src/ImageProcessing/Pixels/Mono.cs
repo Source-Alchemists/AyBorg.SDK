@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Autodroid.SDK.ImageProcessing.Pixels;
+namespace AyBorg.SDK.ImageProcessing.Pixels;
 
 public record struct Mono : IPackedPixel<Mono>
 {

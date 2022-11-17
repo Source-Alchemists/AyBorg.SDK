@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing;
 
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record ImageRecord
 {

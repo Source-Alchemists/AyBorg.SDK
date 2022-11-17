@@ -1,9 +1,9 @@
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Encoding;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Encoding;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.Tests.ImageProcessing;
+namespace AyBorg.SDK.Tests.ImageProcessing;
 
 public class ImageTests
 {

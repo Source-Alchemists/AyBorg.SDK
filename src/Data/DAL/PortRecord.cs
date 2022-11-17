@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Common.Ports;
+using AyBorg.SDK.Common.Ports;
 
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record PortRecord
 {

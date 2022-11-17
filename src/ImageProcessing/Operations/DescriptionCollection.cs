@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 
-namespace Autodroid.SDK.ImageProcessing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Operations;
 
 internal class DescriptionCollection : IEnumerable<OperationDescription>
 {

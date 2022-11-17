@@ -1,25 +1,25 @@
 using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record ProjectMetaRecord
 {
     /// <summary>
     /// Gets or sets the identifier.
     /// </summary>
-    /// <value>
-    /// The identifier.
-    /// </value>
     [Key]
     public Guid DbId { get; set; }
 
     /// <summary>
+    /// Gets or sets the identifier.
+    /// </summary>
+    /// <remarks>Used to identifie the project in combination with the version.</remarks>
+    public Guid Id { get; set; }
+
+    /// <summary>
     /// Gets or sets the name.
     /// </summary>
-    /// <value>
-    /// The name.
-    /// </value>
     [Editable(true)]
     [StringLength(100, MinimumLength = 3)]
     public string Name { get; set; } = string.Empty;
@@ -27,9 +27,6 @@ public record ProjectMetaRecord
     /// <summary>
     /// Gets or sets the created date.
     /// </summary>
-    /// <value>
-    /// The created date.
-    /// </value>
     public DateTime CreatedDate { get; set; }
 
     /// <summary>
@@ -59,8 +56,31 @@ public record ProjectMetaRecord
     public string ServiceUniqueName {get; set;} = string.Empty;
 
     /// <summary>
+    // Gets or sets the version of this project.
+    /// </summary>
+    [StringLength(100, MinimumLength = 1)]
+    public string VersionName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the comment.
+    /// </summary>
+    [Editable(true)]
+    [StringLength(200)]
+    public string Comment { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the internal version.
+    /// </summary>
+    public long VersionIteration { get; set; } = 0;
+
+    /// <summary>
     /// Gets or sets the project record identifier.
     /// </summary>
     /// <remarks>Used for navigation.</remarks>
     public Guid ProjectRecordId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the approvers.
+    /// </summary>
+    public string? ApprovedBy { get; set; }
 }

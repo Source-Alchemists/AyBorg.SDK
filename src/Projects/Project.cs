@@ -1,7 +1,7 @@
-﻿using Autodroid.SDK.Common;
-using Autodroid.SDK.Common.Ports;
+﻿using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Ports;
 
-namespace Autodroid.SDK.Projects;
+namespace AyBorg.SDK.Projects;
 
 public sealed record Project
 {

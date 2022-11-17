@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing.Encoding;
+namespace AyBorg.SDK.ImageProcessing.Encoding;
 
 public enum EncoderType
 {

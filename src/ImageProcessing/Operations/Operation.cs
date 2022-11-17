@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Autodroid.SDK.ImageProcessing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Operations;
 
 public abstract class Operation
 {

@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Mirroring.Operations;
+namespace AyBorg.SDK.ImageProcessing.Mirroring.Operations;
 public record MirrorDescription : OperationDescription
 {
     public MirrorDescription() : base() { }

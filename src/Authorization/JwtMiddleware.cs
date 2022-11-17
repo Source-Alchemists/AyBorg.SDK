@@ -2,7 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace Autodroid.SDK.Authorization;
+namespace AyBorg.SDK.Authorization;
 
 public sealed class JwtMiddleware
 {
@@ -12,21 +12,18 @@ public sealed class JwtMiddleware
     {
         _next = next;
     }
-    
+
     public async Task InvokeAsync(HttpContext context, IJwtConsumerService jwtConsumerService)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-        if(string.IsNullOrEmpty(token))
+        if (string.IsNullOrEmpty(token))
         {
             await _next(context);
             return;
         }
 
         var validatedToken = jwtConsumerService.ValidateToken(token);
-        if(validatedToken != null)
-        {
-            validatedToken.Claims.ToList().ForEach(claim => context.User.AddIdentity(new ClaimsIdentity(new[] { claim }, "jwt")));
-        }
+        validatedToken?.Claims.ToList().ForEach(claim => context.User.AddIdentity(new ClaimsIdentity(new[] { claim }, "jwt")));
         await _next(context);
     }
 }

@@ -1,8 +1,8 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Cropping.Operations;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Cropping.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Cropping;
+namespace AyBorg.SDK.ImageProcessing.Cropping;
 
 public class Crop : Operation<CropDescription, CropParameters, IPixelBuffer>
 {

@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Shapes;
+using AyBorg.SDK.ImageProcessing.Shapes;
 
-namespace Autodroid.SDK.Common.Ports;
+namespace AyBorg.SDK.Common.Ports;
 
 public sealed class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
 {

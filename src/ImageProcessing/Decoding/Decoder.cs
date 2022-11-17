@@ -1,8 +1,8 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Decoding.Operations;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Decoding.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Decoding;
+namespace AyBorg.SDK.ImageProcessing.Decoding;
 
 public class Decoder : Operation<DecoderDescription, DecoderParameters, IPixelBuffer>
 {

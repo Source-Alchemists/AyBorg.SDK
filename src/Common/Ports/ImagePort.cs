@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing;
 
-namespace Autodroid.SDK.Common.Ports;
+namespace AyBorg.SDK.Common.Ports;
 
 public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
 {

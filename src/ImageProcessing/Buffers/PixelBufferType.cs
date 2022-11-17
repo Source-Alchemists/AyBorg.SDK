@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing.Buffers;
+namespace AyBorg.SDK.ImageProcessing.Buffers;
 
 public enum PixelBufferType
 {

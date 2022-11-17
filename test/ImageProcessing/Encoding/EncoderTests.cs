@@ -1,9 +1,9 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Encoding;
-using Autodroid.SDK.ImageProcessing.Encoding.Operations;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Encoding;
+using AyBorg.SDK.ImageProcessing.Encoding.Operations;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.Tests.ImageProcessing.Encoding;
+namespace AyBorg.SDK.Tests.ImageProcessing.Encoding;
 
 public class EncoderTests : IDisposable
 {

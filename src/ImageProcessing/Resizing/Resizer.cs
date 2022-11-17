@@ -1,8 +1,8 @@
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Resizing.Operations;
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Resizing.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Resizing;
+namespace AyBorg.SDK.ImageProcessing.Resizing;
 
 public class Resizer : Operation<ResizerDescription, ResizerParameters, IPixelBuffer>
 {

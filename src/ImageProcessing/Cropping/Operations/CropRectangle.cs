@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Shapes;
+using AyBorg.SDK.ImageProcessing.Shapes;
 
-namespace Autodroid.SDK.ImageProcessing.Cropping.Operations;
+namespace AyBorg.SDK.ImageProcessing.Cropping.Operations;
 
 internal record struct CropRectangle
 {

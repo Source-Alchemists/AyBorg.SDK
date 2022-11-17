@@ -1,8 +1,8 @@
-using Autodroid.SDK.Common;
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.Mapper;
+namespace AyBorg.SDK.Data.Mapper;
 
 public interface IRuntimeToStorageMapper
 {

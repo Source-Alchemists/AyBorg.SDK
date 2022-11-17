@@ -1,9 +1,9 @@
-﻿using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.Common;
+﻿using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Common;
 
-namespace Autodroid.SDK.Data.Mapper;
+namespace AyBorg.SDK.Data.Mapper;
 
 public interface IDtoMapper
 {

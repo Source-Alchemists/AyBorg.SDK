@@ -1,6 +1,6 @@
 using MQTTnet;
 
-namespace Autodroid.SDK.Communication.MQTT;
+namespace AyBorg.SDK.Communication.MQTT;
 
 public sealed record MqttSubscription
 {

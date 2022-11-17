@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.Data.Mapper.Converter;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.Common;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.Data.Mapper.Converter;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Common;
 
-namespace Autodroid.SDK.Data.Mapper;
+namespace AyBorg.SDK.Data.Mapper;
 
 public sealed class DtoMapper : IDtoMapper
 {
-    private readonly AutoMapper.Mapper _mapper;
-
     /// <summary>
     /// Gets the mapper, use with caution.
     /// </summary>
-    public AutoMapper.Mapper Mapper => _mapper;
+    public AutoMapper.Mapper Mapper { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DtoMapper"/> class.
@@ -24,7 +22,7 @@ public sealed class DtoMapper : IDtoMapper
         var config = new MapperConfiguration(config =>
         {
             // Records
-            config.CreateMap<ProjectMetaRecord, ProjectMetaDto>().ForMember(d => d.Id, opt => opt.MapFrom(s => s.DbId)).ReverseMap();
+            config.CreateMap<ProjectMetaRecord, ProjectMetaDto>().ReverseMap();
             config.CreateMap<ProjectRecord, ProjectDto>().ReverseMap();
             config.CreateMap<StepRecord, StepDto>();
             config.CreateMap<LinkRecord, LinkDto>();
@@ -42,7 +40,7 @@ public sealed class DtoMapper : IDtoMapper
             config.CreateMap<EnumPort, PortDto>().ForMember(d => d.Value, opt => opt.ConvertUsing(new EnumToDtoConverter()));
         });
 
-        _mapper = new AutoMapper.Mapper(config);
+        Mapper = new AutoMapper.Mapper(config);
     }
 
     /// <summary>
@@ -50,47 +48,47 @@ public sealed class DtoMapper : IDtoMapper
     /// </summary>
     /// <param name="projectMetaRecord">The project meta record.</param>
     /// <returns></returns>
-    public ProjectMetaDto Map(ProjectMetaRecord projectMetaRecord) => _mapper.Map<ProjectMetaDto>(projectMetaRecord);
-    
+    public ProjectMetaDto Map(ProjectMetaRecord projectMetaRecord) => Mapper.Map<ProjectMetaDto>(projectMetaRecord);
+
     /// <summary>
     /// Maps the specified project record.
     /// </summary>
     /// <param name="projectRecord">The project record.</param>
     /// <returns>Project dto.</returns>
-    public ProjectDto Map(ProjectRecord projectRecord) => _mapper.Map<ProjectDto>(projectRecord);
+    public ProjectDto Map(ProjectRecord projectRecord) => Mapper.Map<ProjectDto>(projectRecord);
 
     /// <summary>
     /// Maps the specified port to record.
     /// </summary>
     /// <param name="portRecord">The port record.</param>
     /// <returns>Port dto.</returns>
-    public PortDto Map(PortRecord portRecord) => _mapper.Map<PortDto>(portRecord);
+    public PortDto Map(PortRecord portRecord) => Mapper.Map<PortDto>(portRecord);
 
     /// <summary>
     /// Maps the specified project dto.
     /// </summary>
     /// <param name="projectDto">The project dto.</param>
     /// <returns></returns>
-    public ProjectRecord Map(ProjectDto projectDto) => _mapper.Map<ProjectRecord>(projectDto);
+    public ProjectRecord Map(ProjectDto projectDto) => Mapper.Map<ProjectRecord>(projectDto);
 
     /// <summary>
     /// Maps the specified step body.
     /// </summary>
     /// <param name="step">The step.</param>
     /// <returns></returns>
-    public StepDto Map(IStepProxy step) =>_mapper.Map<StepDto>(step);
+    public StepDto Map(IStepProxy step) =>Mapper.Map<StepDto>(step);
 
     /// <summary>
     /// Maps the specified port.
     /// </summary>
     /// <param name="port">The port.</param>
     /// <returns></returns>
-    public PortDto Map(IPort port) => _mapper.Map<PortDto>(port);
+    public PortDto Map(IPort port) => Mapper.Map<PortDto>(port);
 
     /// <summary>
     /// Maps the specified link.
     /// </summary>
     /// <param name="link">The link.</param>
     /// <returns></returns>
-    public LinkDto Map(PortLink link) => _mapper.Map<LinkDto>(link);
+    public LinkDto Map(PortLink link) => Mapper.Map<LinkDto>(link);
 }

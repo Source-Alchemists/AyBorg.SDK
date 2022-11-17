@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Autodroid.SDK.Common;
+using AyBorg.SDK.Common;
 
-namespace Autodroid.SDK.Data.DAL;
+namespace AyBorg.SDK.Data.DAL;
 
 public record StepRecord
 {
@@ -24,7 +24,7 @@ public record StepRecord
     /// <summary>
     /// Gets or sets the meta information.
     /// </summary>
-    public PluginMetaInfo MetaInfo { get; set; } = new PluginMetaInfo();
+    public PluginMetaInfoRecord MetaInfo { get; set; } = new PluginMetaInfoRecord();
 
     /// <summary>
     /// Gets or sets the x.

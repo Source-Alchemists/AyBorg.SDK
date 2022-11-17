@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing;
+namespace AyBorg.SDK.ImageProcessing;
 
 public enum BinaryThresholdMode
 {

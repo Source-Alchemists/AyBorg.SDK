@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing.Operations;
+namespace AyBorg.SDK.ImageProcessing.Operations;
 
 public interface IOperationParameters
 {

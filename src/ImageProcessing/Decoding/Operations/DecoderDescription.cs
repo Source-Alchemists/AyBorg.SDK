@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Operations;
+using AyBorg.SDK.ImageProcessing.Operations;
 
-namespace Autodroid.SDK.ImageProcessing.Decoding.Operations;
+namespace AyBorg.SDK.ImageProcessing.Decoding.Operations;
 
 public record DecoderDescription : OperationDescription
 {

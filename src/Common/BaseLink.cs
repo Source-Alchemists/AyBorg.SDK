@@ -1,12 +1,12 @@
-namespace Autodroid.SDK.Common;
+namespace AyBorg.SDK.Common;
 
-public abstract record BaseLink<T> {
-
+public abstract record BaseLink<T>
+{
     /// <summary>
     /// Gets the identifier.
     /// </summary>
     public Guid Id { get; protected set; }
-    
+
     /// <summary>
     /// Gets the source identifier.
     /// </summary>

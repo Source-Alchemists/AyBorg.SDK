@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.Projects;
+namespace AyBorg.SDK.Projects;
 
 public sealed record ProjectMeta {
     /// <summary>

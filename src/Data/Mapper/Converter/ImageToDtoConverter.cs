@@ -2,11 +2,11 @@ using Sys = System;
 using Microsoft.IO;
 using Microsoft.Toolkit.HighPerformance;
 using AutoMapper;
-using Autodroid.SDK.Data.DTOs;
-using Autodroid.SDK.ImageProcessing;
-using Autodroid.SDK.ImageProcessing.Encoding;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.ImageProcessing;
+using AyBorg.SDK.ImageProcessing.Encoding;
 
-namespace Autodroid.SDK.Data.Mapper.Converter;
+namespace AyBorg.SDK.Data.Mapper.Converter;
 
 internal class ImageToDtoConverter : IValueConverter<Image, ImageDto>
 {

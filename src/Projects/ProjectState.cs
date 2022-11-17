@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.Projects;
+namespace AyBorg.SDK.Projects;
 
 public enum ProjectState
 {
@@ -6,6 +6,10 @@ public enum ProjectState
     /// The project is ready.
     /// </summary>
     Ready = 0,
+    /// <summary>
+    /// The project new to be reviewed.
+    /// </summary>
+    Review = 1,
     /// <summary>
     /// The project is in draft.
     /// </summary>

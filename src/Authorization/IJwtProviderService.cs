@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.Authorization;
+namespace AyBorg.SDK.Authorization;
 
 public interface IJwtProviderService
 {

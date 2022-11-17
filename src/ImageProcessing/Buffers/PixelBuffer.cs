@@ -1,8 +1,8 @@
 using System.Buffers;
 using System.Runtime.InteropServices;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing.Buffers;
+namespace AyBorg.SDK.ImageProcessing.Buffers;
 
 public abstract record PixelBuffer<TPixel> : IPixelBuffer<TPixel>
     where TPixel : unmanaged, IPixel<TPixel>

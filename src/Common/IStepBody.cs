@@ -1,6 +1,6 @@
-using Autodroid.SDK.Common.Ports;
+using AyBorg.SDK.Common.Ports;
 
-namespace Autodroid.SDK.Common;
+namespace AyBorg.SDK.Common;
 
 public interface IStepBody 
 {
@@ -19,5 +19,5 @@ public interface IStepBody
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
-    Task<bool> TryRunAsync(CancellationToken cancellationToken);
+    ValueTask<bool> TryRunAsync(CancellationToken cancellationToken);
 }

@@ -1,7 +1,7 @@
-using Autodroid.SDK.ImageProcessing.Encoding;
+using AyBorg.SDK.ImageProcessing.Encoding;
 using MQTTnet.Protocol;
 
-namespace Autodroid.SDK.Communication.MQTT;
+namespace AyBorg.SDK.Communication.MQTT;
 
 public sealed record MqttPublishOptions
 {

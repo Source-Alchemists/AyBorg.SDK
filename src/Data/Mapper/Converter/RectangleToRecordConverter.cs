@@ -1,9 +1,9 @@
 using Sys = System;
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.ImageProcessing.Shapes;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.ImageProcessing.Shapes;
 using AutoMapper;
 
-namespace Autodroid.SDK.Data.Mapper.Converter;
+namespace AyBorg.SDK.Data.Mapper.Converter;
 
 internal class RectangleToRecordConverter : IValueConverter<Rectangle, string>
 {

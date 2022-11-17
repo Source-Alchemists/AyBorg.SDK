@@ -1,9 +1,9 @@
 using System.Collections.Concurrent;
-using Autodroid.SDK.ImageProcessing.Buffers;
-using Autodroid.SDK.ImageProcessing.Buffers.Operations;
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Buffers;
+using AyBorg.SDK.ImageProcessing.Buffers.Operations;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing;
+namespace AyBorg.SDK.ImageProcessing;
 
 public partial record Image : IImage
 {
@@ -26,8 +26,10 @@ public partial record Image : IImage
     /// </summary>
     public int Size => _rootPixelBuffer.Size;
 
-    public bool IsColor {
-        get {
+    public bool IsColor
+    {
+        get
+        {
             return PixelFormat switch
             {
                 PixelFormat.Mono or PixelFormat.Mono8 or PixelFormat.Mono16 => false,
@@ -95,17 +97,17 @@ public partial record Image : IImage
     /// <returns>True if the images are equal, false otherwise.</returns>
     public virtual bool Equals(Image? other)
     {
-        if(other is null)
+        if (other is null)
         {
             return false;
         }
 
-        if(ReferenceEquals(this, other))
+        if (ReferenceEquals(this, other))
         {
             return true;
         }
 
-        if(Width != other.Width || Height != other.Height || Size != other.Size || PixelFormat != other.PixelFormat)
+        if (Width != other.Width || Height != other.Height || Size != other.Size || PixelFormat != other.PixelFormat)
         {
             return false;
         }

@@ -1,12 +1,12 @@
 ﻿using System.Globalization;
 using AutoMapper;
-using Autodroid.SDK.Data.DAL;
-using Autodroid.SDK.Common.Ports;
-using Autodroid.SDK.Data.Mapper.Converter;
-using Autodroid.SDK.Common;
-using Autodroid.SDK.Projects;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Data.Mapper.Converter;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Projects;
 
-namespace Autodroid.SDK.Data.Mapper;
+namespace AyBorg.SDK.Data.Mapper;
 
 public sealed class RuntimeToStorageMapper : IRuntimeToStorageMapper
 {
@@ -19,6 +19,7 @@ public sealed class RuntimeToStorageMapper : IRuntimeToStorageMapper
     {
         var config = new MapperConfiguration(config => {
             config.CreateMap<ProjectMeta, ProjectMetaRecord>().ReverseMap();
+            config.CreateMap<PluginMetaInfo, PluginMetaInfoRecord>().ReverseMap();
             config.CreateMap<Project, ProjectRecord>();
             config.CreateMap<IStepProxy, StepRecord>();
             config.CreateMap<PortLink, LinkRecord>();

@@ -1,7 +1,7 @@
 using AutoMapper;
-using Autodroid.SDK.Data.DTOs;
+using AyBorg.SDK.Data.DTOs;
 
-namespace Autodroid.SDK.Data.Mapper.Converter;
+namespace AyBorg.SDK.Data.Mapper.Converter;
 
 internal class EnumToDtoConverter : IValueConverter<Enum, EnumDto>
 {

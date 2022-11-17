@@ -1,4 +1,4 @@
-namespace Autodroid.SDK.ImageProcessing.Pixels;
+namespace AyBorg.SDK.ImageProcessing.Pixels;
 
 public enum PixelType
 {

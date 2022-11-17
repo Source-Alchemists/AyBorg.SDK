@@ -1,8 +1,8 @@
 using Sys = System;
 using AutoMapper;
-using Autodroid.SDK.Data.DAL;
+using AyBorg.SDK.Data.DAL;
 
-namespace Autodroid.SDK.Data.Mapper.Converter;
+namespace AyBorg.SDK.Data.Mapper.Converter;
 
 internal class EnumToRecordConverter : IValueConverter<Enum, string>
 {

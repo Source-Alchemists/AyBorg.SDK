@@ -1,6 +1,6 @@
-using Autodroid.SDK.ImageProcessing.Pixels;
+using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace Autodroid.SDK.ImageProcessing.Buffers;
+namespace AyBorg.SDK.ImageProcessing.Buffers;
 
 public abstract record ReadOnlyPixelBuffer<TPixel> : IReadOnlyPixelBuffer<TPixel>
     where TPixel : unmanaged, IPixel<TPixel>

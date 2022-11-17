@@ -1,4 +1,4 @@
-﻿namespace Autodroid.SDK.Common;
+﻿namespace AyBorg.SDK.Common;
 
 public interface IInitializable
 {
@@ -6,5 +6,5 @@ public interface IInitializable
     /// Called when [initialize].
     /// Called once on single run or continuous run before TryRunAsync.
     /// </summary>
-    Task OnInitializeAsync();
+    ValueTask OnInitializeAsync();
 }
