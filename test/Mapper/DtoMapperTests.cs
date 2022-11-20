@@ -21,18 +21,18 @@ public class DtoMapperTests
         {
             DbId = Guid.NewGuid(),
             Meta = new ProjectMetaRecord {
-                DbId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Name = "Test Project",
             },
             Steps = new List<StepRecord>()
-            
+
         };
 
         // Act
-        var dto = mapper.Map(projectRecord);
+        ProjectDto dto = mapper.Map(projectRecord);
 
         // Assert
-        Assert.Equal(projectRecord.Meta.DbId, dto.Meta.Id);
+        Assert.Equal(projectRecord.Meta.Id, dto.Meta.Id);
         Assert.Equal(projectRecord.Meta.Name, dto.Meta.Name);
         Assert.Equal(projectRecord.Meta.IsActive, dto.Meta.IsActive);
     }
@@ -55,7 +55,7 @@ public class DtoMapperTests
                     Name = "Test Step",
                     X = 100,
                     Y = 200,
-                    MetaInfo = new PluginMetaInfo
+                    MetaInfo = new PluginMetaInfoRecord
                     {
                         Id = Guid.NewGuid(),
                         AssemblyName = "TestAssembly",
@@ -81,18 +81,22 @@ public class DtoMapperTests
         var expectedDto = new ProjectDto
         {
             Meta = new ProjectMetaDto {
-                Id = projectRecord.Meta.DbId,
+                Id = projectRecord.Meta.Id,
                 Name = projectRecord.Meta.Name,
                 IsActive = projectRecord.Meta.IsActive
             }
         };
+        PluginMetaInfoRecord metaInfoRecord = projectRecord.Steps.First().MetaInfo;
         var stepDto = new StepDto
         {
             Id = projectRecord.Steps.First().Id,
             Name = projectRecord.Steps.First().Name,
             X = projectRecord.Steps.First().X,
             Y = projectRecord.Steps.First().Y,
-            MetaInfo = projectRecord.Steps.First().MetaInfo,
+            MetaInfo = new PluginMetaInfo { Id = metaInfoRecord.Id,
+                                            AssemblyName = metaInfoRecord.AssemblyName,
+                                            TypeName = metaInfoRecord.TypeName,
+                                            AssemblyVersion = metaInfoRecord.AssemblyVersion },
             Ports = new List<PortDto>()
         };
         var portDto1 = new PortDto
@@ -113,7 +117,7 @@ public class DtoMapperTests
         };
 
         // Act
-        var dto = mapper.Map(projectRecord);
+        ProjectDto dto = mapper.Map(projectRecord);
 
         // Assert
         Assert.Equal(expectedDto.Meta.Id, dto.Meta.Id);
@@ -156,7 +160,7 @@ public class DtoMapperTests
         };
 
         // Act
-        var dto = mapper.Map(portRecord);
+        PortDto dto = mapper.Map(portRecord);
 
         // Assert
         Assert.Equal(expectedDto.Name, dto.Name);
@@ -186,7 +190,7 @@ public class DtoMapperTests
         };
 
         // Act
-        var dto = mapper.Map(portRecord);
+        PortDto dto = mapper.Map(portRecord);
 
         // Assert
         Assert.Equal(expectedDto.Name, dto.Name);
@@ -213,7 +217,7 @@ public class DtoMapperTests
         });
 
         // Act
-        var dto = mapper.Map(stepProxyMock.Object);
+        StepDto dto = mapper.Map(stepProxyMock.Object);
 
         // Assert
         Assert.Equal(stepProxyMock.Object.Id, dto.Id);
@@ -231,8 +235,8 @@ public class DtoMapperTests
     public void TestMapEnumPortToDto()
     {
         // Arrange
-        var mode = BinaryThresholdMode.MaxChroma;
-        var names = BinaryThresholdMode.GetNames(typeof(BinaryThresholdMode));
+        BinaryThresholdMode mode = BinaryThresholdMode.MaxChroma;
+        string[] names = BinaryThresholdMode.GetNames(typeof(BinaryThresholdMode));
         var mapper = new DtoMapper();
         var port = new EnumPort("Test Port", PortDirection.Input, mode);
         var expectedDto = new PortDto
@@ -244,7 +248,7 @@ public class DtoMapperTests
         };
 
         // Act
-        var dto = mapper.Map(port);
+        PortDto dto = mapper.Map(port);
 
         // Assert
         Assert.Equal(expectedDto.Name, dto.Name);
