@@ -220,12 +220,12 @@ public sealed class CropOperation : Crop
         int x0 = (int)(rectangle.X - rectangle.HalfWidth);
         int y0 = (int)(rectangle.Y - rectangle.HalfHeight);
 
-        Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
+        _ = Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
         {
             for (int channel = 0; channel < sourcePixelBuffer.NumberOfChannels; channel++)
             {
-                var channelDest = targetPixelBuffer.GetChannel(channel);
-                var channelSrc = sourcePixelBuffer.GetChannel(channel);
+                Span<TPixel> channelDest = targetPixelBuffer.GetChannel(channel);
+                ReadOnlySpan<TPixel> channelSrc = sourcePixelBuffer.GetChannel(channel);
 
                 int yDestWidth = yDest * targetPixelBuffer.Width;
                 int y = y0 + yDest;
@@ -266,12 +266,12 @@ public sealed class CropOperation : Crop
         int x0 = (int)(rectangle.X + rectangle.HalfWidth - 1);
         int y0 = (int)(rectangle.Y - rectangle.HalfHeight);
 
-        Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
+        _ = Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
         {
             for (int channel = 0; channel < sourcePixelBuffer.NumberOfChannels; channel++)
             {
-                var channelDest = targetPixelBuffer.GetChannel(channel);
-                var channelSrc = sourcePixelBuffer.GetChannel(channel);
+                Span<TPixel> channelDest = targetPixelBuffer.GetChannel(channel);
+                ReadOnlySpan<TPixel> channelSrc = sourcePixelBuffer.GetChannel(channel);
 
                 int yDestWidth = yDest * targetPixelBuffer.Width;
                 int x = x0 - yDest;
@@ -311,12 +311,12 @@ public sealed class CropOperation : Crop
         int x0 = (int)(rectangle.X + rectangle.HalfWidth - 1);
         int y0 = (int)(rectangle.Y + rectangle.HalfHeight - 1);
 
-        Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
+        _ = Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
         {
             for (int channel = 0; channel < sourcePixelBuffer.NumberOfChannels; channel++)
             {
-                var channelDest = targetPixelBuffer.GetChannel(channel);
-                var channelSrc = sourcePixelBuffer.GetChannel(channel);
+                Span<TPixel> channelDest = targetPixelBuffer.GetChannel(channel);
+                ReadOnlySpan<TPixel> channelSrc = sourcePixelBuffer.GetChannel(channel);
 
                 int yDestWidth = yDest * targetPixelBuffer.Width;
                 int y = y0 - yDest;
@@ -357,12 +357,12 @@ public sealed class CropOperation : Crop
         int x0 = (int)(rectangle.X - rectangle.HalfWidth);
         int y0 = (int)(rectangle.Y + rectangle.HalfHeight - 1);
 
-        Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
+        _ = Parallel.For(0, targetPixelBuffer.Height, parallelOptions, yDest =>
         {
             for (int channel = 0; channel < sourcePixelBuffer.NumberOfChannels; channel++)
             {
-                var channelDest = targetPixelBuffer.GetChannel(channel);
-                var channelSrc = sourcePixelBuffer.GetChannel(channel);
+                Span<TPixel> channelDest = targetPixelBuffer.GetChannel(channel);
+                ReadOnlySpan<TPixel> channelSrc = sourcePixelBuffer.GetChannel(channel);
 
                 int yDestWidth = yDest * targetPixelBuffer.Width;
                 int x = x0 + yDest;
@@ -642,10 +642,10 @@ public sealed class CropOperation : Crop
                 // See https://en.wikipedia.org/wiki/Bilinear_interpolation
                 if (x2 < imageWidth && y2 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q21 = src[y1ImageWidth + x2];
-                    var q12 = src[y2ImageWidth + x1];
-                    var q22 = src[y2ImageWidth + x2];
+                    Rgb q11 = src[y1ImageWidth + x1];
+                    Rgb q21 = src[y1ImageWidth + x2];
+                    Rgb q12 = src[y2ImageWidth + x1];
+                    Rgb q22 = src[y2ImageWidth + x2];
 
                     double fx1R = Interpolate(x, x1, x2, q11.Red, q21.Red);
                     double fx1G = Interpolate(x, x1, x2, q11.Green, q21.Green);
@@ -661,8 +661,8 @@ public sealed class CropOperation : Crop
                 }
                 else if (x2 < imageWidth && y1 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q21 = src[y1ImageWidth + x2];
+                    Rgb q11 = src[y1ImageWidth + x1];
+                    Rgb q21 = src[y1ImageWidth + x2];
 
                     double fxR = Interpolate(x, x1, x2, q11.Red, q21.Red);
                     double fxG = Interpolate(x, x1, x2, q11.Green, q21.Green);
@@ -672,8 +672,8 @@ public sealed class CropOperation : Crop
                 }
                 else if (x1 < imageWidth && y2 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q12 = src[y2ImageWidth + x1];
+                    Rgb q11 = src[y1ImageWidth + x1];
+                    Rgb q12 = src[y2ImageWidth + x1];
 
                     double fyR = Interpolate(y, y1, y2, q11.Red, q12.Red);
                     double fyG = Interpolate(y, y1, y2, q11.Green, q12.Green);
@@ -725,10 +725,10 @@ public sealed class CropOperation : Crop
                 // See https://en.wikipedia.org/wiki/Bilinear_interpolation
                 if (x2 < imageWidth && y2 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q21 = src[y1ImageWidth + x2];
-                    var q12 = src[y2ImageWidth + x1];
-                    var q22 = src[y2ImageWidth + x2];
+                    Rgb24 q11 = src[y1ImageWidth + x1];
+                    Rgb24 q21 = src[y1ImageWidth + x2];
+                    Rgb24 q12 = src[y2ImageWidth + x1];
+                    Rgb24 q22 = src[y2ImageWidth + x2];
 
                     double fx1R = Interpolate(x, x1, x2, q11.Red, q21.Red);
                     double fx1G = Interpolate(x, x1, x2, q11.Green, q21.Green);
@@ -744,8 +744,8 @@ public sealed class CropOperation : Crop
                 }
                 else if (x2 < imageWidth && y1 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q21 = src[y1ImageWidth + x2];
+                    Rgb24 q11 = src[y1ImageWidth + x1];
+                    Rgb24 q21 = src[y1ImageWidth + x2];
 
                     double fxR = Interpolate(x, x1, x2, q11.Red, q21.Red);
                     double fxG = Interpolate(x, x1, x2, q11.Green, q21.Green);
@@ -755,8 +755,8 @@ public sealed class CropOperation : Crop
                 }
                 else if (x1 < imageWidth && y2 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q12 = src[y2ImageWidth + x1];
+                    Rgb24 q11 = src[y1ImageWidth + x1];
+                    Rgb24 q12 = src[y2ImageWidth + x1];
 
                     double fyR = Interpolate(y, y1, y2, q11.Red, q12.Red);
                     double fyG = Interpolate(y, y1, y2, q11.Green, q12.Green);
@@ -808,10 +808,10 @@ public sealed class CropOperation : Crop
                 // See https://en.wikipedia.org/wiki/Bilinear_interpolation
                 if (x2 < imageWidth && y2 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q21 = src[y1ImageWidth + x2];
-                    var q12 = src[y2ImageWidth + x1];
-                    var q22 = src[y2ImageWidth + x2];
+                    Rgb48 q11 = src[y1ImageWidth + x1];
+                    Rgb48 q21 = src[y1ImageWidth + x2];
+                    Rgb48 q12 = src[y2ImageWidth + x1];
+                    Rgb48 q22 = src[y2ImageWidth + x2];
 
                     double fx1R = Interpolate(x, x1, x2, q11.Red, q21.Red);
                     double fx1G = Interpolate(x, x1, x2, q11.Green, q21.Green);
@@ -827,8 +827,8 @@ public sealed class CropOperation : Crop
                 }
                 else if (x2 < imageWidth && y1 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q21 = src[y1ImageWidth + x2];
+                    Rgb48 q11 = src[y1ImageWidth + x1];
+                    Rgb48 q21 = src[y1ImageWidth + x2];
 
                     double fxR = Interpolate(x, x1, x2, q11.Red, q21.Red);
                     double fxG = Interpolate(x, x1, x2, q11.Green, q21.Green);
@@ -838,8 +838,8 @@ public sealed class CropOperation : Crop
                 }
                 else if (x1 < imageWidth && y2 < imageHeight)
                 {
-                    var q11 = src[y1ImageWidth + x1];
-                    var q12 = src[y2ImageWidth + x1];
+                    Rgb48 q11 = src[y1ImageWidth + x1];
+                    Rgb48 q12 = src[y2ImageWidth + x1];
 
                     double fyR = Interpolate(y, y1, y2, q11.Red, q12.Red);
                     double fyG = Interpolate(y, y1, y2, q11.Green, q12.Green);
