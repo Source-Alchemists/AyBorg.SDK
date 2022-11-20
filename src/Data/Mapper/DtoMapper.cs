@@ -27,6 +27,7 @@ public sealed class DtoMapper : IDtoMapper
             config.CreateMap<StepRecord, StepDto>();
             config.CreateMap<LinkRecord, LinkDto>();
             config.CreateMap<PortRecord, PortDto>();
+            config.CreateMap<PluginMetaInfoRecord, PluginMetaInfo>().ReverseMap();
 
             // Runtimes
             config.CreateMap<IStepProxy, StepDto>();
