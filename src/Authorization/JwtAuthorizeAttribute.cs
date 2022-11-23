@@ -11,11 +11,11 @@ public sealed class JwtAuthorizeAttribute : Attribute, IAuthorizationFilter
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {
-        var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
+        bool allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
         if (allowAnonymous)
             return;
 
-        var user = context.HttpContext.User;
+        System.Security.Claims.ClaimsPrincipal user = context.HttpContext.User;
         if (Roles != null && Roles.Any() && !user.Claims.Any(claim => claim.Type.Equals("role") && Roles.Contains(claim.Value)))
         {
             context.Result = new UnauthorizedResult();
