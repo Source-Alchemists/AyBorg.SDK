@@ -17,6 +17,11 @@ public record ProjectRecord
     public ProjectMetaRecord Meta { get; set; } = new ProjectMetaRecord();
 
     /// <summary>
+    /// Gets or sets the project settings record.
+    /// </summary>
+    public ProjectSettingsRecord Settings { get; set; } = new ProjectSettingsRecord();
+
+    /// <summary>
     /// Gets or sets the steps.
     /// </summary>
     /// <value>

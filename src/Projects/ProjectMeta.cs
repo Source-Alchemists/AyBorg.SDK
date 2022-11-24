@@ -15,5 +15,10 @@ public sealed record ProjectMeta {
     /// <value>
     /// The name.
     /// </value>
-    public string Name { get; set;} = string.Empty;
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the state.
+    /// </summary>
+    public ProjectState State { get; set; } = ProjectState.Draft;
 }
