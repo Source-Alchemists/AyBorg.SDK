@@ -1,6 +1,6 @@
-namespace AyBorg.SDK.Projects;
+namespace AyBorg.SDK.Data.DTOs;
 
-public sealed record ProjectSettings
+public sealed record ProjectSettingsDto
 {
     public bool IsResultCommunicationForced { get; set; } = false;
 

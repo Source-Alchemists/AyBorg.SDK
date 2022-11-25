@@ -193,7 +193,7 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
 
                     b.HasKey("DbId");
 
-                    b.ToTable("ProjectSettingsRecord");
+                    b.ToTable("AyBorgProjectSettings");
                 });
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.StepRecord", b =>

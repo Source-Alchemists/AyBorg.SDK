@@ -23,6 +23,7 @@ public sealed class DtoMapper : IDtoMapper
         {
             // Records
             config.CreateMap<ProjectMetaRecord, ProjectMetaDto>().ReverseMap();
+            config.CreateMap<ProjectSettingsRecord, ProjectSettingsDto>().ReverseMap();
             config.CreateMap<ProjectRecord, ProjectDto>().ReverseMap();
             config.CreateMap<StepRecord, StepDto>();
             config.CreateMap<LinkRecord, LinkDto>();
@@ -50,6 +51,13 @@ public sealed class DtoMapper : IDtoMapper
     /// <param name="projectMetaRecord">The project meta record.</param>
     /// <returns></returns>
     public ProjectMetaDto Map(ProjectMetaRecord projectMetaRecord) => Mapper.Map<ProjectMetaDto>(projectMetaRecord);
+
+    /// <summary>
+    /// Maps the specified project settings record.
+    /// </summary>
+    /// <param name="projectSettingsRecord">The project settings record.</param>
+    /// <returns></returns>
+    public ProjectSettingsDto Map(ProjectSettingsRecord projectSettingsRecord) => Mapper.Map<ProjectSettingsDto>(projectSettingsRecord);
 
     /// <summary>
     /// Maps the specified project record.

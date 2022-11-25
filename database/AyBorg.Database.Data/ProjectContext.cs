@@ -19,6 +19,11 @@ public class ProjectContext : DbContext
     public DbSet<ProjectMetaRecord>? AyBorgProjectMetas { get; set; }
 
     /// <summary>
+    /// Gets or sets the project setting records.
+    /// </summary>
+    public DbSet<ProjectSettingsRecord>? AyBorgProjectSettings { get; set; }
+
+    /// <summary>
     /// Gets or sets the projects.
     /// </summary>
     public DbSet<ProjectRecord>? AyBorgProjects { get; set; }

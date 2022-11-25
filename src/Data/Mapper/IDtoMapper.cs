@@ -11,14 +11,21 @@ public interface IDtoMapper
     /// Gets the mapper, use with caution.
     /// </summary>
     AutoMapper.Mapper Mapper { get; }
-    
+
     /// <summary>
     /// Maps the specified project meta record.
     /// </summary>
     /// <param name="projectMetaRecord">The project meta record.</param>
     /// <returns></returns>
     ProjectMetaDto Map(ProjectMetaRecord projectMetaRecord);
-    
+
+    /// <summary>
+    /// Maps the specified project settings record.
+    /// </summary>
+    /// <param name="projectSettingsRecord">The project settings record.</param>
+    /// <returns></returns>
+    ProjectSettingsDto Map(ProjectSettingsRecord projectSettingsRecord);
+
     /// <summary>
     /// Maps the specified project to record.
     /// </summary>
