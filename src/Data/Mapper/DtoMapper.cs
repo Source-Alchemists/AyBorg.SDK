@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.Data.DAL;
 using AyBorg.SDK.Data.DTOs;
 using AyBorg.SDK.Data.Mapper.Converter;
-using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.Common;
+using AyBorg.SDK.Projects;
 
 namespace AyBorg.SDK.Data.Mapper;
 
@@ -24,6 +25,7 @@ public sealed class DtoMapper : IDtoMapper
             // Records
             config.CreateMap<ProjectMetaRecord, ProjectMetaDto>().ReverseMap();
             config.CreateMap<ProjectSettingsRecord, ProjectSettingsDto>().ReverseMap();
+            config.CreateMap<ProjectSettings, ProjectSettingsDto>().ReverseMap();
             config.CreateMap<ProjectRecord, ProjectDto>().ReverseMap();
             config.CreateMap<StepRecord, StepDto>();
             config.CreateMap<LinkRecord, LinkDto>();
@@ -60,6 +62,13 @@ public sealed class DtoMapper : IDtoMapper
     public ProjectSettingsDto Map(ProjectSettingsRecord projectSettingsRecord) => Mapper.Map<ProjectSettingsDto>(projectSettingsRecord);
 
     /// <summary>
+    /// Maps the specified project settings.
+    /// </summary>
+    /// <param name="projectSettings">The project settings.</param>
+    /// <returns></returns>
+    public ProjectSettingsDto Map(ProjectSettings projectSettings) => Mapper.Map<ProjectSettingsDto>(projectSettings);
+
+    /// <summary>
     /// Maps the specified project record.
     /// </summary>
     /// <param name="projectRecord">The project record.</param>
@@ -85,7 +94,7 @@ public sealed class DtoMapper : IDtoMapper
     /// </summary>
     /// <param name="step">The step.</param>
     /// <returns></returns>
-    public StepDto Map(IStepProxy step) =>Mapper.Map<StepDto>(step);
+    public StepDto Map(IStepProxy step) => Mapper.Map<StepDto>(step);
 
     /// <summary>
     /// Maps the specified port.

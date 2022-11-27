@@ -2,7 +2,7 @@ namespace AyBorg.SDK.Projects;
 
 public sealed record ProjectSettings
 {
-    public bool IsResultCommunicationForced { get; set; } = false;
+    public bool IsForceResultCommunicationEnabled { get; set; } = false;
 
-    public bool IsWebUiCommunicationForced { get; set; } = false;
+    public bool IsForceWebUiCommunicationEnabled { get; set; } = false;
 }
