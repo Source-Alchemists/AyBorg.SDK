@@ -1,7 +1,8 @@
-﻿using AyBorg.SDK.Data.DAL;
-using AyBorg.SDK.Data.DTOs;
+﻿using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.Common;
+using AyBorg.SDK.Data.DAL;
+using AyBorg.SDK.Data.DTOs;
+using AyBorg.SDK.Projects;
 
 namespace AyBorg.SDK.Data.Mapper;
 
@@ -11,14 +12,28 @@ public interface IDtoMapper
     /// Gets the mapper, use with caution.
     /// </summary>
     AutoMapper.Mapper Mapper { get; }
-    
+
     /// <summary>
     /// Maps the specified project meta record.
     /// </summary>
     /// <param name="projectMetaRecord">The project meta record.</param>
     /// <returns></returns>
     ProjectMetaDto Map(ProjectMetaRecord projectMetaRecord);
-    
+
+    /// <summary>
+    /// Maps the specified project settings record.
+    /// </summary>
+    /// <param name="projectSettingsRecord">The project settings record.</param>
+    /// <returns></returns>
+    ProjectSettingsDto Map(ProjectSettingsRecord projectSettingsRecord);
+
+    /// <summary>
+    /// Maps the specified project settings.
+    /// </summary>
+    /// <param name="projectSettings">The project settings.</param>
+    /// <returns></returns>
+    ProjectSettingsDto Map(ProjectSettings projectSettings);
+
     /// <summary>
     /// Maps the specified project to record.
     /// </summary>

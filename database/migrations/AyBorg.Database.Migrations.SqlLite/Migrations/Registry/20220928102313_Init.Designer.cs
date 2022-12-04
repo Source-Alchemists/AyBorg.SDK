@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AyBorg.Database.Migrations.SqlLite.Migrations.Registry
+namespace AyBorg.Database.Migrations.SqlLite.Migrations.Gateway
 {
     [DbContext(typeof(RegistryContext))]
     [Migration("20220928102313_Init")]

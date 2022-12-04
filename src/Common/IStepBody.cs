@@ -2,7 +2,7 @@ using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Common;
 
-public interface IStepBody 
+public interface IStepBody
 {
     /// <summary>
     /// Gets the default name.

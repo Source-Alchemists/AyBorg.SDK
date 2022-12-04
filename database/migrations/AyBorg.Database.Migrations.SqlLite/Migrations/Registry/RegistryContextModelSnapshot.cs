@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AyBorg.Database.Migrations.SqlLite.Migrations.Registry
+namespace AyBorg.Database.Migrations.SqlLite.Migrations.Gateway
 {
     [DbContext(typeof(RegistryContext))]
     partial class RegistryContextModelSnapshot : ModelSnapshot

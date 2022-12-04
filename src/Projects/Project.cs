@@ -11,6 +11,11 @@ public sealed record Project
     public ProjectMeta Meta { get; set; } = new ProjectMeta();
 
     /// <summary>
+    /// Gets or sets the settings.
+    /// </summary>
+    public ProjectSettings Settings { get; set; } = new ProjectSettings();
+
+    /// <summary>
     /// Gets or sets the steps.
     /// </summary>
     public ICollection<IStepProxy> Steps { get; set; } = new List<IStepProxy>();

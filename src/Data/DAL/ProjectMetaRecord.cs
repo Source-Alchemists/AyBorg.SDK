@@ -53,7 +53,7 @@ public record ProjectMetaRecord
     /// <summary>
     /// Gets or sets the unique name of the service. As hint wich service is responsible for this project.
     /// </summary>
-    public string ServiceUniqueName {get; set;} = string.Empty;
+    public string ServiceUniqueName { get; set; } = string.Empty;
 
     /// <summary>
     // Gets or sets the version of this project.

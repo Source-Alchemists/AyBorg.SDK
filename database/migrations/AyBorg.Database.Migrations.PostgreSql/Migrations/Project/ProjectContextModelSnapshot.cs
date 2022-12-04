@@ -169,9 +169,31 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("SettingsDbId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("DbId");
 
+                    b.HasIndex("SettingsDbId");
+
                     b.ToTable("AyBorgProjects");
+                });
+
+            modelBuilder.Entity("AyBorg.SDK.Data.DAL.ProjectSettingsRecord", b =>
+                {
+                    b.Property<Guid>("DbId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsForceResultCommunicationEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsForceWebUiCommunicationEnabled")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("DbId");
+
+                    b.ToTable("AyBorgProjectSettings");
                 });
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.StepRecord", b =>
@@ -237,6 +259,17 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
                         .HasForeignKey("AyBorg.SDK.Data.DAL.ProjectMetaRecord", "ProjectRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AyBorg.SDK.Data.DAL.ProjectRecord", b =>
+                {
+                    b.HasOne("AyBorg.SDK.Data.DAL.ProjectSettingsRecord", "Settings")
+                        .WithMany()
+                        .HasForeignKey("SettingsDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Settings");
                 });
 
             modelBuilder.Entity("AyBorg.SDK.Data.DAL.StepRecord", b =>

@@ -17,11 +17,10 @@ namespace AyBorg.SDK.Communication.MQTT;
 
 public sealed class MqttClientProvider : IMqttClientProvider
 {
-    private static readonly RecyclableMemoryStreamManager _memoryManager = new();
+    private static readonly RecyclableMemoryStreamManager s_memoryManager = new();
     private readonly ILogger<MqttClientProvider> _logger;
     private readonly IConfiguration _configuration;
     private readonly string _serviceTypeName;
-    private readonly string _serviceUniqueName;
     private readonly string _serviceVersion;
     private readonly MqttClientOptions _mqttClientOptions;
     private readonly ManagedMqttClientOptions _managedMqttClientOptions;
@@ -30,20 +29,20 @@ public sealed class MqttClientProvider : IMqttClientProvider
     private Task? _statusTask;
     private ConcurrentBag<MqttSubscription> _subscriptions = new();
 
-    public string ServiceUniqueName => _serviceUniqueName;
+    public string ServiceUniqueName { get; }
 
     public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IServiceConfiguration serviceConfiguration)
     {
         _logger = logger;
         _configuration = configuration;
 
-        _serviceUniqueName = serviceConfiguration.UniqueName;
+        ServiceUniqueName = serviceConfiguration.UniqueName;
         _serviceTypeName = serviceConfiguration.TypeName;
         _serviceVersion = serviceConfiguration.Version;
 
         var factory = new MqttFactory();
         _mqttClientOptions = new MqttClientOptionsBuilder()
-            .WithClientId(_serviceUniqueName)
+            .WithClientId(ServiceUniqueName)
             .WithTcpServer(_configuration.GetValue<string>("MQTT:Host"), _configuration.GetValue<int>("MQTT:Port"))
             .WithCleanSession()
             .Build();
@@ -62,19 +61,19 @@ public sealed class MqttClientProvider : IMqttClientProvider
         {
             await Task.Delay(100);
         }
-        var baseTopic = $"AyBorg/sys/services/{_serviceUniqueName}";
+        string baseTopic = $"AyBorg/sys/services/{ServiceUniqueName}";
         var options = new MqttPublishOptions { Retain = true };
         await PublishAsync($"{baseTopic}/version", _serviceVersion, options);
         await PublishAsync($"{baseTopic}/type", _serviceTypeName, options);
 
         _statusTask = Task.Run(async () =>
         {
-            var startUtc = DateTime.UtcNow;
+            DateTime startUtc = DateTime.UtcNow;
             while (!_disposedValue)
             {
                 if (_mqttClient.IsConnected)
                 {
-                    var uptime = DateTime.UtcNow - startUtc;
+                    TimeSpan uptime = DateTime.UtcNow - startUtc;
                     await PublishAsync($"{baseTopic}/uptime", $"{((long)uptime.TotalSeconds)} seconds", new MqttPublishOptions());
                 }
                 await Task.Delay(10000);
@@ -116,9 +115,8 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
     }
 
-    public async ValueTask PublishAsync(string baseTopic, IPort port, MqttPublishOptions options)
+    public async ValueTask PublishAsync(string topic, IPort port, MqttPublishOptions options)
     {
-        var topic = baseTopic;
         switch (port)
         {
             case StringPort stringPort: // Contains also FolderPort
@@ -187,7 +185,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
         else
         {
-            Image.CalculateClampSize(image, maxSize, out var w, out var h);
+            Image.CalculateClampSize(image, maxSize, out int w, out int h);
             resizedImage = image.Resize(w, h, ResizeMode.NearestNeighbor);
             targetImage = resizedImage;
         }
@@ -202,7 +200,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
                 EncoderType = options.EncoderType
             }), options);
 
-            using var stream = _memoryManager.GetStream();
+            using MemoryStream stream = s_memoryManager.GetStream();
             Image.Save(targetImage, stream, options.EncoderType);
             stream.Position = 0;
             await _mqttClient.InternalClient.PublishAsync(new MqttApplicationMessageBuilder()
@@ -249,7 +247,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
     private async Task OnApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs e)
     {
         var subscriptions = _subscriptions.Where(x => MqttTopicFilterComparer.Compare(e.ApplicationMessage.Topic, x.TopicFilter) == MqttTopicFilterCompareResult.IsMatch).ToList();
-        var token = CancellationToken.None;
+        CancellationToken token = CancellationToken.None;
         await Parallel.ForEachAsync(subscriptions, async (subscription, token) =>
         {
             subscription.MessageReceived?.Invoke(e.ApplicationMessage);
