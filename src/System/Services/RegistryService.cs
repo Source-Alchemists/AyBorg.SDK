@@ -70,7 +70,7 @@ public class RegistryService : BackgroundService
         _logger.LogInformation("Registry service is stopping.");
         try
         {
-            var deleteResult = await _httpClient.DeleteAsync($"/Services?id={_serviceId}", cancellationToken);
+            HttpResponseMessage deleteResult = await _httpClient.DeleteAsync($"/Services?id={_serviceId}", cancellationToken);
             if (deleteResult.StatusCode != Sys.Net.HttpStatusCode.OK && deleteResult.StatusCode != Sys.Net.HttpStatusCode.NoContent)
             {
                 _logger.LogWarning("Failed to unregister service with id {_serviceId} [Code: {deleteResult.StatusCode}]!", _serviceId, deleteResult.StatusCode);
@@ -86,45 +86,42 @@ public class RegistryService : BackgroundService
         await base.StopAsync(cancellationToken);
     }
 
-    protected override Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        return Task.Factory.StartNew(async () =>
-        {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                try
-                {
-                    if (IsConnected)
-                    {
-                        var putResult = await _httpClient.PutAsync("/Services", _serviceInfoContent, stoppingToken);
-                        if (putResult.StatusCode != Sys.Net.HttpStatusCode.OK)
-                        {
-                            _logger.LogWarning("Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!", _serviceId, putResult.StatusCode);
-                            IsConnected = false;
+    protected override Task ExecuteAsync(CancellationToken stoppingToken) => Task.Factory.StartNew(async () =>
+                                                                                  {
+                                                                                      while (!stoppingToken.IsCancellationRequested)
+                                                                                      {
+                                                                                          try
+                                                                                          {
+                                                                                              if (IsConnected)
+                                                                                              {
+                                                                                                  HttpResponseMessage putResult = await _httpClient.PutAsync("/Services", _serviceInfoContent, stoppingToken);
+                                                                                                  if (putResult.StatusCode != Sys.Net.HttpStatusCode.OK)
+                                                                                                  {
+                                                                                                      _logger.LogWarning("Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!", _serviceId, putResult.StatusCode);
+                                                                                                      IsConnected = false;
 
-                            // Try to register again. Because it is not costing much, we will try it infinite times.
-                            await Register(stoppingToken);
-                        }
-                    }
-                    else
-                    {
-                        await Register(stoppingToken);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning("Failed to execute", ex);
-                }
+                                                                                                      // Try to register again. Because it is not costing much, we will try it infinite times.
+                                                                                                      await Register(stoppingToken);
+                                                                                                  }
+                                                                                              }
+                                                                                              else
+                                                                                              {
+                                                                                                  await Register(stoppingToken);
+                                                                                              }
+                                                                                          }
+                                                                                          catch (Exception ex)
+                                                                                          {
+                                                                                              _logger.LogWarning("Failed to execute", ex);
+                                                                                          }
 
-                await Task.Delay(TimeSpan.FromSeconds(30));
-            }
+                                                                                          await Task.Delay(TimeSpan.FromSeconds(30));
+                                                                                      }
 
-        }, TaskCreationOptions.LongRunning);
-    }
+                                                                                  }, TaskCreationOptions.LongRunning);
 
     private async ValueTask Register(CancellationToken cancellationToken)
     {
-        var postResult = await _httpClient.PostAsync("/Services", _serviceInfoContent, cancellationToken);
+        HttpResponseMessage postResult = await _httpClient.PostAsync("/Services", _serviceInfoContent, cancellationToken);
 
         if (postResult.StatusCode != Sys.Net.HttpStatusCode.OK)
         {
@@ -132,9 +129,9 @@ public class RegistryService : BackgroundService
         }
         else
         {
-            using var stream = postResult.Content.ReadAsStream(cancellationToken);
+            using Stream stream = postResult.Content.ReadAsStream(cancellationToken);
             var streamReader = new StreamReader(stream, Encoding.UTF8);
-            var providedId = streamReader.ReadToEnd().Trim(new char[] { '\\', '"' });
+            string providedId = streamReader.ReadToEnd().Trim(new char[] { '\\', '"' });
             _logger.LogInformation("Registry successful with ID: {providedId}.", providedId);
             _serviceId = Guid.Parse(providedId);
             IsConnected = true;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Registry
+namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Gateway
 {
     public partial class Init : Migration
     {
