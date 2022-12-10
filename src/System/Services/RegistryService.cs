@@ -27,7 +27,7 @@ public class RegistryService : BackgroundService
     /// <param name="logger">Logger.</param>
     /// <param name="serviceConfiguration">App configuration.</param>
     /// <param name="httpClient">Http client.</param>
-    public RegistryService(ILogger<RegistryService> logger, IServiceConfiguration serviceConfiguration, HttpClient httpClient)
+    public RegistryService(ILogger<RegistryService> logger, IGatewayConfiguration serviceConfiguration, HttpClient httpClient)
     {
         _logger = logger;
         _httpClient = httpClient;
@@ -41,7 +41,7 @@ public class RegistryService : BackgroundService
         };
 
         _serviceInfoContent = new StringContent(JsonSerializer.Serialize(_serviceEntry), Encoding.UTF8, "application/json");
-        _httpClient.BaseAddress = new Uri(serviceConfiguration.RegistryUrl);
+        _httpClient.BaseAddress = new Uri(serviceConfiguration.GatewayUrl);
     }
 
     /// <summary>

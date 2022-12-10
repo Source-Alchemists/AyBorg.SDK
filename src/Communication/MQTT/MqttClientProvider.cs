@@ -31,7 +31,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
 
     public string ServiceUniqueName { get; }
 
-    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IServiceConfiguration serviceConfiguration)
+    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IGatewayConfiguration serviceConfiguration)
     {
         _logger = logger;
         _configuration = configuration;
