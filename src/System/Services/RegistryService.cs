@@ -27,7 +27,7 @@ public class RegistryService : BackgroundService
     /// <param name="logger">Logger.</param>
     /// <param name="serviceConfiguration">App configuration.</param>
     /// <param name="httpClient">Http client.</param>
-    public RegistryService(ILogger<RegistryService> logger, IGatewayConfiguration serviceConfiguration, HttpClient httpClient)
+    public RegistryService(ILogger<RegistryService> logger, IServiceConfiguration serviceConfiguration, HttpClient httpClient)
     {
         _logger = logger;
         _httpClient = httpClient;
@@ -87,37 +87,37 @@ public class RegistryService : BackgroundService
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken) => Task.Factory.StartNew(async () =>
-                                                                                  {
-                                                                                      while (!stoppingToken.IsCancellationRequested)
-                                                                                      {
-                                                                                          try
-                                                                                          {
-                                                                                              if (IsConnected)
-                                                                                              {
-                                                                                                  HttpResponseMessage putResult = await _httpClient.PutAsync("/Services", _serviceInfoContent, stoppingToken);
-                                                                                                  if (putResult.StatusCode != Sys.Net.HttpStatusCode.OK)
-                                                                                                  {
-                                                                                                      _logger.LogWarning("Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!", _serviceId, putResult.StatusCode);
-                                                                                                      IsConnected = false;
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    HttpResponseMessage putResult = await _httpClient.PutAsync("/Services", _serviceInfoContent, stoppingToken);
+                    if (putResult.StatusCode != Sys.Net.HttpStatusCode.OK)
+                    {
+                        _logger.LogWarning("Failed to update service with id {_serviceId} [Code: {putResult.StatusCode}]!", _serviceId, putResult.StatusCode);
+                        IsConnected = false;
 
-                                                                                                      // Try to register again. Because it is not costing much, we will try it infinite times.
-                                                                                                      await Register(stoppingToken);
-                                                                                                  }
-                                                                                              }
-                                                                                              else
-                                                                                              {
-                                                                                                  await Register(stoppingToken);
-                                                                                              }
-                                                                                          }
-                                                                                          catch (Exception ex)
-                                                                                          {
-                                                                                              _logger.LogWarning("Failed to execute", ex);
-                                                                                          }
+                        // Try to register again. Because it is not costing much, we will try it infinite times.
+                        await Register(stoppingToken);
+                    }
+                }
+                else
+                {
+                    await Register(stoppingToken);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning("Failed to execute", ex);
+            }
 
-                                                                                          await Task.Delay(TimeSpan.FromSeconds(30));
-                                                                                      }
+            await Task.Delay(TimeSpan.FromSeconds(30));
+        }
 
-                                                                                  }, TaskCreationOptions.LongRunning);
+    }, TaskCreationOptions.LongRunning);
 
     private async ValueTask Register(CancellationToken cancellationToken)
     {
