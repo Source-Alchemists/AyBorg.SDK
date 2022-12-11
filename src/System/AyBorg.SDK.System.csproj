@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\DTOs\AyBorg.SDK.Data.DTOs.csproj" />
+    <ProjectReference Include="..\Data\Bindings\AyBorg.SDK.Data.Bindings.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package ayborg.gateway.v1;
+
+service AgentEditor {
+    rpc GetAvailableSteps (GetAvailableStepsRequest) returns (GetAvailableStepsResponse);
+}
+
+message GetAvailableStepsRequest {
+    string agent_unique_name = 1;
+}
+
+message GetAvailableStepsResponse {
+    repeated Step steps = 1;
+}
+
+message PluginMetaInfo {
+    string id = 1;
+    string assembly_name = 2;
+    string assembly_version = 3;
+    string type_name = 4;
+}
+
+message Step {
+    string id = 1;
+    string name = 2;
+    int32 x = 3;
+    int32 y = 4;
+    int64 execution_time_ms = 5;
+    PluginMetaInfo meta_info = 6;
+    repeated Port ports = 7;
+}
+
+message Port {
+    string id = 1;
+    string name = 2;
+    int32 direction = 3;
+    int32 brand = 4;
+    bool is_connected = 5;
+    bool is_link_convertable = 6;
+    string value = 7;
+}

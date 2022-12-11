@@ -11,6 +11,7 @@
     <Protobuf Include=".\Contracts\Gateway\registerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\agentProjectManagementV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\agentProjectSettingsV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\agentEditorV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\AyBorg.SDK.Common.csproj" />
     <ProjectReference Include="..\..\System\AyBorg.SDK.System.csproj" />
   </ItemGroup>
 
