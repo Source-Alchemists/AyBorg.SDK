@@ -7,7 +7,7 @@ package ayborg.gateway.v1;
 
 service AgentProjectManagement {
     rpc GetProjectMetas(GetProjectMetasRequest) returns (GetProjectMetasResponse);
-    rpc CreateProjet(CreateProjectRequest) returns (CreateProjectResponse);
+    rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
     rpc DeleteProject(DeleteProjectRequest) returns (google.protobuf.Empty);
     rpc ActivateProject(ActivateProjectRequest) returns (google.protobuf.Empty);
     rpc SaveProject(SaveProjectRequest) returns (google.protobuf.Empty);
