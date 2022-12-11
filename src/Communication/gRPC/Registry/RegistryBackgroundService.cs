@@ -3,7 +3,7 @@ using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AyBorg.Communication.gRPC.Registry;
+namespace AyBorg.SDK.Communication.gRPC.Registry;
 
 public sealed class RegistryBackgroundService : BackgroundService
 {
