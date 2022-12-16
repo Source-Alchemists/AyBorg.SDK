@@ -106,9 +106,12 @@ public sealed class RegistryBackgroundService : BackgroundService
 
         if (!response.Success)
         {
-            _logger.LogError("Failed to register service: {ErrorMessage}", response.ErrorMessage);
+            _logger.LogWarning("Failed to register service: {ErrorMessage}", response.ErrorMessage);
         }
 
-        _serviceId = Guid.Parse(response.Id);
+        if(!Guid.TryParse(response.Id, out _serviceId))
+        {
+            _logger.LogWarning("Failed to parse service id: {Id}", response.Id);
+        }
     }
 }

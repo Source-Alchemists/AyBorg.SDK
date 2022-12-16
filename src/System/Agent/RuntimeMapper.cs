@@ -8,7 +8,7 @@ namespace AyBorg.SDK.System.Agent;
 public static class RuntimeMapper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Step FromRumtime(IStepProxy stepProxy)
+    public static Step FromRuntime(IStepProxy stepProxy)
     {
         var ports = new List<Port>();
         foreach (IPort port in stepProxy.Ports)

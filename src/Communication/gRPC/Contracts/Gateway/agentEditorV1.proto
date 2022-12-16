@@ -4,6 +4,10 @@ package ayborg.gateway.v1;
 
 service AgentEditor {
     rpc GetAvailableSteps (GetAvailableStepsRequest) returns (GetAvailableStepsResponse);
+    rpc GetFlowSteps (GetFlowStepsRequest) returns (GetFlowStepsResponse);
+    rpc GetFlowLinks (GetFlowLinksRequest) returns (GetFlowLinksResponse);
+    rpc GetFlowPorts (GetFlowPortsRequest) returns (GetFlowPortsResponse);
+    rpc AddFlowStep (AddFlowStepRequest) returns (AddFlowStepResponse);
 }
 
 message GetAvailableStepsRequest {
@@ -12,6 +16,43 @@ message GetAvailableStepsRequest {
 
 message GetAvailableStepsResponse {
     repeated Step steps = 1;
+}
+
+message GetFlowStepsRequest {
+    string agent_unique_name = 1;
+}
+
+message GetFlowStepsResponse {
+    repeated Step steps = 1;
+}
+
+message GetFlowLinksRequest {
+    string agent_unique_name = 1;
+}
+
+message GetFlowLinksResponse {
+    repeated Link links = 1;
+}
+
+message GetFlowPortsRequest {
+    string agent_unique_name = 1;
+    repeated string port_ids = 2;
+    string iteration_id = 3;
+}
+
+message GetFlowPortsResponse {
+    repeated Port ports = 1;
+}
+
+message AddFlowStepRequest {
+    string agent_unique_name = 1;
+    string step_id = 2;
+    int32 x = 3;
+    int32 y = 4;
+}
+
+message AddFlowStepResponse {
+    Step step = 1;
 }
 
 message PluginMetaInfo {
@@ -39,4 +80,10 @@ message Port {
     bool is_connected = 5;
     bool is_link_convertable = 6;
     string value = 7;
+}
+
+message Link {
+    string id = 1;
+    string source_id = 2;
+    string target_id = 3;
 }
