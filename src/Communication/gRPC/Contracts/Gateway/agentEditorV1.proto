@@ -10,6 +10,7 @@ service AgentEditor {
     rpc GetFlowLinks (GetFlowLinksRequest) returns (GetFlowLinksResponse);
     rpc GetFlowPorts (GetFlowPortsRequest) returns (GetFlowPortsResponse);
     rpc AddFlowStep (AddFlowStepRequest) returns (AddFlowStepResponse);
+    rpc DeleteFlowStep (DeleteFlowStepRequest) returns (google.protobuf.Empty);
     rpc MoveFlowStep (MoveFlowStepRequest) returns (google.protobuf.Empty);
 }
 
@@ -56,6 +57,11 @@ message AddFlowStepRequest {
 
 message AddFlowStepResponse {
     Step step = 1;
+}
+
+message DeleteFlowStepRequest {
+    string agent_unique_name = 1;
+    string step_id = 2;
 }
 
 message MoveFlowStepRequest {
