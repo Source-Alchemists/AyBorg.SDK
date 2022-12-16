@@ -34,7 +34,7 @@ public static class RpcMapper
     public static Ayborg.Gateway.V1.Step ToRpc(Data.Bindings.Step step)
     {
         var convertedPorts = new List<Ayborg.Gateway.V1.Port>();
-        foreach(Data.Bindings.Port port in step.Ports!)
+        foreach (Data.Bindings.Port port in step.Ports!)
         {
             convertedPorts.Add(ToRpc(port));
         }
@@ -167,7 +167,7 @@ public static class RpcMapper
             PortBrand.String or PortBrand.Folder => port.Value!.ToString()!,
             PortBrand.Boolean => port.Value!.ToString()!,
             PortBrand.Numeric => port.Value!.ToString()!,
-            PortBrand.Enum => ConvertEnum((Enum)port.Value!),
+            PortBrand.Enum => ConvertEnum(port.Value!),
             PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             PortBrand.Image => JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             _ => throw new ArgumentOutOfRangeException(nameof(port.Brand), port.Brand, null),
@@ -175,13 +175,21 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string ConvertEnum(Enum inEnum)
+    private static string ConvertEnum(object inEnum)
     {
-        var resEnum = new Data.Bindings.Enum
+        Data.Bindings.Enum resEnum;
+        if (inEnum is Enum enumObject)
         {
-            Name = inEnum.ToString(),
-            Names = Enum.GetNames(inEnum.GetType())
-        };
+            resEnum = new Data.Bindings.Enum
+            {
+                Name = enumObject.ToString(),
+                Names = Enum.GetNames(enumObject.GetType())
+            };
+        }
+        else
+        {
+            resEnum = (Data.Bindings.Enum)inEnum;
+        }
 
         return JsonSerializer.Serialize(resEnum, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
     }

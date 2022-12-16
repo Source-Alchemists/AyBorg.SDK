@@ -13,6 +13,7 @@ service AgentEditor {
     rpc DeleteFlowStep (DeleteFlowStepRequest) returns (google.protobuf.Empty);
     rpc MoveFlowStep (MoveFlowStepRequest) returns (google.protobuf.Empty);
     rpc LinkFlowPorts (LinkFlowPortsRequest) returns (google.protobuf.Empty);
+    rpc UpdateFlowPort (UpdateFlowPortRequest) returns (google.protobuf.Empty);
 }
 
 message GetAvailableStepsRequest {
@@ -80,6 +81,11 @@ message LinkFlowPortsRequest {
 
 message LinkFlowPortsResponse {
     Link link = 1;
+}
+
+message UpdateFlowPortRequest {
+    string agent_unique_name = 1;
+    Port port = 2;
 }
 
 message PluginMetaInfo {
