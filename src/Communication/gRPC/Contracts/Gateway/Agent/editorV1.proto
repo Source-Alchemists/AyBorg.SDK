@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package ayborg.gateway.agent.v1;
 
-service AgentEditor {
+service Editor {
     rpc GetAvailableSteps (GetAvailableStepsRequest) returns (GetAvailableStepsResponse);
     rpc GetFlowSteps (GetFlowStepsRequest) returns (GetFlowStepsResponse);
     rpc GetFlowLinks (GetFlowLinksRequest) returns (GetFlowLinksResponse);
@@ -21,7 +21,7 @@ message GetAvailableStepsRequest {
 }
 
 message GetAvailableStepsResponse {
-    repeated Step steps = 1;
+    repeated StepDto steps = 1;
 }
 
 message GetFlowStepsRequest {
@@ -29,7 +29,7 @@ message GetFlowStepsRequest {
 }
 
 message GetFlowStepsResponse {
-    repeated Step steps = 1;
+    repeated StepDto steps = 1;
 }
 
 message GetFlowLinksRequest {
@@ -37,7 +37,7 @@ message GetFlowLinksRequest {
 }
 
 message GetFlowLinksResponse {
-    repeated Link links = 1;
+    repeated LinkDto links = 1;
 }
 
 message GetFlowPortsRequest {
@@ -47,7 +47,7 @@ message GetFlowPortsRequest {
 }
 
 message GetFlowPortsResponse {
-    repeated Port ports = 1;
+    repeated PortDto ports = 1;
 }
 
 message AddFlowStepRequest {
@@ -58,7 +58,7 @@ message AddFlowStepRequest {
 }
 
 message AddFlowStepResponse {
-    Step step = 1;
+    StepDto step = 1;
 }
 
 message DeleteFlowStepRequest {
@@ -80,32 +80,32 @@ message LinkFlowPortsRequest {
 }
 
 message LinkFlowPortsResponse {
-    Link link = 1;
+    LinkDto link = 1;
 }
 
 message UpdateFlowPortRequest {
     string agent_unique_name = 1;
-    Port port = 2;
+    PortDto port = 2;
 }
 
-message PluginMetaInfo {
+message PluginMetaDto {
     string id = 1;
     string assembly_name = 2;
     string assembly_version = 3;
     string type_name = 4;
 }
 
-message Step {
+message StepDto {
     string id = 1;
     string name = 2;
     int32 x = 3;
     int32 y = 4;
     int64 execution_time_ms = 5;
-    PluginMetaInfo meta_info = 6;
-    repeated Port ports = 7;
+    PluginMetaDto meta_info = 6;
+    repeated PortDto ports = 7;
 }
 
-message Port {
+message PortDto {
     string id = 1;
     string name = 2;
     int32 direction = 3;
@@ -115,7 +115,7 @@ message Port {
     string value = 7;
 }
 
-message Link {
+message LinkDto {
     string id = 1;
     string source_id = 2;
     string target_id = 3;

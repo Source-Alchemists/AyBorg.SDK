@@ -5,7 +5,7 @@ import "google/protobuf/timestamp.proto";
 
 package ayborg.gateway.agent.v1;
 
-service AgentProjectManagement {
+service ProjectManagement {
     rpc GetProjectMetas(GetProjectMetasRequest) returns (GetProjectMetasResponse);
     rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
     rpc DeleteProject(DeleteProjectRequest) returns (google.protobuf.Empty);

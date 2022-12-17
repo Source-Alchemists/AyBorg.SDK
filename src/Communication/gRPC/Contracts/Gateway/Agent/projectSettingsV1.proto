@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package ayborg.gateway.agent.v1;
 
-service AgentProjectSettings {
+service ProjectSettings {
     rpc GetProjectSettings (GetProjectSettingsRequest) returns (GetProjectSettingsResponse);
     rpc UpdateProjectSettings (UpdateProjectSettingsRequest) returns (google.protobuf.Empty);
 }
@@ -15,16 +15,16 @@ message GetProjectSettingsRequest {
 }
 
 message GetProjectSettingsResponse {
-    ProjectSettings project_settings = 1;
+    ProjectSettingsDto project_settings = 1;
 }
 
 message UpdateProjectSettingsRequest {
     string agent_unique_name = 1;
     string project_db_id = 2;
-    ProjectSettings project_settings = 3;
+    ProjectSettingsDto project_settings = 3;
 }
 
-message ProjectSettings {
+message ProjectSettingsDto {
     bool IsForceResultCommunicationEnabled = 1;
     bool IsForceWebUiCommunicationEnabled = 2;
 }

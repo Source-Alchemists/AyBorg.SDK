@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.agent.v1;
+
+service Storage {
+    rpc GetDirectories (GetDirectoriesRequest) returns (GetDirectoriesResponse);
+}
+
+message GetDirectoriesRequest {
+    string agent_unique_name = 1;
+    string path = 2;
+}
+
+message GetDirectoriesResponse {
+    repeated string directories = 1;
+}

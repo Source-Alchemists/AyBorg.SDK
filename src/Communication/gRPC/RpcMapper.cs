@@ -1,17 +1,20 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Ayborg.Gateway.Agent.V1;
 using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
+using Sys = System;
 
 namespace AyBorg.SDK.Communication.gRPC;
 
 public static class RpcMapper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Common.Models.Step FromRpc(Ayborg.Gateway.Agent.V1.Step rpc)
+    public static Step FromRpc(StepDto rpc)
     {
         var convertedPorts = new List<Common.Models.Port>();
-        foreach (Ayborg.Gateway.Agent.V1.Port? port in rpc.Ports)
+        foreach (PortDto? port in rpc.Ports)
         {
             convertedPorts.Add(FromRpc(port));
         }
@@ -31,14 +34,14 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.Agent.V1.Step ToRpc(Common.Models.Step step)
+    public static StepDto ToRpc(Step step)
     {
-        var convertedPorts = new List<Ayborg.Gateway.Agent.V1.Port>();
-        foreach (Common.Models.Port port in step.Ports!)
+        var convertedPorts = new List<PortDto>();
+        foreach (Port port in step.Ports!)
         {
             convertedPorts.Add(ToRpc(port));
         }
-        var rpc = new Ayborg.Gateway.Agent.V1.Step
+        var rpc = new StepDto
         {
             Id = step.Id.ToString(),
             Name = step.Name,
@@ -54,7 +57,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static PluginMetaInfo FromRpc(Ayborg.Gateway.Agent.V1.PluginMetaInfo rpc)
+    public static PluginMetaInfo FromRpc(PluginMetaDto rpc)
     {
         var pluginMetaInfo = new PluginMetaInfo
         {
@@ -68,9 +71,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.Agent.V1.PluginMetaInfo ToRpc(PluginMetaInfo pluginMetaInfo)
+    public static PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo)
     {
-        return new Ayborg.Gateway.Agent.V1.PluginMetaInfo
+        return new PluginMetaDto
         {
             Id = pluginMetaInfo.Id.ToString(),
             AssemblyName = pluginMetaInfo.AssemblyName,
@@ -80,9 +83,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Common.Models.Port FromRpc(Ayborg.Gateway.Agent.V1.Port rpc)
+    public static Port FromRpc(PortDto rpc)
     {
-        var port = new Common.Models.Port
+        var port = new Port
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
@@ -97,9 +100,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.Agent.V1.Port ToRpc(Common.Models.Port port)
+    public static PortDto ToRpc(Port port)
     {
-        return new Ayborg.Gateway.Agent.V1.Port
+        return new PortDto
         {
             Id = port.Id.ToString(),
             Name = port.Name,
@@ -112,9 +115,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.Agent.V1.Link ToRpc(Common.Models.Link link)
+    public static LinkDto ToRpc(Link link)
     {
-        return new Ayborg.Gateway.Agent.V1.Link
+        return new LinkDto
         {
             Id = link.Id.ToString(),
             SourceId = link.SourceId.ToString(),
@@ -123,9 +126,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.Agent.V1.Link ToRpc(PortLink link)
+    public static LinkDto ToRpc(PortLink link)
     {
-        return new Ayborg.Gateway.Agent.V1.Link
+        return new LinkDto
         {
             Id = link.Id.ToString(),
             SourceId = link.SourceId.ToString(),
@@ -134,9 +137,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Common.Models.Link FromRpc(Ayborg.Gateway.Agent.V1.Link rpc)
+    public static Link FromRpc(LinkDto rpc)
     {
-        return new Common.Models.Link
+        return new Link
         {
             Id = Guid.Parse(rpc.Id),
             SourceId = Guid.Parse(rpc.SourceId),
@@ -145,7 +148,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static object UnpackPortValue(Ayborg.Gateway.Agent.V1.Port rpc)
+    private static object UnpackPortValue(PortDto rpc)
     {
         return (PortBrand)rpc.Brand switch
         {
@@ -153,8 +156,8 @@ public static class RpcMapper
             PortBrand.Boolean => bool.Parse(rpc.Value),
             PortBrand.Numeric => double.Parse(rpc.Value),
             PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Rectangle => JsonSerializer.Deserialize<Common.Models.Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Image => JsonSerializer.Deserialize<Common.Models.ImageMeta>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Image => JsonSerializer.Deserialize<ImageMeta>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
@@ -178,12 +181,12 @@ public static class RpcMapper
     private static string ConvertEnum(object inEnum)
     {
         Common.Models.Enum resEnum;
-        if (inEnum is Enum enumObject)
+        if (inEnum is Sys.Enum enumObject)
         {
             resEnum = new Common.Models.Enum
             {
                 Name = enumObject.ToString(),
-                Names = Enum.GetNames(enumObject.GetType())
+                Names = Sys.Enum.GetNames(enumObject.GetType())
             };
         }
         else

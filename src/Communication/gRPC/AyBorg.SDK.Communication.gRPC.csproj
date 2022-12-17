@@ -9,10 +9,11 @@
 
   <ItemGroup>
     <Protobuf Include=".\Contracts\Gateway\registerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\agentProjectManagementV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\agentProjectSettingsV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\agentEditorV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\agentRuntimeV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\projectManagementV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\projectSettingsV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\editorV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\runtimeV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\storageV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>
