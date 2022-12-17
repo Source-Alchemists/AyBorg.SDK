@@ -1,4 +1,4 @@
-namespace AyBorg.SDK.Data.Bindings;
+namespace AyBorg.SDK.Common.Models;
 
 public sealed record Enum
 {

@@ -1,6 +1,4 @@
-using AyBorg.SDK.Common;
-
-namespace AyBorg.SDK.Data.Bindings;
+namespace AyBorg.SDK.Common.Models;
 
 public sealed record Step
 {

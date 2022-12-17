@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.Data.Bindings;
+using AyBorg.SDK.Common.Models;
 
 namespace AyBorg.SDK.System.Agent;
 

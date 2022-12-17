@@ -1,6 +1,4 @@
-using AyBorg.SDK.Data.Bindings;
-
-namespace AyBorg.SDK.Data.DTOs;
+namespace AyBorg.SDK.Common.Models;
 
 public sealed record ImageDto
 {

@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\AyBorg.SDK.Data.DAL.csproj" />
-    <ProjectReference Include="..\Bindings\AyBorg.SDK.Data.Bindings.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 using AyBorg.SDK.Common.Ports;
 
-namespace AyBorg.SDK.Data.Bindings;
+namespace AyBorg.SDK.Common.Models;
 
 public sealed record Port
 {

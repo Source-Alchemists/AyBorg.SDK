@@ -8,15 +8,15 @@ namespace AyBorg.SDK.Communication.gRPC;
 public static class RpcMapper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Data.Bindings.Step FromRpc(Ayborg.Gateway.V1.Step rpc)
+    public static Common.Models.Step FromRpc(Ayborg.Gateway.V1.Step rpc)
     {
-        var convertedPorts = new List<Data.Bindings.Port>();
+        var convertedPorts = new List<Common.Models.Port>();
         foreach (Ayborg.Gateway.V1.Port? port in rpc.Ports)
         {
             convertedPorts.Add(FromRpc(port));
         }
 
-        var step = new Data.Bindings.Step
+        var step = new Common.Models.Step
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
@@ -31,10 +31,10 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Step ToRpc(Data.Bindings.Step step)
+    public static Ayborg.Gateway.V1.Step ToRpc(Common.Models.Step step)
     {
         var convertedPorts = new List<Ayborg.Gateway.V1.Port>();
-        foreach (Data.Bindings.Port port in step.Ports!)
+        foreach (Common.Models.Port port in step.Ports!)
         {
             convertedPorts.Add(ToRpc(port));
         }
@@ -80,9 +80,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Data.Bindings.Port FromRpc(Ayborg.Gateway.V1.Port rpc)
+    public static Common.Models.Port FromRpc(Ayborg.Gateway.V1.Port rpc)
     {
-        var port = new Data.Bindings.Port
+        var port = new Common.Models.Port
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
@@ -97,7 +97,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Port ToRpc(Data.Bindings.Port port)
+    public static Ayborg.Gateway.V1.Port ToRpc(Common.Models.Port port)
     {
         return new Ayborg.Gateway.V1.Port
         {
@@ -112,7 +112,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Link ToRpc(Data.Bindings.Link link)
+    public static Ayborg.Gateway.V1.Link ToRpc(Common.Models.Link link)
     {
         return new Ayborg.Gateway.V1.Link
         {
@@ -134,9 +134,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Data.Bindings.Link FromRpc(Ayborg.Gateway.V1.Link rpc)
+    public static Common.Models.Link FromRpc(Ayborg.Gateway.V1.Link rpc)
     {
-        return new Data.Bindings.Link
+        return new Common.Models.Link
         {
             Id = Guid.Parse(rpc.Id),
             SourceId = Guid.Parse(rpc.SourceId),
@@ -152,15 +152,15 @@ public static class RpcMapper
             PortBrand.String or PortBrand.Folder => rpc.Value,
             PortBrand.Boolean => bool.Parse(rpc.Value),
             PortBrand.Numeric => double.Parse(rpc.Value),
-            PortBrand.Enum => JsonSerializer.Deserialize<Data.Bindings.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Rectangle => JsonSerializer.Deserialize<Data.Bindings.Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Image => JsonSerializer.Deserialize<Data.Bindings.ImageMeta>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Rectangle => JsonSerializer.Deserialize<Common.Models.Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Image => JsonSerializer.Deserialize<Common.Models.ImageMeta>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string PackPortValue(Data.Bindings.Port port)
+    private static string PackPortValue(Common.Models.Port port)
     {
         return port.Brand switch
         {
@@ -177,10 +177,10 @@ public static class RpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string ConvertEnum(object inEnum)
     {
-        Data.Bindings.Enum resEnum;
+        Common.Models.Enum resEnum;
         if (inEnum is Enum enumObject)
         {
-            resEnum = new Data.Bindings.Enum
+            resEnum = new Common.Models.Enum
             {
                 Name = enumObject.ToString(),
                 Names = Enum.GetNames(enumObject.GetType())
@@ -188,7 +188,7 @@ public static class RpcMapper
         }
         else
         {
-            resEnum = (Data.Bindings.Enum)inEnum;
+            resEnum = (Common.Models.Enum)inEnum;
         }
 
         return JsonSerializer.Serialize(resEnum, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });

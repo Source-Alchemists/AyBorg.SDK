@@ -12,6 +12,7 @@
     <Protobuf Include=".\Contracts\Gateway\agentProjectManagementV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\agentProjectSettingsV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\agentEditorV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\agentRuntimeV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>
