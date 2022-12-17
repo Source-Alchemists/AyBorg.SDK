@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-package ayborg.gateway.v1;
+package ayborg.gateway.agent.v1;
 
 service AgentEditor {
     rpc GetAvailableSteps (GetAvailableStepsRequest) returns (GetAvailableStepsResponse);

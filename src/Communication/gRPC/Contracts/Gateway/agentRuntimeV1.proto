@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-package ayborg.gateway.v1;
+package ayborg.gateway.agent.v1;
 
 service AgentRuntime {
     rpc GetStatus (GetRuntimeStatusRequest) returns (GetRuntimeStatusResponse);

@@ -8,10 +8,10 @@ namespace AyBorg.SDK.Communication.gRPC;
 public static class RpcMapper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Common.Models.Step FromRpc(Ayborg.Gateway.V1.Step rpc)
+    public static Common.Models.Step FromRpc(Ayborg.Gateway.Agent.V1.Step rpc)
     {
         var convertedPorts = new List<Common.Models.Port>();
-        foreach (Ayborg.Gateway.V1.Port? port in rpc.Ports)
+        foreach (Ayborg.Gateway.Agent.V1.Port? port in rpc.Ports)
         {
             convertedPorts.Add(FromRpc(port));
         }
@@ -31,14 +31,14 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Step ToRpc(Common.Models.Step step)
+    public static Ayborg.Gateway.Agent.V1.Step ToRpc(Common.Models.Step step)
     {
-        var convertedPorts = new List<Ayborg.Gateway.V1.Port>();
+        var convertedPorts = new List<Ayborg.Gateway.Agent.V1.Port>();
         foreach (Common.Models.Port port in step.Ports!)
         {
             convertedPorts.Add(ToRpc(port));
         }
-        var rpc = new Ayborg.Gateway.V1.Step
+        var rpc = new Ayborg.Gateway.Agent.V1.Step
         {
             Id = step.Id.ToString(),
             Name = step.Name,
@@ -54,7 +54,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static PluginMetaInfo FromRpc(Ayborg.Gateway.V1.PluginMetaInfo rpc)
+    public static PluginMetaInfo FromRpc(Ayborg.Gateway.Agent.V1.PluginMetaInfo rpc)
     {
         var pluginMetaInfo = new PluginMetaInfo
         {
@@ -68,9 +68,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.PluginMetaInfo ToRpc(PluginMetaInfo pluginMetaInfo)
+    public static Ayborg.Gateway.Agent.V1.PluginMetaInfo ToRpc(PluginMetaInfo pluginMetaInfo)
     {
-        return new Ayborg.Gateway.V1.PluginMetaInfo
+        return new Ayborg.Gateway.Agent.V1.PluginMetaInfo
         {
             Id = pluginMetaInfo.Id.ToString(),
             AssemblyName = pluginMetaInfo.AssemblyName,
@@ -80,7 +80,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Common.Models.Port FromRpc(Ayborg.Gateway.V1.Port rpc)
+    public static Common.Models.Port FromRpc(Ayborg.Gateway.Agent.V1.Port rpc)
     {
         var port = new Common.Models.Port
         {
@@ -97,9 +97,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Port ToRpc(Common.Models.Port port)
+    public static Ayborg.Gateway.Agent.V1.Port ToRpc(Common.Models.Port port)
     {
-        return new Ayborg.Gateway.V1.Port
+        return new Ayborg.Gateway.Agent.V1.Port
         {
             Id = port.Id.ToString(),
             Name = port.Name,
@@ -112,9 +112,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Link ToRpc(Common.Models.Link link)
+    public static Ayborg.Gateway.Agent.V1.Link ToRpc(Common.Models.Link link)
     {
-        return new Ayborg.Gateway.V1.Link
+        return new Ayborg.Gateway.Agent.V1.Link
         {
             Id = link.Id.ToString(),
             SourceId = link.SourceId.ToString(),
@@ -123,9 +123,9 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Ayborg.Gateway.V1.Link ToRpc(PortLink link)
+    public static Ayborg.Gateway.Agent.V1.Link ToRpc(PortLink link)
     {
-        return new Ayborg.Gateway.V1.Link
+        return new Ayborg.Gateway.Agent.V1.Link
         {
             Id = link.Id.ToString(),
             SourceId = link.SourceId.ToString(),
@@ -134,7 +134,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Common.Models.Link FromRpc(Ayborg.Gateway.V1.Link rpc)
+    public static Common.Models.Link FromRpc(Ayborg.Gateway.Agent.V1.Link rpc)
     {
         return new Common.Models.Link
         {
@@ -145,7 +145,7 @@ public static class RpcMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static object UnpackPortValue(Ayborg.Gateway.V1.Port rpc)
+    private static object UnpackPortValue(Ayborg.Gateway.Agent.V1.Port rpc)
     {
         return (PortBrand)rpc.Brand switch
         {

@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-package ayborg.gateway.v1;
+package ayborg.gateway.agent.v1;
 
 service AgentProjectManagement {
     rpc GetProjectMetas(GetProjectMetasRequest) returns (GetProjectMetasResponse);
