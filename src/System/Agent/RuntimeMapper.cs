@@ -1,19 +1,19 @@
 using System.Runtime.CompilerServices;
 using AyBorg.SDK.Common;
-using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.Common.Models;
+using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.System.Agent;
 
 public static class RuntimeMapper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Step FromRuntime(IStepProxy stepProxy)
+    public static async ValueTask<Step> FromRuntimeAsync(IStepProxy stepProxy)
     {
         var ports = new List<Port>();
         foreach (IPort port in stepProxy.Ports)
         {
-            ports.Add(FromRuntime(port));
+            ports.Add(await FromRuntimeAsync(port));
         }
 
         return new Step
@@ -29,7 +29,7 @@ public static class RuntimeMapper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Port FromRuntime(IPort runtimePort)
+    public static async ValueTask<Port> FromRuntimeAsync(IPort runtimePort)
     {
         var port = new Port
         {
@@ -71,15 +71,29 @@ public static class RuntimeMapper
             case PortBrand.Image:
                 var imagePort = (ImagePort)runtimePort;
                 port.IsLinkConvertable = imagePort.IsLinkConvertable;
-                port.Value = imagePort.Value != null ? new ImageMeta
-                {
-                    Width = imagePort.Value.Width,
-                    Height = imagePort.Value.Height,
-                    PixelFormat = imagePort.Value.PixelFormat
-                } : new ImageMeta();
+                port.Value = await CreateImageAsync(imagePort);
                 break;
         }
 
         return port;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static Task<CacheImage> CreateImageAsync(ImagePort imagePort)
+    {
+        return Task.Factory.StartNew(() =>
+        {
+            if (imagePort.Value != null)
+            {
+                return new CacheImage
+                {
+                    Width = imagePort.Value.Width,
+                    Height = imagePort.Value.Height,
+                    PixelFormat = imagePort.Value.PixelFormat,
+                    OriginalImage = new ImageProcessing.Image(imagePort.Value)
+                };
+            }
+            return new CacheImage();
+        });
     }
 }

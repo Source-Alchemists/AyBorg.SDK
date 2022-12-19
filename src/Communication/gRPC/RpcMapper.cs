@@ -13,13 +13,13 @@ public static class RpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Step FromRpc(StepDto rpc)
     {
-        var convertedPorts = new List<Common.Models.Port>();
+        var convertedPorts = new List<Port>();
         foreach (PortDto? port in rpc.Ports)
         {
             convertedPorts.Add(FromRpc(port));
         }
 
-        var step = new Common.Models.Step
+        var step = new Step
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
@@ -157,13 +157,13 @@ public static class RpcMapper
             PortBrand.Numeric => double.Parse(rpc.Value),
             PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Image => JsonSerializer.Deserialize<ImageMeta>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static string PackPortValue(Common.Models.Port port)
+    private static string PackPortValue(Port port)
     {
         return port.Brand switch
         {
@@ -171,8 +171,8 @@ public static class RpcMapper
             PortBrand.Boolean => port.Value!.ToString()!,
             PortBrand.Numeric => port.Value!.ToString()!,
             PortBrand.Enum => ConvertEnum(port.Value!),
-            PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
-            PortBrand.Image => JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+            PortBrand.Rectangle =>  JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+            PortBrand.Image => ConvertImage(port.Value!),
             _ => throw new ArgumentOutOfRangeException(nameof(port.Brand), port.Brand, null),
         };
     }
@@ -195,5 +195,13 @@ public static class RpcMapper
         }
 
         return JsonSerializer.Serialize(resEnum, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string ConvertImage(object image)
+    {
+        var imageMeta = (ImageMeta)image;
+
+        return JsonSerializer.Serialize(imageMeta, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
     }
 }

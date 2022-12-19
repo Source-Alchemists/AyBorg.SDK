@@ -8,9 +8,9 @@ namespace AyBorg.SDK.ImageProcessing;
 
 public partial record Image
 {
-    private static readonly PixelBufferConverter _pixelBufferConverter = new();
-    private static readonly Decoder _decoder = new();
-    private static readonly Encoder _encoder = new();
+    private static readonly PixelBufferConverter s_pixelBufferConverter = new();
+    private static readonly Decoder s_decoder = new();
+    private static readonly Encoder s_encoder = new();
 
     /// <summary>
     /// Loads the image from the specified stream.
@@ -20,7 +20,7 @@ public partial record Image
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Image Load(Stream stream)
     {
-        var pixelBuffer = _decoder.Execute(new Decoding.Operations.DecoderParameters
+        IPixelBuffer pixelBuffer = s_decoder.Execute(new Decoding.Operations.DecoderParameters
         {
             Input = stream,
             OutputType = typeof(IPixelBuffer)
@@ -37,7 +37,7 @@ public partial record Image
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Image Load(string path)
     {
-        using var stream = File.OpenRead(path);
+        using FileStream stream = File.OpenRead(path);
         return Load(stream);
     }
 
@@ -49,7 +49,7 @@ public partial record Image
     /// <param name="encodeType">Type of the encode.</param>
     /// <param name="quality">The quality.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Save(Image image, Stream stream, EncoderType encodeType, int quality = 80)
+    public static void Save(IImage image, Stream stream, EncoderType encodeType, int quality = 80)
     {
         IReadOnlyPixelBuffer pixelBuffer = image.PixelFormat switch
         {
@@ -63,7 +63,7 @@ public partial record Image
             PixelFormat.RgbPacked => image.AsPacked<Rgb24>(),
             _ => throw new NotSupportedException($"The pixel format {image.PixelFormat} is not supported."),
         };
-        _encoder.Execute(new Encoding.Operations.EncoderParameters
+        s_encoder.Execute(new Encoding.Operations.EncoderParameters
         {
             Input = pixelBuffer,
             Stream = stream,
@@ -80,9 +80,9 @@ public partial record Image
     /// <param name="encodeType">The encode type.</param>
     /// <param name="quality">The quality.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Save(Image image, string path, EncoderType encodeType, int quality = 80)
+    public static void Save(IImage image, string path, EncoderType encodeType, int quality = 80)
     {
-        using var fileStream = File.OpenWrite(path);
+        using FileStream fileStream = File.OpenWrite(path);
         Save(image, fileStream, encodeType, quality);
     }
 
@@ -94,17 +94,17 @@ public partial record Image
     /// <param name="width">The width.</param>
     /// <param name="height">The height.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void CalculateClampSize(Image image, int maxSize, out int width, out int height)
+    public static void CalculateClampSize(IImage image, int maxSize, out int width, out int height)
     {
         if (image.Width > image.Height)
         {
-            var per = (double)maxSize / image.Width;
+            double per = (double)maxSize / image.Width;
             width = (int)(image.Width * per);
             height = (int)(image.Height * per);
         }
         else if (image.Height > image.Width)
         {
-            var per = (double)maxSize / image.Height;
+            double per = (double)maxSize / image.Height;
             width = (int)(image.Width * per);
             height = (int)(image.Height * per);
         }

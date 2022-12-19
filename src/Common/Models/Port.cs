@@ -2,8 +2,10 @@ using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Common.Models;
 
-public sealed record Port
+public sealed record Port : IDisposable
 {
+    private bool _disposedValue;
+
     /// <summary>
     /// Gets or sets the identifier.
     /// </summary>
@@ -38,4 +40,25 @@ public sealed record Port
     /// Gets or sets a value indicating whether this instance is link convertable.
     /// </summary>
     public bool IsLinkConvertable { get; set; }
+
+    private void Dispose(bool disposing)
+    {
+        if (!_disposedValue)
+        {
+            if (disposing)
+            {
+                if (Value != null && Value is IDisposable disposableObject)
+                {
+                    disposableObject?.Dispose();
+                }
+                _disposedValue = true;
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
 }
