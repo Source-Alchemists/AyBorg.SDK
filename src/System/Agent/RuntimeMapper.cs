@@ -8,13 +8,17 @@ namespace AyBorg.SDK.System.Agent;
 public static class RuntimeMapper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static async ValueTask<Step> FromRuntimeAsync(IStepProxy stepProxy)
+    public static async ValueTask<Step> FromRuntimeAsync(IStepProxy stepProxy, bool skipPorts = false)
     {
         var ports = new List<Port>();
-        foreach (IPort port in stepProxy.Ports)
+        if (!skipPorts)
         {
-            ports.Add(await FromRuntimeAsync(port));
+            foreach (IPort port in stepProxy.Ports)
+            {
+                ports.Add(await FromRuntimeAsync(port));
+            }
         }
+
 
         return new Step
         {
