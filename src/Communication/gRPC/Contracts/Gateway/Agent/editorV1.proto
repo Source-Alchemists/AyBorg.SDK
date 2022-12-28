@@ -12,7 +12,7 @@ service Editor {
     rpc AddFlowStep (AddFlowStepRequest) returns (AddFlowStepResponse);
     rpc DeleteFlowStep (DeleteFlowStepRequest) returns (google.protobuf.Empty);
     rpc MoveFlowStep (MoveFlowStepRequest) returns (google.protobuf.Empty);
-    rpc LinkFlowPorts (LinkFlowPortsRequest) returns (google.protobuf.Empty);
+    rpc LinkFlowPorts (LinkFlowPortsRequest) returns (LinkFlowPortsResponse);
     rpc UpdateFlowPort (UpdateFlowPortRequest) returns (google.protobuf.Empty);
     rpc GetImageStream (GetImageStreamRequest) returns (stream ImageChunkDto);
 }
@@ -37,6 +37,7 @@ message GetFlowStepsResponse {
 
 message GetFlowLinksRequest {
     string agent_unique_name = 1;
+    repeated string link_ids = 2;
 }
 
 message GetFlowLinksResponse {
@@ -83,7 +84,7 @@ message LinkFlowPortsRequest {
 }
 
 message LinkFlowPortsResponse {
-    LinkDto link = 1;
+    string link_id = 1;
 }
 
 message UpdateFlowPortRequest {
