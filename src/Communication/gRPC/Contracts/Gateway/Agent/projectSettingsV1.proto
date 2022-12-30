@@ -26,5 +26,4 @@ message UpdateProjectSettingsRequest {
 
 message ProjectSettingsDto {
     bool IsForceResultCommunicationEnabled = 1;
-    bool IsForceWebUiCommunicationEnabled = 2;
 }
