@@ -6,13 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AyBorg.SDK.Authorization;
 
-public sealed class JwtConsumerService : IJwtConsumerService
+public sealed class JwtConsumer : IJwtConsumer
 {
-    private readonly ILogger<JwtConsumerService> _logger;
+    private readonly ILogger<JwtConsumer> _logger;
     private readonly IConfiguration _configuration;
     private readonly byte[] _secretKey;
 
-    public JwtConsumerService(ILogger<JwtConsumerService> logger, IConfiguration configuration)
+    public JwtConsumer(ILogger<JwtConsumer> logger, IConfiguration configuration)
     {
         _logger = logger;
         _configuration = configuration;

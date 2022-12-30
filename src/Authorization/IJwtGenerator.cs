@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Authorization;
 
-public interface IJwtProviderService
+public interface IJwtGenerator
 {
     string GenerateToken(string userName, IEnumerable<string> roles);
 }

@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AyBorg.SDK.Authorization;
-public sealed class JwtProviderService : IJwtProviderService
+public sealed class JwtGenerator : IJwtGenerator
 {
     private readonly IConfiguration _configuration;
     private readonly byte[] _secretKey;
-    public JwtProviderService(IConfiguration configuration)
+    public JwtGenerator(IConfiguration configuration)
     {
         _configuration = configuration;
         _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
@@ -31,7 +31,8 @@ public sealed class JwtProviderService : IJwtProviderService
             Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_secretKey), SecurityAlgorithms.HmacSha256Signature)
         };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
 }
