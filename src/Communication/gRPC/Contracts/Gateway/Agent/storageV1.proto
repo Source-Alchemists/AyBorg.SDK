@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
-
 package ayborg.gateway.agent.v1;
 
 service Storage {
