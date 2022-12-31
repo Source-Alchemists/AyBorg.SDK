@@ -7,12 +7,10 @@ using Microsoft.IdentityModel.Tokens;
 namespace AyBorg.SDK.Authorization;
 public sealed class JwtGenerator : IJwtGenerator
 {
-    private readonly IConfiguration _configuration;
     private readonly byte[] _secretKey;
     public JwtGenerator(IConfiguration configuration)
     {
-        _configuration = configuration;
-        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
+        _secretKey = Encoding.ASCII.GetBytes(configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
     }
 
     public string GenerateToken(string userName, IEnumerable<string> roles)

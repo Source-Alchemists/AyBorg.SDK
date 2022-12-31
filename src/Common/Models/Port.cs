@@ -43,16 +43,14 @@ public sealed record Port : IDisposable
 
     private void Dispose(bool disposing)
     {
-        if (!_disposedValue)
+        if (!_disposedValue && disposing)
         {
-            if (disposing)
+            if (Value is IDisposable disposableObject)
             {
-                if (Value != null && Value is IDisposable disposableObject)
-                {
-                    disposableObject?.Dispose();
-                }
-                _disposedValue = true;
+                disposableObject?.Dispose();
             }
+
+            _disposedValue = true;
         }
     }
 

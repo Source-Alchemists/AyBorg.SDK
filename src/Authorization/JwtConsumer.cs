@@ -9,14 +9,12 @@ namespace AyBorg.SDK.Authorization;
 public sealed class JwtConsumer : IJwtConsumer
 {
     private readonly ILogger<JwtConsumer> _logger;
-    private readonly IConfiguration _configuration;
     private readonly byte[] _secretKey;
 
     public JwtConsumer(ILogger<JwtConsumer> logger, IConfiguration configuration)
     {
         _logger = logger;
-        _configuration = configuration;
-        _secretKey = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
+        _secretKey = Encoding.ASCII.GetBytes(configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
     }
 
     public JwtSecurityToken ValidateToken(string token)
