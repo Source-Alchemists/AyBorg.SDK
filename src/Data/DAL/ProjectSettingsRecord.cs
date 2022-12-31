@@ -8,7 +8,5 @@ namespace AyBorg.SDK.Data.DAL
         public Guid DbId { get; set; }
 
         public bool IsForceResultCommunicationEnabled { get; set; } = false;
-
-        public bool IsForceWebUiCommunicationEnabled { get; set; } = false;
     }
 }
