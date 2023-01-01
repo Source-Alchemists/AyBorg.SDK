@@ -188,9 +188,6 @@ namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Project
                     b.Property<bool>("IsForceResultCommunicationEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsForceWebUiCommunicationEnabled")
-                        .HasColumnType("boolean");
-
                     b.HasKey("DbId");
 
                     b.ToTable("AyBorgProjectSettings");
