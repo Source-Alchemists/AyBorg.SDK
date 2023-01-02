@@ -1,14 +1,12 @@
-using System.Runtime.CompilerServices;
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.System.Agent;
 
-public static class RuntimeMapper
+public class RuntimeMapper : IRuntimeMapper
 {
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Step FromRuntime(IStepProxy stepProxy, bool skipPorts = false)
+    public Step FromRuntime(IStepProxy stepProxy, bool skipPorts = false)
     {
         var ports = new List<Port>();
         if (!skipPorts)
@@ -31,8 +29,7 @@ public static class RuntimeMapper
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Port FromRuntime(IPort runtimePort)
+    public Port FromRuntime(IPort runtimePort)
     {
         var port = new Port
         {
@@ -81,7 +78,6 @@ public static class RuntimeMapper
         return port;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static CacheImage CreateImage(ImagePort imagePort)
     {
         if (imagePort.Value != null)
