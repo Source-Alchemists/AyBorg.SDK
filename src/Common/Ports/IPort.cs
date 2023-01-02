@@ -3,22 +3,6 @@
 public interface IPort
 {
     /// <summary>
-    /// Gets the brand.
-    /// </summary>
-    /// <value>
-    /// The brand.
-    /// </value>
-    PortBrand Brand { get; }
-
-    /// <summary>
-    /// Gets the direction.
-    /// </summary>
-    /// <value>
-    /// The direction.
-    /// </value>
-    PortDirection Direction { get; }
-
-    /// <summary>
     /// Gets the identifier.
     /// </summary>
     /// <value>
@@ -33,6 +17,22 @@ public interface IPort
     /// The name.
     /// </value>
     string Name { get; }
+
+    /// <summary>
+    /// Gets the brand.
+    /// </summary>
+    /// <value>
+    /// The brand.
+    /// </value>
+    PortBrand Brand { get; }
+
+    /// <summary>
+    /// Gets the direction.
+    /// </summary>
+    /// <value>
+    /// The direction.
+    /// </value>
+    PortDirection Direction { get; }
 
     /// <summary>
     /// Gets a value indicating whether this instance is connected.
