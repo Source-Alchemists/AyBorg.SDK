@@ -5,33 +5,21 @@ public interface IPort
     /// <summary>
     /// Gets the identifier.
     /// </summary>
-    /// <value>
-    /// The identifier.
-    /// </value>
     Guid Id { get; }
 
     /// <summary>
     /// Gets the name.
     /// </summary>
-    /// <value>
-    /// The name.
-    /// </value>
     string Name { get; }
 
     /// <summary>
     /// Gets the brand.
     /// </summary>
-    /// <value>
-    /// The brand.
-    /// </value>
     PortBrand Brand { get; }
 
     /// <summary>
     /// Gets the direction.
     /// </summary>
-    /// <value>
-    /// The direction.
-    /// </value>
     PortDirection Direction { get; }
 
     /// <summary>
