@@ -8,10 +8,9 @@ using Sys = System;
 
 namespace AyBorg.SDK.Communication.gRPC;
 
-public static class RpcMapper
+public class RpcMapper : IRpcMapper
 {
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Step FromRpc(StepDto rpc)
+    public Step FromRpc(StepDto rpc)
     {
         var convertedPorts = new List<Port>();
         foreach (PortDto? port in rpc.Ports)
@@ -33,8 +32,7 @@ public static class RpcMapper
         return step;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static StepDto ToRpc(Step step)
+    public StepDto ToRpc(Step step)
     {
         var convertedPorts = new List<PortDto>();
         foreach (Port port in step.Ports!)
@@ -56,8 +54,7 @@ public static class RpcMapper
         return rpc;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static PluginMetaInfo FromRpc(PluginMetaDto rpc)
+    public PluginMetaInfo FromRpc(PluginMetaDto rpc)
     {
         var pluginMetaInfo = new PluginMetaInfo
         {
@@ -70,8 +67,7 @@ public static class RpcMapper
         return pluginMetaInfo;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo)
+    public PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo)
     {
         return new PluginMetaDto
         {
@@ -82,8 +78,7 @@ public static class RpcMapper
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Port FromRpc(PortDto rpc)
+    public Port FromRpc(PortDto rpc)
     {
         var port = new Port
         {
@@ -99,8 +94,7 @@ public static class RpcMapper
         return port;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static PortDto ToRpc(Port port)
+    public PortDto ToRpc(Port port)
     {
         return new PortDto
         {
@@ -114,8 +108,7 @@ public static class RpcMapper
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static LinkDto ToRpc(Link link)
+    public LinkDto ToRpc(Link link)
     {
         return new LinkDto
         {
@@ -125,8 +118,7 @@ public static class RpcMapper
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static LinkDto ToRpc(PortLink link)
+    public LinkDto ToRpc(PortLink link)
     {
         return new LinkDto
         {
@@ -136,8 +128,7 @@ public static class RpcMapper
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Link FromRpc(LinkDto rpc)
+    public Link FromRpc(LinkDto rpc)
     {
         return new Link
         {
