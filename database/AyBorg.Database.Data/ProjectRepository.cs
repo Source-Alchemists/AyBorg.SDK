@@ -5,12 +5,10 @@ using Microsoft.Extensions.Logging;
 
 namespace AyBorg.Database.Data;
 
-public sealed class ProjectRepository : IProjectRepository, IDisposable
+public sealed class ProjectRepository : IProjectRepository
 {
     public ILogger<ProjectRepository> _logger;
     private readonly IDbContextFactory<ProjectContext> _contextFactory;
-    private ProjectContext _context = null!;
-    private bool _disposedValue;
 
     public ProjectRepository(ILogger<ProjectRepository> logger, IDbContextFactory<ProjectContext> contextFactory)
     {
@@ -20,13 +18,25 @@ public sealed class ProjectRepository : IProjectRepository, IDisposable
 
     public async ValueTask<IEnumerable<ProjectMetaRecord>> GetAllMetasAsync()
     {
-        ProjectContext context = await GetProjectContextAsync();
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
         return await context.AyBorgProjectMetas!.ToListAsync();
+    }
+
+    public async ValueTask<IEnumerable<ProjectMetaRecord>> GetAllMetasAsync(Guid projectMetaId)
+    {
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
+        return await context.AyBorgProjectMetas!.Where(pm => pm.Id.Equals(projectMetaId)).ToListAsync();
+    }
+
+    public async ValueTask<IEnumerable<ProjectMetaRecord>> GetAllMetasAsync(string serviceUniqueName)
+    {
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
+        return await context.AyBorgProjectMetas!.Where(pm => pm.ServiceUniqueName == serviceUniqueName).ToListAsync();
     }
 
     public async ValueTask<ProjectMetaRecord> FindMetaAsync(Guid projectMetaDbId)
     {
-        ProjectContext context = await GetProjectContextAsync();
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
         ProjectMetaRecord? projectMeta = await context.AyBorgProjectMetas!.FindAsync(projectMetaDbId);
         if (projectMeta == null)
         {
@@ -37,64 +47,121 @@ public sealed class ProjectRepository : IProjectRepository, IDisposable
         return projectMeta!;
     }
 
-    public async ValueTask<IEnumerable<ProjectMetaRecord>> GetProjectMetasAsync(Guid projectMetaId, ProjectState projectState, long versionIteration)
+    public async ValueTask<ProjectRecord> CreateAsync(string projectName, string serviceUniqueName)
     {
-        ProjectContext context = await GetProjectContextAsync();
-        return await context.AyBorgProjectMetas!.Where(pm => pm.Id.Equals(projectMetaId)
-                                                                && pm.State == projectState
-                                                                && pm.VersionIteration.Equals(versionIteration)).ToListAsync();
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
+        var emptyProject = new ProjectRecord
+        {
+            Meta = new ProjectMetaRecord
+            {
+                Id = Guid.NewGuid(),
+                Name = projectName,
+                CreatedDate = DateTime.UtcNow,
+                UpdatedDate = DateTime.UtcNow,
+                State = ProjectState.Draft,
+                ServiceUniqueName = serviceUniqueName
+            }
+        };
+
+        Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ProjectRecord> result = await context.AyBorgProjects!.AddAsync(emptyProject);
+        await context.SaveChangesAsync();
+        _logger.LogTrace("Created new project {projectName} with id {projectId}", projectName, result.Entity.Meta.Id);
+        return result.Entity;
     }
 
-    public async ValueTask<IEnumerable<ProjectMetaRecord>> GetMetasByProjectIdAsync(Guid projectId)
+    public async ValueTask<ProjectRecord> FindAsync(Guid projectMetaId)
     {
-        ProjectContext context = await GetProjectContextAsync();
-        return await context.AyBorgProjectMetas!.Where(pm => pm.Id.Equals(projectId)).ToListAsync();
-    }
-
-    public async ValueTask<IEnumerable<ProjectRecord>> GetProjectsAsync(Guid projectId)
-    {
-        ProjectContext context = await GetProjectContextAsync();
-        return await context.AyBorgProjects!.Where(p => p.Meta.Id.Equals(projectId)).ToListAsync();
-    }
-
-    public async ValueTask<ProjectRecord> GetProjectAsync(Guid projectMetaId)
-    {
-        ProjectContext context = await GetProjectContextAsync();
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
         IQueryable<ProjectRecord> queryProject = CreateFullProjectQuery(context);
-        ProjectRecord orgProjectRecord = await queryProject.FirstAsync(x => x.Meta.DbId.Equals(projectMetaId));
-        return orgProjectRecord;
+        ProjectRecord fullProjectRecord = await queryProject.FirstAsync(x => x.Meta.DbId.Equals(projectMetaId));
+        return fullProjectRecord;
     }
 
     public async ValueTask<ProjectRecord> AddAsync(ProjectRecord project)
     {
-        ProjectContext context = await GetProjectContextAsync();
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
         Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ProjectRecord> result = await context.AyBorgProjects!.AddAsync(project);
+        await context.SaveChangesAsync();
         return result.Entity;
     }
 
-    public async ValueTask<ProjectMetaRecord> AddAsync(ProjectMetaRecord projectMeta)
+    public async ValueTask<bool> TrySave(ProjectRecord project)
     {
-        ProjectContext context = await GetProjectContextAsync();
-        Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ProjectMetaRecord> result = await context.AyBorgProjectMetas!.AddAsync(projectMeta);
-        return result.Entity;
+        try
+        {
+            using ProjectContext context = await _contextFactory.CreateDbContextAsync();
+            await context.AyBorgProjects!.AddAsync(project);
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ProjectMetaRecord> newMeta = await context.AyBorgProjectMetas!.AddAsync(project.Meta);
+            await context.AyBorgProjectSettings!.AddAsync(project.Settings);
+            await context.SaveChangesAsync();
+            project.Meta.DbId = newMeta.Entity.DbId;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning("Failed to save project {projectName}. {message}", project.Meta.Name, ex.Message);
+            return false;
+        }
     }
 
-    public async ValueTask<ProjectSettingsRecord> AddAsync(ProjectSettingsRecord projectSettings)
-    {
-        ProjectContext context = await GetProjectContextAsync();
-        Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ProjectSettingsRecord> result = await context.AyBorgProjectSettings!.AddAsync(projectSettings);
-        return result.Entity;
-    }
-
-    public async ValueTask<bool> ContainsActiveProjectForServiceAsync(string serviceUniqueName)
+    public async ValueTask<bool> TryDeleteAsync(Guid projectMetaId)
     {
         using ProjectContext context = await _contextFactory.CreateDbContextAsync();
-        return context.AyBorgProjects!.Any(p => p.Meta.IsActive && p.Meta.ServiceUniqueName == serviceUniqueName);
+        List<ProjectRecord> projects = await context.AyBorgProjects!.Include(p => p.Meta).Include(p => p.Settings).Where(p => p.Meta.Id.Equals(projectMetaId)).ToListAsync();
+        if (!projects.Any())
+        {
+            _logger.LogWarning("No project found with id {projectMetaId}.", projectMetaId);
+            return false;
+        }
+        IEnumerable<ProjectMetaRecord> metas = projects.Select(p => p.Meta);
+        IEnumerable<ProjectSettingsRecord> settings = projects.Select(p => p.Settings);
+        context.AyBorgProjects!.RemoveRange(projects);
+        context.AyBorgProjectMetas!.RemoveRange(metas);
+        context.AyBorgProjectSettings!.RemoveRange(settings);
+        await context.SaveChangesAsync();
+        return true;
+    }
+
+    public async ValueTask<bool> TryUpdateAsync(ProjectMetaRecord projectMeta)
+    {
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
+        ProjectMetaRecord? databaseProjectMeta = await context.AyBorgProjectMetas!.FindAsync(projectMeta.DbId);
+        if (databaseProjectMeta == null)
+        {
+            _logger.LogWarning("No project found for database id {projectMetaDbId}.", projectMeta.DbId);
+            return false;
+        }
+
+        databaseProjectMeta.ApprovedBy = projectMeta.ApprovedBy;
+        databaseProjectMeta.Comment = projectMeta.Comment;
+        databaseProjectMeta.IsActive = projectMeta.IsActive;
+        databaseProjectMeta.State = projectMeta.State;
+        databaseProjectMeta.VersionName = projectMeta.VersionName;
+        databaseProjectMeta.VersionIteration = projectMeta.VersionIteration;
+        databaseProjectMeta.UpdatedDate = DateTime.UtcNow;
+        await context.SaveChangesAsync();
+        return true;
+    }
+
+    public async ValueTask<bool> TryRemoveRangeAsync(IEnumerable<ProjectMetaRecord> projectMetas)
+    {
+        try
+        {
+            using ProjectContext context = await _contextFactory.CreateDbContextAsync();
+            context.AyBorgProjectMetas!.RemoveRange(projectMetas);
+            await context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning("Failed to remove project metas. {message}", ex.Message);
+            return false;
+        }
     }
 
     public async ValueTask<ProjectSettingsRecord> GetSettingAsync(Guid projectMetaDbId)
     {
-        ProjectContext context = await GetProjectContextAsync();
+        using ProjectContext context = await _contextFactory.CreateDbContextAsync();
         ProjectRecord? projectRecord = await context.AyBorgProjects!.Include(x => x.Settings).FirstOrDefaultAsync(x => x.Meta.DbId.Equals(projectMetaDbId));
         if (projectRecord == null)
         {
@@ -103,30 +170,6 @@ public sealed class ProjectRepository : IProjectRepository, IDisposable
         }
 
         return projectRecord.Settings;
-    }
-
-    public async ValueTask RemoveRangeAsync(IEnumerable<ProjectRecord> projects)
-    {
-        ProjectContext context = await GetProjectContextAsync();
-        context.AyBorgProjects!.RemoveRange(projects);
-    }
-
-    public async ValueTask RemoveRangeAsync(IEnumerable<ProjectMetaRecord> projectMetas)
-    {
-        ProjectContext context = await GetProjectContextAsync();
-        context.AyBorgProjectMetas!.RemoveRange(projectMetas);
-    }
-
-    public async ValueTask SaveChangesAsync()
-    {
-        ProjectContext context = await GetProjectContextAsync();
-        await context.SaveChangesAsync();
-    }
-
-    private async ValueTask<ProjectContext> GetProjectContextAsync()
-    {
-        _context ??= await _contextFactory.CreateDbContextAsync();
-        return _context;
     }
 
     private static IQueryable<ProjectRecord> CreateFullProjectQuery(ProjectContext context)
@@ -139,20 +182,5 @@ public sealed class ProjectRepository : IProjectRepository, IDisposable
                                         .ThenInclude(x => x.Ports)
                                         .Include(x => x.Links)
                                         .AsSplitQuery();
-    }
-
-    private void Dispose(bool disposing)
-    {
-        if (!_disposedValue && disposing)
-        {
-            _context?.Dispose();
-            _disposedValue = true;
-        }
-    }
-
-    public void Dispose()
-    {
-        Dispose(disposing: true);
-        GC.SuppressFinalize(this);
     }
 }
