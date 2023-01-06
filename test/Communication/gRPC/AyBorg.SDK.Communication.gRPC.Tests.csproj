@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Data\Mapper\AyBorg.SDK.Data.Mapper.csproj" />
+    <ProjectReference Include="..\..\..\src\Communication\gRPC\AyBorg.SDK.Communication.gRPC.csproj" />
   </ItemGroup>
 
 </Project>
