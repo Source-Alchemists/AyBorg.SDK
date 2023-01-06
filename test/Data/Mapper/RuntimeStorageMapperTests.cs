@@ -1,16 +1,15 @@
-﻿using AyBorg.SDK.Data.DAL;
+﻿using AutoMapper;
+using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Data.DAL;
 using AyBorg.SDK.ImageProcessing;
 using AyBorg.SDK.ImageProcessing.Buffers;
 using AyBorg.SDK.ImageProcessing.Pixels;
-using AyBorg.SDK.Data.Mapper;
-using AyBorg.SDK.Common;
-using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.Projects;
-using AutoMapper;
 using Moq;
 using Newtonsoft.Json;
 
-namespace AyBorg.SDK.Tests.Mapper;
+namespace AyBorg.SDK.Data.Mapper.Tests;
 
 public class RuntimeStorageMapperTests
 {

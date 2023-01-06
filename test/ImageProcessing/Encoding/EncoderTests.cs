@@ -1,9 +1,11 @@
+using System;
+using System.IO;
 using AyBorg.SDK.ImageProcessing.Buffers;
 using AyBorg.SDK.ImageProcessing.Encoding;
 using AyBorg.SDK.ImageProcessing.Encoding.Operations;
 using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace AyBorg.SDK.Tests.ImageProcessing.Encoding;
+namespace AyBorg.SDK.ImageProcessing.Tests.Encoding;
 
 public class EncoderTests : IDisposable
 {
@@ -11,7 +13,7 @@ public class EncoderTests : IDisposable
     private readonly PackedPixelBuffer<Mono8> _packedPixelBufferMono8;
     private readonly PackedPixelBuffer<Rgb24> _packedPixelBufferRgb24;
     private readonly PackedPixelBuffer<Rgb48> _packedPixelBufferRgb48;
-    private bool disposedValue;
+    private bool _disposedValue;
 
     public EncoderTests()
     {
@@ -115,7 +117,7 @@ public class EncoderTests : IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposedValue)
+        if (!_disposedValue)
         {
             if (disposing)
             {
@@ -124,7 +126,7 @@ public class EncoderTests : IDisposable
                 _packedPixelBufferRgb24.Dispose();
                 _packedPixelBufferRgb48.Dispose();
             }
-            disposedValue = true;
+            _disposedValue = true;
         }
     }
 

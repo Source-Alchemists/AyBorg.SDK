@@ -1,9 +1,9 @@
-using AyBorg.SDK.ImageProcessing;
+using System.IO;
 using AyBorg.SDK.ImageProcessing.Buffers;
 using AyBorg.SDK.ImageProcessing.Encoding;
 using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace AyBorg.SDK.Tests.ImageProcessing;
+namespace AyBorg.SDK.ImageProcessing.Tests;
 
 public class ImageTests
 {
@@ -35,7 +35,7 @@ public class ImageTests
 
     [Fact]
     public void TestCopy()
-     {
+    {
         // Arrange
         using var image = new Image(_packedPixelBufferRgb);
 
@@ -44,7 +44,7 @@ public class ImageTests
 
         // Assert
         Assert.Equal(image, imageCopy);
-     }
+    }
 
     [Fact]
     public void TestRgbToRgb24()
@@ -53,7 +53,7 @@ public class ImageTests
         using var image = new Image(_packedPixelBufferRgb);
 
         // Act
-        var resultBuffer = image.AsPacked<Rgb24>();
+        ReadOnlyPackedPixelBuffer<Rgb24> resultBuffer = image.AsPacked<Rgb24>();
 
         // Assert
         Assert.IsType<ReadOnlyPackedPixelBuffer<Rgb24>>(resultBuffer);
@@ -67,7 +67,7 @@ public class ImageTests
         using var image = new Image(_packedPixelBufferRgb);
 
         // Act
-        var resultBuffer = image.AsPlanar<Rgb888>();
+        ReadOnlyPlanarPixelBuffer<Rgb888> resultBuffer = image.AsPlanar<Rgb888>();
 
         // Assert
         Assert.IsType<ReadOnlyPlanarPixelBuffer<Rgb888>>(resultBuffer);
@@ -81,7 +81,7 @@ public class ImageTests
         using var image = new Image(_packedPixelBufferMono);
 
         // Act
-        var resultBuffer = image.AsPacked<Mono8>();
+        ReadOnlyPackedPixelBuffer<Mono8> resultBuffer = image.AsPacked<Mono8>();
 
         // Assert
         Assert.IsType<ReadOnlyPackedPixelBuffer<Mono8>>(resultBuffer);
@@ -91,8 +91,8 @@ public class ImageTests
     [Fact]
     public void TestLoadAndSaveMono8()
     {
-        var targetName = $"{nameof(ImageTests)}_{nameof(TestLoadAndSaveMono8)}.png";
-        using var loadedImage = Image.Load("lena8.bmp");
+        string targetName = $"{nameof(ImageTests)}_{nameof(TestLoadAndSaveMono8)}.png";
+        using var loadedImage = Image.Load("./resources/lena8.bmp");
         Image.Save(loadedImage, targetName, EncoderType.Png);
 
         Assert.True(File.Exists(targetName));
@@ -102,8 +102,8 @@ public class ImageTests
     [Fact]
     public void TestLoadAndSaveRgb24()
     {
-        var targetName = $"{nameof(ImageTests)}_{nameof(TestLoadAndSaveRgb24)}.png";
-        using var loadedImage = Image.Load("lena24.png");
+        string targetName = $"{nameof(ImageTests)}_{nameof(TestLoadAndSaveRgb24)}.png";
+        using var loadedImage = Image.Load("./resources/lena24.png");
         Image.Save(loadedImage, targetName, EncoderType.Png);
 
         Assert.True(File.Exists(targetName));

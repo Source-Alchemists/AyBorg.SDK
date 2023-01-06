@@ -2,7 +2,7 @@ using AyBorg.SDK.ImageProcessing.Buffers;
 using AyBorg.SDK.ImageProcessing.Buffers.Operations;
 using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace AyBorg.SDK.Tests.ImageProcessing.Buffers.Operations;
+namespace AyBorg.SDK.ImageProcessing.Tests.Buffers.Operations;
 
 public class RgbConvertOperationTests
 {
@@ -52,7 +52,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb24>)
@@ -70,7 +70,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb48>)
@@ -88,7 +88,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb24.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb>)
@@ -106,7 +106,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb24.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb48>)
@@ -124,7 +124,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb48.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb>)
@@ -142,7 +142,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb48.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb24>)
@@ -178,7 +178,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb24.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb161616>)
@@ -214,7 +214,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb888>)
@@ -232,7 +232,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb24.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb888>)
@@ -250,7 +250,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb48.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb888>)
@@ -268,7 +268,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<RgbFFF>)
@@ -286,7 +286,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb24.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<RgbFFF>)
@@ -304,7 +304,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferRgb48.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<RgbFFF>)
@@ -322,7 +322,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb161616.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb888>)
@@ -340,7 +340,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb161616.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<RgbFFF>)
@@ -358,7 +358,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb888.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<RgbFFF>)
@@ -376,7 +376,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgbFFF.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb161616>)
@@ -394,7 +394,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgbFFF.AsReadOnly(),
             OutputType = typeof(PlanarPixelBuffer<Rgb888>)
@@ -412,7 +412,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb161616.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb>)
@@ -430,7 +430,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb161616.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb24>)
@@ -448,7 +448,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb161616.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb48>)
@@ -466,7 +466,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb888.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb>)
@@ -484,7 +484,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb888.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb24>)
@@ -502,7 +502,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgb888.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb48>)
@@ -520,7 +520,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgbFFF.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb>)
@@ -538,7 +538,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgbFFF.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb24>)
@@ -556,7 +556,7 @@ public class RgbConvertOperationTests
         var converter = new RgbConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _planarPixelBufferRgbFFF.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Rgb48>)
