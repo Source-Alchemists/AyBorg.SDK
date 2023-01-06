@@ -13,7 +13,7 @@ public sealed class JwtMiddleware
         _next = next;
     }
 
-    public async Task InvokeAsync(HttpContext context, IJwtConsumerService jwtConsumerService)
+    public async Task InvokeAsync(HttpContext context, IJwtConsumer jwtConsumerService)
     {
         string? token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         if (string.IsNullOrEmpty(token))

@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.agent.v1;
+
+service ProjectManagement {
+    rpc GetProjectMetas(GetProjectMetasRequest) returns (GetProjectMetasResponse);
+    rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
+    rpc DeleteProject(DeleteProjectRequest) returns (google.protobuf.Empty);
+    rpc ActivateProject(ActivateProjectRequest) returns (google.protobuf.Empty);
+    rpc SaveProject(SaveProjectRequest) returns (google.protobuf.Empty);
+    rpc ApproveProject(ApproveProjectRequest) returns (google.protobuf.Empty);
+}
+
+message GetProjectMetasRequest {
+    string agent_unique_name = 1;
+}
+
+message GetProjectMetasResponse {
+    repeated ProjectMeta project_metas = 1;
+}
+
+message CreateProjectRequest {
+    string agent_unique_name = 1;
+    string project_name = 2;
+}
+
+message CreateProjectResponse {
+    ProjectMeta project_meta = 1;
+}
+
+message DeleteProjectRequest {
+    string agent_unique_name = 1;
+    string project_id = 2;
+}
+
+message ActivateProjectRequest {
+    string agent_unique_name = 1;
+    string project_db_id = 2;
+}
+
+message SaveProjectRequest {
+    string agent_unique_name = 1;
+    string project_db_id = 2;
+    string project_id = 3;
+    ProjectSaveInfo project_save_info = 4;
+}
+
+message ApproveProjectRequest {
+    string agent_unique_name = 1;
+    string project_db_id = 2;
+    ProjectSaveInfo project_save_info = 3;
+}
+
+message ProjectMeta {
+    string db_id = 1;
+    string id = 2;
+    string name = 3;
+    string version_name = 4;
+    string comment = 5;
+    google.protobuf.Timestamp creation_date = 6;
+    google.protobuf.Timestamp change_date = 7;
+    bool is_active = 8;
+    int32 state = 9;
+    string approved_by = 10;
+}
+
+message ProjectSaveInfo {
+    int32 state = 1;
+    string version_name = 2;
+    string comment = 3;
+    string user_name = 4;
+}

@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
 using System.Globalization;
 using System.Text.Json;
+using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.Data.DTOs;
 using AyBorg.SDK.ImageProcessing;
 using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Configuration;
@@ -192,12 +192,11 @@ public sealed class MqttClientProvider : IMqttClientProvider
 
         try
         {
-            await PublishAsync($"{topic}/meta", JsonSerializer.Serialize(new ImageMetaDto
+            await PublishAsync($"{topic}/meta", JsonSerializer.Serialize(new ImageMeta
             {
                 Width = image.Width,
                 Height = image.Height,
-                PixelFormat = image.PixelFormat,
-                EncoderType = options.EncoderType
+                PixelFormat = image.PixelFormat
             }), options);
 
             using MemoryStream stream = s_memoryManager.GetStream();

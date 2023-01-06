@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.agent.v1;
+
+service ProjectSettings {
+    rpc GetProjectSettings (GetProjectSettingsRequest) returns (GetProjectSettingsResponse);
+    rpc UpdateProjectSettings (UpdateProjectSettingsRequest) returns (google.protobuf.Empty);
+}
+
+message GetProjectSettingsRequest {
+    string agent_unique_name = 1;
+    string project_db_id = 2;
+}
+
+message GetProjectSettingsResponse {
+    ProjectSettingsDto project_settings = 1;
+}
+
+message UpdateProjectSettingsRequest {
+    string agent_unique_name = 1;
+    string project_db_id = 2;
+    ProjectSettingsDto project_settings = 3;
+}
+
+message ProjectSettingsDto {
+    bool IsForceResultCommunicationEnabled = 1;
+}

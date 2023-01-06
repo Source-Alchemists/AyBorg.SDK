@@ -183,9 +183,6 @@ namespace AyBorg.Database.Migrations.SqlLite.Migrations.Project
                     b.Property<bool>("IsForceResultCommunicationEnabled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsForceWebUiCommunicationEnabled")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("DbId");
 
                     b.ToTable("AyBorgProjectSettings");

@@ -2,7 +2,7 @@ using AyBorg.SDK.ImageProcessing.Buffers;
 using AyBorg.SDK.ImageProcessing.Buffers.Operations;
 using AyBorg.SDK.ImageProcessing.Pixels;
 
-namespace AyBorg.SDK.Tests.ImageProcessing.Buffers.Operations;
+namespace AyBorg.SDK.ImageProcessing.Tests.Buffers.Operations;
 
 public class MonoConvertOperationTests
 {
@@ -24,7 +24,7 @@ public class MonoConvertOperationTests
         var converter = new MonoConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferMono.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Mono8>)
@@ -42,7 +42,7 @@ public class MonoConvertOperationTests
         var converter = new MonoConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferMono.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Mono16>)
@@ -60,7 +60,7 @@ public class MonoConvertOperationTests
         var converter = new MonoConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferMono8.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Mono>)
@@ -78,7 +78,7 @@ public class MonoConvertOperationTests
         var converter = new MonoConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferMono8.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Mono16>)
@@ -96,7 +96,7 @@ public class MonoConvertOperationTests
         var converter = new MonoConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferMono16.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Mono>)
@@ -114,7 +114,7 @@ public class MonoConvertOperationTests
         var converter = new MonoConvertOperation();
 
         // Act
-        using var resultBuffer = converter.Execute(new ConvertParameters
+        using IPixelBuffer resultBuffer = converter.Execute(new ConvertParameters
         {
             Input = _packedPixelBufferMono16.AsReadOnly(),
             OutputType = typeof(PackedPixelBuffer<Mono8>)

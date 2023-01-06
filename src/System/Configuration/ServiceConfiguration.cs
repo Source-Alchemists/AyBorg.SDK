@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 
 namespace AyBorg.SDK.System.Configuration;
 
-public record ServiceConfiguration : RegistryConfiguration, IServiceConfiguration
+public record ServiceConfiguration : GatewayConfiguration, IServiceConfiguration
 {
     private readonly ILogger<IServiceConfiguration> _logger;
 
-    public string RegistryUrl { get; }
+    public string GatewayUrl { get; }
 
     public ServiceConfiguration(ILogger<IServiceConfiguration> logger, IConfiguration configuration) : base(logger, configuration)
     {
@@ -16,11 +16,11 @@ public record ServiceConfiguration : RegistryConfiguration, IServiceConfiguratio
         if (string.IsNullOrEmpty(registryUrl))
         {
             _logger.LogWarning("Registry url is not set in configuration. Using default value. (Hint: AyBorg:Registry:Url)");
-            RegistryUrl = "https://localhost:5001";
+            GatewayUrl = "http://localhost:5000";
         }
         else
         {
-            RegistryUrl = registryUrl;
+            GatewayUrl = registryUrl;
         }
     }
 }

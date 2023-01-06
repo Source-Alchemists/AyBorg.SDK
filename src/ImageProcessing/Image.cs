@@ -138,7 +138,7 @@ public partial record Image : IImage
             if (disposing)
             {
                 _rootPixelBuffer.Dispose();
-                foreach (var pixelBuffer in _convertedPixelBuffers.Values)
+                foreach (IPixelBuffer pixelBuffer in _convertedPixelBuffers.Values)
                 {
                     pixelBuffer.Dispose();
                 }
@@ -150,12 +150,12 @@ public partial record Image : IImage
 
     private IReadOnlyPixelBuffer AsPixelBuffer<TBuffer>()
     {
-        if (_convertedPixelBuffers.TryGetValue(typeof(TBuffer), out var pixelBuffer))
+        if (_convertedPixelBuffers.TryGetValue(typeof(TBuffer), out IPixelBuffer? pixelBuffer))
         {
             return pixelBuffer.AsReadOnly();
         }
 
-        var convertedPixelBuffer = _pixelBufferConverter.Execute(new ConvertParameters
+        IPixelBuffer convertedPixelBuffer = s_pixelBufferConverter.Execute(new ConvertParameters
         {
             Input = _rootPixelBuffer.AsReadOnly(),
             OutputType = typeof(TBuffer)
