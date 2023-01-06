@@ -10,6 +10,11 @@ public interface IStepBody
     string DefaultName { get; }
 
     /// <summary>
+    /// Gets the categories.
+    /// </summary>
+    IEnumerable<string> Categories { get; }
+
+    /// <summary>
     /// Gets the ports.
     /// </summary>
     IEnumerable<IPort> Ports { get; }
