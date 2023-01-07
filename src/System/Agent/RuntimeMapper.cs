@@ -1,3 +1,4 @@
+using System.Globalization;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.Projects;
@@ -52,7 +53,7 @@ public class RuntimeMapper : IRuntimeMapper
             case PortBrand.Numeric:
                 var numericPort = (NumericPort)runtimePort;
                 port.IsLinkConvertable = numericPort.IsLinkConvertable;
-                port.Value = numericPort.Value;
+                port.Value = numericPort.Value.ToString(CultureInfo.InvariantCulture);
                 break;
             case PortBrand.Boolean:
                 var booleanPort = (BooleanPort)runtimePort;
