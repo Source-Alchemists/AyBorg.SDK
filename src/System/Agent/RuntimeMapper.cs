@@ -1,6 +1,7 @@
-using AyBorg.SDK.Common;
+using System.Globalization;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
+using AyBorg.SDK.Projects;
 
 namespace AyBorg.SDK.System.Agent;
 
@@ -21,6 +22,7 @@ public class RuntimeMapper : IRuntimeMapper
         {
             Id = stepProxy.Id,
             Name = stepProxy.Name,
+            Categories = stepProxy.Categories,
             X = stepProxy.X,
             Y = stepProxy.Y,
             ExecutionTimeMs = stepProxy.ExecutionTimeMs,
@@ -51,7 +53,7 @@ public class RuntimeMapper : IRuntimeMapper
             case PortBrand.Numeric:
                 var numericPort = (NumericPort)runtimePort;
                 port.IsLinkConvertable = numericPort.IsLinkConvertable;
-                port.Value = numericPort.Value;
+                port.Value = numericPort.Value.ToString(CultureInfo.InvariantCulture);
                 break;
             case PortBrand.Boolean:
                 var booleanPort = (BooleanPort)runtimePort;

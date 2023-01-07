@@ -1,6 +1,7 @@
-﻿using AyBorg.SDK.Common.Ports;
+﻿using AyBorg.SDK.Common;
+using AyBorg.SDK.Common.Ports;
 
-namespace AyBorg.SDK.Common;
+namespace AyBorg.SDK.Projects;
 
 public interface IStepProxy : IDisposable
 {
@@ -21,6 +22,11 @@ public interface IStepProxy : IDisposable
     /// Gets or sets the name.
     /// </summary>
     string Name { get; set; }
+
+    /// <summary>
+    /// Gets the categories.
+    /// </summary>
+    IEnumerable<string> Categories { get; }
 
     /// <summary>
     /// Gets or sets the meta information.

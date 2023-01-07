@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Ayborg.Gateway.Agent.V1;
@@ -22,6 +23,7 @@ public class RpcMapper : IRpcMapper
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
+            Categories = rpc.Categories,
             X = rpc.X,
             Y = rpc.Y,
             ExecutionTimeMs = rpc.ExecutionTimeMs,
@@ -49,6 +51,7 @@ public class RpcMapper : IRpcMapper
             MetaInfo = ToRpc(step.MetaInfo),
         };
 
+        rpc.Categories.AddRange(step.Categories);
         rpc.Ports.Add(convertedPorts);
 
         return rpc;
@@ -145,7 +148,7 @@ public class RpcMapper : IRpcMapper
         {
             PortBrand.String or PortBrand.Folder => rpc.Value,
             PortBrand.Boolean => bool.Parse(rpc.Value),
-            PortBrand.Numeric => double.Parse(rpc.Value),
+            PortBrand.Numeric => double.Parse(rpc.Value, CultureInfo.InvariantCulture),
             PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,

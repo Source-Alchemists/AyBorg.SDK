@@ -2,14 +2,19 @@ namespace AyBorg.SDK.Common.Models;
 
 public sealed record Step
 {
+    /// <summary>
+    /// Gets or sets the identifier.
+    public Guid Id { get; init; } = Guid.Empty;
+
     // <summary>
     /// Gets or sets the default name.
     /// </summary>
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the identifier.
-    public Guid Id { get; set; } = Guid.Empty;
+    /// Gets or sets the categories.
+    /// </summary>
+    public IEnumerable<string> Categories { get; init; } = new List<string>();
 
     /// <summary>
     /// Gets or sets the x position.
@@ -24,7 +29,7 @@ public sealed record Step
     /// <summary>
     /// Gets or sets the meta information.
     /// </summary>
-    public PluginMetaInfo MetaInfo { get; set; } = new PluginMetaInfo();
+    public PluginMetaInfo MetaInfo { get; init; } = new PluginMetaInfo();
 
     /// <summary>
     /// Gets or sets the ports.
