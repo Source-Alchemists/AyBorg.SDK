@@ -22,6 +22,7 @@ public class RpcMapper : IRpcMapper
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
+            Categories = rpc.Categories,
             X = rpc.X,
             Y = rpc.Y,
             ExecutionTimeMs = rpc.ExecutionTimeMs,
@@ -49,6 +50,7 @@ public class RpcMapper : IRpcMapper
             MetaInfo = ToRpc(step.MetaInfo),
         };
 
+        rpc.Categories.AddRange(step.Categories);
         rpc.Ports.Add(convertedPorts);
 
         return rpc;

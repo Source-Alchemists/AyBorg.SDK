@@ -24,6 +24,11 @@ public interface IStepProxy : IDisposable
     string Name { get; set; }
 
     /// <summary>
+    /// Gets the categories.
+    /// </summary>
+    IEnumerable<string> Categories { get; }
+
+    /// <summary>
     /// Gets or sets the meta information.
     /// </summary>
     /// <value>

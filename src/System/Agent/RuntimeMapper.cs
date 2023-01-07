@@ -21,6 +21,7 @@ public class RuntimeMapper : IRuntimeMapper
         {
             Id = stepProxy.Id,
             Name = stepProxy.Name,
+            Categories = stepProxy.Categories,
             X = stepProxy.X,
             Y = stepProxy.Y,
             ExecutionTimeMs = stepProxy.ExecutionTimeMs,

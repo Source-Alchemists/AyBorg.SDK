@@ -114,6 +114,7 @@ message StepDto {
     int64 execution_time_ms = 5;
     PluginMetaDto meta_info = 6;
     repeated PortDto ports = 7;
+    repeated string categories = 8;
 }
 
 message PortDto {
