@@ -2,10 +2,10 @@
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.Data.DAL;
-using AyBorg.SDK.ImageProcessing;
-using AyBorg.SDK.ImageProcessing.Buffers;
-using AyBorg.SDK.ImageProcessing.Pixels;
 using AyBorg.SDK.Projects;
+using ImageTorque;
+using ImageTorque.Buffers;
+using ImageTorque.Pixels;
 using Moq;
 using Newtonsoft.Json;
 
@@ -224,7 +224,7 @@ public class RuntimeStorageMapperTests
     {
         // Arrange
         var mapper = new RuntimeToStorageMapper();
-        var pixelBuffer = new PackedPixelBuffer<Mono8>(2, 2, new Mono8[] { 0x00, 0x01, 0x80, 0xFF });
+        var pixelBuffer = new PixelBuffer<L8>(2, 2, new L8[] { 0x00, 0x01, 0x80, 0xFF });
         var image = new Image(pixelBuffer);
         using var imagePort = new ImagePort("ImagePort", PortDirection.Input, image);
         Mock<IStepProxy> mockedStepProxy = CreateStepProxyMock();

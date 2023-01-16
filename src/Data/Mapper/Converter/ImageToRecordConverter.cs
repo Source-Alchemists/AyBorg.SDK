@@ -1,7 +1,7 @@
-using Sys = System;
-using AyBorg.SDK.Data.DAL;
-using AyBorg.SDK.ImageProcessing;
 using AutoMapper;
+using AyBorg.SDK.Data.DAL;
+using ImageTorque;
+using Sys = System;
 
 namespace AyBorg.SDK.Data.Mapper.Converter;
 
@@ -9,7 +9,7 @@ internal class ImageToRecordConverter : IValueConverter<Image, string>
 {
     public string Convert(Image sourceMember, ResolutionContext context)
     {
-        if(sourceMember == null)
+        if (sourceMember == null)
         {
             return string.Empty;
         }

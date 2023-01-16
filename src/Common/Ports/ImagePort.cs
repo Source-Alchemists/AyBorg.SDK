@@ -1,10 +1,10 @@
-using AyBorg.SDK.ImageProcessing;
+using ImageTorque;
 
 namespace AyBorg.SDK.Common.Ports;
 
 public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
 {
-    private bool disposedValue;
+    private bool _disposedValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ImagePort"/> class.
@@ -31,13 +31,13 @@ public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
 
     public void Dispose(bool disposing)
     {
-        if (!disposedValue)
+        if (!_disposedValue)
         {
             if (disposing)
             {
                 Value?.Dispose();
             }
-            disposedValue = true;
+            _disposedValue = true;
         }
     }
 

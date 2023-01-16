@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ImageTorque" Version="0.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\AyBorg.SDK.Common.csproj" />
     <ProjectReference Include="..\..\Projects\AyBorg.SDK.Projects.csproj" />
   </ItemGroup>

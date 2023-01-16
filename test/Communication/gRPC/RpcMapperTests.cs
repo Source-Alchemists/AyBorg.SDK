@@ -260,7 +260,7 @@ public class UnitTest1
         {
             Assert.Equal(2, ((ImageMeta)result.Value!).Width);
             Assert.Equal(4, ((ImageMeta)result.Value!).Height);
-            Assert.Equal(AyBorg.SDK.ImageProcessing.PixelFormat.Rgb24Packed, ((ImageMeta)result.Value!).PixelFormat);
+            Assert.Equal(ImageTorque.PixelFormat.Rgb24Packed, ((ImageMeta)result.Value!).PixelFormat);
             return;
         }
 
@@ -294,7 +294,7 @@ public class UnitTest1
             {
                 Width = 2,
                 Height = 4,
-                PixelFormat = AyBorg.SDK.ImageProcessing.PixelFormat.Rgb24Packed
+                PixelFormat = ImageTorque.PixelFormat.Rgb24Packed
             };
         }
 

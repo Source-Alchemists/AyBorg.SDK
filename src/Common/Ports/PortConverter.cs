@@ -1,5 +1,5 @@
 using System.Text.Json;
-using AyBorg.SDK.ImageProcessing.Shapes;
+using ImageTorque;
 
 namespace AyBorg.SDK.Common.Ports;
 
@@ -37,7 +37,7 @@ public static class PortConverter
     /// <summary>
     /// Connvert the port value to the specified type.
     /// </summary>
-    /// <typeparam name="T">The type to convert to.</typeparam>	
+    /// <typeparam name="T">The type to convert to.</typeparam>
     /// <param name="sourcePort">The port to convert.</param>
     /// <param name="orgtValue">The original value.</param>
     /// <returns>The converted value.</returns>
@@ -57,11 +57,11 @@ public static class PortConverter
                         var enumType = orgValue.GetType();
                         return (T)System.Convert.ChangeType(Enum.Parse(enumType, ((StringPort)sourcePort).Value), typeof(T));
                     }
-                    if(typeof(T) == typeof(Double) && Double.TryParse(((StringPort)sourcePort).Value, out var numericValue))
+                    if (typeof(T) == typeof(double) && double.TryParse(((StringPort)sourcePort).Value, out var numericValue))
                     {
                         return (T)System.Convert.ChangeType(numericValue, typeof(T));
                     }
-                    return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, typeof(T));                    
+                    return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, typeof(T));
                 case PortBrand.Folder:
                     return (T)System.Convert.ChangeType(((FolderPort)sourcePort).Value, typeof(T));
                 case PortBrand.Numeric:
@@ -71,8 +71,8 @@ public static class PortConverter
                     }
                     if (typeof(T) == typeof(Enum))
                     {
-                        var intValue = System.Convert.ToInt32((((NumericPort)sourcePort).Value));
-                        var enumType = orgValue.GetType();
+                        int intValue = System.Convert.ToInt32((((NumericPort)sourcePort).Value));
+                        Type enumType = orgValue.GetType();
                         return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType).ElementAt(intValue)), typeof(T));
                     }
                     return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value, typeof(T));

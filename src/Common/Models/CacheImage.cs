@@ -3,7 +3,7 @@ namespace AyBorg.SDK.Common.Models;
 public sealed record CacheImage : ImageMeta, IDisposable
 {
     private bool _disposedValue;
-    public ImageProcessing.IImage? OriginalImage { get; set; }
+    public ImageTorque.IImage? OriginalImage { get; set; }
 
     private void Dispose(bool disposing)
     {
