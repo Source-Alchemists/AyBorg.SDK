@@ -350,4 +350,50 @@ public class UnitTest1
 
         Assert.Equal(value.ToString(), result.Value);
     }
+
+    [Theory]
+    [InlineData(0.4, "0.4")]
+    [InlineData(0.4, "0,4")]
+    [InlineData(1000.4, "1000.4")]
+    [InlineData(1000.4, "1000,4")]
+    public void Test_DoublePortFromRpc(double expectedValue, string value)
+    {
+        // Arrange
+        var dto = new PortDto
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = "Test_Port",
+            Direction = (int)PortDirection.Input,
+            Brand = (int)PortBrand.Numeric,
+            Value = value
+        };
+
+        // Act
+        Port port = _service.FromRpc(dto);
+
+        // Assert
+        Assert.Equal(double.Round(expectedValue, 1), double.Round((double)port.Value!, 1));
+    }
+
+    [Theory]
+    [InlineData("0.4", 0.4)]
+    [InlineData("1000.4", 1000.4)]
+    public void Test_DoublePortToRpc(string expectedValue, double value)
+    {
+        // Arrange
+        var port = new Port
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test_Port",
+            Direction = PortDirection.Input,
+            Brand = PortBrand.Numeric,
+            Value = value
+        };
+
+        // Act
+        PortDto dto = _service.ToRpc(port);
+
+        // Assert
+        Assert.Equal(expectedValue, dto.Value);
+    }
 }
