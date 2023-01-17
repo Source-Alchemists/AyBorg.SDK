@@ -1,4 +1,4 @@
-using AyBorg.SDK.ImageProcessing.Encoding;
+using ImageTorque.Processing;
 using MQTTnet.Protocol;
 
 namespace AyBorg.SDK.Communication.MQTT;

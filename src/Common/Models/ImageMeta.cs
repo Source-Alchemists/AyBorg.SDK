@@ -1,4 +1,4 @@
-using AyBorg.SDK.ImageProcessing;
+using ImageTorque;
 
 namespace AyBorg.SDK.Common.Models;
 

@@ -148,7 +148,7 @@ public class RpcMapper : IRpcMapper
         {
             PortBrand.String or PortBrand.Folder => rpc.Value,
             PortBrand.Boolean => bool.Parse(rpc.Value),
-            PortBrand.Numeric => double.Parse(rpc.Value, CultureInfo.InvariantCulture),
+            PortBrand.Numeric => double.Parse(rpc.Value.Replace(',', '.'), CultureInfo.InvariantCulture),
             PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
             PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
@@ -163,7 +163,7 @@ public class RpcMapper : IRpcMapper
         {
             PortBrand.String or PortBrand.Folder => port.Value!.ToString()!,
             PortBrand.Boolean => port.Value!.ToString()!,
-            PortBrand.Numeric => port.Value!.ToString()!,
+            PortBrand.Numeric => Convert.ToString(port.Value, CultureInfo.InvariantCulture)!,
             PortBrand.Enum => ConvertEnum(port.Value!),
             PortBrand.Rectangle =>  JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             PortBrand.Image => ConvertImage(port.Value!),

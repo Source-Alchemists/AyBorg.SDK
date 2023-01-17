@@ -89,7 +89,7 @@ public class RuntimeMapper : IRuntimeMapper
                 Width = imagePort.Value.Width,
                 Height = imagePort.Value.Height,
                 PixelFormat = imagePort.Value.PixelFormat,
-                OriginalImage = new ImageProcessing.Image(imagePort.Value)
+                OriginalImage = new ImageTorque.Image(imagePort.Value)
             };
         }
         return new CacheImage();

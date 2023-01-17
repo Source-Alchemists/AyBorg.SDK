@@ -1,11 +1,9 @@
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.ImageProcessing;
-using AyBorg.SDK.ImageProcessing.Buffers;
-using AyBorg.SDK.ImageProcessing.Pixels;
 using AyBorg.SDK.Projects;
 using AyBorg.SDK.System.Agent;
+using ImageTorque;
 using Moq;
 
 namespace System;
@@ -77,12 +75,12 @@ public class RuntimeMapperTests
         // Arrange
         if (portBrand == PortBrand.Rectangle)
         {
-            value = new AyBorg.SDK.ImageProcessing.Shapes.Rectangle(1, 2, 3, 4);
+            value = new ImageTorque.Rectangle(1, 2, 3, 4);
         }
 
         if (portBrand == PortBrand.Image)
         {
-            value = new Image(new PackedPixelBuffer<Mono8>(2, 2));
+            value = new Image(new ImageTorque.Buffers.PixelBuffer<ImageTorque.Pixels.L8>(2, 2));
         }
 
         IPort runtimePort = portBrand switch
@@ -92,7 +90,7 @@ public class RuntimeMapperTests
             PortBrand.String => new StringPort("P3", PortDirection.Input, (string)value),
             PortBrand.Folder => new FolderPort("P4", PortDirection.Output, (string)value),
             PortBrand.Enum => new EnumPort("P5", PortDirection.Input, (PortDirection)value),
-            PortBrand.Rectangle => new RectanglePort("P6", PortDirection.Input, (AyBorg.SDK.ImageProcessing.Shapes.Rectangle)value),
+            PortBrand.Rectangle => new RectanglePort("P6", PortDirection.Input, (ImageTorque.Rectangle)value),
             PortBrand.Image => new ImagePort("P7", PortDirection.Input, (Image)value),
             _ => throw new NotImplementedException(),
         };

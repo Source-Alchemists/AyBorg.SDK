@@ -3,8 +3,8 @@ using System.Globalization;
 using System.Text.Json;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.ImageProcessing;
 using AyBorg.SDK.System.Configuration;
+using ImageTorque;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
@@ -185,7 +185,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
         else
         {
-            Image.CalculateClampSize(image, maxSize, out int w, out int h);
+            image.CalculateClampSize(maxSize, out int w, out int h);
             resizedImage = image.Resize(w, h, ResizeMode.NearestNeighbor);
             targetImage = resizedImage;
         }
@@ -200,7 +200,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
             }), options);
 
             using MemoryStream stream = s_memoryManager.GetStream();
-            Image.Save(targetImage, stream, options.EncoderType);
+            targetImage.Save(stream, options.EncoderType);
             stream.Position = 0;
             await _mqttClient.InternalClient.PublishAsync(new MqttApplicationMessageBuilder()
                 .WithTopic($"{topic}/data")
