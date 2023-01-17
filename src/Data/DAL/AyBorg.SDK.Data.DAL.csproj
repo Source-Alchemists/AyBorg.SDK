@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ImageTorque" Version="0.1.3" />
+    <PackageReference Include="ImageTorque" Version="0.1.4" />
   </ItemGroup>
 
   <ItemGroup>
