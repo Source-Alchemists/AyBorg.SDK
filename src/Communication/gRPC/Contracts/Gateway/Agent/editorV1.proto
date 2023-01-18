@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.agent.v1;
+
+service Editor {
+    rpc GetAvailableSteps (GetAvailableStepsRequest) returns (GetAvailableStepsResponse);
+    rpc GetFlowSteps (GetFlowStepsRequest) returns (GetFlowStepsResponse);
+    rpc GetFlowLinks (GetFlowLinksRequest) returns (GetFlowLinksResponse);
+    rpc GetFlowPorts (GetFlowPortsRequest) returns (GetFlowPortsResponse);
+    rpc AddFlowStep (AddFlowStepRequest) returns (AddFlowStepResponse);
+    rpc DeleteFlowStep (DeleteFlowStepRequest) returns (google.protobuf.Empty);
+    rpc MoveFlowStep (MoveFlowStepRequest) returns (google.protobuf.Empty);
+    rpc LinkFlowPorts (LinkFlowPortsRequest) returns (LinkFlowPortsResponse);
+    rpc UpdateFlowPort (UpdateFlowPortRequest) returns (google.protobuf.Empty);
+    rpc GetImageStream (GetImageStreamRequest) returns (stream ImageChunkDto);
+}
+
+message GetAvailableStepsRequest {
+    string agent_unique_name = 1;
+}
+
+message GetAvailableStepsResponse {
+    repeated StepDto steps = 1;
+}
+
+message GetFlowStepsRequest {
+    string agent_unique_name = 1;
+    repeated string step_ids = 2;
+    string iteration_id = 3;
+}
+
+message GetFlowStepsResponse {
+    repeated StepDto steps = 1;
+}
+
+message GetFlowLinksRequest {
+    string agent_unique_name = 1;
+    repeated string link_ids = 2;
+}
+
+message GetFlowLinksResponse {
+    repeated LinkDto links = 1;
+}
+
+message GetFlowPortsRequest {
+    string agent_unique_name = 1;
+    repeated string port_ids = 2;
+    string iteration_id = 3;
+}
+
+message GetFlowPortsResponse {
+    repeated PortDto ports = 1;
+}
+
+message AddFlowStepRequest {
+    string agent_unique_name = 1;
+    string step_id = 2;
+    int32 x = 3;
+    int32 y = 4;
+}
+
+message AddFlowStepResponse {
+    StepDto step = 1;
+}
+
+message DeleteFlowStepRequest {
+    string agent_unique_name = 1;
+    string step_id = 2;
+}
+
+message MoveFlowStepRequest {
+    string agent_unique_name = 1;
+    string step_id = 2;
+    int32 x = 3;
+    int32 y = 4;
+}
+
+message LinkFlowPortsRequest {
+    string agent_unique_name = 1;
+    string source_id = 2;
+    string target_id = 3;
+}
+
+message LinkFlowPortsResponse {
+    string link_id = 1;
+}
+
+message UpdateFlowPortRequest {
+    string agent_unique_name = 1;
+    PortDto port = 2;
+}
+
+message GetImageStreamRequest {
+    string agent_unique_name = 1;
+    string port_id = 2;
+    string iteration_id = 3;
+    bool AsThumbnail = 4;
+}
+
+message PluginMetaDto {
+    string id = 1;
+    string assembly_name = 2;
+    string assembly_version = 3;
+    string type_name = 4;
+}
+
+message StepDto {
+    string id = 1;
+    string name = 2;
+    int32 x = 3;
+    int32 y = 4;
+    int64 execution_time_ms = 5;
+    PluginMetaDto meta_info = 6;
+    repeated PortDto ports = 7;
+    repeated string categories = 8;
+}
+
+message PortDto {
+    string id = 1;
+    string name = 2;
+    int32 direction = 3;
+    int32 brand = 4;
+    bool is_connected = 5;
+    bool is_link_convertable = 6;
+    string value = 7;
+}
+
+message LinkDto {
+    string id = 1;
+    string source_id = 2;
+    string target_id = 3;
+}
+
+message ImageChunkDto {
+    bytes data = 1;
+    int32 full_width = 2;
+    int32 full_height = 3;
+    int64 full_stream_length = 4;
+}

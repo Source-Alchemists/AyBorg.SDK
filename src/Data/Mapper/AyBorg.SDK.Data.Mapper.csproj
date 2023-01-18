@@ -4,21 +4,21 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <RestoreAdditionalProjectSources>
       https://www.myget.org/F/automapperdev/api/v3/index.json
     </RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1-preview.0.3" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.1" />
     <PackageReference Include="Microsoft.Toolkit.HighPerformance" Version="7.1.2" />
+    <PackageReference Include="ImageTorque" Version="0.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\AyBorg.SDK.Data.DAL.csproj" />
-    <ProjectReference Include="..\DTOs\AyBorg.SDK.Data.DTOs.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.System.Configuration;
 
-public interface IServiceConfiguration : IRegistryConfiguration
+public interface IServiceConfiguration : IGatewayConfiguration
 {
-    string RegistryUrl { get; }
+    string GatewayUrl { get; }
 }

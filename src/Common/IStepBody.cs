@@ -2,12 +2,17 @@ using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Common;
 
-public interface IStepBody 
+public interface IStepBody
 {
     /// <summary>
     /// Gets the default name.
     /// </summary>
     string DefaultName { get; }
+
+    /// <summary>
+    /// Gets the categories.
+    /// </summary>
+    IEnumerable<string> Categories { get; }
 
     /// <summary>
     /// Gets the ports.

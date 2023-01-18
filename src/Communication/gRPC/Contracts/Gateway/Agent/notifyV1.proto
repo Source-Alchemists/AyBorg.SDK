@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.agent.v1;
+
+service Notify {
+    rpc CreateDownstream (CreateNotifyStreamRequest) returns (stream NotifyMessage);
+    rpc CreateNotificationFromAgent (NotifyMessage) returns (google.protobuf.Empty);
+}
+
+message CreateNotifyStreamRequest {
+    string service_unique_name = 1;
+}
+
+message NotifyMessage {
+    string agent_unique_name = 1;
+    int32 type = 2;
+    string payload = 3;
+}
+

@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include=".\Contracts\Gateway\registerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\projectManagementV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\projectSettingsV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\editorV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\runtimeV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\storageV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\notifyV1.proto" GrpcServices="Both" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.50.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\AyBorg.SDK.Common.csproj" />
+    <ProjectReference Include="..\..\System\AyBorg.SDK.System.csproj" />
+  </ItemGroup>
+
+</Project>

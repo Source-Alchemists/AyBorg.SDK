@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace AyBorg.Database.Migrations.SqlLite.Migrations.Registry
+namespace AyBorg.Database.Migrations.SqlLite.Migrations.Gateway
 {
     public partial class RemovedPort : Migration
     {

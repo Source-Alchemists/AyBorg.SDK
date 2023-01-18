@@ -13,16 +13,16 @@ public sealed class JwtMiddleware
         _next = next;
     }
 
-    public async Task InvokeAsync(HttpContext context, IJwtConsumerService jwtConsumerService)
+    public async Task InvokeAsync(HttpContext context, IJwtConsumer jwtConsumerService)
     {
-        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+        string? token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         if (string.IsNullOrEmpty(token))
         {
             await _next(context);
             return;
         }
 
-        var validatedToken = jwtConsumerService.ValidateToken(token);
+        System.IdentityModel.Tokens.Jwt.JwtSecurityToken validatedToken = jwtConsumerService.ValidateToken(token);
         validatedToken?.Claims.ToList().ForEach(claim => context.User.AddIdentity(new ClaimsIdentity(new[] { claim }, "jwt")));
         await _next(context);
     }

@@ -1,5 +1,4 @@
-﻿using AyBorg.SDK.Common;
-using AyBorg.SDK.Common.Ports;
+﻿using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Projects;
 
@@ -9,6 +8,11 @@ public sealed record Project
     /// Gets or sets the meta informations.
     /// </summary>
     public ProjectMeta Meta { get; set; } = new ProjectMeta();
+
+    /// <summary>
+    /// Gets or sets the settings.
+    /// </summary>
+    public ProjectSettings Settings { get; set; } = new ProjectSettings();
 
     /// <summary>
     /// Gets or sets the steps.

@@ -4,8 +4,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ImageTorque" Version="0.1.4" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AyBorg.SDK.Common.csproj" />

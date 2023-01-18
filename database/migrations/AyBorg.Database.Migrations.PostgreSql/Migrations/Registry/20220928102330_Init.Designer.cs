@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Registry
+namespace AyBorg.Database.Migrations.PostgreSql.Migrations.Gateway
 {
     [DbContext(typeof(RegistryContext))]
     [Migration("20220928102330_Init")]

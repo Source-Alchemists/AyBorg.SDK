@@ -1,9 +1,7 @@
-using Sys = System;
-using AyBorg.SDK.Data.DAL;
-using AyBorg.SDK.ImageProcessing;
-using AyBorg.SDK.ImageProcessing.Buffers;
-using AyBorg.SDK.ImageProcessing.Pixels;
 using AutoMapper;
+using AyBorg.SDK.Data.DAL;
+using ImageTorque;
+using Sys = System;
 
 namespace AyBorg.SDK.Data.Mapper.Converter;
 
@@ -11,7 +9,7 @@ internal class ImageToRecordConverter : IValueConverter<Image, string>
 {
     public string Convert(Image sourceMember, ResolutionContext context)
     {
-        if(sourceMember == null)
+        if (sourceMember == null)
         {
             return string.Empty;
         }
@@ -24,7 +22,7 @@ internal class ImageToRecordConverter : IValueConverter<Image, string>
             PixelFormat = sourceMember.PixelFormat,
             Value = string.Empty // No need to save images to the database as port.
         };
-        
+
         return Sys.Text.Json.JsonSerializer.Serialize(record);
     }
 }
