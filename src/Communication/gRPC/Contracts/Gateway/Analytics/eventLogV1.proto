@@ -1,1 +1,17 @@
 syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.analytics.v1;
+
+service EventLog {
+    rpc LogEvent (EventRequest) returns (google.protobuf.Empty) {}
+}
+
+message EventRequest {
+    string service_unique_name = 1;
+    int32 log_level = 2;
+    string message = 3;
+    int32 event_id = 4;
+    string event_name = 5;
+}
