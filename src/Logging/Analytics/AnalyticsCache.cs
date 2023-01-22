@@ -5,16 +5,16 @@ namespace AyBorg.SDK.Logging.Analytics;
 
 public sealed class AnalyticsCache
 {
-    private readonly ConcurrentQueue<EventRequest> _queue = new();
+    private readonly ConcurrentQueue<EventEntry> _queue = new();
 
-    public void Enqueue(EventRequest eventRequest)
+    public void Enqueue(EventEntry eventRequest)
     {
         _queue.Enqueue(eventRequest);
     }
 
-    public bool TryDequeue(out EventRequest eventRequest)
+    public bool TryDequeue(out EventEntry eventRequest)
     {
-        bool result = _queue.TryDequeue(out EventRequest? er);
+        bool result = _queue.TryDequeue(out EventEntry? er);
         eventRequest = er!;
         return result;
     }

@@ -29,10 +29,10 @@ public sealed class AnalyticsLogger : ILogger
     {
         if (!IsEnabled(logLevel)) return;
 
-        _cache.Enqueue(new EventRequest
+        _cache.Enqueue(new EventEntry
         {
             ServiceUniqueName = string.Empty,
-            TimeStamp = Timestamp.FromDateTime(DateTime.UtcNow),
+            Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
             LogLevel = (int)logLevel,
             EventId = eventId.Id,
             EventName = eventId.Name ?? string.Empty,
