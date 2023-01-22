@@ -37,6 +37,7 @@ public sealed class AnalyticsBackgroundService : BackgroundService
                 {
                     if (_cache.TryDequeue(out EventRequest? request))
                     {
+                        request.ServiceType = _serviceConfiguration.TypeName;
                         request.ServiceUniqueName = _serviceConfiguration.UniqueName;
                         await _eventLogClient.LogEventAsync(request);
                     }

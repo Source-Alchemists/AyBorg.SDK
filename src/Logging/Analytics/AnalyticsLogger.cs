@@ -1,4 +1,5 @@
 using Ayborg.Gateway.Analytics.V1;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -31,9 +32,11 @@ public sealed class AnalyticsLogger : ILogger
         _cache.Enqueue(new EventRequest
         {
             ServiceUniqueName = string.Empty,
+            TimeStamp = Timestamp.FromDateTime(DateTime.UtcNow),
             LogLevel = (int)logLevel,
             EventId = eventId.Id,
-            EventName = eventId.Name ?? string.Empty
+            EventName = eventId.Name ?? string.Empty,
+            Message = $"{formatter(state, exception)}"
         });
     }
 }

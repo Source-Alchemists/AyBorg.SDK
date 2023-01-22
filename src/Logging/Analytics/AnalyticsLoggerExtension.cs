@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AyBorg.SDK.Logging.Analytics;
 
-public static class AnalyticsLoggerMiddleware
+public static class AnalyticsLoggerExtension
 {
     public static ILoggingBuilder AddAyBorgAnalyticsLogger(this ILoggingBuilder builder)
     {
