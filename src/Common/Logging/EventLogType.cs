@@ -4,13 +4,6 @@ namespace AyBorg.SDK.Common;
 
 public enum EventLogType
 {
-    [Description("Undefined")]
-    Undefined = 0,
-    // gRPC
-    [Description("gRPC.Internal.Call")]
-    GrpcInternalCall = 3,
-    [Description("gRPC.ServerCallHandler")]
-    GrpcServerCallHandler = 7,
     // Registry
     [Description("Connect")]
     Connect = 42000,
