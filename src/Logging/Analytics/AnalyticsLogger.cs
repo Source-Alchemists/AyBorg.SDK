@@ -35,7 +35,6 @@ public sealed class AnalyticsLogger : ILogger
             Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
             LogLevel = (int)logLevel,
             EventId = eventId.Id,
-            EventName = eventId.Name ?? string.Empty,
             Message = $"{formatter(state, exception)}"
         });
     }

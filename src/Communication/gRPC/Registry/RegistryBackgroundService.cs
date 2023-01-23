@@ -1,4 +1,5 @@
 using Ayborg.Gateway.V1;
+using AyBorg.SDK.Common;
 using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -23,14 +24,14 @@ public sealed class RegistryBackgroundService : BackgroundService
 
     public override async Task StartAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Registry service is starting.");
+        _logger.LogInformation(new EventId((int)EventLogType.Connect), "Registry service is starting.");
         try
         {
             await Register(cancellationToken);
         }
         catch (Exception ex)
         {
-            _logger.LogWarning("Failed to register at start", ex);
+            _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to register at start", ex);
         }
 
         await base.StartAsync(cancellationToken);
@@ -38,7 +39,7 @@ public sealed class RegistryBackgroundService : BackgroundService
 
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Registry service is stopping.");
+        _logger.LogInformation(new EventId((int)EventLogType.Disconnect), "Registry service is stopping.");
         try
         {
             StatusResponse response = await _registerClient.UnregisterAsync(new UnregisterRequest
@@ -48,14 +49,14 @@ public sealed class RegistryBackgroundService : BackgroundService
 
             if (!response.Success)
             {
-                _logger.LogWarning("Failed to unregister service: {ErrorMessage}", response.ErrorMessage);
+                _logger.LogWarning(new EventId((int)EventLogType.Disconnect), "Failed to unregister service: {ErrorMessage}", response.ErrorMessage);
             }
 
             _serviceId = Guid.Empty;
         }
         catch (Exception ex)
         {
-            _logger.LogWarning("Failed to unregister", ex);
+            _logger.LogWarning(new EventId((int)EventLogType.Disconnect), "Failed to unregister", ex);
         }
 
         await base.StopAsync(cancellationToken);
@@ -76,7 +77,7 @@ public sealed class RegistryBackgroundService : BackgroundService
 
                     if (!response.Success)
                     {
-                        _logger.LogWarning("Failed to send heartbeat: {ErrorMessage}", response.ErrorMessage);
+                        _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to send heartbeat: {ErrorMessage}", response.ErrorMessage);
                     }
                 }
                 else
@@ -86,7 +87,7 @@ public sealed class RegistryBackgroundService : BackgroundService
             }
             catch (Exception ex)
             {
-                _logger.LogWarning("Failed to send heartbeat", ex);
+                _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to send heartbeat", ex);
             }
 
             await Task.Delay(TimeSpan.FromSeconds(30));
@@ -106,12 +107,12 @@ public sealed class RegistryBackgroundService : BackgroundService
 
         if (!response.Success)
         {
-            _logger.LogWarning("Failed to register service: {ErrorMessage}", response.ErrorMessage);
+            _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to register service: {ErrorMessage}", response.ErrorMessage);
         }
 
-        if(!Guid.TryParse(response.Id, out _serviceId))
+        if (!Guid.TryParse(response.Id, out _serviceId))
         {
-            _logger.LogWarning("Failed to parse service id: {Id}", response.Id);
+            _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to parse service id: {Id}", response.Id);
         }
     }
 }
