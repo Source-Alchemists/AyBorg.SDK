@@ -12,6 +12,8 @@ public enum EventLogType
     // Common
     [Description("Result")]
     Result = 42010,
+    [Description("User Interaction")]
+    UserInteraction = 42020,
     // Engine
     [Description("Engine State")]
     EngineState = 42100,
