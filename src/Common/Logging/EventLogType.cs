@@ -15,10 +15,10 @@ public enum EventLogType
     [Description("User Interaction")]
     UserInteraction = 42020,
     // Engine
-    [Description("Engine State")]
-    EngineState = 42100,
-    [Description("Plugin State")]
-    PluginState = 42110,
+    [Description("Engine")]
+    Engine = 42100,
+    [Description("Plugin")]
+    Plugin = 42110,
     [Description("Project State")]
     ProjectState = 42200,
     [Description("Project saved")]
