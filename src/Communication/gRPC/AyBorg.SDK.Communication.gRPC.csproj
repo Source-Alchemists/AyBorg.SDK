@@ -15,6 +15,7 @@
     <Protobuf Include=".\Contracts\Gateway\Agent\runtimeV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Agent\storageV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Agent\notifyV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Analytics\eventLogV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

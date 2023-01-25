@@ -246,7 +246,6 @@ public sealed class MqttClientProvider : IMqttClientProvider
     private async Task OnApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs e)
     {
         var subscriptions = _subscriptions.Where(x => MqttTopicFilterComparer.Compare(e.ApplicationMessage.Topic, x.TopicFilter) == MqttTopicFilterCompareResult.IsMatch).ToList();
-        CancellationToken token = CancellationToken.None;
         await Parallel.ForEachAsync(subscriptions, async (subscription, token) =>
         {
             subscription.MessageReceived?.Invoke(e.ApplicationMessage);
