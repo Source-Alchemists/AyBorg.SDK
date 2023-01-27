@@ -18,6 +18,8 @@ public record GatewayConfiguration : IGatewayConfiguration
 
     public string Url { get; }
 
+    public bool IsAuditRequired { get; }
+
     public GatewayConfiguration(ILogger<IGatewayConfiguration> logger, IConfiguration configuration)
     {
         _logger = logger;
@@ -65,6 +67,8 @@ public record GatewayConfiguration : IGatewayConfiguration
         {
             Url = serviceUrl;
         }
+
+        IsAuditRequired = configuration.GetValue<bool>("AyBorg:Service:Audit:Required", true);
 
         Version = assemblyName.Version!.ToString();
     }
