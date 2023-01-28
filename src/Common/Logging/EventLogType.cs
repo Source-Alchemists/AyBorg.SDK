@@ -9,11 +9,13 @@ public enum EventLogType
     Connect = 42000,
     [Description("Disconnect")]
     Disconnect = 42001,
+
     // Common
     [Description("Result")]
     Result = 42010,
     [Description("User Interaction")]
     UserInteraction = 42020,
+
     // Engine
     [Description("Engine")]
     Engine = 42100,
@@ -24,5 +26,9 @@ public enum EventLogType
     [Description("Project saved")]
     ProjectSaved = 42201,
     [Description("Project removed")]
-    ProjectRemoved = 42202
+    ProjectRemoved = 42202,
+
+    // Audit
+    [Description("Audit")]
+    Audit = 42300
 }

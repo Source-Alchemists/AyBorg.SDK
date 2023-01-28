@@ -16,7 +16,9 @@ message AuditEntry {
     string service_unique_name = 2;
     google.protobuf.Timestamp timestamp = 3;
     int32 type = 4;
-    string json = 5;
+    oneof payload {
+        AgentProjectAuditEntry agent_project = 5;
+    }
 }
 
 message AuditReportMeta {
@@ -37,4 +39,45 @@ message GetAuditReportMetasRequest {
     string service_unique_name = 2;
     google.protobuf.Timestamp from = 3;
     google.protobuf.Timestamp to = 4;
+}
+
+message AgentProjectAuditEntry {
+    string id = 1;
+    string name = 2;
+    int32 state = 3;
+    string version_name = 4;
+    int32 version_iteration = 5;
+    string comment = 6;
+    string approved_bye = 7;
+    AgentProjectSettingsAuditEntry settings = 8;
+    repeated AgentStepAuditEntry steps = 9;
+    repeated AgentLinkAuditEntry links = 10;
+}
+
+message AgentProjectSettingsAuditEntry {
+    bool is_force_result_communication_enabled = 1;
+}
+
+message AgentStepAuditEntry {
+    string id = 1;
+    string name = 2;
+    int32 x = 3;
+    int32 y = 4;
+    string assembly_name = 5;
+    string assembly_version = 6;
+    string type_name = 7;
+    repeated AgentPortAuditEntry ports = 8;
+}
+
+message AgentPortAuditEntry {
+    string id = 1;
+    string name = 2;
+    string value = 3;
+    int32 brand = 4;
+}
+
+message AgentLinkAuditEntry {
+    string id = 1;
+    string source_id = 2;
+    string target_id = 3;
 }
