@@ -7,6 +7,7 @@ package ayborg.gateway.audit.v1;
 
 service Audit {
     rpc AddEntry (AuditEntry) returns (google.protobuf.Empty);
+    rpc InvalidateEntry(AuditReportMeta) returns (google.protobuf.Empty);
     rpc GetEntries (GetAuditEntriesRequest) returns (stream AuditEntry);
     rpc GetReportMetas (GetAuditReportMetasRequest) returns (stream AuditReportMeta);
 }
@@ -23,9 +24,10 @@ message AuditEntry {
 }
 
 message AuditReportMeta {
-    string service_type = 1;
-    string service_unique_name = 2;
-    google.protobuf.Timestamp timestamp = 3;
+    string token = 1;
+    string service_type = 2;
+    string service_unique_name = 3;
+    google.protobuf.Timestamp timestamp = 4;
 }
 
 message GetAuditEntriesRequest {
