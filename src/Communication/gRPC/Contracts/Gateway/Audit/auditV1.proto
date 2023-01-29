@@ -12,12 +12,13 @@ service Audit {
 }
 
 message AuditEntry {
-    string service_type = 1;
-    string service_unique_name = 2;
-    google.protobuf.Timestamp timestamp = 3;
-    int32 type = 4;
+    string token = 1;
+    string service_type = 2;
+    string service_unique_name = 3;
+    google.protobuf.Timestamp timestamp = 4;
+    int32 type = 5;
     oneof payload {
-        AgentProjectAuditEntry agent_project = 5;
+        AgentProjectAuditEntry agent_project = 6;
     }
 }
 
