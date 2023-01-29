@@ -48,7 +48,7 @@ message AgentProjectAuditEntry {
     string version_name = 4;
     int32 version_iteration = 5;
     string comment = 6;
-    string approved_bye = 7;
+    string approved_by = 7;
     AgentProjectSettingsAuditEntry settings = 8;
     repeated AgentStepAuditEntry steps = 9;
     repeated AgentLinkAuditEntry links = 10;
