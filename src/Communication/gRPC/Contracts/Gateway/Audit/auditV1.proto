@@ -7,8 +7,10 @@ package ayborg.gateway.audit.v1;
 
 service Audit {
     rpc AddEntry (AuditEntry) returns (google.protobuf.Empty);
-    rpc InvalidateEntry(AuditReportMeta) returns (google.protobuf.Empty);
+    rpc InvalidateEntry(InvalidateAuditEntryRequest) returns (google.protobuf.Empty);
     rpc GetEntries (GetAuditEntriesRequest) returns (stream AuditEntry);
+    rpc GetChanges (GetAuditChangesRequest) returns (stream AuditChanges);
+
     rpc GetReportMetas (GetAuditReportMetasRequest) returns (stream AuditReportMeta);
 }
 
@@ -16,11 +18,18 @@ message AuditEntry {
     string token = 1;
     string service_type = 2;
     string service_unique_name = 3;
-    google.protobuf.Timestamp timestamp = 4;
-    int32 type = 5;
+    string user = 4;
+    google.protobuf.Timestamp timestamp = 5;
+    int32 type = 6;
     oneof payload {
-        AgentProjectAuditEntry agent_project = 6;
+        google.protobuf.Empty empty = 7;
+        AgentProjectAuditEntry agent_project = 8;
     }
+}
+
+message InvalidateAuditEntryRequest {
+    string token = 1;
+    string service_type = 2;
 }
 
 message AuditReportMeta {
@@ -35,6 +44,21 @@ message GetAuditEntriesRequest {
     string service_unique_name = 2;
     google.protobuf.Timestamp from = 3;
     google.protobuf.Timestamp to = 4;
+}
+
+message GetAuditChangesRequest {
+    string service_type = 1;
+    string service_unique_name = 2;
+    google.protobuf.Timestamp from = 3;
+    google.protobuf.Timestamp to = 4;
+    repeated string token = 5;
+}
+
+message AuditChanges {
+    string related_token = 1;
+    string property_name = 2;
+    string original_value = 3;
+    string changed_value = 4;
 }
 
 message GetAuditReportMetasRequest {
