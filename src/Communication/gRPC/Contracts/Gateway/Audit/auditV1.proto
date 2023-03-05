@@ -64,18 +64,16 @@ message GetAuditChangesetsRequest {
 }
 
 message GetAuditChangesRequest {
-    string service_type = 1;
-    string service_unique_name = 2;
-    google.protobuf.Timestamp from = 3;
-    google.protobuf.Timestamp to = 4;
-    repeated string token = 5;
+    repeated string tokens = 1;
 }
 
 message AuditChange {
-    string related_token = 1;
-    string property_name = 2;
-    string original_value = 3;
-    string changed_value = 4;
+    string related_token_a = 1;
+    string related_token_b = 2;
+    string label = 3;
+    string sub_label = 4;
+    string original_value = 5;
+    string changed_value = 6;
 }
 
 message GetAuditReportMetasRequest {
@@ -118,6 +116,7 @@ message AgentPortAuditEntry {
     string name = 2;
     string value = 3;
     int32 brand = 4;
+    int32 direction = 5;
 }
 
 message AgentLinkAuditEntry {
