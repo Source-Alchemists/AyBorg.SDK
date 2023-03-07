@@ -12,7 +12,8 @@ service Audit {
     rpc GetChangesets (GetAuditChangesetsRequest) returns (stream AuditChangeset);
     rpc GetChanges (GetAuditChangesRequest) returns (stream AuditChange);
 
-    rpc GetReportMetas (GetAuditReportMetasRequest) returns (stream AuditReportMeta);
+    rpc SaveReport (SaveAuditReportRequest) returns (google.protobuf.Empty);
+    rpc GetSavedReports (google.protobuf.Empty) returns (stream AuditReport);
 }
 
 message AuditEntry {
@@ -49,13 +50,6 @@ message InvalidateAuditEntryRequest {
     string service_type = 2;
 }
 
-message AuditReportMeta {
-    string token = 1;
-    string service_type = 2;
-    string service_unique_name = 3;
-    google.protobuf.Timestamp timestamp = 4;
-}
-
 message GetAuditChangesetsRequest {
     string service_type = 1;
     string service_unique_name = 2;
@@ -76,11 +70,18 @@ message AuditChange {
     string changed_value = 6;
 }
 
-message GetAuditReportMetasRequest {
-    string service_type = 1;
-    string service_unique_name = 2;
-    google.protobuf.Timestamp from = 3;
-    google.protobuf.Timestamp to = 4;
+message SaveAuditReportRequest {
+    repeated AuditChangeset changesets = 1;
+    string report_name = 2;
+    string comment = 3;
+}
+
+message AuditReport {
+    string id = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    string report_name = 3;
+    string comment = 4;
+    repeated AuditChangeset changesets = 5;
 }
 
 message AgentProjectAuditEntry {
