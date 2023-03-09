@@ -12,8 +12,9 @@ service Audit {
     rpc GetChangesets (GetAuditChangesetsRequest) returns (stream AuditChangeset);
     rpc GetChanges (GetAuditChangesRequest) returns (stream AuditChange);
 
-    rpc SaveReport (SaveAuditReportRequest) returns (google.protobuf.Empty);
-    rpc GetSavedReports (google.protobuf.Empty) returns (stream AuditReport);
+    rpc AddReport (AddAuditReportRequest) returns (google.protobuf.Empty);
+    rpc GetReports (google.protobuf.Empty) returns (stream AuditReport);
+    rpc DeleteReport(AuditReport) returns (google.protobuf.Empty);
 }
 
 message AuditEntry {
@@ -70,7 +71,7 @@ message AuditChange {
     string changed_value = 6;
 }
 
-message SaveAuditReportRequest {
+message AddAuditReportRequest {
     repeated AuditChangeset changesets = 1;
     string report_name = 2;
     string comment = 3;
