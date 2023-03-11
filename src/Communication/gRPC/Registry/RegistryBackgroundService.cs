@@ -78,6 +78,7 @@ public sealed class RegistryBackgroundService : BackgroundService
                     if (!response.Success)
                     {
                         _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to send heartbeat: {ErrorMessage}", response.ErrorMessage);
+                        _serviceId = Guid.Empty;
                     }
                 }
                 else
@@ -88,6 +89,7 @@ public sealed class RegistryBackgroundService : BackgroundService
             catch (Exception ex)
             {
                 _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to send heartbeat", ex);
+                _serviceId = Guid.Empty; // In the next iteration, the service should be registered again
             }
 
             await Task.Delay(TimeSpan.FromSeconds(30));
