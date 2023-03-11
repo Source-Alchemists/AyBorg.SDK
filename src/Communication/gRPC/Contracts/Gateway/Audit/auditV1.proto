@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.audit.v1;
+
+service Audit {
+    rpc AddEntry (AuditEntry) returns (google.protobuf.Empty);
+    rpc InvalidateEntry(InvalidateAuditEntryRequest) returns (google.protobuf.Empty);
+
+    rpc GetChangesets (GetAuditChangesetsRequest) returns (stream AuditChangeset);
+    rpc GetChanges (GetAuditChangesRequest) returns (stream AuditChange);
+
+    rpc AddReport (AddAuditReportRequest) returns (google.protobuf.Empty);
+    rpc GetReports (google.protobuf.Empty) returns (stream AuditReport);
+    rpc DeleteReport(AuditReport) returns (google.protobuf.Empty);
+}
+
+message AuditEntry {
+    string token = 1;
+    string service_type = 2;
+    string service_unique_name = 3;
+    string user = 4;
+    google.protobuf.Timestamp timestamp = 5;
+    oneof payload {
+        google.protobuf.Empty empty = 6;
+        AgentProjectAuditEntry agent_project = 7;
+    }
+}
+
+message AuditChangeset {
+    string token = 1;
+    string service_type = 2;
+    string service_unique_name = 3;
+    string project_id = 4;
+    string project_name = 5;
+    int32 project_state = 6;
+    string version_name = 7;
+    int32 version_iteration = 8;
+    string user = 9;
+    string approver = 10;
+    string comment = 11;
+    google.protobuf.Timestamp timestamp = 12;
+    int32 type = 13;
+}
+
+message InvalidateAuditEntryRequest {
+    string token = 1;
+    string service_type = 2;
+}
+
+message GetAuditChangesetsRequest {
+    string service_type = 1;
+    string service_unique_name = 2;
+    google.protobuf.Timestamp from = 3;
+    google.protobuf.Timestamp to = 4;
+}
+
+message GetAuditChangesRequest {
+    repeated string tokens = 1;
+}
+
+message AuditChange {
+    string related_token_a = 1;
+    string related_token_b = 2;
+    string label = 3;
+    string sub_label = 4;
+    string original_value = 5;
+    string changed_value = 6;
+}
+
+message AddAuditReportRequest {
+    repeated AuditChangeset changesets = 1;
+    string report_name = 2;
+    string comment = 3;
+}
+
+message AuditReport {
+    string id = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    string report_name = 3;
+    string comment = 4;
+    repeated AuditChangeset changesets = 5;
+}
+
+message AgentProjectAuditEntry {
+    string id = 1;
+    string name = 2;
+    int32 state = 3;
+    string version_name = 4;
+    int32 version_iteration = 5;
+    string comment = 6;
+    string approved_by = 7;
+    AgentProjectSettingsAuditEntry settings = 8;
+    repeated AgentStepAuditEntry steps = 9;
+    repeated AgentLinkAuditEntry links = 10;
+}
+
+message AgentProjectSettingsAuditEntry {
+    bool is_force_result_communication_enabled = 1;
+}
+
+message AgentStepAuditEntry {
+    string id = 1;
+    string name = 2;
+    int32 x = 3;
+    int32 y = 4;
+    string assembly_name = 5;
+    string assembly_version = 6;
+    string type_name = 7;
+    repeated AgentPortAuditEntry ports = 8;
+}
+
+message AgentPortAuditEntry {
+    string id = 1;
+    string name = 2;
+    string value = 3;
+    int32 brand = 4;
+    int32 direction = 5;
+}
+
+message AgentLinkAuditEntry {
+    string id = 1;
+    string source_id = 2;
+    string target_id = 3;
+}

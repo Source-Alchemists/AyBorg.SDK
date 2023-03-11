@@ -15,7 +15,7 @@ public static class AnalyticsLoggerExtension
 
     public static WebApplicationBuilder AddAyBorgAnalyticsLogger(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSingleton<AnalyticsCache>();
+        builder.Services.AddSingleton<IAnalyticsCache, AnalyticsCache>();
         builder.Services.AddHostedService<AnalyticsBackgroundService>();
         builder.Logging.AddAyBorgAnalyticsLogger();
         return builder;

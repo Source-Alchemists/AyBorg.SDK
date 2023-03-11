@@ -15,7 +15,10 @@ public record ServiceConfiguration : GatewayConfiguration, IServiceConfiguration
         string? registryUrl = configuration.GetValue<string>("AyBorg:Gateway:Url");
         if (string.IsNullOrEmpty(registryUrl))
         {
-            _logger.LogWarning("Registry url is not set in configuration. Using default value. (Hint: AyBorg:Registry:Url)");
+            if (configuration.GetValue<string>("AyBorg:Service:Type")?.Equals(ServiceTypes.Gateway) != true)
+            {
+                _logger.LogWarning("Registry url is not set in configuration. Using default value. (Hint: AyBorg:Gateway:Url)");
+            }
             GatewayUrl = "http://localhost:5000";
         }
         else

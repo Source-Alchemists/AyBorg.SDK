@@ -1,26 +1,23 @@
 using Ayborg.Gateway.Analytics.V1;
 using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace AyBorg.SDK.Logging.Analytics;
 
 public sealed class AnalyticsBackgroundService : BackgroundService
 {
-    private readonly ILogger<AnalyticsBackgroundService> _logger;
     private readonly IServiceConfiguration _serviceConfiguration;
+    private readonly IAnalyticsCache _cache;
     private readonly EventLog.EventLogClient _eventLogClient;
-    private readonly AnalyticsCache _cache;
 
-    public AnalyticsBackgroundService(ILogger<AnalyticsBackgroundService> logger,
-                                        IServiceConfiguration serviceConfiguration,
-                                        EventLog.EventLogClient eventLogClient,
-                                        AnalyticsCache analyticsCache)
+
+    public AnalyticsBackgroundService(IServiceConfiguration serviceConfiguration,
+                                        IAnalyticsCache analyticsCache,
+                                        EventLog.EventLogClient eventLogClient)
     {
-        _logger = logger;
         _serviceConfiguration = serviceConfiguration;
-        _eventLogClient = eventLogClient;
         _cache = analyticsCache;
+        _eventLogClient = eventLogClient;
     }
 
     public override Task StartAsync(CancellationToken cancellationToken) => base.StartAsync(cancellationToken);

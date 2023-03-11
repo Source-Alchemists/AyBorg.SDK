@@ -3,7 +3,7 @@ using Ayborg.Gateway.Analytics.V1;
 
 namespace AyBorg.SDK.Logging.Analytics;
 
-public sealed class AnalyticsCache
+public sealed class AnalyticsCache : IAnalyticsCache
 {
     private readonly ConcurrentQueue<EventEntry> _queue = new();
 
