@@ -7,12 +7,12 @@ namespace AyBorg.SDK.Logging.Analytics;
 public sealed class AnalyticsLoggerProvider : ILoggerProvider
 {
     private readonly IConfiguration _configuration;
-    private readonly AnalyticsCache _cache;
+    private readonly IAnalyticsCache _cache;
     private AnalyticsLogger _logger = null!;
     private bool _isDisposed = false;
 
     public AnalyticsLoggerProvider(IConfiguration configuration,
-                                    AnalyticsCache analyticsCache)
+                                    IAnalyticsCache analyticsCache)
     {
         _configuration = configuration;
         _cache = analyticsCache;

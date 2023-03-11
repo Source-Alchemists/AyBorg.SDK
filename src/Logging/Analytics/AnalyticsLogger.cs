@@ -8,10 +8,10 @@ namespace AyBorg.SDK.Logging.Analytics;
 public sealed class AnalyticsLogger : ILogger
 {
     private readonly IConfiguration _configuration;
-    private readonly AnalyticsCache _cache;
+    private readonly IAnalyticsCache _cache;
 
     public AnalyticsLogger(IConfiguration configuration,
-                            AnalyticsCache analyticsCache)
+                            IAnalyticsCache analyticsCache)
     {
         _configuration = configuration;
         _cache = analyticsCache;
