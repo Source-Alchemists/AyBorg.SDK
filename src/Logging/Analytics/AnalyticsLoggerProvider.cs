@@ -9,6 +9,7 @@ public sealed class AnalyticsLoggerProvider : ILoggerProvider
     private readonly IConfiguration _configuration;
     private readonly AnalyticsCache _cache;
     private AnalyticsLogger _logger = null!;
+    private bool _isDisposed = false;
 
     public AnalyticsLoggerProvider(IConfiguration configuration,
                                     AnalyticsCache analyticsCache)
@@ -25,5 +26,16 @@ public sealed class AnalyticsLoggerProvider : ILoggerProvider
 
     public void Dispose()
     {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool isDisposing)
+    {
+        if (isDisposing && !_isDisposed)
+        {
+            _logger = null!;
+            _isDisposed = true;
+        }
     }
 }

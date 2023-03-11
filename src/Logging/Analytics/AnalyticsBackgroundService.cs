@@ -1,23 +1,19 @@
 using Ayborg.Gateway.Analytics.V1;
 using AyBorg.SDK.System.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace AyBorg.SDK.Logging.Analytics;
 
 public sealed class AnalyticsBackgroundService : BackgroundService
 {
-    private readonly ILogger<AnalyticsBackgroundService> _logger;
     private readonly IServiceConfiguration _serviceConfiguration;
     private readonly EventLog.EventLogClient _eventLogClient;
     private readonly AnalyticsCache _cache;
 
-    public AnalyticsBackgroundService(ILogger<AnalyticsBackgroundService> logger,
-                                        IServiceConfiguration serviceConfiguration,
+    public AnalyticsBackgroundService(IServiceConfiguration serviceConfiguration,
                                         EventLog.EventLogClient eventLogClient,
                                         AnalyticsCache analyticsCache)
     {
-        _logger = logger;
         _serviceConfiguration = serviceConfiguration;
         _eventLogClient = eventLogClient;
         _cache = analyticsCache;
