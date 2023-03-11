@@ -7,16 +7,17 @@ namespace AyBorg.SDK.Logging.Analytics;
 public sealed class AnalyticsBackgroundService : BackgroundService
 {
     private readonly IServiceConfiguration _serviceConfiguration;
+    private readonly IAnalyticsCache _cache;
     private readonly EventLog.EventLogClient _eventLogClient;
-    private readonly AnalyticsCache _cache;
+
 
     public AnalyticsBackgroundService(IServiceConfiguration serviceConfiguration,
-                                        EventLog.EventLogClient eventLogClient,
-                                        AnalyticsCache analyticsCache)
+                                        IAnalyticsCache analyticsCache,
+                                        EventLog.EventLogClient eventLogClient)
     {
         _serviceConfiguration = serviceConfiguration;
-        _eventLogClient = eventLogClient;
         _cache = analyticsCache;
+        _eventLogClient = eventLogClient;
     }
 
     public override Task StartAsync(CancellationToken cancellationToken) => base.StartAsync(cancellationToken);
