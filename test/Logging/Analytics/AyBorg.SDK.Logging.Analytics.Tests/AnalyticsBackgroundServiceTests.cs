@@ -19,7 +19,7 @@ public class AnalyticsBackgroundServiceTests
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async ValueTask Test_BackgroundDequeue(bool canDequeue)
+    public async Task Test_BackgroundDequeue(bool canDequeue)
     {
         // Arrange
         CancellationTokenSource tokenSource = new();
