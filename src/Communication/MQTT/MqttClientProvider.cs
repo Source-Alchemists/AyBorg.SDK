@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Globalization;
 using System.Text.Json;
 using AyBorg.SDK.Common.Models;
@@ -25,9 +24,9 @@ public sealed class MqttClientProvider : IMqttClientProvider
     private readonly MqttClientOptions _mqttClientOptions;
     private readonly ManagedMqttClientOptions _managedMqttClientOptions;
     private readonly IManagedMqttClient _mqttClient;
+    private readonly List<MqttSubscription> _subscriptions = new();
     private bool _disposedValue;
     private Task? _statusTask;
-    private ConcurrentBag<MqttSubscription> _subscriptions = new();
 
     public string ServiceUniqueName { get; }
 
@@ -152,7 +151,10 @@ public sealed class MqttClientProvider : IMqttClientProvider
         }
         await _mqttClient.SubscribeAsync(topic).ConfigureAwait(false);
         var subscription = new MqttSubscription { TopicFilter = topic };
-        _subscriptions.Add(subscription);
+        lock (_subscriptions)
+        {
+            _subscriptions.Add(subscription);
+        }
         return subscription;
     }
 
@@ -166,9 +168,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         await _mqttClient.UnsubscribeAsync(subscription.TopicFilter).ConfigureAwait(false);
         lock (_subscriptions)
         {
-            var tmp = new List<MqttSubscription>(_subscriptions);
-            tmp.Remove(subscription);
-            _subscriptions = new ConcurrentBag<MqttSubscription>(tmp);
+            _subscriptions.Remove(subscription);
         }
     }
 
@@ -246,7 +246,6 @@ public sealed class MqttClientProvider : IMqttClientProvider
     private async Task OnApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs e)
     {
         var subscriptions = _subscriptions.Where(x => MqttTopicFilterComparer.Compare(e.ApplicationMessage.Topic, x.TopicFilter) == MqttTopicFilterCompareResult.IsMatch).ToList();
-        CancellationToken token = CancellationToken.None;
         await Parallel.ForEachAsync(subscriptions, async (subscription, token) =>
         {
             subscription.MessageReceived?.Invoke(e.ApplicationMessage);

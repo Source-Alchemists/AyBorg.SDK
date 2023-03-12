@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.analytics.v1;
+
+service EventLog {
+    rpc LogEvent (EventEntry) returns (google.protobuf.Empty);
+    rpc GetLogEvents(GetEventsRequest) returns (stream EventEntry);
+}
+
+message EventEntry {
+    string service_type = 1;
+    string service_unique_name = 2;
+    google.protobuf.Timestamp timestamp = 3;
+    int32 log_level = 4;
+    string message = 5;
+    int32 event_id = 6;
+}
+
+message GetEventsRequest {
+    string service_type = 1;
+    string service_unique_name = 2;
+    int32 log_level = 3;
+    int32 event_id = 4;
+}
