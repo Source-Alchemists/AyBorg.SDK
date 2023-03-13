@@ -7,4 +7,5 @@ public static class DefaultStepCategories {
     public const string ImageShapes = "Image shapes";
     public const string Communication = "Communication";
     public const string Time = "Time";
+    public const string Function = "Function";
 }

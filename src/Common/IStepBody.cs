@@ -12,7 +12,7 @@ public interface IStepBody
     /// <summary>
     /// Gets the categories.
     /// </summary>
-    IEnumerable<string> Categories { get; }
+    IReadOnlyCollection<string> Categories { get; }
 
     /// <summary>
     /// Gets the ports.

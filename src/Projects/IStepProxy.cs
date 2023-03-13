@@ -26,7 +26,7 @@ public interface IStepProxy : IDisposable
     /// <summary>
     /// Gets the categories.
     /// </summary>
-    IEnumerable<string> Categories { get; }
+    IReadOnlyCollection<string> Categories { get; }
 
     /// <summary>
     /// Gets or sets the meta information.
