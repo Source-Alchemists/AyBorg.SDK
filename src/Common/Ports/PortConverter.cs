@@ -34,7 +34,8 @@ public static class PortConverter
             PortBrand.Rectangle => targetPort.Brand == PortBrand.String,
             PortBrand.Enum => targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric,
             // Collections
-            PortBrand.StringCollection => targetPort.Brand == PortBrand.String,
+            PortBrand.StringCollection => targetPort.Brand == PortBrand.String
+                                    || targetPort.Brand == PortBrand.Numeric,
             _ => false,
         };
     }
@@ -59,7 +60,7 @@ public static class PortConverter
                 PortBrand.Rectangle => (T)System.Convert.ChangeType(JsonSerializer.Serialize(((RectanglePort)sourcePort).Value), typeof(T)),
                 PortBrand.Enum => (T)System.Convert.ChangeType(((EnumPort)sourcePort).Value, typeof(T)),
                 // Collections
-                PortBrand.StringCollection => (T)System.Convert.ChangeType(JsonSerializer.Serialize(((StringCollectionPort)sourcePort).Value), typeof(T)),
+                PortBrand.StringCollection => ConvertStringCollectionPort<T>(sourcePort),
                 // Unsupported
                 _ => throw new ArgumentException("The port brand is not supported."),
             };
@@ -112,5 +113,16 @@ public static class PortConverter
         }
 
         return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, typeof(T));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T ConvertStringCollectionPort<T>(IPort sourcePort)
+    {
+        if (typeof(T) == typeof(double))
+        {
+            return (T)System.Convert.ChangeType(((StringCollectionPort)sourcePort).Value.Count, typeof(T));
+        }
+
+        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((StringCollectionPort)sourcePort).Value), typeof(T));
     }
 }
