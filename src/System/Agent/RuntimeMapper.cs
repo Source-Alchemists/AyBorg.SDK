@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.Projects;
@@ -74,6 +75,12 @@ public class RuntimeMapper : IRuntimeMapper
                 var imagePort = (ImagePort)runtimePort;
                 port.IsLinkConvertable = imagePort.IsLinkConvertable;
                 port.Value = CreateImage(imagePort);
+                break;
+            // Collections
+            case PortBrand.StringCollection:
+                var stringCollectionPort = (StringCollectionPort)runtimePort;
+                port.IsLinkConvertable = stringCollectionPort.IsLinkConvertable;
+                port.Value = JsonSerializer.Serialize(stringCollectionPort.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 break;
         }
 

@@ -1,6 +1,8 @@
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Ayborg.Gateway.Agent.V1;
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Models;
@@ -144,14 +146,21 @@ public class RpcMapper : IRpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static object UnpackPortValue(PortDto rpc)
     {
+        var jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
         return (PortBrand)rpc.Brand switch
         {
             PortBrand.String or PortBrand.Folder => rpc.Value,
             PortBrand.Boolean => bool.Parse(rpc.Value),
             PortBrand.Numeric => double.Parse(rpc.Value.Replace(',', '.'), CultureInfo.InvariantCulture),
-            PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
-            PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!,
+            PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, jsonOptions)!,
+            PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, jsonOptions)!,
+            PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, jsonOptions)!,
+            // Collections
+            PortBrand.StringCollection => new ReadOnlyCollection<string>(JsonSerializer.Deserialize<string[]>(rpc.Value, jsonOptions) ?? Array.Empty<string>()),
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
@@ -159,14 +168,21 @@ public class RpcMapper : IRpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string PackPortValue(Port port)
     {
+        var jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
         return port.Brand switch
         {
             PortBrand.String or PortBrand.Folder => port.Value!.ToString()!,
             PortBrand.Boolean => port.Value!.ToString()!,
             PortBrand.Numeric => Convert.ToString(port.Value, CultureInfo.InvariantCulture)!,
             PortBrand.Enum => ConvertEnum(port.Value!),
-            PortBrand.Rectangle =>  JsonSerializer.Serialize(port.Value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+            PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, jsonOptions),
             PortBrand.Image => ConvertImage(port.Value!),
+            // Collections
+            PortBrand.StringCollection => port.Value!.ToString()!,
             _ => throw new ArgumentOutOfRangeException(nameof(port.Brand), port.Brand, null),
         };
     }

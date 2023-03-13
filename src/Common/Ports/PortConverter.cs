@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using ImageTorque;
 
@@ -22,7 +24,8 @@ public static class PortConverter
             PortBrand.String => targetPort.Brand == PortBrand.Numeric
                                     || targetPort.Brand == PortBrand.Boolean
                                     || targetPort.Brand == PortBrand.Rectangle
-                                    || targetPort.Brand == PortBrand.Enum,
+                                    || targetPort.Brand == PortBrand.Enum
+                                    || targetPort.Brand == PortBrand.StringCollection,
             PortBrand.Folder => targetPort.Brand == PortBrand.String,
             PortBrand.Numeric => targetPort.Brand == PortBrand.String
                                     || targetPort.Brand == PortBrand.Boolean
@@ -30,6 +33,8 @@ public static class PortConverter
             PortBrand.Boolean => targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric,
             PortBrand.Rectangle => targetPort.Brand == PortBrand.String,
             PortBrand.Enum => targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric,
+            // Collections
+            PortBrand.StringCollection => targetPort.Brand == PortBrand.String,
             _ => false,
         };
     }
@@ -39,56 +44,73 @@ public static class PortConverter
     /// </summary>
     /// <typeparam name="T">The type to convert to.</typeparam>
     /// <param name="sourcePort">The port to convert.</param>
-    /// <param name="orgtValue">The original value.</param>
+    /// <param name="targetPreviousValue">The original value.</param>
     /// <returns>The converted value.</returns>
-    public static T Convert<T>(IPort sourcePort, object orgValue)
+    public static T Convert<T>(IPort sourcePort, object targetPreviousValue)
     {
         try
         {
-            switch (sourcePort.Brand)
+            return sourcePort.Brand switch
             {
-                case PortBrand.String:
-                    if (typeof(T) == typeof(Rectangle))
-                    {
-                        return (T)System.Convert.ChangeType(JsonSerializer.Deserialize<Rectangle>(((StringPort)sourcePort).Value), typeof(T));
-                    }
-                    if (typeof(T) == typeof(Enum))
-                    {
-                        var enumType = orgValue.GetType();
-                        return (T)System.Convert.ChangeType(Enum.Parse(enumType, ((StringPort)sourcePort).Value), typeof(T));
-                    }
-                    if (typeof(T) == typeof(double) && double.TryParse(((StringPort)sourcePort).Value, out var numericValue))
-                    {
-                        return (T)System.Convert.ChangeType(numericValue, typeof(T));
-                    }
-                    return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, typeof(T));
-                case PortBrand.Folder:
-                    return (T)System.Convert.ChangeType(((FolderPort)sourcePort).Value, typeof(T));
-                case PortBrand.Numeric:
-                    if (typeof(T) == typeof(bool))
-                    {
-                        return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value > 0, typeof(T));
-                    }
-                    if (typeof(T) == typeof(Enum))
-                    {
-                        int intValue = System.Convert.ToInt32((((NumericPort)sourcePort).Value));
-                        Type enumType = orgValue.GetType();
-                        return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType).ElementAt(intValue)), typeof(T));
-                    }
-                    return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value, typeof(T));
-                case PortBrand.Boolean:
-                    return (T)System.Convert.ChangeType(((BooleanPort)sourcePort).Value, typeof(T));
-                case PortBrand.Rectangle:
-                    return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((RectanglePort)sourcePort).Value), typeof(T));
-                case PortBrand.Enum:
-                    return (T)System.Convert.ChangeType(((EnumPort)sourcePort).Value, typeof(T));
-                default:
-                    throw new ArgumentException("The port brand is not supported.");
-            }
+                PortBrand.String => ConvertStringPort<T>(sourcePort, targetPreviousValue),
+                PortBrand.Folder => (T)System.Convert.ChangeType(((FolderPort)sourcePort).Value, typeof(T)),
+                PortBrand.Numeric => ConvertNumericPort<T>(sourcePort, targetPreviousValue),
+                PortBrand.Boolean => (T)System.Convert.ChangeType(((BooleanPort)sourcePort).Value, typeof(T)),
+                PortBrand.Rectangle => (T)System.Convert.ChangeType(JsonSerializer.Serialize(((RectanglePort)sourcePort).Value), typeof(T)),
+                PortBrand.Enum => (T)System.Convert.ChangeType(((EnumPort)sourcePort).Value, typeof(T)),
+                // Collections
+                PortBrand.StringCollection => (T)System.Convert.ChangeType(JsonSerializer.Serialize(((StringCollectionPort)sourcePort).Value), typeof(T)),
+                // Unsupported
+                _ => throw new ArgumentException("The port brand is not supported."),
+            };
         }
         catch (Exception ex)
         {
             throw new ArgumentException("The port value cannot be converted to the specified type.", ex);
         }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T ConvertNumericPort<T>(IPort sourcePort, object orgValue)
+    {
+        if (typeof(T) == typeof(bool))
+        {
+            return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value > 0, typeof(T));
+        }
+        if (typeof(T) == typeof(Enum))
+        {
+            int intValue = System.Convert.ToInt32(((NumericPort)sourcePort).Value);
+            Type enumType = orgValue.GetType();
+            return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType).ElementAt(intValue)), typeof(T));
+        }
+        return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value, typeof(T));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T ConvertStringPort<T>(IPort sourcePort, object orgValue)
+    {
+        if (typeof(T) == typeof(Rectangle))
+        {
+            return (T)System.Convert.ChangeType(JsonSerializer.Deserialize<Rectangle>(((StringPort)sourcePort).Value), typeof(T));
+        }
+
+        if (typeof(T) == typeof(Enum))
+        {
+            Type enumType = orgValue.GetType();
+            return (T)System.Convert.ChangeType(Enum.Parse(enumType, ((StringPort)sourcePort).Value), typeof(T));
+        }
+
+        if (typeof(T) == typeof(double) && double.TryParse(((StringPort)sourcePort).Value, out double numericValue))
+        {
+            return (T)System.Convert.ChangeType(numericValue, typeof(T));
+        }
+
+        if (typeof(T) == typeof(ReadOnlyCollection<string>))
+        {
+            var collection = new List<string> { ((StringPort)sourcePort).Value };
+            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(collection), typeof(T));
+        }
+
+        return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, typeof(T));
     }
 }

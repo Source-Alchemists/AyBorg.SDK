@@ -15,9 +15,9 @@ public class StringPort : ValuePortGeneric<StringPort, string>
     /// <summary>
     /// Initializes a new instance of the <see cref="StringPort"/> class.
     /// </summary>
-    public StringPort(StringPort port) : base(port)
+    public StringPort(StringPort other) : base(other)
     {
-        Value = new string(port.Value);
+        Value = new string(other.Value);
     }
 
     /// <summary>

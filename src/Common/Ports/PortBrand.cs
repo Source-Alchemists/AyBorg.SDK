@@ -6,6 +6,7 @@ public enum PortBrand
     Numeric = 10,
     String = 20,
     Folder = 21,
+    StringCollection = 22,
     Boolean = 30,
     Enum = 40,
     Image = 100,

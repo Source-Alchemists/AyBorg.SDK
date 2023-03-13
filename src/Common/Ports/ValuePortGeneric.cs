@@ -50,7 +50,7 @@ public abstract class ValuePortGeneric<TPort, TValue> : BasePort<TPort>, IPortGe
                     }
                     return _value!;
                 }
-                var sourcePort = _link.GetSource<ValuePortGeneric<TPort, TValue>>();
+                ValuePortGeneric<TPort, TValue> sourcePort = _link.GetSource<ValuePortGeneric<TPort, TValue>>();
                 return sourcePort.Value;
             }
             return _value!;
