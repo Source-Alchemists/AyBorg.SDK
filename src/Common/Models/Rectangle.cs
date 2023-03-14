@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Common.Models;
 
-public record Rectangle
+public record struct Rectangle
 {
     public int X { get; set; }
     public int Y { get; set; }

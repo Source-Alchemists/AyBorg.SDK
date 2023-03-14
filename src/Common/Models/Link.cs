@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Common.Models;
 
-public sealed record Link
+public record struct Link
 {
     public Guid Id { get; set; }
     public Guid SourceId { get; set; }
