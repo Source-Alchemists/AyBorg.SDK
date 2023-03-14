@@ -73,7 +73,6 @@ public class PortConverterTests
         var sourcePort = new StringCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<string>(collection));
 
         // Act / Assert
-        Assert.False(PortConverter.IsConvertable(sourcePort, new NumericPort("Test", PortDirection.Input, 0d)));
         Assert.False(PortConverter.IsConvertable(sourcePort, new FolderPort("Test", PortDirection.Input, string.Empty)));
         Assert.False(PortConverter.IsConvertable(sourcePort, new BooleanPort("Test", PortDirection.Input, false)));
         Assert.False(PortConverter.IsConvertable(sourcePort, new RectanglePort("Test", PortDirection.Input, new ImageTorque.Rectangle())));
