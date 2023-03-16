@@ -13,6 +13,10 @@ namespace AyBorg.SDK.Communication.gRPC;
 
 public class RpcMapper : IRpcMapper
 {
+    private static readonly JsonSerializerOptions s_jsonSerializerOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
     public Step FromRpc(StepDto rpc)
     {
         var convertedPorts = new List<Port>();
@@ -182,9 +186,30 @@ public class RpcMapper : IRpcMapper
             PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, jsonOptions),
             PortBrand.Image => ConvertImage(port.Value!),
             // Collections
-            PortBrand.StringCollection => port.Value!.ToString()!,
+            PortBrand.StringCollection => ConvertCollection<string>(port.Value!),
             _ => throw new ArgumentOutOfRangeException(nameof(port.Brand), port.Brand, null),
         };
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static string ConvertCollection<T>(object obj)
+    {
+        string result;
+        if (obj is ReadOnlyCollection<T> collection)
+        {
+            result = JsonSerializer.Serialize(collection, s_jsonSerializerOptions);
+        }
+        else
+        {
+            result = obj.ToString()!;
+        }
+
+        // The JsonSerializer is providing us with a invalid json, we have to fix it.
+        if (result.Equals("[\"\"]"))
+        {
+            result = result.Replace("\"\"", string.Empty);
+        }
+        return result;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -204,7 +229,7 @@ public class RpcMapper : IRpcMapper
             resEnum = (Common.Models.Enum)inEnum;
         }
 
-        return JsonSerializer.Serialize(resEnum, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        return JsonSerializer.Serialize(resEnum, s_jsonSerializerOptions);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -212,6 +237,6 @@ public class RpcMapper : IRpcMapper
     {
         var imageMeta = (ImageMeta)image;
 
-        return JsonSerializer.Serialize(imageMeta, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        return JsonSerializer.Serialize(imageMeta, s_jsonSerializerOptions);
     }
 }
