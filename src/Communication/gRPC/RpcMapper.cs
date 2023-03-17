@@ -2,7 +2,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Ayborg.Gateway.Agent.V1;
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Models;
