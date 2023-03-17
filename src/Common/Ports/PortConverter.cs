@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using ImageTorque;
@@ -36,6 +37,9 @@ public static class PortConverter
             // Collections
             PortBrand.StringCollection => targetPort.Brand == PortBrand.String
                                     || targetPort.Brand == PortBrand.Numeric,
+            PortBrand.NumericCollection => targetPort.Brand == PortBrand.String
+                                    || targetPort.Brand == PortBrand.Numeric
+                                    || targetPort.Brand == PortBrand.StringCollection,
             _ => false,
         };
     }
@@ -61,6 +65,7 @@ public static class PortConverter
                 PortBrand.Enum => (T)System.Convert.ChangeType(((EnumPort)sourcePort).Value, typeof(T)),
                 // Collections
                 PortBrand.StringCollection => ConvertStringCollectionPort<T>(sourcePort),
+                PortBrand.NumericCollection => ConvertNumericCollectionPort<T>(sourcePort),
                 // Unsupported
                 _ => throw new ArgumentException("The port brand is not supported."),
             };
@@ -124,5 +129,26 @@ public static class PortConverter
         }
 
         return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((StringCollectionPort)sourcePort).Value), typeof(T));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T ConvertNumericCollectionPort<T>(IPort sourcePort)
+    {
+        if (typeof(T) == typeof(double))
+        {
+            return (T)System.Convert.ChangeType(((NumericCollectionPort)sourcePort).Value.Count, typeof(T));
+        }
+
+        if (typeof(T) == typeof(ReadOnlyCollection<string>))
+        {
+            var list = new List<string>();
+            foreach (double value in ((NumericCollectionPort)sourcePort).Value)
+            {
+                list.Add(System.Convert.ToString(value, CultureInfo.InstalledUICulture));
+            }
+            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(list), typeof(T));
+        }
+
+        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((NumericCollectionPort)sourcePort).Value), typeof(T));
     }
 }
