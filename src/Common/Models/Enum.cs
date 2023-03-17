@@ -2,8 +2,8 @@ namespace AyBorg.SDK.Common.Models;
 
 public sealed record Enum
 {
-    public string? Name { get; set; }
-    public string[]? Names { get; set; }
+    public string? Name { get; init; }
+    public string[]? Names { get; init; }
 
     public bool Equals(Enum? other)
     {

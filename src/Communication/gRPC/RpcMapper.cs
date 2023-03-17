@@ -236,7 +236,7 @@ public class RpcMapper : IRpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string ConvertImage(object image)
     {
-        var imageMeta = (ImageMeta)image;
+        ImageMeta imageMeta = ((CacheImage)image).Meta;
 
         return JsonSerializer.Serialize(imageMeta, s_jsonSerializerOptions);
     }

@@ -2,9 +2,9 @@ using ImageTorque;
 
 namespace AyBorg.SDK.Common.Models;
 
-public record ImageMeta
+public readonly record struct ImageMeta
 {
-    public int Width { get; set; }
-    public int Height { get; set; }
-    public PixelFormat PixelFormat { get; set; }
+    public int Width { get; init; }
+    public int Height { get; init; }
+    public PixelFormat PixelFormat { get; init; }
 }
