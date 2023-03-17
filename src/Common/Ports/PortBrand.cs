@@ -4,6 +4,7 @@ public enum PortBrand
 {
     Unknown = -1,
     Numeric = 10,
+    NumericCollection = 11,
     String = 20,
     Folder = 21,
     StringCollection = 22,
