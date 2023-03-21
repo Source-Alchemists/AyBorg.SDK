@@ -8,7 +8,7 @@ public record PluginMetaInfo
     /// <value>
     /// The identifier.
     /// </value>
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
 
     /// <summary>
     /// Gets or sets the name of the assembly.
@@ -16,7 +16,7 @@ public record PluginMetaInfo
     /// <value>
     /// The name of the assembly.
     /// </value>
-    public string AssemblyName { get; set; } = string.Empty;
+    public string AssemblyName { get; init; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the assembly version.
@@ -24,7 +24,7 @@ public record PluginMetaInfo
     /// <value>
     /// The assembly version.
     /// </value>
-    public string AssemblyVersion { get; set; } = string.Empty;
+    public string AssemblyVersion { get; init; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the name of the type.
@@ -32,5 +32,5 @@ public record PluginMetaInfo
     /// <value>
     /// The name of the type.
     /// </value>
-    public string TypeName { get; set; } = string.Empty;
+    public string TypeName { get; init; } = string.Empty;
 }
