@@ -165,6 +165,7 @@ public class RpcMapper : IRpcMapper
             // Collections
             PortBrand.StringCollection => new ReadOnlyCollection<string>(JsonSerializer.Deserialize<string[]>(rpc.Value, jsonOptions) ?? Array.Empty<string>()),
             PortBrand.NumericCollection => new ReadOnlyCollection<double>(JsonSerializer.Deserialize<double[]>(rpc.Value, jsonOptions) ?? Array.Empty<double>()),
+            PortBrand.RectangleCollection => new ReadOnlyCollection<Rectangle>(JsonSerializer.Deserialize<Rectangle[]>(rpc.Value, jsonOptions) ?? Array.Empty<Rectangle>()),
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
@@ -188,6 +189,7 @@ public class RpcMapper : IRpcMapper
             // Collections
             PortBrand.StringCollection => ConvertCollection<string>(port.Value!),
             PortBrand.NumericCollection => ConvertCollection<double>(port.Value!),
+            PortBrand.RectangleCollection => ConvertCollection<Rectangle>(port.Value!),
             _ => throw new ArgumentOutOfRangeException(nameof(port.Brand), port.Brand, null),
         };
     }

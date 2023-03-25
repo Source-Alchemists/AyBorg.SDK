@@ -36,10 +36,15 @@ public static class PortConverter
             PortBrand.Enum => targetPort.Brand == PortBrand.String || targetPort.Brand == PortBrand.Numeric,
             // Collections
             PortBrand.StringCollection => targetPort.Brand == PortBrand.String
-                                    || targetPort.Brand == PortBrand.Numeric,
+                                    || targetPort.Brand == PortBrand.Numeric
+                                    || targetPort.Brand == PortBrand.Boolean,
             PortBrand.NumericCollection => targetPort.Brand == PortBrand.String
                                     || targetPort.Brand == PortBrand.Numeric
+                                    || targetPort.Brand == PortBrand.Boolean
                                     || targetPort.Brand == PortBrand.StringCollection,
+            PortBrand.RectangleCollection => targetPort.Brand == PortBrand.String
+                                    || targetPort.Brand == PortBrand.Numeric
+                                    || targetPort.Brand == PortBrand.Boolean,
             _ => false,
         };
     }
@@ -66,6 +71,7 @@ public static class PortConverter
                 // Collections
                 PortBrand.StringCollection => ConvertStringCollectionPort<T>(sourcePort),
                 PortBrand.NumericCollection => ConvertNumericCollectionPort<T>(sourcePort),
+                PortBrand.RectangleCollection => ConvertRectangleCollectionPort<T>(sourcePort),
                 // Unsupported
                 _ => throw new ArgumentException("The port brand is not supported."),
             };
@@ -79,76 +85,105 @@ public static class PortConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static T ConvertNumericPort<T>(IPort sourcePort, object orgValue)
     {
-        if (typeof(T) == typeof(bool))
+        Type targetType = typeof(T);
+        if (targetType == typeof(bool))
         {
-            return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value > 0, typeof(T));
+            return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value > 0, targetType);
         }
-        if (typeof(T) == typeof(Enum))
+
+        if (targetType == typeof(Enum))
         {
             int intValue = System.Convert.ToInt32(((NumericPort)sourcePort).Value);
             Type enumType = orgValue.GetType();
-            return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType).ElementAt(intValue)), typeof(T));
+            return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType).ElementAt(intValue)), targetType);
         }
-        return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value, typeof(T));
+        return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value, targetType);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static T ConvertStringPort<T>(IPort sourcePort, object orgValue)
     {
-        if (typeof(T) == typeof(Rectangle))
+        Type targetType = typeof(T);
+        if (targetType == typeof(Rectangle))
         {
-            return (T)System.Convert.ChangeType(JsonSerializer.Deserialize<Rectangle>(((StringPort)sourcePort).Value), typeof(T));
+            return (T)System.Convert.ChangeType(JsonSerializer.Deserialize<Rectangle>(((StringPort)sourcePort).Value), targetType);
         }
 
-        if (typeof(T) == typeof(Enum))
+        if (targetType == typeof(Enum))
         {
             Type enumType = orgValue.GetType();
-            return (T)System.Convert.ChangeType(Enum.Parse(enumType, ((StringPort)sourcePort).Value), typeof(T));
+            return (T)System.Convert.ChangeType(Enum.Parse(enumType, ((StringPort)sourcePort).Value), targetType);
         }
 
-        if (typeof(T) == typeof(double) && double.TryParse(((StringPort)sourcePort).Value, out double numericValue))
+        if (targetType == typeof(double) && double.TryParse(((StringPort)sourcePort).Value, out double numericValue))
         {
-            return (T)System.Convert.ChangeType(numericValue, typeof(T));
+            return (T)System.Convert.ChangeType(numericValue, targetType);
         }
 
-        if (typeof(T) == typeof(ReadOnlyCollection<string>))
+        if (targetType == typeof(ReadOnlyCollection<string>))
         {
             var collection = new List<string> { ((StringPort)sourcePort).Value };
-            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(collection), typeof(T));
+            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(collection), targetType);
         }
 
-        return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, typeof(T));
+        return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, targetType);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static T ConvertStringCollectionPort<T>(IPort sourcePort)
     {
-        if (typeof(T) == typeof(double))
+        Type targetType = typeof(T);
+        if (targetType == typeof(double))
         {
-            return (T)System.Convert.ChangeType(((StringCollectionPort)sourcePort).Value.Count, typeof(T));
+            return (T)System.Convert.ChangeType(((StringCollectionPort)sourcePort).Value.Count, targetType);
+        }
+        else if (targetType == typeof(bool))
+        {
+            return (T)System.Convert.ChangeType(((StringCollectionPort)sourcePort).Value.Any(), targetType);
         }
 
-        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((StringCollectionPort)sourcePort).Value), typeof(T));
+        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((StringCollectionPort)sourcePort).Value), targetType);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static T ConvertNumericCollectionPort<T>(IPort sourcePort)
     {
-        if (typeof(T) == typeof(double))
+        Type targetType = typeof(T);
+        if (targetType == typeof(double))
         {
-            return (T)System.Convert.ChangeType(((NumericCollectionPort)sourcePort).Value.Count, typeof(T));
+            return (T)System.Convert.ChangeType(((NumericCollectionPort)sourcePort).Value.Count, targetType);
+        }
+        else if (targetType == typeof(bool))
+        {
+            return (T)System.Convert.ChangeType(((NumericCollectionPort)sourcePort).Value.Any(), targetType);
         }
 
-        if (typeof(T) == typeof(ReadOnlyCollection<string>))
+        if (targetType == typeof(ReadOnlyCollection<string>))
         {
             var list = new List<string>();
             foreach (double value in ((NumericCollectionPort)sourcePort).Value)
             {
                 list.Add(System.Convert.ToString(value, CultureInfo.InstalledUICulture));
             }
-            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(list), typeof(T));
+            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(list), targetType);
         }
 
-        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((NumericCollectionPort)sourcePort).Value), typeof(T));
+        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((NumericCollectionPort)sourcePort).Value), targetType);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T ConvertRectangleCollectionPort<T>(IPort sourcePort)
+    {
+        Type targetType = typeof(T);
+        if (targetType == typeof(double))
+        {
+            return (T)System.Convert.ChangeType(((RectangleCollectionPort)sourcePort).Value.Count, targetType);
+        }
+        else if (targetType == typeof(bool))
+        {
+            return (T)System.Convert.ChangeType(((RectangleCollectionPort)sourcePort).Value.Any(), targetType);
+        }
+
+        return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((RectangleCollectionPort)sourcePort).Value), targetType);
     }
 }

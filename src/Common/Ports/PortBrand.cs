@@ -12,4 +12,5 @@ public enum PortBrand
     Enum = 40,
     Image = 100,
     Rectangle = 110,
+    RectangleCollection = 111,
 }

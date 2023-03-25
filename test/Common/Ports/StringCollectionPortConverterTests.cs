@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace AyBorg.SDK.Common.Ports.Tests;
 
-public class PortConverterTests
+public class StringCollectionPortConverterTests
 {
     [Fact]
     public void Test_StringCollection_ConvertTo_String()
@@ -43,6 +43,30 @@ public class PortConverterTests
     }
 
     [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Test_StringCollection_ConvertTo_Boolean(bool isEmpty)
+    {
+        // Arrange
+        var collection = new List<string>();
+        if(!isEmpty)
+        {
+            collection.Add("Test 1");
+        }
+
+        var sourcePort = new StringCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<string>(collection));
+        var targetPort = new StringPort("TargetPort", PortDirection.Input, string.Empty);
+
+        // Act
+        bool isConvertableResult = PortConverter.IsConvertable(sourcePort, targetPort);
+        bool convertResult = PortConverter.Convert<bool>(sourcePort, targetPort.Value);
+
+        // Assert
+        Assert.True(isConvertableResult);
+        Assert.Equal(!isEmpty, convertResult);
+    }
+
+    [Theory]
     [InlineData("TestString")]
     [InlineData("[]")]
     [InlineData("\"[]\"")]
@@ -73,10 +97,11 @@ public class PortConverterTests
         var sourcePort = new StringCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<string>(collection));
 
         // Act / Assert
+        using var image = new ImageTorque.Image(new ImageTorque.Buffers.PixelBuffer<ImageTorque.Pixels.L8>(2, 2));
         Assert.False(PortConverter.IsConvertable(sourcePort, new FolderPort("Test", PortDirection.Input, string.Empty)));
-        Assert.False(PortConverter.IsConvertable(sourcePort, new BooleanPort("Test", PortDirection.Input, false)));
         Assert.False(PortConverter.IsConvertable(sourcePort, new RectanglePort("Test", PortDirection.Input, new ImageTorque.Rectangle())));
         Assert.False(PortConverter.IsConvertable(sourcePort, new EnumPort("Test", PortDirection.Input, TestEnum.A)));
+        Assert.False(PortConverter.IsConvertable(sourcePort, new ImagePort("Test", PortDirection.Input, image)));
     }
 
     private enum TestEnum {
