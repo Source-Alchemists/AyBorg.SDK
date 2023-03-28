@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text.Json;
+using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
 using AyBorg.SDK.System.Configuration;
@@ -39,10 +40,15 @@ public sealed class MqttClientProvider : IMqttClientProvider
         _serviceTypeName = serviceConfiguration.TypeName;
         _serviceVersion = serviceConfiguration.Version;
 
+        string mqttHost = _configuration.GetValue("MQTT:Host", "localhost")!;
+        int mqttPort = _configuration.GetValue("MQTT:Port", 1883);
+
+        _logger.LogInformation(new EventId((int)EventLogType.Connect), "Connecting to MQTT broker at {mqttHost}:{mqttPort}", mqttHost, mqttPort);
+
         var factory = new MqttFactory();
         _mqttClientOptions = new MqttClientOptionsBuilder()
             .WithClientId(ServiceUniqueName)
-            .WithTcpServer(_configuration.GetValue<string>("MQTT:Host"), _configuration.GetValue<int>("MQTT:Port"))
+            .WithTcpServer(mqttHost, mqttPort)
             .WithCleanSession()
             .Build();
         _managedMqttClientOptions = new ManagedMqttClientOptionsBuilder()
@@ -58,7 +64,8 @@ public sealed class MqttClientProvider : IMqttClientProvider
         await _mqttClient.StartAsync(_managedMqttClientOptions);
         while (!_mqttClient.IsConnected)
         {
-            await Task.Delay(100);
+            await Task.Delay(1000);
+            _logger.LogWarning(new EventId((int)EventLogType.Disconnect), "MQTT client is not connected, retrying...");
         }
         string baseTopic = $"AyBorg/sys/services/{ServiceUniqueName}";
         var options = new MqttPublishOptions { Retain = true };
@@ -73,7 +80,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
                 if (_mqttClient.IsConnected)
                 {
                     TimeSpan uptime = DateTime.UtcNow - startUtc;
-                    await PublishAsync($"{baseTopic}/uptime", $"{((long)uptime.TotalSeconds)} seconds", new MqttPublishOptions());
+                    await PublishAsync($"{baseTopic}/uptime", $"{(long)uptime.TotalSeconds} seconds", new MqttPublishOptions());
                 }
                 await Task.Delay(10000);
             }
