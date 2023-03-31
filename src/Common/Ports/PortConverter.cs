@@ -42,7 +42,8 @@ public static class PortConverter
                                     || targetPort.Brand == PortBrand.Numeric
                                     || targetPort.Brand == PortBrand.Boolean
                                     || targetPort.Brand == PortBrand.StringCollection,
-            PortBrand.RectangleCollection => targetPort.Brand == PortBrand.String
+            PortBrand.RectangleCollection => targetPort.Brand == PortBrand.Rectangle
+                                    || targetPort.Brand == PortBrand.String
                                     || targetPort.Brand == PortBrand.Numeric
                                     || targetPort.Brand == PortBrand.Boolean,
             _ => false,
@@ -175,11 +176,17 @@ public static class PortConverter
     private static T ConvertRectangleCollectionPort<T>(IPort sourcePort)
     {
         Type targetType = typeof(T);
+        if (targetType == typeof(Rectangle))
+        {
+            return (T)System.Convert.ChangeType(((RectangleCollectionPort)sourcePort).Value.FirstOrDefault(), targetType);
+        }
+
         if (targetType == typeof(double))
         {
             return (T)System.Convert.ChangeType(((RectangleCollectionPort)sourcePort).Value.Count, targetType);
         }
-        else if (targetType == typeof(bool))
+
+        if (targetType == typeof(bool))
         {
             return (T)System.Convert.ChangeType(((RectangleCollectionPort)sourcePort).Value.Any(), targetType);
         }
