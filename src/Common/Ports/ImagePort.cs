@@ -12,7 +12,7 @@ public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
     /// <param name="name">The name.</param>
     /// <param name="direction">The port direction.</param>
     /// <param name="value">The value.</param>
-    public ImagePort(string name, PortDirection direction, Image value) : base(name, direction, value)
+    public ImagePort(string name, PortDirection direction, Image value = default!) : base(name, direction, value)
     {
     }
 
