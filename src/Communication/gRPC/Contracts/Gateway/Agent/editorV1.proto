@@ -138,4 +138,6 @@ message ImageChunkDto {
     int32 full_width = 2;
     int32 full_height = 3;
     int64 full_stream_length = 4;
+    int32 scaled_width = 5;
+    int32 scaled_height= 6;
 }
