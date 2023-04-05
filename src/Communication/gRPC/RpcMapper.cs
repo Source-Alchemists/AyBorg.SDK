@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -163,9 +163,9 @@ public class RpcMapper : IRpcMapper
             PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, jsonOptions)!,
             PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, jsonOptions)!,
             // Collections
-            PortBrand.StringCollection => new ReadOnlyCollection<string>(JsonSerializer.Deserialize<string[]>(rpc.Value, jsonOptions) ?? Array.Empty<string>()),
-            PortBrand.NumericCollection => new ReadOnlyCollection<double>(JsonSerializer.Deserialize<double[]>(rpc.Value, jsonOptions) ?? Array.Empty<double>()),
-            PortBrand.RectangleCollection => new ReadOnlyCollection<Rectangle>(JsonSerializer.Deserialize<Rectangle[]>(rpc.Value, jsonOptions) ?? Array.Empty<Rectangle>()),
+            PortBrand.StringCollection => JsonSerializer.Deserialize<string[]>(rpc.Value, jsonOptions)?.ToImmutableList() ?? ImmutableList<string>.Empty,
+            PortBrand.NumericCollection => JsonSerializer.Deserialize<double[]>(rpc.Value, jsonOptions)?.ToImmutableList() ?? ImmutableList<double>.Empty,
+            PortBrand.RectangleCollection => JsonSerializer.Deserialize<Rectangle[]>(rpc.Value, jsonOptions)?.ToImmutableList() ?? ImmutableList<Rectangle>.Empty,
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
@@ -198,7 +198,7 @@ public class RpcMapper : IRpcMapper
     private static string ConvertCollection<T>(object obj)
     {
         string result;
-        if (obj is ReadOnlyCollection<T> collection)
+        if (obj is ImmutableList<T> collection)
         {
             result = JsonSerializer.Serialize(collection, s_jsonSerializerOptions);
         }
