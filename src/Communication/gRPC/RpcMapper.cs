@@ -198,7 +198,7 @@ public class RpcMapper : IRpcMapper
     private static string ConvertCollection<T>(object obj)
     {
         string result;
-        if (obj is ImmutableList<T> collection)
+        if (obj is IEnumerable<T> collection)
         {
             result = JsonSerializer.Serialize(collection, s_jsonSerializerOptions);
         }
