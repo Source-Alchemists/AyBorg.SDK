@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -121,10 +121,10 @@ public static class PortConverter
             return (T)System.Convert.ChangeType(numericValue, targetType);
         }
 
-        if (targetType == typeof(ReadOnlyCollection<string>))
+        if (targetType == typeof(ImmutableList<string>))
         {
             var collection = new List<string> { ((StringPort)sourcePort).Value };
-            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(collection), targetType);
+            return (T)System.Convert.ChangeType(collection.ToImmutableList(), targetType);
         }
 
         return (T)System.Convert.ChangeType(((StringPort)sourcePort).Value, targetType);
@@ -159,14 +159,14 @@ public static class PortConverter
             return (T)System.Convert.ChangeType(((NumericCollectionPort)sourcePort).Value.Any(), targetType);
         }
 
-        if (targetType == typeof(ReadOnlyCollection<string>))
+        if (targetType == typeof(ImmutableList<string>))
         {
             var list = new List<string>();
             foreach (double value in ((NumericCollectionPort)sourcePort).Value)
             {
                 list.Add(System.Convert.ToString(value, CultureInfo.InstalledUICulture));
             }
-            return (T)System.Convert.ChangeType(new ReadOnlyCollection<string>(list), targetType);
+            return (T)System.Convert.ChangeType(list.ToImmutableList(), targetType);
         }
 
         return (T)System.Convert.ChangeType(JsonSerializer.Serialize(((NumericCollectionPort)sourcePort).Value), targetType);

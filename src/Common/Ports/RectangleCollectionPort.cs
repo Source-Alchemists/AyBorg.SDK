@@ -1,17 +1,27 @@
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using ImageTorque;
 
 namespace AyBorg.SDK.Common.Ports;
 
-public class RectangleCollectionPort : ValuePortGeneric<RectangleCollectionPort, ReadOnlyCollection<Rectangle>>
+public class RectangleCollectionPort : ValuePortGeneric<RectangleCollectionPort, ImmutableList<Rectangle>>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RectangleCollectionPort"/> class.
     /// </summary>
     /// <param name="name">The name.</param>
     /// <param name="direction">The port direction.</param>
+    public RectangleCollectionPort(string name, PortDirection direction) : base(name, direction)
+    {
+        Value = ImmutableList<Rectangle>.Empty;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RectangleCollectionPort"/> class.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="direction">The port direction.</param>
     /// <param name="value">The value.</param>
-    public RectangleCollectionPort(string name, PortDirection direction, ReadOnlyCollection<Rectangle> value) : base(name, direction, value)
+    public RectangleCollectionPort(string name, PortDirection direction, ImmutableList<Rectangle> value) : base(name, direction, value)
     {
     }
 
@@ -21,7 +31,7 @@ public class RectangleCollectionPort : ValuePortGeneric<RectangleCollectionPort,
     /// <param name="other">The other.</param>
     public RectangleCollectionPort(RectangleCollectionPort other) : base(other)
     {
-        Value = new ReadOnlyCollection<Rectangle>(other.Value);
+        Value =  ImmutableList<Rectangle>.Empty.AddRange(other.Value);
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace AyBorg.SDK.Common.Ports.Tests;
 
@@ -9,7 +9,7 @@ public class NumericCollectionPortConverterTests
     {
         // Arrange
         var collection = new List<double> { 1, 2, 3 };
-        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<double>(collection));
+        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, collection.ToImmutableList());
         var targetPort = new StringPort("TargetPort", PortDirection.Input, string.Empty);
 
         // Act
@@ -33,7 +33,7 @@ public class NumericCollectionPortConverterTests
             collection.Add(1);
         }
 
-        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<double>(collection));
+        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, collection.ToImmutableList());
         var targetPort = new StringPort("TargetPort", PortDirection.Input, string.Empty);
 
         // Act
@@ -50,12 +50,12 @@ public class NumericCollectionPortConverterTests
     {
         // Arrange
         var collection = new List<double> { 1, 2, 3 };
-        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<double>(collection));
-        var targetPort = new StringCollectionPort("TargetPort", PortDirection.Input, new ReadOnlyCollection<string>(Array.Empty<string>()));
+        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, collection.ToImmutableList());
+        var targetPort = new StringCollectionPort("TargetPort", PortDirection.Input, ImmutableList<string>.Empty);
 
         // Act
         bool isConvertableResult = PortConverter.IsConvertable(sourcePort, targetPort);
-        ReadOnlyCollection<string> convertResult = PortConverter.Convert<ReadOnlyCollection<string>>(sourcePort, targetPort.Value);
+        ImmutableList<string> convertResult = PortConverter.Convert<ImmutableList<string>>(sourcePort, targetPort.Value);
 
         // Assert
         Assert.True(isConvertableResult);
@@ -68,7 +68,7 @@ public class NumericCollectionPortConverterTests
     {
         // Arrange
         var collection = new List<double> { 1, 2, 3 };
-        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, new ReadOnlyCollection<double>(collection));
+        var sourcePort = new NumericCollectionPort("SourcePort", PortDirection.Output, collection.ToImmutableList());
 
         // Act / Assert
         using var image = new ImageTorque.Image(new ImageTorque.Buffers.PixelBuffer<ImageTorque.Pixels.L8>(2, 2));
