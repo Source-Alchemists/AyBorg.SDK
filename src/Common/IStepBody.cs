@@ -7,7 +7,7 @@ public interface IStepBody
     /// <summary>
     /// Gets the default name.
     /// </summary>
-    string DefaultName { get; }
+    string Name { get; }
 
     /// <summary>
     /// Gets the categories.
