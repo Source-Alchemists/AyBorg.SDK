@@ -2,18 +2,8 @@ using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Common;
 
-public interface IStepBody
+public interface IStepBody : IPlugin
 {
-    /// <summary>
-    /// Gets the default name.
-    /// </summary>
-    string Name { get; }
-
-    /// <summary>
-    /// Gets the categories.
-    /// </summary>
-    IReadOnlyCollection<string> Categories { get; }
-
     /// <summary>
     /// Gets the ports.
     /// </summary>
@@ -23,6 +13,6 @@ public interface IStepBody
     /// Tries to run asynchronous.
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns></returns>
+    /// <returns>True if successful.</returns>
     ValueTask<bool> TryRunAsync(CancellationToken cancellationToken);
 }

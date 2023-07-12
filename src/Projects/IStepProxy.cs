@@ -94,5 +94,5 @@ public interface IStepProxy : IDisposable
     /// <summary>
     /// Initializes the step.
     /// </summary>
-    ValueTask InitializeAsync();
+    ValueTask<bool> TryInitializeAsync();
 }
