@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Projects;
 
-public interface IDeviceManagerProxy : IDisposable {
+public interface IDeviceProviderProxy : IDisposable {
     bool CanAdd { get; }
     IReadOnlyCollection<IDeviceProxy> Devices { get; }
 

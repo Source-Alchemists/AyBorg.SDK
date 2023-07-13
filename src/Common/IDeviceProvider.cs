@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Common;
 
-public interface IDeviceManager : IPlugin
+public interface IDeviceProvider : IPlugin
 {
     bool CanCreate { get; }
 
