@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "Contracts/Gateway/Agent/commonV1.proto";
 
 package ayborg.gateway.agent.v1;
 
@@ -115,16 +116,6 @@ message StepDto {
     PluginMetaDto meta_info = 6;
     repeated PortDto ports = 7;
     repeated string categories = 8;
-}
-
-message PortDto {
-    string id = 1;
-    string name = 2;
-    int32 direction = 3;
-    int32 brand = 4;
-    bool is_connected = 5;
-    bool is_link_convertable = 6;
-    string value = 7;
 }
 
 message LinkDto {

@@ -44,10 +44,17 @@ public sealed class MqttClientProvider : IMqttClientProvider
     public async ValueTask ConnectAsync()
     {
         await _mqttClient.StartAsync(_managedMqttClientOptions);
-        while (!_mqttClient.IsConnected)
+        int count = 0;
+        while (!_mqttClient.IsConnected && count < 10)
         {
             await Task.Delay(1000);
-            _logger.LogWarning(new EventId((int)EventLogType.Disconnect), "MQTT client is not connected, retrying...");
+            _logger.LogTrace(new EventId((int)EventLogType.Disconnect), "MQTT client is not connected, retrying...");
+            count++;
+        }
+
+        if (!_mqttClient.IsConnected)
+        {
+            throw new Exception("MQTT client is not connected");
         }
     }
 

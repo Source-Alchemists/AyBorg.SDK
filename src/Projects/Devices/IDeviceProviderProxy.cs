@@ -6,6 +6,6 @@ public interface IDeviceProviderProxy : IDisposable {
     IReadOnlyCollection<IDeviceProxy> Devices { get; }
 
     ValueTask<bool> TryInitializeAsync();
-    ValueTask<IDeviceProxy> AddAsync(string id);
+    ValueTask<IDeviceProxy> AddAsync(AddDeviceOptions options);
     ValueTask<IDeviceProxy> RemoveAsync(string id);
 }

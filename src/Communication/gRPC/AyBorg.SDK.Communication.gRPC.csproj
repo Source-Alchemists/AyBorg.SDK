@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Protobuf Include=".\Contracts\Gateway\registerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Agent\commonV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Agent\projectManagementV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Agent\projectSettingsV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Agent\editorV1.proto" GrpcServices="Both" />
