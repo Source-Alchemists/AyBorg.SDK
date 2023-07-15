@@ -24,4 +24,13 @@ public sealed class EnumPort : ValuePortGeneric<EnumPort, Enum>
     /// Gets the brand.
     /// </summary>
     public override PortBrand Brand => PortBrand.Enum;
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (EnumPort)port;
+        Value = sourcePort.Value;
+    }
 }

@@ -27,4 +27,13 @@ public sealed class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
     /// Gets the port type.
     /// </summary>
     public override PortBrand Brand => PortBrand.Rectangle;
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (RectanglePort)port;
+        Value = sourcePort.Value;
+    }
 }

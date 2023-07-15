@@ -38,4 +38,13 @@ public class RectangleCollectionPort : ValuePortGeneric<RectangleCollectionPort,
     /// Gets the brand.
     /// </summary>
     public override PortBrand Brand => PortBrand.RectangleCollection;
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (RectangleCollectionPort)port;
+        Value = sourcePort.Value;
+    }
 }

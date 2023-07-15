@@ -2,13 +2,8 @@ using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Common;
 
-public interface IStepBody : IPlugin
+public interface IStepBody : IPortProviderPlugin
 {
-    /// <summary>
-    /// Gets the ports.
-    /// </summary>
-    IEnumerable<IPort> Ports { get; }
-
     /// <summary>
     /// Tries to run asynchronous.
     /// </summary>
