@@ -10,6 +10,7 @@ service DeviceManager {
     rpc Remove(RemoveDeviceRequest) returns (DeviceDto);
     rpc ChangeState(DeviceStateRequest) returns (DeviceDto);
     rpc GetDevice(GetDeviceRequest) returns (DeviceDto);
+    rpc UpdateDevice(UpdateDeviceRequest) returns (DeviceDto);
 }
 
 message DefaultAgentRequest {
@@ -36,6 +37,12 @@ message DeviceStateRequest {
 message GetDeviceRequest {
     string agent_unique_name = 1;
     string device_id = 2;
+}
+
+message UpdateDeviceRequest {
+    string agent_unique_name = 1;
+    string device_id = 2;
+    repeated PortDto ports = 3;
 }
 
 message DeviceProviderCollectionResponse {
