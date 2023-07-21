@@ -1,7 +1,6 @@
-using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Ports;
 
-namespace AyBorg.SDK.Communication;
+namespace AyBorg.SDK.Common.Communication;
 
 public interface ICommunicationDevice : IDevice
 {

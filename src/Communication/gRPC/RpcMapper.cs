@@ -160,6 +160,7 @@ public class RpcMapper : IRpcMapper
             PortBrand.Boolean => bool.Parse(rpc.Value),
             PortBrand.Numeric => double.Parse(rpc.Value.Replace(',', '.'), CultureInfo.InvariantCulture),
             PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, jsonOptions)!,
+            PortBrand.Select => JsonSerializer.Deserialize<SelectPort.ValueContainer>(rpc.Value, jsonOptions)!,
             PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, jsonOptions)!,
             PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, jsonOptions)!,
             // Collections
@@ -184,6 +185,7 @@ public class RpcMapper : IRpcMapper
             PortBrand.Boolean => port.Value!.ToString()!,
             PortBrand.Numeric => Convert.ToString(port.Value, CultureInfo.InvariantCulture)!,
             PortBrand.Enum => ConvertEnum(port.Value!),
+            PortBrand.Select => JsonSerializer.Serialize(port.Value, jsonOptions),
             PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, jsonOptions),
             PortBrand.Image => ConvertImage(port.Value!),
             // Collections

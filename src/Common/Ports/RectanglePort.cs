@@ -5,6 +5,11 @@ namespace AyBorg.SDK.Common.Ports;
 public sealed class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
 {
     /// <summary>
+    /// Gets the port type.
+    /// </summary>
+    public override PortBrand Brand => PortBrand.Rectangle;
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="RectanglePort"/> class.
     /// </summary>
     /// <param name="name">The name.</param>
@@ -24,15 +29,11 @@ public sealed class RectanglePort : ValuePortGeneric<RectanglePort, Rectangle>
     }
 
     /// <summary>
-    /// Gets the port type.
-    /// </summary>
-    public override PortBrand Brand => PortBrand.Rectangle;
-
-    /// <summary>
     /// Updates the value.
     /// </summary>
     /// <param name="port">The port.</param>
-    public override void UpdateValue(IPort port) {
+    public override void UpdateValue(IPort port)
+    {
         var sourcePort = (RectanglePort)port;
         Value = sourcePort.Value;
     }

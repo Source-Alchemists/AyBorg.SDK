@@ -1,4 +1,4 @@
-namespace AyBorg.SDK.Communication;
+namespace AyBorg.SDK.Common.Communication;
 
 public interface IMessageSubscription {
     string Id { get; init; }

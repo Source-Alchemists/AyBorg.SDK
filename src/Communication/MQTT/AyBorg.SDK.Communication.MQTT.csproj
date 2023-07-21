@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\System\AyBorg.SDK.System.csproj" />
-    <ProjectReference Include="..\Base\AyBorg.SDK.Communication.csproj" />
   </ItemGroup>
 
 </Project>

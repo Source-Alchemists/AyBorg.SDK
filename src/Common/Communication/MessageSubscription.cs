@@ -1,4 +1,4 @@
-namespace AyBorg.SDK.Communication;
+namespace AyBorg.SDK.Common.Communication;
 
 public record MessageSubscription : IMessageSubscription {
     public string Id { get; init; } = string.Empty;
