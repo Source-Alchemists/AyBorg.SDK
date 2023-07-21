@@ -21,6 +21,7 @@ message AddDeviceRequest {
     string agent_unique_name = 1;
     string device_provider_name = 2;
     string device_id = 3;
+    string device_prefix = 4;
 }
 
 message RemoveDeviceRequest {
@@ -53,13 +54,15 @@ message DeviceProviderDto {
     string name = 1;
     bool can_add = 2;
     repeated DeviceDto devices = 3;
+    string prefix = 4;
 }
 
 message DeviceDto {
     string id = 1;
     string name = 2;
-    bool is_active = 3;
-    bool is_connected = 4;
-    repeated string categories = 5;
-    repeated PortDto ports = 6;
+    string manufacturer = 3;
+    bool is_active = 4;
+    bool is_connected = 5;
+    repeated string categories = 6;
+    repeated PortDto ports = 7;
 }
