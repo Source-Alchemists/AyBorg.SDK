@@ -16,6 +16,7 @@ public class RpcMapper : IRpcMapper
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
+
     public Step FromRpc(StepDto rpc)
     {
         var convertedPorts = new List<Port>();

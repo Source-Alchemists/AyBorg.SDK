@@ -92,7 +92,12 @@ public interface IStepProxy : IDisposable
     ValueTask<bool> TryRunAsync(Guid iterationId, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Initializes the step.
+    /// Initializes the step before running it.
     /// </summary>
-    ValueTask<bool> TryInitializeAsync();
+    ValueTask<bool> TryBeforeStartAsync();
+
+    /// <summary>
+    /// Called after the step is created or loaded.
+    /// </summary>
+    ValueTask<bool> TryAfterInitializedAsync();
 }
