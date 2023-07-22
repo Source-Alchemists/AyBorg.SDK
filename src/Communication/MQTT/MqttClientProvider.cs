@@ -97,22 +97,22 @@ public sealed class MqttClientProvider : IMqttClientProvider
         switch (port)
         {
             case StringPort stringPort: // Contains also FolderPort
-                await PublishAsync($"{topic}/value", stringPort.Value, options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", stringPort.Value, options).ConfigureAwait(false);
                 break;
             case NumericPort numericPort:
-                await PublishAsync($"{topic}/value", numericPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", numericPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
                 break;
             case BooleanPort booleanPort:
-                await PublishAsync($"{topic}/value", booleanPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", booleanPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
                 break;
             case EnumPort enumPort:
-                await PublishAsync($"{topic}/value", enumPort.Value.ToString(), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", enumPort.Value.ToString(), options).ConfigureAwait(false);
                 break;
             case RectanglePort rectanglePort:
-                await PublishAsync($"{topic}/value", JsonSerializer.Serialize(rectanglePort.Value), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", JsonSerializer.Serialize(rectanglePort.Value), options).ConfigureAwait(false);
                 break;
             case ImagePort imagePort:
-                await SendImageAsync($"{topic}/value", imagePort.Value, options).ConfigureAwait(false);
+                await SendImageAsync($"{topic}", imagePort.Value, options).ConfigureAwait(false);
                 break;
             default:
                 throw new NotSupportedException($"Port type {port.GetType().Name} is not supported.");
