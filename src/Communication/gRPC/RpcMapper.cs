@@ -65,15 +65,13 @@ public class RpcMapper : IRpcMapper
 
     public PluginMetaInfo FromRpc(PluginMetaDto rpc)
     {
-        var pluginMetaInfo = new PluginMetaInfo
+        return new PluginMetaInfo
         {
             Id = Guid.Parse(rpc.Id),
             AssemblyName = rpc.AssemblyName,
             AssemblyVersion = rpc.AssemblyVersion,
             TypeName = rpc.TypeName
         };
-
-        return pluginMetaInfo;
     }
 
     public PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo)
@@ -89,7 +87,7 @@ public class RpcMapper : IRpcMapper
 
     public Port FromRpc(PortDto rpc)
     {
-        var port = new Port
+        return new Port
         {
             Id = Guid.Parse(rpc.Id),
             Name = rpc.Name,
@@ -99,8 +97,6 @@ public class RpcMapper : IRpcMapper
             IsLinkConvertable = rpc.IsLinkConvertable,
             Value = UnpackPortValue(rpc)
         };
-
-        return port;
     }
 
     public PortDto ToRpc(Port port)
@@ -150,24 +146,19 @@ public class RpcMapper : IRpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static object UnpackPortValue(PortDto rpc)
     {
-        var jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
-
         return (PortBrand)rpc.Brand switch
         {
             PortBrand.String or PortBrand.Folder => rpc.Value,
             PortBrand.Boolean => bool.Parse(rpc.Value),
             PortBrand.Numeric => double.Parse(rpc.Value.Replace(',', '.'), CultureInfo.InvariantCulture),
-            PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, jsonOptions)!,
-            PortBrand.Select => JsonSerializer.Deserialize<SelectPort.ValueContainer>(rpc.Value, jsonOptions)!,
-            PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, jsonOptions)!,
-            PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, jsonOptions)!,
+            PortBrand.Enum => JsonSerializer.Deserialize<Common.Models.Enum>(rpc.Value, s_jsonSerializerOptions)!,
+            PortBrand.Select => JsonSerializer.Deserialize<SelectPort.ValueContainer>(rpc.Value, s_jsonSerializerOptions)!,
+            PortBrand.Rectangle => JsonSerializer.Deserialize<Rectangle>(rpc.Value, s_jsonSerializerOptions)!,
+            PortBrand.Image => JsonSerializer.Deserialize<CacheImage>(rpc.Value, s_jsonSerializerOptions)!,
             // Collections
-            PortBrand.StringCollection => JsonSerializer.Deserialize<string[]>(rpc.Value, jsonOptions)?.ToImmutableList() ?? ImmutableList<string>.Empty,
-            PortBrand.NumericCollection => JsonSerializer.Deserialize<double[]>(rpc.Value, jsonOptions)?.ToImmutableList() ?? ImmutableList<double>.Empty,
-            PortBrand.RectangleCollection => JsonSerializer.Deserialize<Rectangle[]>(rpc.Value, jsonOptions)?.ToImmutableList() ?? ImmutableList<Rectangle>.Empty,
+            PortBrand.StringCollection => JsonSerializer.Deserialize<string[]>(rpc.Value, s_jsonSerializerOptions)?.ToImmutableList() ?? ImmutableList<string>.Empty,
+            PortBrand.NumericCollection => JsonSerializer.Deserialize<double[]>(rpc.Value, s_jsonSerializerOptions)?.ToImmutableList() ?? ImmutableList<double>.Empty,
+            PortBrand.RectangleCollection => JsonSerializer.Deserialize<Rectangle[]>(rpc.Value, s_jsonSerializerOptions)?.ToImmutableList() ?? ImmutableList<Rectangle>.Empty,
             _ => throw new ArgumentOutOfRangeException(nameof(rpc.Brand), rpc.Brand, null),
         };
     }
@@ -175,19 +166,14 @@ public class RpcMapper : IRpcMapper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string PackPortValue(Port port)
     {
-        var jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-
         return port.Brand switch
         {
             PortBrand.String or PortBrand.Folder => port.Value!.ToString()!,
             PortBrand.Boolean => port.Value!.ToString()!,
             PortBrand.Numeric => Convert.ToString(port.Value, CultureInfo.InvariantCulture)!,
             PortBrand.Enum => ConvertEnum(port.Value!),
-            PortBrand.Select => JsonSerializer.Serialize(port.Value, jsonOptions),
-            PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, jsonOptions),
+            PortBrand.Select => JsonSerializer.Serialize(port.Value, s_jsonSerializerOptions),
+            PortBrand.Rectangle => JsonSerializer.Serialize(port.Value, s_jsonSerializerOptions),
             PortBrand.Image => ConvertImage(port.Value!),
             // Collections
             PortBrand.StringCollection => ConvertCollection<string>(port.Value!),
