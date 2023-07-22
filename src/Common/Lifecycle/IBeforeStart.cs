@@ -3,7 +3,7 @@
 public interface IBeforeStart
 {
     /// <summary>
-    /// Called when [before start].
+    /// Called [before start].
     /// Called once on single run or continuous run before TryRunAsync.
     /// </summary>
     ValueTask BeforeStartAsync();
