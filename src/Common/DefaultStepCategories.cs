@@ -1,6 +1,7 @@
 namespace AyBorg.SDK.Common;
 
-public static class DefaultStepCategories {
+public static class DefaultStepCategories
+{
     public const string Display = "Display";
     public const string Ai = "AI (Artifical Intelligence)";
     public const string Simulation = "Simulation";
