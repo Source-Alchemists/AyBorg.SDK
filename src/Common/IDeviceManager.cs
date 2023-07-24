@@ -15,11 +15,6 @@ public interface IDeviceManager
     /// <summary>
     /// Gets the devices.
     /// </summary>
-    IEnumerable<IDevice> Devices { get; }
-
-    /// <summary>
-    /// Gets the devices.
-    /// </summary>
     /// <returns>The devices.</returns>
     IEnumerable<T> GetDevices<T>() where T : IDevice;
 
