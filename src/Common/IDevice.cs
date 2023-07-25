@@ -36,5 +36,5 @@ public interface IDevice : IPortProviderPlugin
     /// </summary>
     /// <param name="ports">The ports.</param>
     /// <returns>True if updated.</returns>
-    ValueTask<bool> TryUpdate(IReadOnlyCollection<IPort> ports);
+    ValueTask<bool> TryUpdateAsync(IReadOnlyCollection<IPort> ports);
 }
