@@ -3,7 +3,7 @@ using AyBorg.SDK.Common.Ports;
 
 namespace AyBorg.SDK.Projects;
 
-public interface IDeviceProxy
+public interface IDeviceProxy : IDisposable
 {
     /// <summary>
     /// Gets the id.
