@@ -48,4 +48,13 @@ public sealed class NumericPort : ValuePortGeneric<NumericPort, double>
     {
         return (T)Convert.ChangeType(Value, typeof(T));
     }
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (NumericPort)port;
+        Value = sourcePort.Value;
+    }
 }

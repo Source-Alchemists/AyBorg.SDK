@@ -29,6 +29,15 @@ public sealed class ImagePort : ValuePortGeneric<ImagePort, Image>, IDisposable
     /// </summary>
     public override PortBrand Brand => PortBrand.Image;
 
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (ImagePort)port;
+        Value = new Image(sourcePort.Value);
+    }
+
     public void Dispose(bool disposing)
     {
         if (!_disposedValue)

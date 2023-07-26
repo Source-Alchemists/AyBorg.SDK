@@ -10,6 +10,7 @@ public enum PortBrand
     StringCollection = 22,
     Boolean = 30,
     Enum = 40,
+    Select = 41,
     Image = 100,
     Rectangle = 110,
     RectangleCollection = 111,

@@ -24,4 +24,13 @@ public sealed class BooleanPort : ValuePortGeneric<BooleanPort, bool>
     /// Gets the brand.
     /// </summary>
     public override PortBrand Brand => PortBrand.Boolean;
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (BooleanPort)port;
+        Value = sourcePort.Value;
+    }
 }

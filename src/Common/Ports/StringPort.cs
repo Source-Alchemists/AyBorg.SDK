@@ -24,4 +24,13 @@ public class StringPort : ValuePortGeneric<StringPort, string>
     /// Gets the brand.
     /// </summary>
     public override PortBrand Brand => PortBrand.String;
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (StringPort)port;
+        Value = new string(sourcePort.Value);
+    }
 }

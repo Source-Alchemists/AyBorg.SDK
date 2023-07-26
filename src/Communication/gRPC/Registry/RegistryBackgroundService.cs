@@ -24,7 +24,7 @@ public sealed class RegistryBackgroundService : BackgroundService
 
     public override async Task StartAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation(new EventId((int)EventLogType.Connect), "Registry service is starting.");
+        _logger.LogTrace(new EventId((int)EventLogType.Connect), "Registry service is starting.");
         try
         {
             await Register(cancellationToken);
@@ -39,7 +39,7 @@ public sealed class RegistryBackgroundService : BackgroundService
 
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation(new EventId((int)EventLogType.Disconnect), "Registry service is stopping.");
+        _logger.LogTrace(new EventId((int)EventLogType.Disconnect), "Registry service is stopping.");
         try
         {
             StatusResponse response = await _registerClient.UnregisterAsync(new UnregisterRequest

@@ -9,7 +9,7 @@ public abstract class BasePort<TPort> : IPort where TPort : class, IPort
     /// </summary>
     /// <param name="name">The name.</param>
     /// <param name="direction">The direction.</param>
-    protected BasePort(string name, PortDirection direction) { 
+    protected BasePort(string name, PortDirection direction) {
         Name = name;
         Direction = direction;
     }
@@ -49,7 +49,7 @@ public abstract class BasePort<TPort> : IPort where TPort : class, IPort
     /// Gets a value indicating whether this instance is connected.
     /// </summary>
     public bool IsConnected => _link != null;
-    
+
     /// <summary>
     /// Connects with the specified link.
     /// </summary>
@@ -68,6 +68,12 @@ public abstract class BasePort<TPort> : IPort where TPort : class, IPort
     {
         _link = null;
     }
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public abstract void UpdateValue(IPort port);
 
     /// <summary>
     /// Sets the identifier.

@@ -19,7 +19,6 @@ public sealed class JwtAuthorizeAttribute : Attribute, IAuthorizationFilter
         if (Roles != null && Roles.Any() && !user.Claims.Any(claim => claim.Type.Equals("role") && Roles.Contains(claim.Value)))
         {
             context.Result = new UnauthorizedResult();
-            return;
         }
     }
 }

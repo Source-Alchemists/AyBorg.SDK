@@ -37,4 +37,13 @@ public class StringCollectionPort : ValuePortGeneric<StringCollectionPort, Immut
     /// Gets the brand.
     /// </summary>
     public override PortBrand Brand => PortBrand.StringCollection;
+
+    /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    public override void UpdateValue(IPort port) {
+        var sourcePort = (StringCollectionPort)port;
+        Value = sourcePort.Value;
+    }
 }

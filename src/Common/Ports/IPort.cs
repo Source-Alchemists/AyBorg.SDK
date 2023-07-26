@@ -39,6 +39,12 @@ public interface IPort
     void Disconnect();
 
     /// <summary>
+    /// Updates the value.
+    /// </summary>
+    /// <param name="port">The port.</param>
+    void UpdateValue(IPort port);
+
+    /// <summary>
     /// Sets the identifier.
     /// </summary>
     /// <param name="id">The identifier.</param>

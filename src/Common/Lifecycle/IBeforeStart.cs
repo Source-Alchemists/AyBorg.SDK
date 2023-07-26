@@ -1,10 +1,10 @@
 ﻿namespace AyBorg.SDK.Common;
 
-public interface IInitializable
+public interface IBeforeStart
 {
     /// <summary>
-    /// Called when [initialize].
+    /// Called [before start].
     /// Called once on single run or continuous run before TryRunAsync.
     /// </summary>
-    ValueTask OnInitializeAsync();
+    ValueTask BeforeStartAsync();
 }

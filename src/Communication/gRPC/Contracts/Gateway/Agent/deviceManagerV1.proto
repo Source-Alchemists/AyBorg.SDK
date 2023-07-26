@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+import "Contracts/Gateway/Agent/commonV1.proto";
+
+package ayborg.gateway.agent.v1;
+
+service DeviceManager {
+    rpc GetAvailableProviders (DefaultAgentRequest) returns (DeviceProviderCollectionResponse);
+    rpc Add(AddDeviceRequest) returns (DeviceDto);
+    rpc Remove(RemoveDeviceRequest) returns (DeviceDto);
+    rpc ChangeState(DeviceStateRequest) returns (DeviceDto);
+    rpc GetDevice(GetDeviceRequest) returns (DeviceDto);
+    rpc UpdateDevice(UpdateDeviceRequest) returns (DeviceDto);
+}
+
+message DefaultAgentRequest {
+    string agent_unique_name = 1;
+}
+
+message AddDeviceRequest {
+    string agent_unique_name = 1;
+    string device_provider_name = 2;
+    string device_id = 3;
+    string device_prefix = 4;
+}
+
+message RemoveDeviceRequest {
+    string agent_unique_name = 1;
+    string device_id = 2;
+}
+
+message DeviceStateRequest {
+    string agent_unique_name = 1;
+    string device_id = 2;
+    bool activate = 3;
+}
+
+message GetDeviceRequest {
+    string agent_unique_name = 1;
+    string device_id = 2;
+}
+
+message UpdateDeviceRequest {
+    string agent_unique_name = 1;
+    string device_id = 2;
+    repeated PortDto ports = 3;
+}
+
+message DeviceProviderCollectionResponse {
+    repeated DeviceProviderDto device_providers = 1;
+}
+
+message DeviceProviderDto {
+    string name = 1;
+    bool can_add = 2;
+    repeated DeviceDto devices = 3;
+    string prefix = 4;
+}
+
+message DeviceDto {
+    string id = 1;
+    string name = 2;
+    string manufacturer = 3;
+    bool is_active = 4;
+    bool is_connected = 5;
+    repeated string categories = 6;
+    repeated PortDto ports = 7;
+}

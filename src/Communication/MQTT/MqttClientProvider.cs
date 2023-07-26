@@ -3,9 +3,7 @@ using System.Text.Json;
 using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.System.Configuration;
 using ImageTorque;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 using MQTTnet;
@@ -18,37 +16,21 @@ namespace AyBorg.SDK.Communication.MQTT;
 public sealed class MqttClientProvider : IMqttClientProvider
 {
     private static readonly RecyclableMemoryStreamManager s_memoryManager = new();
-    private readonly ILogger<MqttClientProvider> _logger;
-    private readonly IConfiguration _configuration;
-    private readonly string _serviceTypeName;
-    private readonly string _serviceVersion;
+    private readonly ILogger _logger;
     private readonly MqttClientOptions _mqttClientOptions;
     private readonly ManagedMqttClientOptions _managedMqttClientOptions;
     private readonly IManagedMqttClient _mqttClient;
     private readonly List<MqttSubscription> _subscriptions = new();
     private bool _disposedValue;
-    private Task? _statusTask;
 
-    public string ServiceUniqueName { get; }
-
-    public MqttClientProvider(ILogger<MqttClientProvider> logger, IConfiguration configuration, IServiceConfiguration serviceConfiguration)
+    public MqttClientProvider(ILogger logger, string clientId, string host, int port)
     {
         _logger = logger;
-        _configuration = configuration;
-
-        ServiceUniqueName = serviceConfiguration.UniqueName;
-        _serviceTypeName = serviceConfiguration.TypeName;
-        _serviceVersion = serviceConfiguration.Version;
-
-        string mqttHost = _configuration.GetValue("MQTT:Host", "localhost")!;
-        int mqttPort = _configuration.GetValue("MQTT:Port", 1883);
-
-        _logger.LogInformation(new EventId((int)EventLogType.Connect), "Connecting to MQTT broker at {mqttHost}:{mqttPort}", mqttHost, mqttPort);
 
         var factory = new MqttFactory();
         _mqttClientOptions = new MqttClientOptionsBuilder()
-            .WithClientId(ServiceUniqueName)
-            .WithTcpServer(mqttHost, mqttPort)
+            .WithClientId(clientId)
+            .WithTcpServer(host, port)
             .WithCleanSession()
             .Build();
         _managedMqttClientOptions = new ManagedMqttClientOptionsBuilder()
@@ -62,29 +44,18 @@ public sealed class MqttClientProvider : IMqttClientProvider
     public async ValueTask ConnectAsync()
     {
         await _mqttClient.StartAsync(_managedMqttClientOptions);
-        while (!_mqttClient.IsConnected)
+        int count = 0;
+        while (!_mqttClient.IsConnected && count < 10)
         {
             await Task.Delay(1000);
-            _logger.LogWarning(new EventId((int)EventLogType.Disconnect), "MQTT client is not connected, retrying...");
+            _logger.LogTrace(new EventId((int)EventLogType.Disconnect), "MQTT client is not connected, retrying...");
+            count++;
         }
-        string baseTopic = $"AyBorg/sys/services/{ServiceUniqueName}";
-        var options = new MqttPublishOptions { Retain = true };
-        await PublishAsync($"{baseTopic}/version", _serviceVersion, options);
-        await PublishAsync($"{baseTopic}/type", _serviceTypeName, options);
 
-        _statusTask = Task.Run(async () =>
+        if (!_mqttClient.IsConnected)
         {
-            DateTime startUtc = DateTime.UtcNow;
-            while (!_disposedValue)
-            {
-                if (_mqttClient.IsConnected)
-                {
-                    TimeSpan uptime = DateTime.UtcNow - startUtc;
-                    await PublishAsync($"{baseTopic}/uptime", $"{(long)uptime.TotalSeconds} seconds", new MqttPublishOptions());
-                }
-                await Task.Delay(10000);
-            }
-        });
+            throw new InvalidOperationException("MQTT client is not connected");
+        }
     }
 
     public async ValueTask PublishAsync(string topic, string message, MqttPublishOptions options)
@@ -126,22 +97,22 @@ public sealed class MqttClientProvider : IMqttClientProvider
         switch (port)
         {
             case StringPort stringPort: // Contains also FolderPort
-                await PublishAsync($"{topic}/value", stringPort.Value, options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", stringPort.Value, options).ConfigureAwait(false);
                 break;
             case NumericPort numericPort:
-                await PublishAsync($"{topic}/value", numericPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", numericPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
                 break;
             case BooleanPort booleanPort:
-                await PublishAsync($"{topic}/value", booleanPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", booleanPort.Value.ToString(CultureInfo.InvariantCulture), options).ConfigureAwait(false);
                 break;
             case EnumPort enumPort:
-                await PublishAsync($"{topic}/value", enumPort.Value.ToString(), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", enumPort.Value.ToString(), options).ConfigureAwait(false);
                 break;
             case RectanglePort rectanglePort:
-                await PublishAsync($"{topic}/value", JsonSerializer.Serialize(rectanglePort.Value), options).ConfigureAwait(false);
+                await PublishAsync($"{topic}", JsonSerializer.Serialize(rectanglePort.Value), options).ConfigureAwait(false);
                 break;
             case ImagePort imagePort:
-                await SendImageAsync($"{topic}/value", imagePort.Value, options).ConfigureAwait(false);
+                await SendImageAsync($"{topic}", imagePort.Value, options).ConfigureAwait(false);
                 break;
             default:
                 throw new NotSupportedException($"Port type {port.GetType().Name} is not supported.");
@@ -171,7 +142,8 @@ public sealed class MqttClientProvider : IMqttClientProvider
         {
             _logger.LogWarning("UnsubscribeAsync called while not connected");
             return;
-        };
+        }
+
         await _mqttClient.UnsubscribeAsync(subscription.TopicFilter).ConfigureAwait(false);
         lock (_subscriptions)
         {
@@ -186,7 +158,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         const int maxSize = 250;
         Image resizedImage = null!;
         Image targetImage;
-        if (image.Width <= maxSize && image.Height <= maxSize || options.Resize == false)
+        if (image.Width <= maxSize && image.Height <= maxSize || !options.Resize)
         {
             targetImage = image;
         }
@@ -232,18 +204,13 @@ public sealed class MqttClientProvider : IMqttClientProvider
         GC.SuppressFinalize(this);
     }
 
-    public async void Dispose(bool disposing)
+    public void Dispose(bool disposing)
     {
         if (!_disposedValue)
         {
             if (disposing)
             {
                 _mqttClient?.Dispose();
-                if (_statusTask != null)
-                {
-                    await _statusTask;
-                    _statusTask.Dispose();
-                }
             }
 
             _disposedValue = true;
