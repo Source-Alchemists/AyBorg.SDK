@@ -7,13 +7,13 @@ namespace AyBorg.SDK.Communication.gRPC;
 
 public interface IRpcMapper
 {
-    Step FromRpc(StepDto rpc);
-    StepDto ToRpc(Step step);
     PluginMetaInfo FromRpc(PluginMetaDto rpc);
-    PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo);
+    Step FromRpc(StepDto rpc);
     Port FromRpc(PortDto rpc);
+    Link FromRpc(LinkDto rpc);
+    PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo);
+    StepDto ToRpc(Step step);
     PortDto ToRpc(Port port);
     LinkDto ToRpc(Link link);
     LinkDto ToRpc(PortLink link);
-    Link FromRpc(LinkDto rpc);
 }

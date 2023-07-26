@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Common.Ports;
 
-public sealed record PortLink : BaseLink<IPort>
+public sealed record PortLink : BaseLink
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PortLink"/> class.

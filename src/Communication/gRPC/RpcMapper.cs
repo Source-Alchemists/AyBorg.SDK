@@ -17,6 +17,17 @@ public class RpcMapper : IRpcMapper
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
+     public PluginMetaInfo FromRpc(PluginMetaDto rpc)
+    {
+        return new PluginMetaInfo
+        {
+            Id = Guid.Parse(rpc.Id),
+            AssemblyName = rpc.AssemblyName,
+            AssemblyVersion = rpc.AssemblyVersion,
+            TypeName = rpc.TypeName
+        };
+    }
+
     public Step FromRpc(StepDto rpc)
     {
         var convertedPorts = new List<Port>();
@@ -40,6 +51,41 @@ public class RpcMapper : IRpcMapper
         return step;
     }
 
+    public Port FromRpc(PortDto rpc)
+    {
+        return new Port
+        {
+            Id = Guid.Parse(rpc.Id),
+            Name = rpc.Name,
+            Direction = (PortDirection)rpc.Direction,
+            Brand = (PortBrand)rpc.Brand,
+            IsConnected = rpc.IsConnected,
+            IsLinkConvertable = rpc.IsLinkConvertable,
+            Value = UnpackPortValue(rpc)
+        };
+    }
+
+    public Link FromRpc(LinkDto rpc)
+    {
+        return new Link
+        {
+            Id = Guid.Parse(rpc.Id),
+            SourceId = Guid.Parse(rpc.SourceId),
+            TargetId = Guid.Parse(rpc.TargetId)
+        };
+    }
+
+    public PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo)
+    {
+        return new PluginMetaDto
+        {
+            Id = pluginMetaInfo.Id.ToString(),
+            AssemblyName = pluginMetaInfo.AssemblyName,
+            AssemblyVersion = pluginMetaInfo.AssemblyVersion,
+            TypeName = pluginMetaInfo.TypeName
+        };
+    }
+
     public StepDto ToRpc(Step step)
     {
         var convertedPorts = new List<PortDto>();
@@ -61,42 +107,6 @@ public class RpcMapper : IRpcMapper
         rpc.Ports.Add(convertedPorts);
 
         return rpc;
-    }
-
-    public PluginMetaInfo FromRpc(PluginMetaDto rpc)
-    {
-        return new PluginMetaInfo
-        {
-            Id = Guid.Parse(rpc.Id),
-            AssemblyName = rpc.AssemblyName,
-            AssemblyVersion = rpc.AssemblyVersion,
-            TypeName = rpc.TypeName
-        };
-    }
-
-    public PluginMetaDto ToRpc(PluginMetaInfo pluginMetaInfo)
-    {
-        return new PluginMetaDto
-        {
-            Id = pluginMetaInfo.Id.ToString(),
-            AssemblyName = pluginMetaInfo.AssemblyName,
-            AssemblyVersion = pluginMetaInfo.AssemblyVersion,
-            TypeName = pluginMetaInfo.TypeName
-        };
-    }
-
-    public Port FromRpc(PortDto rpc)
-    {
-        return new Port
-        {
-            Id = Guid.Parse(rpc.Id),
-            Name = rpc.Name,
-            Direction = (PortDirection)rpc.Direction,
-            Brand = (PortBrand)rpc.Brand,
-            IsConnected = rpc.IsConnected,
-            IsLinkConvertable = rpc.IsLinkConvertable,
-            Value = UnpackPortValue(rpc)
-        };
     }
 
     public PortDto ToRpc(Port port)
@@ -130,16 +140,6 @@ public class RpcMapper : IRpcMapper
             Id = link.Id.ToString(),
             SourceId = link.SourceId.ToString(),
             TargetId = link.TargetId.ToString()
-        };
-    }
-
-    public Link FromRpc(LinkDto rpc)
-    {
-        return new Link
-        {
-            Id = Guid.Parse(rpc.Id),
-            SourceId = Guid.Parse(rpc.SourceId),
-            TargetId = Guid.Parse(rpc.TargetId)
         };
     }
 

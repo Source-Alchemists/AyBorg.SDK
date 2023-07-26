@@ -142,7 +142,8 @@ public sealed class MqttClientProvider : IMqttClientProvider
         {
             _logger.LogWarning("UnsubscribeAsync called while not connected");
             return;
-        };
+        }
+
         await _mqttClient.UnsubscribeAsync(subscription.TopicFilter).ConfigureAwait(false);
         lock (_subscriptions)
         {
@@ -157,7 +158,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
         const int maxSize = 250;
         Image resizedImage = null!;
         Image targetImage;
-        if (image.Width <= maxSize && image.Height <= maxSize || options.Resize == false)
+        if (image.Width <= maxSize && image.Height <= maxSize || !options.Resize)
         {
             targetImage = image;
         }

@@ -1,6 +1,6 @@
 namespace AyBorg.SDK.Common;
 
-public abstract record BaseLink<T>
+public abstract record BaseLink
 {
     /// <summary>
     /// Gets the identifier.
