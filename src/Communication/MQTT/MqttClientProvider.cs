@@ -54,7 +54,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
 
         if (!_mqttClient.IsConnected)
         {
-            throw new Exception("MQTT client is not connected");
+            throw new InvalidOperationException("MQTT client is not connected");
         }
     }
 
