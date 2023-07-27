@@ -14,7 +14,8 @@ public class RpcMapper : IRpcMapper
 {
     private static readonly JsonSerializerOptions s_jsonSerializerOptions = new()
     {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true
     };
 
      public PluginMetaInfo FromRpc(PluginMetaDto rpc)
