@@ -1,12 +1,11 @@
 using Ayborg.Gateway.Agent.V1;
 using AyBorg.SDK.Common.Models;
 using AyBorg.SDK.Common.Ports;
-using AyBorg.SDK.Communication.gRPC;
 using Moq;
 
-namespace gRPC;
+namespace AyBorg.SDK.Communication.gRPC.Tests;
 
-public class UnitTest1
+public class RpcMapperTests
 {
     private readonly RpcMapper _service = new();
 
@@ -224,7 +223,7 @@ public class UnitTest1
     [InlineData(PortBrand.String, "test")]
     [InlineData(PortBrand.Numeric, "42")]
     [InlineData(PortBrand.Enum, "{\"name\":\"Output\",\"names\":[\"Input\",\"Output\"]}")]
-    [InlineData(PortBrand.Image, "{\"width\":2,\"height\":4,\"pixelFormat\":5}")]
+    [InlineData(PortBrand.Image, "{\"OriginalImage\":null,\"Meta\":{\"Width\":2,\"Height\":4,\"PixelFormat\":5}}")]
     [InlineData(PortBrand.Rectangle, "{\"x\":2,\"y\":4,\"width\":10,\"height\":20}")]
     public void Test_FromRpc_PortDto(PortBrand portBrand, string value)
     {
@@ -258,9 +257,9 @@ public class UnitTest1
 
         if (portBrand == PortBrand.Image)
         {
-            Assert.Equal(2, ((ImageMeta)result.Value!).Width);
-            Assert.Equal(4, ((ImageMeta)result.Value!).Height);
-            Assert.Equal(ImageTorque.PixelFormat.Rgb24Packed, ((ImageMeta)result.Value!).PixelFormat);
+            Assert.Equal(2, ((CacheImage)result.Value!).Meta.Width);
+            Assert.Equal(4, ((CacheImage)result.Value!).Meta.Height);
+            Assert.Equal(ImageTorque.PixelFormat.Rgb24Packed, ((CacheImage)result.Value!).Meta.PixelFormat);
             return;
         }
 
@@ -290,11 +289,14 @@ public class UnitTest1
         // Arrange
         if (portBrand == PortBrand.Image)
         {
-            value = new ImageMeta
+            value = new CacheImage
             {
-                Width = 2,
-                Height = 4,
-                PixelFormat = ImageTorque.PixelFormat.Rgb24Packed
+                Meta = new ImageMeta
+                {
+                    Width = 2,
+                    Height = 4,
+                    PixelFormat = ImageTorque.PixelFormat.Rgb24Packed
+                }
             };
         }
 
