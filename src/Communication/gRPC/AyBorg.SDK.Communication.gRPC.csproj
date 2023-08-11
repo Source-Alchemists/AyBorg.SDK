@@ -19,6 +19,8 @@
     <Protobuf Include=".\Contracts\Gateway\Agent\deviceManagerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Analytics\eventLogV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Audit\auditV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Result\commonV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Result\storageV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using AyBorg.SDK.Common;
 using AyBorg.SDK.Common.Ports;
 
-namespace AyBorg.SDK.Projects;
+namespace AyBorg.SDK.Common;
 
 public interface IStepProxy : IDisposable
 {
