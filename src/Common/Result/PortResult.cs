@@ -4,6 +4,12 @@ namespace AyBorg.SDK.Common.Result;
 
 public record PortResult
 {
-    public string Id { get; init; } = string.Empty;
-    public Port Port { get; init; } = new Port();
+    public string Id { get; } = string.Empty;
+    public Port Port { get; } = new Port();
+
+    public PortResult(string id, Port port)
+    {
+        Id = id;
+        Port = port;
+    }
 }
