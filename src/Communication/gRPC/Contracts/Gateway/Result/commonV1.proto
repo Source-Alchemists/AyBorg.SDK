@@ -7,7 +7,15 @@ message PortDto {
     string name = 2;
     int32 direction = 3;
     int32 brand = 4;
-    bool is_connected = 5;
-    bool is_link_convertable = 6;
-    string value = 7;
+    string value = 5;
+}
+
+message ImageChunkDto {
+    bytes data = 1;
+    int32 full_width = 2;
+    int32 full_height = 3;
+    int64 full_stream_length = 4;
+    int32 scaled_width = 5;
+    int32 scaled_height= 6;
+    string result_id = 7;
 }
