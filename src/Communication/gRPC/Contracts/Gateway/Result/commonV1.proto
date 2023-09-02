@@ -17,5 +17,6 @@ message ImageChunkDto {
     int64 full_stream_length = 4;
     int32 scaled_width = 5;
     int32 scaled_height= 6;
-    string result_id = 7;
+    string iteration_id = 7;
+    string result_id = 8;
 }
