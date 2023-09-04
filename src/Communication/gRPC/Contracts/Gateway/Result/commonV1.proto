@@ -19,4 +19,5 @@ message ImageChunkDto {
     int32 scaled_height= 6;
     string iteration_id = 7;
     string result_id = 8;
+    string agent_unique_name = 9;
 }
