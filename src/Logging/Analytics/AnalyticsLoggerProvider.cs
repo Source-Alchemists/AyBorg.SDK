@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AyBorg.SDK.Logging.Analytics;
 
-[ProviderAlias("AyBorg.Analytics")]
+[ProviderAlias("AyBorg.Log")]
 public sealed class AnalyticsLoggerProvider : ILoggerProvider
 {
     private readonly IConfiguration _configuration;

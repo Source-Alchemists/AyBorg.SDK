@@ -21,7 +21,7 @@ public sealed class AnalyticsLogger : ILogger
 
     public bool IsEnabled(LogLevel logLevel)
     {
-        LogLevel configLogLevel = _configuration.GetValue("Logging:LogLevel:AyBorg.Analytics", LogLevel.Information);
+        LogLevel configLogLevel = _configuration.GetValue("Logging:LogLevel:AyBorg.Log", LogLevel.Information);
         return logLevel >= configLogLevel;
     }
 
