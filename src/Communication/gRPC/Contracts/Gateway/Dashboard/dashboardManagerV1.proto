@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.dashboard.v1;
+
+service DashboardManager {
+    rpc GetMetaInfos(google.protobuf.Empty) returns (GetMetaInfosResponse);
+}
+
+message GetMetaInfosResponse {
+    repeated MetaInfo metas = 1;
+}
+
+message MetaInfo {
+    string service_id = 1;
+    string name = 2;
+    repeated string favorited_users = 3;
+}
