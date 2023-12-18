@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.net.v1;
+
+service Filemanager {
+    rpc UploadImage (stream ImageUploadRequest) returns (google.protobuf.Empty);
+}
+
+message ImageUploadRequest {
+    string service_unique_name = 1;
+    string file_name = 2;
+    repeated string tags = 3;
+    int64 stream_length = 4;
+    bytes chunk = 5;
+}
