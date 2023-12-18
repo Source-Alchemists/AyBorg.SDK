@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package ayborg.gateway.result.v1;
+
+message PortDto {
+    string id = 1;
+    string name = 2;
+    int32 direction = 3;
+    int32 brand = 4;
+    string value = 5;
+}
+
+message ImageChunkDto {
+    bytes data = 1;
+    int32 full_width = 2;
+    int32 full_height = 3;
+    int64 full_stream_length = 4;
+    int32 scaled_width = 5;
+    int32 scaled_height= 6;
+    string iteration_id = 7;
+    string result_id = 8;
+    string agent_unique_name = 9;
+}

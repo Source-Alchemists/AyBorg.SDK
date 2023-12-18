@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "Contracts/Gateway/Result/commonV1.proto";
+
+package ayborg.gateway.result.v1;
+
+service Storage {
+    rpc Add (AddRequest) returns (google.protobuf.Empty);
+    rpc AddImage(stream ImageChunkDto) returns (google.protobuf.Empty);
+}
+
+message AddRequest {
+    string id = 1;
+    string agent_unique_name = 2;
+    string iteration_id = 3;
+    google.protobuf.Timestamp start_time = 4;
+    google.protobuf.Timestamp stop_time = 5;
+    int32 elapsed_ms = 6;
+    bool success = 7;
+    repeated PortDto ports = 8;
+}
+
