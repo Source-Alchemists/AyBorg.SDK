@@ -21,7 +21,9 @@
     <Protobuf Include=".\Contracts\Gateway\Audit\auditV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Result\commonV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Result\storageV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\Net\filemanagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Net\commonV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Net\fileManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Net\projectManagerV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

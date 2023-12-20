@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package ayborg.gateway.net.v1;
 
-service Filemanager {
+service FileManager {
     rpc UploadImage (stream ImageUploadRequest) returns (google.protobuf.Empty);
 }
 

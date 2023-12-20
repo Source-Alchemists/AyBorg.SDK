@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "Contracts/Gateway/Net/commonV1.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.net.v1;
+
+service ProjectManager {
+    rpc Create (CreateProjectRequest) returns (ProjectMeta);
+}
+
+message CreateProjectRequest {
+    string service_unique_name = 1;
+    string name = 2; 
+    repeated Tag tags = 3;
+    int32 type = 4;
+}
+
+message ProjectMeta {
+    string id = 1;
+    string name = 2;
+    repeated Tag tags = 3;
+    int32 type = 4;
+    google.protobuf.Timestamp creation_date = 5;
+}
