@@ -29,4 +29,5 @@ message ProjectMeta {
 message Tag {
     string name = 1;
     string color_code = 2;
+    int32 index = 3;
 }
