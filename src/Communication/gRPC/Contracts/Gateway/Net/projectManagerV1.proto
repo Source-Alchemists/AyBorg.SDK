@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "Contracts/Gateway/Net/commonV1.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -25,4 +24,9 @@ message ProjectMeta {
     int32 type = 4;
     google.protobuf.Timestamp creation_date = 5;
     string created_by = 6;
+}
+
+message Tag {
+    string name = 1;
+    string color_code = 2;
 }
