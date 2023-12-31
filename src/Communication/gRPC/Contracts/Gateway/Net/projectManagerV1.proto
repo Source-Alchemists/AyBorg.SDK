@@ -22,9 +22,10 @@ message ProjectMeta {
     string id = 1;
     string name = 2;
     repeated string tags = 3;
-    int32 type = 4;
-    google.protobuf.Timestamp creation_date = 5;
-    string created_by = 6;
+    repeated Label labels = 4;
+    int32 type = 5;
+    google.protobuf.Timestamp creation_date = 6;
+    string created_by = 7;
 }
 
 message Label {
