@@ -15,19 +15,19 @@ message CreateProjectRequest {
     string name = 1; 
     int32 type = 2;
     string created_by = 3;
-    repeated Tag tags = 4;
+    repeated string tags = 4;
 }
 
 message ProjectMeta {
     string id = 1;
     string name = 2;
-    repeated Tag tags = 3;
+    repeated string tags = 3;
     int32 type = 4;
     google.protobuf.Timestamp creation_date = 5;
     string created_by = 6;
 }
 
-message Tag {
+message Label {
     string name = 1;
     string color_code = 2;
     int32 index = 3;
