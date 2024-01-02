@@ -14,4 +14,5 @@ message ImageUploadRequest {
     bytes chunk = 3;
     repeated string tags = 4;
     string batch_name = 5;
+    repeated int32 distribution = 6;
 }

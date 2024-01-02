@@ -9,6 +9,8 @@ public enum EventLogType
     Connect = 42000,
     [Description("Disconnect")]
     Disconnect = 42001,
+    [Description("Upload")]
+    Upload = 42002,
 
     // Common
     [Description("Result")]
