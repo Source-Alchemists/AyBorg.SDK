@@ -13,16 +13,16 @@ message ImageUploadRequest {
     string project_id = 1;
     int64 stream_length = 2;
     bytes chunk = 3;
-    repeated string tags = 4;
-    string batch_name = 5;
-    repeated int32 distribution = 6;
-    string collection_id = 7;
-    int32 collection_index = 8;
-    int32 collection_size = 9;
-    string content_type = 10;
+    string collection_id = 4;
+    int32 collection_index = 5;
+    int32 collection_size = 6;
+    string content_type = 7;
 }
 
 message ConfirmUploadRequest {
     string project_id = 1;
     string collection_id = 2;
+    string batch_name = 3;
+    repeated string tags = 4;
+    repeated int32 distribution = 5;
 }
