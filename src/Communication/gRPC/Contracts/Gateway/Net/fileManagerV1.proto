@@ -6,6 +6,7 @@ package ayborg.gateway.net.v1;
 
 service FileManager {
     rpc UploadImage (stream ImageUploadRequest) returns (google.protobuf.Empty);
+    rpc ConfirmUpload (ConfirmUploadRequest) returns (google.protobuf.Empty);
 }
 
 message ImageUploadRequest {
@@ -19,4 +20,8 @@ message ImageUploadRequest {
     int32 collection_index = 8;
     int32 collection_size = 9;
     string content_type = 10;
+}
+
+message ConfirmUploadRequest {
+    string collection_id = 1;
 }
