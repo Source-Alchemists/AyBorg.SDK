@@ -18,4 +18,5 @@ message ImageUploadRequest {
     string collection_id = 7;
     int32 collection_index = 8;
     int32 collection_size = 9;
+    string content_type = 10;
 }
