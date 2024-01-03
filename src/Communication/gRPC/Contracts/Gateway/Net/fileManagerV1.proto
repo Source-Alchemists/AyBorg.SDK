@@ -15,4 +15,7 @@ message ImageUploadRequest {
     repeated string tags = 4;
     string batch_name = 5;
     repeated int32 distribution = 6;
+    string collection_id = 7;
+    int32 collection_index = 8;
+    int32 collection_size = 9;
 }
