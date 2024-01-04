@@ -30,7 +30,6 @@ message ConfirmUploadRequest {
 
 message GetImageCollectionMetaRequest {
     string project_id = 1;
-    string collection_id = 2;
 }
 
 message ImageCollectionMeta {
