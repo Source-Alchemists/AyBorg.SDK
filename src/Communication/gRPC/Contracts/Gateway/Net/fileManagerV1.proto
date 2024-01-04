@@ -7,6 +7,7 @@ package ayborg.gateway.net.v1;
 service FileManager {
     rpc UploadImage (stream ImageUploadRequest) returns (google.protobuf.Empty);
     rpc ConfirmUpload (ConfirmUploadRequest) returns (google.protobuf.Empty);
+    rpc GetImageCollectionMeta (GetImageCollectionMetaRequest) returns (ImageCollectionMeta);
 }
 
 message ImageUploadRequest {
@@ -25,4 +26,16 @@ message ConfirmUploadRequest {
     string batch_name = 3;
     repeated string tags = 4;
     repeated int32 distribution = 5;
+}
+
+message GetImageCollectionMetaRequest {
+    string project_id = 1;
+    string collection_id = 2;
+}
+
+message ImageCollectionMeta {
+    repeated string unannotated_file_names = 1;
+    repeated string annotated_files_names = 2;
+    repeated string batch_names = 3;
+    repeated string tags = 4;
 }
