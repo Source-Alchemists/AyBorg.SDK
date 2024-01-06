@@ -8,7 +8,7 @@ package ayborg.gateway.net.v1;
 service ProjectManager {
     rpc Create (CreateProjectRequest) returns (ProjectMeta);
     rpc Delete (ProjectMeta) returns (google.protobuf.Empty);
-    rpc GetMetas(google.protobuf.Empty) returns (stream ProjectMeta);
+    rpc GetMetas (google.protobuf.Empty) returns (stream ProjectMeta);
 }
 
 message CreateProjectRequest {
