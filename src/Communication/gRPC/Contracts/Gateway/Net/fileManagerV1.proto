@@ -31,6 +31,8 @@ message ImageChunk {
     int64 stream_length = 1;
     bytes data = 2;
     string content_type = 3;
+    int32 width = 4;
+    int32 height = 5;
 }
 
 message ConfirmUploadRequest {
