@@ -9,6 +9,7 @@ service FileManager {
     rpc DownloadImage (ImageDownloadRequest) returns (stream ImageChunk);
     rpc ConfirmUpload (ConfirmUploadRequest) returns (google.protobuf.Empty);
     rpc GetImageCollectionMeta (GetImageCollectionMetaRequest) returns (ImageCollectionMeta);
+    rpc GetImageAnnotationMeta (GetImageAnnotationMetaRequest) returns (ImageAnnotationMeta);
 }
 
 message ImageUploadRequest {
@@ -55,4 +56,19 @@ message ImageCollectionMeta {
     repeated string annotated_files_names = 2;
     repeated string batch_names = 3;
     repeated string tags = 4;
+}
+
+message GetImageAnnotationMetaRequest {
+    string project_id = 1;
+    string image_name = 2;
+}
+
+message ImageAnnotationMeta {
+    repeated string tags = 1;
+    repeated ClassMeta classes = 2;
+}
+
+message ClassMeta {
+    string name = 1;
+    int32 index = 2;
 }
