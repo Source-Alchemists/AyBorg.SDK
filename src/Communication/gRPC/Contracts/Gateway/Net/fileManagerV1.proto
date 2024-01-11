@@ -65,10 +65,5 @@ message GetImageAnnotationMetaRequest {
 
 message ImageAnnotationMeta {
     repeated string tags = 1;
-    repeated ClassMeta classes = 2;
-}
-
-message ClassMeta {
-    string name = 1;
-    int32 index = 2;
+    repeated int32 layers = 2;
 }
