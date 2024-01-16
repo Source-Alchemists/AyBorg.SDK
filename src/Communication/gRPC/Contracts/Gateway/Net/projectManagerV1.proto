@@ -9,6 +9,7 @@ service ProjectManager {
     rpc Create (CreateProjectRequest) returns (ProjectMeta);
     rpc Delete (ProjectMeta) returns (google.protobuf.Empty);
     rpc GetMetas (google.protobuf.Empty) returns (stream ProjectMeta);
+    rpc AddOrUpdateClassLabel (AddOrUpdateClassLabelRequest) returns (ClassLabel);
 }
 
 message CreateProjectRequest {
@@ -18,17 +19,22 @@ message CreateProjectRequest {
     repeated string tags = 4;
 }
 
+message AddOrUpdateClassLabelRequest {
+    string project_id = 1;
+    ClassLabel class_label = 2;
+}
+
 message ProjectMeta {
     string id = 1;
     string name = 2;
     repeated string tags = 3;
-    repeated Label labels = 4;
+    repeated ClassLabel class_labels = 4;
     int32 type = 5;
     google.protobuf.Timestamp creation_date = 6;
     string created_by = 7;
 }
 
-message Label {
+message ClassLabel {
     string name = 1;
     string color_code = 2;
     int32 index = 3;
