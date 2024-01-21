@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.net.v1;
+
+service DatasetManager {
+    rpc GetMetas (GetMetasRequest) returns (stream DatasetMeta);
+    rpc Create (CreateRequest) returns (DatasetMeta);
+    rpc Delete (DeleteRequest) returns (google.protobuf.Empty);
+    rpc Edit (EditRequest) returns (google.protobuf.Empty);
+    rpc Generate (GenerateRequest) returns (google.protobuf.Empty);
+    rpc AddImage (AddImageRequest) returns (google.protobuf.Empty);
+}
+
+message GetMetasRequest {
+    string project_id = 1;
+}
+
+message CreateRequest {
+    string project_id = 1;
+    string name = 2;
+    bool withdraw_dataset_images = 3;
+}
+
+message DeleteRequest {
+    string project_id = 1;
+    string id = 2;
+}
+
+message EditRequest {
+    string project_id = 1;
+    string id = 2;
+    string new_name = 3;
+    string new_comment = 4;
+}
+
+message GenerateRequest {
+    string project_id = 1;
+    string id = 2;
+    string comment = 3;
+}
+
+message AddImageRequest {
+    string project_id = 1;
+    string id = 2;
+    string image_name = 3;
+}
+
+message DatasetMeta {
+    string id = 1;
+    string name = 2;
+    google.protobuf.Timestamp creation_date = 3;
+    google.protobuf.Timestamp generated_date = 4;
+    bool is_active = 5;
+    repeated int32 distribution = 6;
+    string comment = 7;
+}
