@@ -39,7 +39,6 @@ message EditRequest {
 message GenerateRequest {
     string project_id = 1;
     string id = 2;
-    string comment = 3;
 }
 
 message AddImageRequest {
