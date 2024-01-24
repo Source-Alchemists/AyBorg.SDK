@@ -39,6 +39,7 @@ message EditRequest {
 message GenerateRequest {
     string project_id = 1;
     string id = 2;
+    GenerateOptions options = 3;
 }
 
 message AddImageRequest {
@@ -55,4 +56,18 @@ message DatasetMeta {
     bool is_active = 5;
     repeated int32 distribution = 6;
     string comment = 7;
+}
+
+message GenerateOptions {
+    int32 sample_rate = 1;
+    int32 max_size = 2;
+    float flip_horizontal_probability = 3;
+    float flip_vertical_probability = 4;
+    float rotate_90_probability = 5;
+    float scale_probability = 6;
+    float pixel_dropout_probability = 7;
+    float channel_shuffel_probability = 8;
+    float iso_noise_probability = 9;
+    float gauss_noise_probability = 10;
+    float brightness_and_contrast_probability = 11;
 }
