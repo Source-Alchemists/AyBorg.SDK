@@ -12,6 +12,7 @@ service DatasetManager {
     rpc Edit (EditRequest) returns (google.protobuf.Empty);
     rpc Generate (GenerateRequest) returns (google.protobuf.Empty);
     rpc AddImage (AddImageRequest) returns (google.protobuf.Empty);
+    rpc GetImageNames (GetImagesRequest) returns (stream ImageInfo);
 }
 
 message GetMetasRequest {
@@ -48,6 +49,11 @@ message AddImageRequest {
     string image_name = 3;
 }
 
+message GetImagesRequest {
+    string project_id = 1;
+    string id = 2;
+}
+
 message DatasetMeta {
     string id = 1;
     string name = 2;
@@ -56,6 +62,10 @@ message DatasetMeta {
     bool is_active = 5;
     repeated int32 distribution = 6;
     string comment = 7;
+}
+
+message ImageInfo {
+    string name = 1;
 }
 
 message GenerateOptions {
