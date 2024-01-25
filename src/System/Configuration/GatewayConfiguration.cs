@@ -16,8 +16,6 @@ public record GatewayConfiguration : IGatewayConfiguration
 
     public string Version { get; }
 
-    public string Url { get; }
-
     public bool IsAuditRequired { get; }
 
     public GatewayConfiguration(ILogger<IGatewayConfiguration> logger, IConfiguration configuration)
@@ -55,17 +53,6 @@ public record GatewayConfiguration : IGatewayConfiguration
         else
         {
             DisplayName = serviceDisplayName;
-        }
-
-        string? serviceUrl = configuration.GetValue<string>("AyBorg:Service:Url");
-        if (string.IsNullOrEmpty(serviceUrl))
-        {
-            _logger.LogWarning("Service url is not set in configuration. Using default value. (Hint: AyBorg:Service:Url)");
-            Url = "https://localhost:5001";
-        }
-        else
-        {
-            Url = serviceUrl;
         }
 
         IsAuditRequired = configuration.GetValue<bool>("AyBorg:Service:Audit:Required", true);

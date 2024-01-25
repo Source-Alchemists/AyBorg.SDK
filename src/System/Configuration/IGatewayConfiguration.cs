@@ -6,6 +6,5 @@ public interface IGatewayConfiguration
     string UniqueName { get; }
     string TypeName { get; }
     string Version { get; }
-    string Url { get; }
     bool IsAuditRequired { get; }
 }

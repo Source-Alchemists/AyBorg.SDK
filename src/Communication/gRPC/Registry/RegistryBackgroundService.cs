@@ -1,6 +1,7 @@
 using Ayborg.Gateway.V1;
 using AyBorg.SDK.Common;
 using AyBorg.SDK.System.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -11,14 +12,17 @@ public sealed class RegistryBackgroundService : BackgroundService
     private readonly ILogger<RegistryBackgroundService> _logger;
     private readonly Register.RegisterClient _registerClient;
     private readonly IServiceConfiguration _serviceConfiguration;
+    private readonly IConfiguration _configuration;
     private Guid _serviceId = Guid.Empty;
 
     public RegistryBackgroundService(ILogger<RegistryBackgroundService> logger,
                                         Register.RegisterClient registerClient,
+                                        IConfiguration configuration,
                                         IServiceConfiguration serviceConfiguration)
     {
         _logger = logger;
         _registerClient = registerClient;
+        _configuration = configuration;
         _serviceConfiguration = serviceConfiguration;
     }
 
@@ -103,7 +107,7 @@ public sealed class RegistryBackgroundService : BackgroundService
             Name = _serviceConfiguration.DisplayName,
             UniqueName = _serviceConfiguration.UniqueName,
             Type = _serviceConfiguration.TypeName,
-            Url = _serviceConfiguration.Url,
+            Url = DetermineServiceUrl(_configuration),
             Version = _serviceConfiguration.Version
         }, cancellationToken: cancellationToken);
 
@@ -116,5 +120,31 @@ public sealed class RegistryBackgroundService : BackgroundService
         {
             _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to parse service id: {Id}", response.Id);
         }
+    }
+
+    private static string DetermineServiceUrl(IConfiguration configuration)
+    {
+        string url = configuration.GetValue("Kestrel:Endpoints:gRPC:Url", string.Empty)!;
+
+        if (!string.IsNullOrEmpty(url))
+        {
+            return url;
+        }
+
+        url = configuration.GetValue("Kestrel:Endpoints:Https:Url", string.Empty)!;
+
+        if (!string.IsNullOrEmpty(url))
+        {
+            return url;
+        }
+
+        url = configuration.GetValue("Kestrel:Endpoints:Http:Url", string.Empty)!;
+
+        if (string.IsNullOrEmpty(url))
+        {
+            throw new KeyNotFoundException("Service URL not set!");
+        }
+
+        return url;
     }
 }
