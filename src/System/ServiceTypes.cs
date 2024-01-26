@@ -10,4 +10,5 @@ public static class ServiceTypes
     public const string Log = "Log";
     public const string Audit = "Audit";
     public const string Net = "Net";
+    public const string NetRunner = "Net.Runner";
 }
