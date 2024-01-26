@@ -5,43 +5,43 @@ import "google/protobuf/empty.proto";
 package ayborg.gateway.net.v1;
 
 service AnnotationManager {
-    rpc GetMeta (GetMetaRequest) returns (Meta);
-    rpc Get (GetRequest) returns (Layer);
-    rpc Add (AddRequest) returns (google.protobuf.Empty);
-    rpc Remove (RemoveRequest) returns (google.protobuf.Empty);
+    rpc GetMeta (GetAnnotationMetaRequest) returns (AnnotationMeta);
+    rpc Get (GetAnnotationRequest) returns (AnnotationLayer);
+    rpc Add (AddAnnotationRequest) returns (google.protobuf.Empty);
+    rpc Remove (RemoveAnnotationRequest) returns (google.protobuf.Empty);
 }
 
-message GetMetaRequest {
+message GetAnnotationMetaRequest {
     string project_id = 1;
     string image_name = 2;
 }
 
-message GetRequest {
+message GetAnnotationRequest {
     string project_id = 1;
     string image_name = 2;
     int32 type = 3;
     string layer_id = 4;
 }
 
-message AddRequest {
+message AddAnnotationRequest {
     string project_id = 1;
     string image_name = 2;
     int32 type = 3;
-    Layer layer = 4;
+    AnnotationLayer layer = 4;
 }
 
-message RemoveRequest {
+message RemoveAnnotationRequest {
     string project_id = 1;
     string image_name = 2;
     string layer_id = 3;
 }
 
-message Meta {
+message AnnotationMeta {
     repeated string tags = 1;
     repeated string layer_ids = 2;
 }
 
-message Layer {
+message AnnotationLayer {
     string id = 1;
     int32 class_index = 2;
     repeated Point points = 3;
