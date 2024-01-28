@@ -25,6 +25,7 @@
     <Protobuf Include=".\Contracts\Gateway\Net\projectManagerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Net\annotationManagerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Net\datasetManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Net\jobManagerV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

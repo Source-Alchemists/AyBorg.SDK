@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.net.v1;
+
+service JobManager {
+    rpc GetMetas (google.protobuf.Empty) returns (stream JobMeta);
+    rpc Get (GetJobRequest) returns (Job);
+    rpc Create (CreateJobRequest) returns (google.protobuf.Empty);
+    rpc Cancel (CancelJobRequest) returns (google.protobuf.Empty);
+}
+
+message GetJobRequest {
+    string id = 1;
+}
+
+message CreateJobRequest {
+    string project_id = 1;
+    string dataset_id = 2;
+}
+
+message CancelJobRequest {
+    string id = 1;
+}
+
+message JobMeta {
+    string id = 1;
+    string runner_name = 2;
+    string runner_unique_name = 3;
+    google.protobuf.Timestamp queue_date = 4;
+    google.protobuf.Timestamp finished_date = 5;
+    string project_id = 6;
+    string project_name = 7;
+    string dataset_id = 8;
+    string dataset_name = 9;
+    string model_id = 10;
+    JobStatus status = 11;
+}
+
+message Job {
+    JobMeta meta = 1;
+}
+
+enum JobStatus {
+    Queued = 0;
+    Running = 1;
+    Finished = 2;
+    Canceled = 3;
+}
