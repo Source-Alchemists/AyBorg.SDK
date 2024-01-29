@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +27,7 @@
     <Protobuf Include=".\Contracts\Gateway\Net\datasetManagerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Net\jobManagerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\NetRunner\statusManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\NetRunner\jobManagerV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

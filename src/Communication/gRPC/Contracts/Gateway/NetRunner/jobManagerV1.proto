@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.net.runner.v1;
+
+service JobManager {
+    rpc GetStatus (GetJobStatusRequest) returns (JobStatusResponse);
+    rpc Upload (stream UploadJobRequest) returns (google.protobuf.Empty);
+    rpc Download (DownloadJobRequest) returns (stream JobChunk);
+}
+
+message GetJobStatusRequest {
+    string service_unique_name = 1;
+    string job_id = 2;
+}
+
+message JobStatusResponse {
+    JobStatus status = 1;
+}
+
+message UploadJobRequest {
+    string service_unique_name = 1;
+    string job_id = 2;
+    int64 stream_length = 3;
+    bytes data = 4;
+    string content_type = 5;
+}
+
+message DownloadJobRequest {
+    string service_unique_name = 1;
+    string job_id = 2;
+}
+
+message JobChunk {
+    int64 stream_length = 1;
+    bytes data = 2;
+    string content_type = 3;
+}
+
+enum JobStatus {
+    Queued = 0;
+    Running = 1;
+    Finished = 2;
+    Canceled = 3;
+}
