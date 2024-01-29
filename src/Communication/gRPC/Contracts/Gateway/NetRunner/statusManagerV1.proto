@@ -16,5 +16,5 @@ message ServiceStatus {
 
 enum Status {
     Idle = 0;
-    Running = 1;
+    Processing = 1;
 }
