@@ -8,6 +8,7 @@ service JobManager {
     rpc GetStatus (GetJobStatusRequest) returns (JobStatusResponse);
     rpc Upload (stream UploadJobRequest) returns (google.protobuf.Empty);
     rpc Download (DownloadJobRequest) returns (stream JobChunk);
+    rpc ConfirmDownload (DownloadJobRequest) returns (google.protobuf.Empty);
 }
 
 message GetJobStatusRequest {
@@ -25,6 +26,7 @@ message UploadJobRequest {
     int64 stream_length = 3;
     bytes data = 4;
     string content_type = 5;
+    TrainParameters training_parameters = 6;
 }
 
 message DownloadJobRequest {
@@ -36,6 +38,10 @@ message JobChunk {
     int64 stream_length = 1;
     bytes data = 2;
     string content_type = 3;
+}
+
+message TrainParameters {
+    int32 iterations = 1;
 }
 
 enum JobStatus {

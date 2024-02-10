@@ -19,6 +19,7 @@ message GetJobRequest {
 message CreateJobRequest {
     string project_id = 1;
     string dataset_id = 2;
+    TrainParameters training_parameters = 3;
 }
 
 message CancelJobRequest {
@@ -41,6 +42,10 @@ message JobMeta {
 
 message Job {
     JobMeta meta = 1;
+}
+
+message TrainParameters {
+    int32 iterations = 1;
 }
 
 enum JobStatus {
