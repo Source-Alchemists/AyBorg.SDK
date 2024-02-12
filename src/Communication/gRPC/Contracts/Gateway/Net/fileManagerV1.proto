@@ -1,14 +1,18 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 package ayborg.gateway.net.v1;
 
 service FileManager {
+    rpc GetImageCollectionMeta (GetImageCollectionMetaRequest) returns (ImageCollectionMeta);
     rpc UploadImage (stream ImageUploadRequest) returns (google.protobuf.Empty);
     rpc DownloadImage (ImageDownloadRequest) returns (stream ImageChunk);
     rpc ConfirmUpload (ConfirmUploadRequest) returns (google.protobuf.Empty);
-    rpc GetImageCollectionMeta (GetImageCollectionMetaRequest) returns (ImageCollectionMeta);
+    rpc GetModelMetas (GetModelMetasRequest) returns (stream ModelMeta);
+    rpc EditModel (EditModelRequest) returns (google.protobuf.Empty);
+    rpc DeleteModel (DeleteModelRequest) returns (google.protobuf.Empty);
 }
 
 message ImageUploadRequest {
@@ -55,4 +59,31 @@ message ImageCollectionMeta {
     repeated string annotated_files_names = 2;
     repeated string batch_names = 3;
     repeated string tags = 4;
+}
+
+message GetModelMetasRequest {
+    string project_id = 1;
+}
+
+message EditModelRequest {
+    string project_id = 1;
+    string model_id = 2;
+    string name = 3;
+}
+
+message DeleteModelRequest {
+    string project_id = 1;
+    string model_id = 2;
+}
+
+message ModelMeta {
+    string id = 1;
+    string name = 2;
+    ModelType type = 3;
+    repeated string classes = 4;
+    google.protobuf.Timestamp creation_date = 5;
+}
+
+enum ModelType {
+    ObjectDetection = 0;
 }
