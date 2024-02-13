@@ -69,6 +69,7 @@ message EditModelRequest {
     string project_id = 1;
     string model_id = 2;
     string name = 3;
+    ModelState state = 4;
 }
 
 message DeleteModelRequest {
@@ -82,8 +83,15 @@ message ModelMeta {
     ModelType type = 3;
     repeated string classes = 4;
     google.protobuf.Timestamp creation_date = 5;
+    ModelState state = 6;
 }
 
 enum ModelType {
     ObjectDetection = 0;
+}
+
+enum ModelState {
+    Draft = 0;
+    Review = 1;
+    Release = 2;
 }
