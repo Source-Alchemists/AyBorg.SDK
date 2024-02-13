@@ -41,7 +41,8 @@ message JobChunk {
 }
 
 message TrainParameters {
-    int32 iterations = 1;
+    string model_name = 1;
+    int32 iterations = 2;
 }
 
 enum JobStatus {
