@@ -13,6 +13,7 @@ service FileManager {
     rpc GetModelMetas (GetModelMetasRequest) returns (stream ModelMeta);
     rpc EditModel (EditModelRequest) returns (google.protobuf.Empty);
     rpc DeleteModel (DeleteModelRequest) returns (google.protobuf.Empty);
+    rpc ChangeModelState (ChangeModelStateRequest) returns (google.protobuf.Empty);
 }
 
 message ImageUploadRequest {
@@ -69,12 +70,18 @@ message EditModelRequest {
     string project_id = 1;
     string model_id = 2;
     string name = 3;
-    ModelState state = 4;
 }
 
 message DeleteModelRequest {
     string project_id = 1;
     string model_id = 2;
+}
+
+message ChangeModelStateRequest {
+    string project_id = 1;
+    string model_id = 2;
+    ModelState state = 3;
+    string comment = 4;
 }
 
 message ModelMeta {
@@ -84,6 +91,7 @@ message ModelMeta {
     repeated string classes = 4;
     google.protobuf.Timestamp creation_date = 5;
     ModelState state = 6;
+    string comment = 7;
 }
 
 enum ModelType {
