@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +21,13 @@
     <Protobuf Include=".\Contracts\Gateway\Audit\auditV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Result\commonV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Result\storageV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\fileManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\projectManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\annotationManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\datasetManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\jobManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\CognitiveAgent\statusManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\CognitiveAgent\jobManagerV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

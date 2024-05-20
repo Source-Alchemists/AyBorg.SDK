@@ -9,6 +9,10 @@ public enum EventLogType
     Connect = 42000,
     [Description("Disconnect")]
     Disconnect = 42001,
+    [Description("Upload")]
+    Upload = 42002,
+    [Description("Download")]
+    Download = 42003,
 
     // Common
     [Description("Result")]
@@ -30,5 +34,9 @@ public enum EventLogType
 
     // Audit
     [Description("Audit")]
-    Audit = 42300
+    Audit = 42300,
+
+    // Cognitive
+    [Description("Cognitive")]
+    Cognitive = 42400
 }

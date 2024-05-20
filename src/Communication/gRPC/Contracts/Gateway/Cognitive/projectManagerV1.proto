@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.cognitive.v1;
+
+service ProjectManager {
+    rpc Create (CreateProjectRequest) returns (ProjectMeta);
+    rpc Delete (ProjectMeta) returns (google.protobuf.Empty);
+    rpc GetMetas (google.protobuf.Empty) returns (stream ProjectMeta);
+    rpc AddOrUpdateClassLabel (AddOrUpdateClassLabelRequest) returns (ClassLabel);
+}
+
+message CreateProjectRequest {
+    string name = 1;
+    int32 type = 2;
+    string created_by = 3;
+    repeated string tags = 4;
+}
+
+message AddOrUpdateClassLabelRequest {
+    string project_id = 1;
+    ClassLabel class_label = 2;
+}
+
+message ProjectMeta {
+    string id = 1;
+    string name = 2;
+    repeated string tags = 3;
+    repeated ClassLabel class_labels = 4;
+    int32 type = 5;
+    google.protobuf.Timestamp creation_date = 6;
+    string created_by = 7;
+}
+
+message ClassLabel {
+    string name = 1;
+    string color_code = 2;
+    int32 index = 3;
+}

@@ -18,13 +18,13 @@ public sealed class JwtMiddleware
         string? token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         if (string.IsNullOrEmpty(token))
         {
-            await _next(context);
+            await _next(context).ConfigureAwait(false);
             return;
         }
 
         System.IdentityModel.Tokens.Jwt.JwtSecurityToken validatedToken = jwtConsumerService.ValidateToken(token);
         validatedToken?.Claims.ToList().ForEach(claim => context.User.AddIdentity(new ClaimsIdentity(new[] { claim }, "jwt")));
-        await _next(context);
+        await _next(context).ConfigureAwait(false);
     }
 }
 

@@ -47,7 +47,7 @@ public sealed record Port : IDisposable
         {
             if (Value is IDisposable disposableObject)
             {
-                disposableObject?.Dispose();
+                disposableObject.Dispose();
             }
 
             _disposedValue = true;

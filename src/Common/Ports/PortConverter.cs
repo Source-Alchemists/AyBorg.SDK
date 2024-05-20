@@ -96,7 +96,7 @@ public static class PortConverter
         {
             int intValue = System.Convert.ToInt32(((NumericPort)sourcePort).Value);
             Type enumType = orgValue.GetType();
-            return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType).ElementAt(intValue)), targetType);
+            return (T)System.Convert.ChangeType(Enum.Parse(enumType, Enum.GetNames(enumType)[intValue]), targetType);
         }
         return (T)System.Convert.ChangeType(((NumericPort)sourcePort).Value, targetType);
     }

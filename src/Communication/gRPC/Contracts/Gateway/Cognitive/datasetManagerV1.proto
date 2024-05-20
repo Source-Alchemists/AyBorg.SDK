@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.cognitive.v1;
+
+service DatasetManager {
+    rpc GetMetas (GetMetasRequest) returns (stream DatasetMeta);
+    rpc Create (CreateRequest) returns (DatasetMeta);
+    rpc Delete (DeleteRequest) returns (google.protobuf.Empty);
+    rpc Edit (EditRequest) returns (google.protobuf.Empty);
+    rpc Generate (GenerateRequest) returns (google.protobuf.Empty);
+    rpc AddImage (AddImageRequest) returns (google.protobuf.Empty);
+    rpc GetImageNames (GetImagesRequest) returns (stream ImageInfo);
+}
+
+message GetMetasRequest {
+    string project_id = 1;
+}
+
+message CreateRequest {
+    string project_id = 1;
+    string name = 2;
+    bool withdraw_dataset_images = 3;
+}
+
+message DeleteRequest {
+    string project_id = 1;
+    string id = 2;
+}
+
+message EditRequest {
+    string project_id = 1;
+    string id = 2;
+    string new_name = 3;
+    string new_comment = 4;
+}
+
+message GenerateRequest {
+    string project_id = 1;
+    string id = 2;
+    GenerateOptions options = 3;
+}
+
+message AddImageRequest {
+    string project_id = 1;
+    string id = 2;
+    string image_name = 3;
+}
+
+message GetImagesRequest {
+    string project_id = 1;
+    string id = 2;
+}
+
+message DatasetMeta {
+    string id = 1;
+    string name = 2;
+    google.protobuf.Timestamp creation_date = 3;
+    google.protobuf.Timestamp generated_date = 4;
+    bool is_active = 5;
+    repeated int32 distribution = 6;
+    string comment = 7;
+}
+
+message ImageInfo {
+    string name = 1;
+}
+
+message GenerateOptions {
+    int32 sample_rate = 1;
+    int32 max_size = 2;
+    float flip_horizontal_probability = 3;
+    float flip_vertical_probability = 4;
+    float rotate_90_probability = 5;
+    float scale_probability = 6;
+    float pixel_dropout_probability = 7;
+    float channel_shuffel_probability = 8;
+    float iso_noise_probability = 9;
+    float gauss_noise_probability = 10;
+    float brightness_and_contrast_probability = 11;
+}

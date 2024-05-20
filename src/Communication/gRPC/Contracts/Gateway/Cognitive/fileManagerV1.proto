@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package ayborg.gateway.cognitive.v1;
+
+service FileManager {
+    rpc GetImageCollectionMeta (GetImageCollectionMetaRequest) returns (ImageCollectionMeta);
+    rpc UploadImage (stream ImageUploadRequest) returns (google.protobuf.Empty);
+    rpc DownloadImage (ImageDownloadRequest) returns (stream ImageChunk);
+    rpc ConfirmUpload (ConfirmUploadRequest) returns (google.protobuf.Empty);
+    rpc GetModelMetas (GetModelMetasRequest) returns (stream ModelMeta);
+    rpc EditModel (EditModelRequest) returns (google.protobuf.Empty);
+    rpc DeleteModel (DeleteModelRequest) returns (google.protobuf.Empty);
+    rpc ChangeModelState (ChangeModelStateRequest) returns (google.protobuf.Empty);
+}
+
+message ImageUploadRequest {
+    string project_id = 1;
+    int64 stream_length = 2;
+    bytes data = 3;
+    string collection_id = 4;
+    int32 collection_index = 5;
+    int32 collection_size = 6;
+    string content_type = 7;
+}
+
+message ImageDownloadRequest {
+    string project_id = 1;
+    string image_name = 2;
+    bool as_thumbnail = 3;
+}
+
+message ConfirmUploadRequest {
+    string project_id = 1;
+    string collection_id = 2;
+    string batch_name = 3;
+    repeated string tags = 4;
+    repeated int32 distribution = 5;
+}
+
+message GetImageCollectionMetaRequest {
+    string project_id = 1;
+    string batch_name = 2;
+    string split_group = 3;
+    repeated string tags = 4;
+}
+
+message ImageChunk {
+    int64 stream_length = 1;
+    bytes data = 2;
+    string content_type = 3;
+    int32 width = 4;
+    int32 height = 5;
+}
+
+message ImageCollectionMeta {
+    repeated string unannotated_file_names = 1;
+    repeated string annotated_files_names = 2;
+    repeated string batch_names = 3;
+    repeated string tags = 4;
+}
+
+message GetModelMetasRequest {
+    string project_id = 1;
+}
+
+message EditModelRequest {
+    string project_id = 1;
+    string model_id = 2;
+    string name = 3;
+}
+
+message DeleteModelRequest {
+    string project_id = 1;
+    string model_id = 2;
+}
+
+message ChangeModelStateRequest {
+    string project_id = 1;
+    string model_id = 2;
+    ModelState state = 3;
+    string comment = 4;
+}
+
+message ModelMeta {
+    string id = 1;
+    string name = 2;
+    ModelType type = 3;
+    repeated string classes = 4;
+    google.protobuf.Timestamp creation_date = 5;
+    ModelState state = 6;
+    string comment = 7;
+}
+
+enum ModelType {
+    ObjectDetection = 0;
+}
+
+enum ModelState {
+    Draft = 0;
+    Review = 1;
+    Release = 2;
+}

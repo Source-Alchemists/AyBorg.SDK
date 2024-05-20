@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package ayborg.gateway.cognitive.v1;
+
+service AnnotationManager {
+    rpc GetMeta (GetAnnotationMetaRequest) returns (AnnotationMeta);
+    rpc Get (GetAnnotationRequest) returns (AnnotationLayer);
+    rpc Add (AddAnnotationRequest) returns (google.protobuf.Empty);
+    rpc Remove (RemoveAnnotationRequest) returns (google.protobuf.Empty);
+}
+
+message GetAnnotationMetaRequest {
+    string project_id = 1;
+    string image_name = 2;
+}
+
+message GetAnnotationRequest {
+    string project_id = 1;
+    string image_name = 2;
+    int32 type = 3;
+    string layer_id = 4;
+}
+
+message AddAnnotationRequest {
+    string project_id = 1;
+    string image_name = 2;
+    int32 type = 3;
+    AnnotationLayer layer = 4;
+}
+
+message RemoveAnnotationRequest {
+    string project_id = 1;
+    string image_name = 2;
+    string layer_id = 3;
+}
+
+message AnnotationMeta {
+    repeated string tags = 1;
+    repeated string layer_ids = 2;
+}
+
+message AnnotationLayer {
+    string id = 1;
+    int32 class_index = 2;
+    repeated Point points = 3;
+}
+
+message Point {
+    int32 x = 1;
+    int32 y = 2;
+}
