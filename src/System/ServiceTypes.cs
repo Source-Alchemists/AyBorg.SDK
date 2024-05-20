@@ -10,5 +10,5 @@ public static class ServiceTypes
     public const string Log = "Log";
     public const string Audit = "Audit";
     public const string Cognitive = "Cognitive";
-    public const string CognitiveRunner = "Cognitive.Agent";
+    public const string CognitiveAgent = "Cognitive.Agent";
 }
