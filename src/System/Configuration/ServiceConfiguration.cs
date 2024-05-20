@@ -5,11 +5,11 @@ namespace AyBorg.SDK.System.Configuration;
 
 public record ServiceConfiguration : GatewayConfiguration, IServiceConfiguration
 {
-    private readonly ILogger<IServiceConfiguration> _logger;
+    private readonly ILogger<ServiceConfiguration> _logger;
 
     public string GatewayUrl { get; }
 
-    public ServiceConfiguration(ILogger<IServiceConfiguration> logger, IConfiguration configuration) : base(logger, configuration)
+    public ServiceConfiguration(ILogger<ServiceConfiguration> logger, IConfiguration configuration) : base(logger, configuration)
     {
         _logger = logger;
         string? registryUrl = configuration.GetValue<string>("AyBorg:Gateway:Url");
