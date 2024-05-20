@@ -17,7 +17,6 @@ public sealed class MqttClientProvider : IMqttClientProvider
 {
     private static readonly RecyclableMemoryStreamManager s_memoryManager = new();
     private readonly ILogger _logger;
-    private readonly MqttClientOptions _mqttClientOptions;
     private readonly ManagedMqttClientOptions _managedMqttClientOptions;
     private readonly IManagedMqttClient _mqttClient;
     private readonly List<MqttSubscription> _subscriptions = new();
@@ -28,13 +27,13 @@ public sealed class MqttClientProvider : IMqttClientProvider
         _logger = logger;
 
         var factory = new MqttFactory();
-        _mqttClientOptions = new MqttClientOptionsBuilder()
+        MqttClientOptions mqttClientOptions = new MqttClientOptionsBuilder()
             .WithClientId(clientId)
             .WithTcpServer(host, port)
             .WithCleanSession()
             .Build();
         _managedMqttClientOptions = new ManagedMqttClientOptionsBuilder()
-            .WithClientOptions(_mqttClientOptions)
+            .WithClientOptions(mqttClientOptions)
             .Build();
 
         _mqttClient = factory.CreateManagedMqttClient();
