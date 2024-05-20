@@ -6,7 +6,7 @@ namespace AyBorg.SDK.System.Configuration;
 
 public record GatewayConfiguration : IGatewayConfiguration
 {
-    private readonly ILogger<IGatewayConfiguration> _logger;
+    private readonly ILogger<GatewayConfiguration> _logger;
 
     public string DisplayName { get; }
 
@@ -18,7 +18,7 @@ public record GatewayConfiguration : IGatewayConfiguration
 
     public bool IsAuditRequired { get; }
 
-    public GatewayConfiguration(ILogger<IGatewayConfiguration> logger, IConfiguration configuration)
+    public GatewayConfiguration(ILogger<GatewayConfiguration> logger, IConfiguration configuration)
     {
         _logger = logger;
         AssemblyName assemblyName = Assembly.GetEntryAssembly()!.GetName();
