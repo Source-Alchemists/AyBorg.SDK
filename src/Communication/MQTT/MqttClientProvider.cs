@@ -43,11 +43,11 @@ public sealed class MqttClientProvider : IMqttClientProvider
 
     public async ValueTask ConnectAsync()
     {
-        await _mqttClient.StartAsync(_managedMqttClientOptions);
+        await _mqttClient.StartAsync(_managedMqttClientOptions).ConfigureAwait(false);
         int count = 0;
         while (!_mqttClient.IsConnected && count < 10)
         {
-            await Task.Delay(1000);
+            await Task.Delay(1000).ConfigureAwait(false);
             _logger.LogTrace(new EventId((int)EventLogType.Disconnect), "MQTT client is not connected, retrying...");
             count++;
         }
@@ -67,7 +67,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
                 .WithPayload(message)
                 .WithQualityOfServiceLevel(options.QualityOfServiceLevel)
                 .WithRetainFlag(options.Retain)
-                .Build());
+                .Build()).ConfigureAwait(false);
         }
         catch (OperationCanceledException ex)
         {
@@ -176,7 +176,7 @@ public sealed class MqttClientProvider : IMqttClientProvider
                 Width = image.Width,
                 Height = image.Height,
                 PixelFormat = image.PixelFormat
-            }), options);
+            }), options).ConfigureAwait(false);
 
             using MemoryStream stream = s_memoryManager.GetStream();
             targetImage.Save(stream, options.EncoderType);
@@ -224,6 +224,6 @@ public sealed class MqttClientProvider : IMqttClientProvider
         {
             subscription.MessageReceived?.Invoke(e.ApplicationMessage);
             await ValueTask.CompletedTask;
-        });
+        }).ConfigureAwait(false);
     }
 }

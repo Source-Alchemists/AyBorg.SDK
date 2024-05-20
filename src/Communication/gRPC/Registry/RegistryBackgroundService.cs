@@ -31,7 +31,7 @@ public sealed class RegistryBackgroundService : BackgroundService
         _logger.LogTrace(new EventId((int)EventLogType.Connect), "Registry service is starting.");
         try
         {
-            await Register(cancellationToken);
+            await Register(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -49,7 +49,7 @@ public sealed class RegistryBackgroundService : BackgroundService
             StatusResponse response = await _registerClient.UnregisterAsync(new UnregisterRequest
             {
                 Id = _serviceId.ToString()
-            }, cancellationToken: cancellationToken);
+            }, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             if (!response.Success)
             {
@@ -77,7 +77,7 @@ public sealed class RegistryBackgroundService : BackgroundService
                     StatusResponse response = await _registerClient.HeartbeatAsync(new HeartbeatRequest
                     {
                         Id = _serviceId.ToString()
-                    }, cancellationToken: stoppingToken);
+                    }, cancellationToken: stoppingToken).ConfigureAwait(false);
 
                     if (!response.Success)
                     {
@@ -96,7 +96,7 @@ public sealed class RegistryBackgroundService : BackgroundService
                 _serviceId = Guid.Empty; // In the next iteration, the service should be registered again
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(30));
+            await Task.Delay(TimeSpan.FromSeconds(30)).ConfigureAwait(false);
         }
     }, TaskCreationOptions.LongRunning);
 
@@ -109,7 +109,7 @@ public sealed class RegistryBackgroundService : BackgroundService
             Type = _serviceConfiguration.TypeName,
             Url = DetermineServiceUrl(_configuration),
             Version = _serviceConfiguration.Version
-        }, cancellationToken: cancellationToken);
+        }, cancellationToken: cancellationToken).ConfigureAwait(false);
 
         if (!response.Success)
         {

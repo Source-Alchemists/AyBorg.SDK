@@ -36,16 +36,16 @@ public sealed class AnalyticsBackgroundService : BackgroundService
                     {
                         request.ServiceType = _serviceConfiguration.TypeName;
                         request.ServiceUniqueName = _serviceConfiguration.UniqueName;
-                        await _eventLogClient.LogEventAsync(request);
+                        await _eventLogClient.LogEventAsync(request).ConfigureAwait(false);
                     }
                     else
                     {
-                        await Task.Delay(100);
+                        await Task.Delay(100).ConfigureAwait(false);
                     }
                 }
                 catch (Exception)
                 {
-                    await Task.Delay(100);
+                    await Task.Delay(100).ConfigureAwait(false);
                 }
             }
         });
