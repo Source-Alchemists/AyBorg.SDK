@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-package ayborg.gateway.net.v1;
+package ayborg.gateway.cognitive.v1;
 
 service AnnotationManager {
     rpc GetMeta (GetAnnotationMetaRequest) returns (AnnotationMeta);

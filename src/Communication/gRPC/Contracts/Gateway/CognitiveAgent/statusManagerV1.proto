@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ayborg.gateway.net.runner.v1;
+package ayborg.gateway.cognitive.agent.v1;
 
 service StatusManager {
     rpc Get (GetStatusRequest) returns (ServiceStatus);

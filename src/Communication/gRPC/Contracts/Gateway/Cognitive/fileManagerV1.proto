@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-package ayborg.gateway.net.v1;
+package ayborg.gateway.cognitive.v1;
 
 service FileManager {
     rpc GetImageCollectionMeta (GetImageCollectionMetaRequest) returns (ImageCollectionMeta);

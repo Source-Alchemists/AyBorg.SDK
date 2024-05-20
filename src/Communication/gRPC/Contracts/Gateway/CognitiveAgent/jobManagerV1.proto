@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-package ayborg.gateway.net.runner.v1;
+package ayborg.gateway.cognitive.agent.v1;
 
 service JobManager {
     rpc GetStatus (GetJobStatusRequest) returns (JobStatusResponse);

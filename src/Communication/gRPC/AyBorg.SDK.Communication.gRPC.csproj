@@ -21,13 +21,13 @@
     <Protobuf Include=".\Contracts\Gateway\Audit\auditV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Result\commonV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Result\storageV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\Net\fileManagerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\Net\projectManagerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\Net\annotationManagerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\Net\datasetManagerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\Net\jobManagerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\NetRunner\statusManagerV1.proto" GrpcServices="Both" />
-    <Protobuf Include=".\Contracts\Gateway\NetRunner\jobManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\fileManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\projectManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\annotationManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\datasetManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\Cognitive\jobManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\CognitiveAgent\statusManagerV1.proto" GrpcServices="Both" />
+    <Protobuf Include=".\Contracts\Gateway\CognitiveAgent\jobManagerV1.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>

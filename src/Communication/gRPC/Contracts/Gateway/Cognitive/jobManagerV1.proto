@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-package ayborg.gateway.net.v1;
+package ayborg.gateway.cognitive.v1;
 
 service JobManager {
     rpc GetMetas (google.protobuf.Empty) returns (stream JobMeta);
@@ -28,8 +28,8 @@ message CancelJobRequest {
 
 message JobMeta {
     string id = 1;
-    string runner_name = 2;
-    string runner_unique_name = 3;
+    string agent_name = 2;
+    string agent_unique_name = 3;
     google.protobuf.Timestamp queue_date = 4;
     google.protobuf.Timestamp finished_date = 5;
     string project_id = 6;

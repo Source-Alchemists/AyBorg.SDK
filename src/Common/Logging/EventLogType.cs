@@ -36,7 +36,7 @@ public enum EventLogType
     [Description("Audit")]
     Audit = 42300,
 
-    // Net
-    [Description("Net")]
-    Net = 42400
+    // Cognitive
+    [Description("Cognitive")]
+    Cognitive = 42400
 }
