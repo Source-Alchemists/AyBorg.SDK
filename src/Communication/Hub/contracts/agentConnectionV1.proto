@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "AyBorg.Hub.Connect";
+
+package ayborg.hub.connect.agent.v1;
+
+service AgentConnection {
+    rpc Register (RegisterMessage) returns (google.protobuf.Empty);
+    rpc Unregister (RegisterMessage) returns (google.protobuf.Empty);
+    rpc Update (stream UpdateMessage) returns (stream UpdateMessage);
+    rpc Query (stream QueryMessage) returns (stream QueryMessage);
+    rpc Notify (NotifyMessage) returns (NotifyMessage);
+}
+
+message RegisterMessage {
+    string service_id = 1;
+    string name = 2;
+    string type = 3;
+    string version = 4;
+}
+
+message UpdateMessage {
+    string service_id = 1;
+}
+
+message QueryMessage {
+    string service_id = 1;
+}
+
+message NotifyMessage {
+    string service_id = 1;
+    int32 type = 2;
+    string payload = 3;
+}
