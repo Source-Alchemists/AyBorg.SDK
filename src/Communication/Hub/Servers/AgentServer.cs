@@ -15,7 +15,15 @@ public sealed class AgentServer : AgentConnection.AgentConnectionBase
     }
     public override Task<Empty> Register(RegisterMessage request, ServerCallContext context)
     {
-        _logger.LogInformation((int)EventLogType.Connect, "Agent client with host address {HostAddress} connected.", context.Host);
+        Microsoft.AspNetCore.Http.HttpContext httpContext = context.GetHttpContext();
+        _logger.LogInformation((int)EventLogType.Connect, "Agent client with address {ClientAddress} connected.", httpContext.Connection.RemoteIpAddress?.ToString());
+        return Task.FromResult(new Empty());
+    }
+
+    public override Task<Empty> Unregister(RegisterMessage request, ServerCallContext context)
+    {
+        Microsoft.AspNetCore.Http.HttpContext httpContext = context.GetHttpContext();
+        _logger.LogInformation((int)EventLogType.Disconnect, "Agent client with address {ClientAddress} disconnected.", httpContext.Connection.RemoteIpAddress?.ToString());
         return Task.FromResult(new Empty());
     }
 }

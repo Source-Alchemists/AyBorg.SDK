@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace AyBorg.Hub.Connect;
+namespace AyBorg.Hub.Connect.Services;
 
 public abstract class RegisterBackgroundService<TClient> : BackgroundService
 {
@@ -40,7 +40,20 @@ public abstract class RegisterBackgroundService<TClient> : BackgroundService
 
         await base.StartAsync(cancellationToken);
     }
-    public override Task StopAsync(CancellationToken cancellationToken) => base.StopAsync(cancellationToken);
+    public override async Task StopAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogTrace((int)EventLogType.Disconnect, "Registry service stopping ...");
+        try
+        {
+            await UnregisterAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning((int)EventLogType.Disconnect, ex, "Failed to unregister service!");
+        }
+
+        await base.StopAsync(cancellationToken);
+    }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -48,4 +61,5 @@ public abstract class RegisterBackgroundService<TClient> : BackgroundService
     }
 
     protected abstract ValueTask RegisterAsync(CancellationToken cancellationToken);
+    protected abstract ValueTask UnregisterAsync(CancellationToken cancellationToken);
 }

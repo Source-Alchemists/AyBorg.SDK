@@ -6,7 +6,7 @@ namespace AyBorg.Hub.Connect;
 public static class WebApplicationExtensions{
     public static WebApplication AddAyBorgAgentServer(this WebApplication app)
     {
-        app.MapGrpcService<AgentServer>();
+        app.MapGrpcService<AgentServer>().RequireAuthorization();
         return app;
     }
 }
