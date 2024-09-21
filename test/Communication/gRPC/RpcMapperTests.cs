@@ -284,7 +284,7 @@ public class RpcMapperTests
     [InlineData(PortBrand.Enum, PortDirection.Output)]
     [InlineData(PortBrand.Image, null)]
     [InlineData(PortBrand.Rectangle, null)]
-    public void Test_ToRpc_Port(PortBrand portBrand, object value)
+    public void Test_ToRpc_Port(PortBrand portBrand, object? value)
     {
         // Arrange
         if (portBrand == PortBrand.Image)
@@ -350,7 +350,10 @@ public class RpcMapperTests
             return;
         }
 
-        Assert.Equal(value.ToString(), result.Value);
+        if (value != null)
+        {
+            Assert.Equal(value.ToString(), result.Value);
+        }
     }
 
     [Theory]
