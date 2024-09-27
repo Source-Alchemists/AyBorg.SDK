@@ -35,7 +35,7 @@ public sealed class RegistryBackgroundService : BackgroundService
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to register at start", ex);
+            _logger.LogWarning(new EventId((int)EventLogType.Connect), ex, "Failed to register at start");
         }
 
         await base.StartAsync(cancellationToken);
@@ -60,7 +60,7 @@ public sealed class RegistryBackgroundService : BackgroundService
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(new EventId((int)EventLogType.Disconnect), "Failed to unregister", ex);
+            _logger.LogWarning(new EventId((int)EventLogType.Disconnect), ex, "Failed to unregister");
         }
 
         await base.StopAsync(cancellationToken);
@@ -92,7 +92,7 @@ public sealed class RegistryBackgroundService : BackgroundService
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(new EventId((int)EventLogType.Connect), "Failed to send heartbeat", ex);
+                _logger.LogWarning(new EventId((int)EventLogType.Connect), ex, "Failed to send heartbeat");
                 _serviceId = Guid.Empty; // In the next iteration, the service should be registered again
             }
 

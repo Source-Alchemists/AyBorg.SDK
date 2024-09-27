@@ -1,12 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Version>0.1.0</Version>
-  </PropertyGroup>
-
   <ItemGroup>
     <Protobuf Include=".\Contracts\Gateway\registerV1.proto" GrpcServices="Both" />
     <Protobuf Include=".\Contracts\Gateway\Agent\commonV1.proto" GrpcServices="Both" />
@@ -32,8 +25,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.50.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.66.0" />
   </ItemGroup>
 
   <ItemGroup>
