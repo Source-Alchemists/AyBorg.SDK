@@ -1,23 +1,37 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AyBorg.SDK.Authorization;
-public sealed class JwtGenerator : IJwtGenerator
+
+public sealed class JwtGenerator : ITokenGenerator
 {
     private readonly byte[] _secretKey;
-    public JwtGenerator(IConfiguration configuration)
+
+    public JwtGenerator(IOptions<SecurityConfiguration> configuration)
     {
-        _secretKey = Encoding.ASCII.GetBytes(configuration.GetValue<string>("AyBorg:Jwt:SecretKey"));
+        _secretKey = Encoding.ASCII.GetBytes(configuration.Value.PrimarySharedKey.KeyValue);
     }
 
-    public string GenerateToken(string userName, IEnumerable<string> roles)
+    public string GenerateUserToken(string userName, IEnumerable<string> roles)
+    {
+        return GenerateToken(userName, roles);
+    }
+
+    public string GenerateServiceToken(string serviceName, IEnumerable<string> roles)
+    {
+        return GenerateToken(serviceName, roles);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private string GenerateToken(string name, IEnumerable<string> roles)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var claims = new List<Claim> {
-                new Claim(ClaimTypes.Name, userName),
+                new(ClaimTypes.Name, name),
             };
         if (roles.Any())
         {

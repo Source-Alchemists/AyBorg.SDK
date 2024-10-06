@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AyBorg.SDK.Authorization;
 
+[Obsolete("Use AyBorg.SDK.Authorization.JwtTValidator instead.")]
 public sealed class JwtConsumer : IJwtConsumer
 {
     private readonly ILogger<JwtConsumer> _logger;
